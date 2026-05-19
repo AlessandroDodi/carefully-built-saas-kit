@@ -21,7 +21,7 @@ function formatListEntry(value: unknown): string {
  * Get nested value from object using dot notation
  * e.g., getNestedValue(obj, 'user.profile.name')
  */
-export function getNestedValue(obj: unknown, path: string): unknown {
+function getNestedValue(obj: unknown, path: string): unknown {
   return path.split('.').reduce((acc, key) => {
     if (acc && typeof acc === 'object' && key in acc) {
       return (acc as Record<string, unknown>)[key];
@@ -33,7 +33,7 @@ export function getNestedValue(obj: unknown, path: string): unknown {
 /**
  * Format a value for display
  */
-export function formatValue(value: unknown): ReactNode {
+function formatValue(value: unknown): ReactNode {
   if (value === null || value === undefined) {
     return '—';
   }
@@ -76,7 +76,7 @@ export function formatValue(value: unknown): ReactNode {
   return '[Object]';
 }
 
-export function formatValueAsText(value: unknown): string | null {
+function formatValueAsText(value: unknown): string | null {
   if (value === null || value === undefined) {
     return '—';
   }

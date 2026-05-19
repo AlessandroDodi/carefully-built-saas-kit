@@ -4,6 +4,24 @@
   "description": "Reusable React UI primitives and data-display components for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/ui"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": [
+    "react",
+    "saas",
+    "table",
+    "dashboard",
+    "components",
+    "tailwind"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -21,7 +39,11 @@
   },
   "scripts": {
     "build": "tsdown src/index.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
     "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "class-variance-authority": ">=0.7.0",

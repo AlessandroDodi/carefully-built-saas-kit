@@ -107,7 +107,7 @@ function applyDirection(value: number, direction: SortDirection): number {
   return direction === 'asc' ? value : -value;
 }
 
-export function sortTableData<T>(
+function sortTableData<T>(
   data: readonly T[],
   columns: readonly Column<T>[],
   sortState: SortState,

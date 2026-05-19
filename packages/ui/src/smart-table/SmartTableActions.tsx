@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 
 import { Button } from '../primitives/button';
 
-export const SMART_TABLE_ACTIONS_CONTAINER_CLASS = 'flex w-full items-center justify-end gap-1';
+const SMART_TABLE_ACTIONS_CONTAINER_CLASS = 'flex w-full items-center justify-end gap-1';
 
 interface SmartTableActionsProps<T> {
   item: T;
