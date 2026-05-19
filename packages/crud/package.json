@@ -1,7 +1,7 @@
 {
-  "name": "@carefully-built/forms",
+  "name": "@carefully-built/crud",
   "version": "0.1.0",
-  "description": "Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.",
+  "description": "Config-driven CRUD table and form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
   "author": "Alessandro Dodi",
@@ -9,17 +9,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
-    "directory": "packages/forms"
+    "directory": "packages/crud"
   },
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
   "keywords": [
     "react",
-    "forms",
-    "react-hook-form",
+    "crud",
+    "table",
     "saas",
-    "zod"
+    "convex"
   ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
@@ -46,12 +46,8 @@
   },
   "peerDependencies": {
     "@carefully-built/ui": ">=0.1.4",
-    "@hookform/resolvers": ">=5.0.0",
-    "lucide-react": ">=0.400.0 || >=1.0.0",
     "react": ">=18.2.0 || >=19.0.0",
-    "react-dom": ">=18.2.0 || >=19.0.0",
-    "react-hook-form": ">=7.0.0",
-    "zod": ">=4.0.0"
+    "react-dom": ">=18.2.0 || >=19.0.0"
   },
   "peerDependenciesMeta": {
     "@carefully-built/ui": {
@@ -60,11 +56,7 @@
   },
   "devDependencies": {
     "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
-    "@hookform/resolvers": "^5.2.2",
-    "lucide-react": "^1.8.0",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "react-hook-form": "^7.71.1",
-    "zod": "^4.3.6"
+    "react-dom": "^19.2.3"
   }
 }

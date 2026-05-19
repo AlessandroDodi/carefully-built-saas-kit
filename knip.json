@@ -11,6 +11,10 @@
     "packages/forms": {
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/crud": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
     }
   }
 }

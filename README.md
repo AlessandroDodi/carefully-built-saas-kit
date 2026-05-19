@@ -8,13 +8,13 @@ The goal of this repo is to collect the boring-but-important SaaS building block
 
 - `@carefully-built/ui`: React UI primitives, overlays, search controls, and data-display components.
 - `@carefully-built/forms`: React Hook Form fields and schema-driven form helpers.
+- `@carefully-built/crud`: Config-driven CRUD table helpers.
 
 Planned future packages:
 
 - `@carefully-built/workos`: reusable WorkOS organization, profile, and settings flows.
 - `@carefully-built/auth`: reusable login, signup, password reset, invite, terms, privacy, and legal pages.
 - `@carefully-built/superadmin`: reusable superadmin shell, application access, company, user, and audit views.
-- `@carefully-built/crud`: Convex-friendly multi-tenant CRUD patterns.
 - `@carefully-built/dashboard`: responsive app shell, sidebar, bottom nav, command search, and admin layouts.
 - `@carefully-built/files`: reusable file upload, preview, share link, and document-management UI.
 - `@carefully-built/agenda`: reusable activity agenda, calendar, list, and scheduling UI.
