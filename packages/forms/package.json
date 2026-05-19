@@ -1,7 +1,7 @@
 {
-  "name": "@carefully-built/ui",
-  "version": "0.1.3",
-  "description": "Reusable React UI primitives and data-display components for Carefully Built SaaS apps.",
+  "name": "@carefully-built/forms",
+  "version": "0.1.0",
+  "description": "Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
   "author": "Alessandro Dodi",
@@ -9,18 +9,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
-    "directory": "packages/ui"
+    "directory": "packages/forms"
   },
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
   "keywords": [
     "react",
+    "forms",
+    "react-hook-form",
     "saas",
-    "table",
-    "dashboard",
-    "components",
-    "tailwind"
+    "zod"
   ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
@@ -46,23 +45,26 @@
     "access": "public"
   },
   "peerDependencies": {
-    "class-variance-authority": ">=0.7.0",
-    "clsx": ">=2.0.0",
+    "@carefully-built/ui": ">=0.1.3",
+    "@hookform/resolvers": ">=5.0.0",
     "lucide-react": ">=0.400.0 || >=1.0.0",
-    "radix-ui": ">=1.0.0",
     "react": ">=18.2.0 || >=19.0.0",
     "react-dom": ">=18.2.0 || >=19.0.0",
-    "tailwind-merge": ">=2.0.0 || >=3.0.0",
-    "vaul": ">=1.0.0"
+    "react-hook-form": ">=7.0.0",
+    "zod": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@carefully-built/ui": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.3.tgz",
+    "@hookform/resolvers": "^5.2.2",
     "lucide-react": "^1.8.0",
-    "radix-ui": "^1.4.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "tailwind-merge": "^3.5.0",
-    "vaul": "^1.1.2"
+    "react-hook-form": "^7.71.1",
+    "zod": "^4.3.6"
   }
 }

@@ -27,6 +27,8 @@ This package assumes your app provides Tailwind-compatible design tokens such as
 - `Button`: shared button variants and sizes, including icon-only buttons.
 - `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`: compact card building blocks for repeated items and panels.
 - `Input`: styled text input primitive.
+- `Textarea`: styled textarea primitive.
+- `Label`: accessible Radix label primitive.
 - `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableCell`, and related table primitives.
 - `Pagination`: page navigation control for list and table views.
 - `Skeleton`: loading placeholder primitive.

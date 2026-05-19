@@ -7,6 +7,10 @@
     "packages/ui": {
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/forms": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
     }
   }
 }
