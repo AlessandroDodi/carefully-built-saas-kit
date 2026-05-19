@@ -15,6 +15,7 @@ export * from './overlays/responsive-sheet.shortcuts';
 export * from './search/searchable-select';
 export * from './search/searchable-select-position';
 export * from './smart-table';
+export * from './table-toolbar';
 export * from './utils/cn';
 export * from './utils/date-display';
 export * from './utils/search';

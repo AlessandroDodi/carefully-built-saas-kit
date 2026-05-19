@@ -56,6 +56,14 @@ This package assumes your app provides Tailwind-compatible design tokens such as
 - `useTableSorting`: sortable table state and sorting helper hook.
 - `Column`, `SmartTableProps`, `PaginationConfig`, `ActionHandlers`, `ActionType`: table typing helpers.
 
+### Table Toolbar
+
+- `TableToolbar`: reusable toolbar with search, filter sheet, draft/apply behavior, active filter count, and clear-all support.
+- `SearchInput`: search field with leading search icon and clear button.
+- `FilterDropdown`: searchable select dropdown for simple enum filters.
+- `CustomTableToolbarFilter`: extension point for app-specific filters such as association pickers.
+- `FilterConfig`, `FilterOption`, `TableToolbarProps`: toolbar typing helpers.
+
 ### Utilities
 
 - `cn`: Tailwind class merge helper.
