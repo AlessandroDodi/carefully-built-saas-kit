@@ -12,6 +12,28 @@
         "typescript": "^5.0.0",
       },
     },
+    "packages/auth-pages": {
+      "name": "@carefully-built/auth-pages",
+      "version": "0.1.0",
+      "devDependencies": {
+        "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.0.tgz",
+        "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "react-hook-form": "^7.71.1",
+      },
+      "peerDependencies": {
+        "@carefully-built/forms": ">=0.1.0",
+        "@carefully-built/ui": ">=0.1.4",
+        "react": ">=18.2.0 || >=19.0.0",
+        "react-dom": ">=18.2.0 || >=19.0.0",
+        "react-hook-form": ">=7.0.0",
+      },
+      "optionalPeers": [
+        "@carefully-built/forms",
+        "@carefully-built/ui",
+      ],
+    },
     "packages/crud": {
       "name": "@carefully-built/crud",
       "version": "0.1.0",
@@ -89,6 +111,8 @@
     "@babel/parser": ["@babel/parser@7.29.3", "", { "dependencies": { "@babel/types": "^7.29.0" }, "bin": "./bin/babel-parser.js" }, "sha512-b3ctpQwp+PROvU/cttc4OYl4MzfJUWy6FZg+PMXfzmt/+39iHVF0sDfqay8TQM3JA2EUOyKcFZt75jWriQijsA=="],
 
     "@babel/types": ["@babel/types@7.29.0", "", { "dependencies": { "@babel/helper-string-parser": "^7.27.1", "@babel/helper-validator-identifier": "^7.28.5" } }, "sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A=="],
+
+    "@carefully-built/auth-pages": ["@carefully-built/auth-pages@workspace:packages/auth-pages"],
 
     "@carefully-built/crud": ["@carefully-built/crud@workspace:packages/crud"],
 
@@ -489,6 +513,10 @@
     "yaml": ["yaml@2.9.0", "", { "bin": { "yaml": "bin.mjs" } }, "sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA=="],
 
     "zod": ["zod@4.4.3", "", {}, "sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ=="],
+
+    "@carefully-built/auth-pages/@carefully-built/forms": ["@carefully-built/forms@../forms/carefully-built-forms-0.1.0.tgz", { "peerDependencies": { "@carefully-built/ui": ">=0.1.3", "@hookform/resolvers": ">=5.0.0", "lucide-react": ">=0.400.0 || >=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0", "react-hook-form": ">=7.0.0", "zod": ">=4.0.0" }, "optionalPeers": ["@carefully-built/ui"] }, "sha512-Z+z/kXSn34wp+KVjTjXayKyWYowbBRr9IcoOyLEPYeMiOQA7sNPCkm/LMN6ARnnPwdYO2R0Npej9ZJIHFRB8dw=="],
+
+    "@carefully-built/auth-pages/@carefully-built/ui": ["@carefully-built/ui@../ui/carefully-built-ui-0.1.4.tgz", { "peerDependencies": { "class-variance-authority": ">=0.7.0", "clsx": ">=2.0.0", "lucide-react": ">=0.400.0 || >=1.0.0", "radix-ui": ">=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0", "tailwind-merge": ">=2.0.0 || >=3.0.0", "vaul": ">=1.0.0" } }, "sha512-Oso+vvBQBhJS/Y1p5LQwGe5I6d42CAC7OTezVNkZX+TOXzdTWIqqbIvsNMQbcNXQg7crCdOL/eGODlRbuOI9lA=="],
 
     "@carefully-built/crud/@carefully-built/ui": ["@carefully-built/ui@../ui/carefully-built-ui-0.1.4.tgz", { "peerDependencies": { "class-variance-authority": ">=0.7.0", "clsx": ">=2.0.0", "lucide-react": ">=0.400.0 || >=1.0.0", "radix-ui": ">=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0", "tailwind-merge": ">=2.0.0 || >=3.0.0", "vaul": ">=1.0.0" } }, "sha512-Oso+vvBQBhJS/Y1p5LQwGe5I6d42CAC7OTezVNkZX+TOXzdTWIqqbIvsNMQbcNXQg7crCdOL/eGODlRbuOI9lA=="],
 

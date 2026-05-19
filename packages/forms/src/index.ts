@@ -1,3 +1,5 @@
+'use client';
+
 export { CustomForm } from './custom-form';
 export { buildCustomFormOptions } from './custom-form-options';
 export { CustomInputField } from './fields/custom-input-field';

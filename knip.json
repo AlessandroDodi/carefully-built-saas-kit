@@ -15,6 +15,10 @@
     "packages/crud": {
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/auth-pages": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
     }
   }
 }
