@@ -1,0 +1,46 @@
+{
+  "name": "@carefully-built/ui",
+  "version": "0.1.1",
+  "description": "Reusable React UI primitives and data-display components for Carefully Built SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "class-variance-authority": ">=0.7.0",
+    "clsx": ">=2.0.0",
+    "lucide-react": ">=0.400.0 || >=1.0.0",
+    "radix-ui": ">=1.0.0",
+    "react": ">=18.2.0 || >=19.0.0",
+    "react-dom": ">=18.2.0 || >=19.0.0",
+    "tailwind-merge": ">=2.0.0 || >=3.0.0",
+    "vaul": ">=1.0.0"
+  },
+  "devDependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.8.0",
+    "radix-ui": "^1.4.3",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tailwind-merge": "^3.5.0",
+    "vaul": "^1.1.2"
+  }
+}
