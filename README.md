@@ -8,24 +8,101 @@ The goal of this repo is to collect the boring-but-important SaaS building block
 
 Reusable CRM/SaaS primitives included in the kit.
 
-| Component | Preview |
-| --- | --- |
-| SmartTable | ![SmartTable](docs/saas-kit/images/smarttable.png) |
-| ResponsiveSheet | ![ResponsiveSheet](docs/saas-kit/images/responsivesheet.png) |
-| Search | ![Search](docs/saas-kit/images/search.png) |
-| Sidebar | ![Sidebar](docs/saas-kit/images/sidebar.png) |
-| OrgSwitcher | ![OrgSwitcher](docs/saas-kit/images/orgswitcher.png) |
-| SuperAdmin | ![SuperAdmin](docs/saas-kit/images/superadmin.png) |
-| Kanban | ![Kanban](docs/saas-kit/images/kanban.png) |
-| Charts | ![Charts](docs/saas-kit/images/charts.png) |
-| Calendar | ![Calendar](docs/saas-kit/images/calendar.png) |
-| Documents | ![Documents](docs/saas-kit/images/documents.png) |
-| File Dropper | ![File Dropper](docs/saas-kit/images/file-dropper.png) |
-| Notifications | ![Notifications](docs/saas-kit/images/notifications.png) |
-| Widgets | ![Widgets](docs/saas-kit/images/widgets.png) |
-| Theme Switcher | ![Theme Switcher](docs/saas-kit/images/theme-switcher.png) |
-| Maps | ![Maps](docs/saas-kit/images/maps.png) |
-| Maps Theme | ![Maps Theme](docs/saas-kit/images/maps-theme.png) |
+### SmartTable
+
+<img src="docs/saas-kit/images/smarttable.png" alt="SmartTable component preview" width="760" style="border-radius: 12px;">
+
+Use `SmartTable` for dense CRM lists with sortable columns, row actions, mobile cards, and consistent empty/loading behavior. [Read the UI docs](./docs/packages/ui.md).
+
+### ResponsiveSheet
+
+<img src="docs/saas-kit/images/responsivesheet.png" alt="ResponsiveSheet component preview" width="760" style="border-radius: 12px;">
+
+Use `ResponsiveSheet` for create/edit/detail workflows that open as a desktop side panel and adapt cleanly on mobile. [Read the UI docs](./docs/packages/ui.md).
+
+### Search
+
+<img src="docs/saas-kit/images/search.png" alt="Search component preview" width="760" style="border-radius: 12px;">
+
+Use the search package for command-palette style navigation, fuzzy matching, ranked results, and app-wide quick actions. [Read the search docs](./docs/packages/search.md).
+
+### Sidebar
+
+<img src="docs/saas-kit/images/sidebar.png" alt="Sidebar component preview" width="760" style="border-radius: 12px;">
+
+Use the app shell primitives to compose dashboard navigation, active states, responsive layout, footer actions, and mobile navigation. [Read the app shell docs](./docs/packages/app-shell.md).
+
+### OrgSwitcher
+
+<img src="docs/saas-kit/images/orgswitcher.png" alt="OrgSwitcher component preview" width="760" style="border-radius: 12px;">
+
+Use `SidebarOrgSwitcherBase` and WorkOS helpers for organization switching, organization creation, and logo upload flows. [Read the WorkOS docs](./docs/packages/workos.md).
+
+### SuperAdmin
+
+<img src="docs/saas-kit/images/superadmin.png" alt="SuperAdmin component preview" width="760" style="border-radius: 12px;">
+
+Use the superadmin package for internal admin routes, application access, users, companies, feature flags, metrics, and audit-friendly admin lists. [Read the superadmin docs](./docs/packages/superadmin.md).
+
+### Kanban
+
+<img src="docs/saas-kit/images/kanban.png" alt="Kanban component preview" width="760" style="border-radius: 12px;">
+
+Use `KanbanBoard`, `KanbanCard`, and pipeline helpers for status-based workflows such as deals, tickets, tasks, and approvals. [Read the kanban docs](./docs/packages/kanban.md).
+
+### Charts
+
+<img src="docs/saas-kit/images/charts.png" alt="Charts component preview" width="760" style="border-radius: 12px;">
+
+Use the chart widgets for compact dashboard analytics, legends, bar distributions, and donut charts fed by app-specific data. [Read the charts docs](./docs/packages/charts.md).
+
+### Calendar
+
+<img src="docs/saas-kit/images/calendar.png" alt="Calendar component preview" width="760" style="border-radius: 12px;">
+
+Use the agenda package for scheduled activities, calendar widgets, list views, date utilities, and responsive calendar scopes. [Read the agenda docs](./docs/packages/agenda.md).
+
+### Documents
+
+<img src="docs/saas-kit/images/documents.png" alt="Documents component preview" width="760" style="border-radius: 12px;">
+
+Use the files package for document cards, document sheets, previews, filters, public upload helpers, and association summaries. [Read the files docs](./docs/packages/files.md).
+
+### File Dropper
+
+<img src="docs/saas-kit/images/file-dropper.png" alt="File Dropper component preview" width="760" style="border-radius: 12px;">
+
+Use `FileDropzone` for reusable drag-and-drop upload inputs, accepted-file hints, validation states, and form integration. [Read the UI docs](./docs/packages/ui.md).
+
+### Notifications
+
+<img src="docs/saas-kit/images/notifications.png" alt="Notifications component preview" width="760" style="border-radius: 12px;">
+
+Use the notifications package for a notification button, sheet, tabs, visual metadata, and controlled notification lists. [Read the notifications docs](./docs/packages/notifications.md).
+
+### Widgets
+
+<img src="docs/saas-kit/images/widgets.png" alt="Widgets component preview" width="760" style="border-radius: 12px;">
+
+Use `DashboardWidget` and `EntityInfoWidget` to build reusable dashboard panels, detail-page blocks, and empty states. [Read the widgets docs](./docs/packages/widgets.md).
+
+### Theme Switcher
+
+<img src="docs/saas-kit/images/theme-switcher.png" alt="Theme Switcher component preview" width="760" style="border-radius: 12px;">
+
+Use `ThemeSelector` for light, dark, and system mode selection with reusable theme option metadata. [Read the theme UI docs](./docs/packages/theme-ui.md).
+
+### Maps
+
+<img src="docs/saas-kit/images/maps.png" alt="Maps component preview" width="760" style="border-radius: 12px;">
+
+Use the maps package for Google Maps loading, Places autocomplete fields, normalized place values, and attribution helpers. [Read the maps UI docs](./docs/packages/maps-ui.md).
+
+### Maps Theme
+
+<img src="docs/saas-kit/images/maps-theme.png" alt="Maps Theme component preview" width="760" style="border-radius: 12px;">
+
+Use `MapThemeSelector` and map theme constants to let apps switch between reusable Google Maps visual themes. [Read the theme UI docs](./docs/packages/theme-ui.md).
 
 ## Packages
 
