@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/crud",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Config-driven CRUD table and form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -46,16 +46,21 @@
   },
   "peerDependencies": {
     "@carefully-built/ui": ">=0.1.4",
+    "nuqs": ">=2.0.0",
     "react": ">=18.2.0 || >=19.0.0",
     "react-dom": ">=18.2.0 || >=19.0.0"
   },
   "peerDependenciesMeta": {
     "@carefully-built/ui": {
       "optional": true
+    },
+    "nuqs": {
+      "optional": true
     }
   },
   "devDependencies": {
     "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "nuqs": "^2.8.8",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   }

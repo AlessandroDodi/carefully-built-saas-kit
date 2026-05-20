@@ -1,0 +1,72 @@
+{
+  "name": "@carefully-built/agenda",
+  "version": "0.1.5",
+  "description": "Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.tsx --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@carefully-built/search": ">=0.1.1",
+    "@carefully-built/crud": ">=0.1.0",
+    "@carefully-built/resource-kit": ">=0.1.0",
+    "@carefully-built/ui": ">=0.1.12",
+    "@carefully-built/widgets": ">=0.1.0",
+    "@fullcalendar/core": "^6.1.0",
+    "@fullcalendar/daygrid": "^6.1.0",
+    "@fullcalendar/interaction": "^6.1.0",
+    "@fullcalendar/react": "^6.1.0",
+    "@fullcalendar/timegrid": "^6.1.0",
+    "lucide-react": "^0.475.0 || ^1.0.0",
+    "nuqs": ">=2.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "sonner": ">=1.0.0 || >=2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@carefully-built/search": { "optional": true },
+    "@carefully-built/crud": { "optional": true },
+    "@carefully-built/resource-kit": { "optional": true },
+    "@carefully-built/ui": { "optional": true },
+    "@carefully-built/widgets": { "optional": true }
+  },
+  "devDependencies": {
+    "@carefully-built/crud": "file:../crud/carefully-built-crud-0.1.2.tgz",
+    "@carefully-built/resource-kit": "file:../resource-kit/carefully-built-resource-kit-0.1.2.tgz",
+    "@carefully-built/search": "file:../search/carefully-built-search-0.1.1.tgz",
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.12.tgz",
+    "@carefully-built/widgets": "file:../widgets/carefully-built-widgets-0.1.0.tgz",
+    "@fullcalendar/core": "^6.1.20",
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/interaction": "^6.1.20",
+    "@fullcalendar/react": "^6.1.20",
+    "@fullcalendar/timegrid": "^6.1.20",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "lucide-react": "^1.8.0",
+    "nuqs": "^2.8.8",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sonner": "^2.0.7"
+  }
+}

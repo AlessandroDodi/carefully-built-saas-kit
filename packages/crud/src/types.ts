@@ -1,10 +1,4 @@
-import type {
-  ActionHandlers,
-  ActionType,
-  Column,
-  FilterConfig,
-  SortState,
-} from "@carefully-built/ui";
+import type { ActionHandlers, ActionType, Column, FilterConfig, SortState } from "@carefully-built/ui";
 import type { ReactNode } from "react";
 
 import type { CrudPaginationState } from "./pagination";
@@ -65,4 +59,24 @@ export interface CrudTableViewProps<TItem> {
   readonly stickyHeader?: boolean;
   readonly fullHeight?: boolean;
   readonly maxHeight?: string;
+}
+
+export interface CrudDataTableProps<TItem> {
+  readonly data: readonly TItem[];
+  readonly columns: readonly Column<TItem>[];
+  readonly isLoading: boolean;
+  readonly actions?: readonly ActionType[];
+  readonly actionHandlers?: ActionHandlers<TItem>;
+  readonly renderActions?: (item: TItem) => ReactNode;
+  readonly noDataMessage?: string;
+  readonly noDataContent?: ReactNode;
+  readonly getRowKey?: (item: TItem) => string | number;
+  readonly onRowClick?: (item: TItem) => void;
+  readonly renderMobileCard?: (item: TItem) => ReactNode;
+  readonly stickyHeader?: boolean;
+  readonly fullHeight?: boolean;
+  readonly maxHeight?: string;
+  readonly sortState?: SortState;
+  readonly onSortChange?: (state: SortState) => void;
+  readonly pagination?: CrudPaginationState;
 }

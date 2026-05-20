@@ -1,0 +1,75 @@
+{
+  "name": "@carefully-built/rich-text",
+  "version": "0.1.0",
+  "description": "Reusable rich text editor, renderer, AI action affordances, and serialization helpers for SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/rich-text"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": ["react", "rich-text", "tiptap", "saas", "ai"],
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@carefully-built/forms": ">=0.1.0",
+    "@carefully-built/ui": ">=0.1.4",
+    "@tiptap/extension-link": ">=3.0.0",
+    "@tiptap/extension-table": ">=3.0.0",
+    "@tiptap/extension-table-cell": ">=3.0.0",
+    "@tiptap/extension-table-header": ">=3.0.0",
+    "@tiptap/extension-table-row": ">=3.0.0",
+    "@tiptap/react": ">=3.0.0",
+    "@tiptap/starter-kit": ">=3.0.0",
+    "lucide-react": ">=0.400.0 || >=1.0.0",
+    "react": ">=18.2.0 || >=19.0.0",
+    "react-dom": ">=18.2.0 || >=19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@carefully-built/forms": {
+      "optional": true
+    },
+    "@carefully-built/ui": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.0.tgz",
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "@tiptap/extension-link": "^3.22.0",
+    "@tiptap/extension-table": "^3.22.0",
+    "@tiptap/extension-table-cell": "^3.22.0",
+    "@tiptap/extension-table-header": "^3.22.0",
+    "@tiptap/extension-table-row": "^3.22.0",
+    "@tiptap/react": "^3.22.0",
+    "@tiptap/starter-kit": "^3.22.0",
+    "lucide-react": "^1.8.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

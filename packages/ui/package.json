@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/ui",
-  "version": "0.1.4",
+  "version": "0.1.15",
   "description": "Reusable React UI primitives and data-display components for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -51,6 +51,7 @@
     "lucide-react": ">=0.400.0 || >=1.0.0",
     "radix-ui": ">=1.0.0",
     "react": ">=18.2.0 || >=19.0.0",
+    "react-day-picker": ">=9.0.0",
     "react-dom": ">=18.2.0 || >=19.0.0",
     "tailwind-merge": ">=2.0.0 || >=3.0.0",
     "vaul": ">=1.0.0"
@@ -61,6 +62,7 @@
     "lucide-react": "^1.8.0",
     "radix-ui": "^1.4.3",
     "react": "^19.2.3",
+    "react-day-picker": "^9.14.0",
     "react-dom": "^19.2.3",
     "tailwind-merge": "^3.5.0",
     "vaul": "^1.1.2"

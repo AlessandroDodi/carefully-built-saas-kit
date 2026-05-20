@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/forms",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -45,26 +45,42 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@carefully-built/ui": ">=0.1.4",
+    "@carefully-built/agent-picker": ">=0.1.0",
+    "@carefully-built/association-picker": ">=0.1.1",
+    "@carefully-built/ui": ">=0.1.14",
     "@hookform/resolvers": ">=5.0.0",
     "lucide-react": ">=0.400.0 || >=1.0.0",
     "react": ">=18.2.0 || >=19.0.0",
+    "react-country-flag": ">=3.0.0",
+    "react-day-picker": ">=9.0.0",
     "react-dom": ">=18.2.0 || >=19.0.0",
     "react-hook-form": ">=7.0.0",
+    "react-phone-number-input": ">=3.0.0",
     "zod": ">=4.0.0"
   },
   "peerDependenciesMeta": {
+    "@carefully-built/agent-picker": {
+      "optional": true
+    },
+    "@carefully-built/association-picker": {
+      "optional": true
+    },
     "@carefully-built/ui": {
       "optional": true
     }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "@carefully-built/agent-picker": "file:../agent-picker/carefully-built-agent-picker-0.1.0.tgz",
+    "@carefully-built/association-picker": "file:../association-picker/carefully-built-association-picker-0.1.1.tgz",
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
     "@hookform/resolvers": "^5.2.2",
     "lucide-react": "^1.8.0",
     "react": "^19.2.3",
+    "react-country-flag": "^3.1.0",
+    "react-day-picker": "^9.14.0",
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.71.1",
+    "react-phone-number-input": "^3.4.16",
     "zod": "^4.3.6"
   }
 }

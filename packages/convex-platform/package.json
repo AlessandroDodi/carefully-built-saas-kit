@@ -1,0 +1,40 @@
+{
+  "name": "@carefully-built/convex-platform",
+  "version": "0.1.7",
+  "description": "Reusable Convex SaaS platform helpers for org-scoped CRUD, entity associations, and multitenant apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/convex-platform"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": ["convex", "saas", "multitenant", "crud", "associations"],
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {}
+}

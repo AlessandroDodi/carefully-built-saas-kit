@@ -1,0 +1,36 @@
+{
+  "name": "@carefully-built/convex-workos",
+  "version": "0.1.0",
+  "description": "Reusable Convex helpers for syncing WorkOS users across base and organization-scoped records.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "tsdown": "^0.17.4",
+    "typescript": "^5.9.3"
+  }
+}

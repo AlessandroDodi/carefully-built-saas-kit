@@ -49,6 +49,10 @@ function AccountForm() {
 
 Use `CustomForm` when you want full layout control, and `SchemaForm` when a CRUD screen should be generated from a small field list.
 
+## Component Docs
+
+- [Forms](./docs/forms.md)
+
 ## Keep This Updated
 
 Whenever a field or schema renderer is added, update this README in the same change.

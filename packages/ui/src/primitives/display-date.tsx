@@ -1,6 +1,10 @@
-import { formatAbsoluteDate, formatDisplayDate, type DateDisplayValue } from '../utils/date-display';
+import {
+  formatAbsoluteDate,
+  formatDisplayDate,
+  type DateDisplayValue,
+} from "../utils/date-display";
 
-interface DisplayDateProps {
+export interface DisplayDateProps {
   readonly value: DateDisplayValue;
   readonly className?: string;
 }
@@ -9,11 +13,7 @@ export function DisplayDate({ value, className }: DisplayDateProps): React.React
   const date = value instanceof Date ? value : new Date(value);
 
   return (
-    <time
-      dateTime={date.toISOString()}
-      title={formatAbsoluteDate(date)}
-      className={className}
-    >
+    <time dateTime={date.toISOString()} title={formatAbsoluteDate(date)} className={className}>
       {formatDisplayDate(date)}
     </time>
   );

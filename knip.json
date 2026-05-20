@@ -16,6 +16,18 @@
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
     },
+    "packages/search": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/app-shell": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/legal-ui": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.{ts,tsx}"]
+    },
     "packages/auth-pages": {
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]

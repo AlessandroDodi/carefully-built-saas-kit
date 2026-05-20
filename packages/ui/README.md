@@ -57,6 +57,7 @@ This package assumes your app provides Tailwind-compatible design tokens such as
 - `TruncatedContent`: expandable/truncated cell content for long text.
 - `useTableSorting`: sortable table state and sorting helper hook.
 - `Column`, `SmartTableProps`, `PaginationConfig`, `ActionHandlers`, `ActionType`: table typing helpers.
+- Component doc: [SmartTable](./docs/smart-table.md).
 
 ### Table Toolbar
 
@@ -65,6 +66,13 @@ This package assumes your app provides Tailwind-compatible design tokens such as
 - `FilterDropdown`: searchable select dropdown for simple enum filters.
 - `CustomTableToolbarFilter`: extension point for app-specific filters such as association pickers.
 - `FilterConfig`, `FilterOption`, `TableToolbarProps`: toolbar typing helpers.
+- Component doc: [TableToolbar](./docs/table-toolbar.md).
+
+### Component Docs
+
+- [SmartTable](./docs/smart-table.md)
+- [TableToolbar](./docs/table-toolbar.md)
+- [ResponsiveSheet](./docs/responsive-sheet.md)
 
 ### Utilities
 

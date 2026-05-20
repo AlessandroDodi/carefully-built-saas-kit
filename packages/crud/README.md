@@ -38,3 +38,7 @@ const table = useCrudTableState({
 ```
 
 Keep domain actions, mutations, and labels inside the consuming app. This package owns the repeated table mechanics.
+
+## Component Docs
+
+- [CRUD Table](./docs/crud-table.md)

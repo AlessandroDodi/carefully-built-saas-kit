@@ -1,0 +1,64 @@
+{
+  "name": "@carefully-built/files",
+  "version": "0.1.4",
+  "description": "Reusable file and document UI primitives, previews, filters, and association helpers for SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./convex": {
+      "types": "./dist/convex.d.mts",
+      "import": "./dist/convex.mjs",
+      "default": "./dist/convex.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.tsx src/convex.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@carefully-built/convex-crud": ">=0.1.8",
+    "@carefully-built/forms": ">=0.1.1",
+    "@carefully-built/search": ">=0.1.1",
+    "@carefully-built/ui": ">=0.1.12",
+    "lucide-react": "^0.475.0 || ^1.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "sonner": "^1.0.0 || ^2.0.0",
+    "zod": ">=3.0.0 || >=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@carefully-built/convex-crud": { "optional": true },
+    "@carefully-built/forms": { "optional": true },
+    "@carefully-built/search": { "optional": true },
+    "@carefully-built/ui": { "optional": true }
+  },
+  "devDependencies": {
+    "@carefully-built/convex-crud": "file:../convex-crud/carefully-built-convex-crud-0.1.8.tgz",
+    "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.1.tgz",
+    "@carefully-built/search": "file:../search/carefully-built-search-0.1.1.tgz",
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "lucide-react": "^1.8.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sonner": "^2.0.7",
+    "zod": "^4.0.0"
+  }
+}

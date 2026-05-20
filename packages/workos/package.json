@@ -1,0 +1,58 @@
+{
+  "name": "@carefully-built/workos",
+  "version": "0.1.2",
+  "description": "Reusable WorkOS organization creation and organization logo primitives for SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.mts",
+      "import": "./dist/server.mjs",
+      "default": "./dist/server.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.tsx src/server.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@carefully-built/ui": ">=0.1.12",
+    "@radix-ui/react-slot": "^1.0.0",
+    "lucide-react": ">=0.400.0 || >=1.0.0",
+    "next": ">=15.0.0 || >=16.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "sonner": "^1.0.0 || ^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@carefully-built/ui": { "optional": true },
+    "next": { "optional": true }
+  },
+  "devDependencies": {
+    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.12.tgz",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "lucide-react": "^1.8.0",
+    "next": "^16.0.7",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sonner": "^2.0.7"
+  }
+}
