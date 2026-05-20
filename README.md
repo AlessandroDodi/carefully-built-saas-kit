@@ -4,6 +4,29 @@ Reusable packages for building B2B SaaS apps with React, Next.js, Convex, WorkOS
 
 The goal of this repo is to collect the boring-but-important SaaS building blocks once, keep them polished, and reuse them across projects instead of rebuilding tables, filters, organization flows, CRUD screens, and dashboard shells every time.
 
+## Component Gallery
+
+Reusable CRM/SaaS primitives included in the kit.
+
+| Component | Preview |
+| --- | --- |
+| SmartTable | ![SmartTable](docs/saas-kit/images/smarttable.png) |
+| ResponsiveSheet | ![ResponsiveSheet](docs/saas-kit/images/responsivesheet.png) |
+| Search | ![Search](docs/saas-kit/images/search.png) |
+| Sidebar | ![Sidebar](docs/saas-kit/images/sidebar.png) |
+| OrgSwitcher | ![OrgSwitcher](docs/saas-kit/images/orgswitcher.png) |
+| SuperAdmin | ![SuperAdmin](docs/saas-kit/images/superadmin.png) |
+| Kanban | ![Kanban](docs/saas-kit/images/kanban.png) |
+| Charts | ![Charts](docs/saas-kit/images/charts.png) |
+| Calendar | ![Calendar](docs/saas-kit/images/calendar.png) |
+| Documents | ![Documents](docs/saas-kit/images/documents.png) |
+| File Dropper | ![File Dropper](docs/saas-kit/images/file-dropper.png) |
+| Notifications | ![Notifications](docs/saas-kit/images/notifications.png) |
+| Widgets | ![Widgets](docs/saas-kit/images/widgets.png) |
+| Theme Switcher | ![Theme Switcher](docs/saas-kit/images/theme-switcher.png) |
+| Maps | ![Maps](docs/saas-kit/images/maps.png) |
+| Maps Theme | ![Maps Theme](docs/saas-kit/images/maps-theme.png) |
+
 ## Packages
 
 | Package | Version | Purpose |
