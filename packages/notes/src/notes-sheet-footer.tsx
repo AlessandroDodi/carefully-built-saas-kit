@@ -20,14 +20,14 @@ export function NotesSheetFooter({
         onClick={onArchive}
         className="text-sm text-destructive hover:underline"
       >
-        Archivia nota
+        Archive note
       </button>
       <div className="flex items-center gap-2">
         <Button type="button" variant="outline" onClick={onCancel}>
-          Annulla
+          Cancel
         </Button>
         <Button type="button" onClick={onConfirm}>
-          Salva modifiche
+          Save changes
         </Button>
       </div>
     </div>

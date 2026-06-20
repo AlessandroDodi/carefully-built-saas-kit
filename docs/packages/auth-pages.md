@@ -122,6 +122,7 @@ Helpers in this package:
 - `AuthForgotPasswordPageProps`
 - `AuthFormState`
 - `AuthLayoutBranding`
+- `AuthLayoutClassNames`
 - `AuthLoginPageProps`
 - `AuthPageBranding`
 - `AuthPagesConfig`
@@ -133,7 +134,9 @@ Helpers in this package:
 - `ForgotPasswordFormData`
 - `LegalLinkConfig`
 - `LoginFormData`
+- `OrganizationSelectionPageClassNames`
 - `OrganizationSelectionPageProps`
+- `OrganizationSelectorClassNames`
 - `OrganizationSelectorItem`
 - `OrganizationSelectorProps`
 - `ResetPasswordFormData`
@@ -224,6 +227,7 @@ Helpers in this package:
 | `AuthForgotPasswordPageProps` | Type | `packages/auth-pages/src/pages/auth-pages.tsx` |
 | `AuthFormState` | Type | `packages/auth-pages/src/types.ts` |
 | `AuthLayoutBranding` | Type | `packages/auth-pages/src/types.ts` |
+| `AuthLayoutClassNames` | Type | `packages/auth-pages/src/types.ts` |
 | `AuthLoginPageProps` | Type | `packages/auth-pages/src/pages/auth-pages.tsx` |
 | `AuthPageBranding` | Type | `packages/auth-pages/src/pages/auth-pages.tsx` |
 | `AuthPagesConfig` | Type | `packages/auth-pages/src/config/auth-pages-config.tsx` |
@@ -235,7 +239,9 @@ Helpers in this package:
 | `ForgotPasswordFormData` | Type | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `LegalLinkConfig` | Type | `packages/auth-pages/src/types.ts` |
 | `LoginFormData` | Type | `packages/auth-pages/src/controllers/password-forms.ts` |
+| `OrganizationSelectionPageClassNames` | Type | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectionPageProps` | Type | `packages/auth-pages/src/organizations/organization-selection.tsx` |
+| `OrganizationSelectorClassNames` | Type | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectorItem` | Type | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectorProps` | Type | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `ResetPasswordFormData` | Type | `packages/auth-pages/src/controllers/password-forms.ts` |

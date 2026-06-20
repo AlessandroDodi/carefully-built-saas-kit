@@ -24,7 +24,7 @@ export function OrganizationLogoDropzone({
         accept={ORGANIZATION_LOGO_ACCEPT}
         currentPreviewUrl={previewUrl}
         helperText={ORGANIZATION_LOGO_HELPER_TEXT}
-        previewAlt="Anteprima logo organizzazione"
+        previewAlt="Organization logo preview"
         onFileSelect={onFileSelect}
         onRemove={onRemove}
       />

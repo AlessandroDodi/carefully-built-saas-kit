@@ -73,7 +73,7 @@ function promptForLink(currentUrl: string): string | null {
     return null;
   }
 
-  return window.prompt('Inserisci un link', currentUrl) ?? null;
+  return window.prompt('Enter a link', currentUrl) ?? null;
 }
 
 export function RichTextEditor({
@@ -81,7 +81,7 @@ export function RichTextEditor({
   onChange,
   label,
   labelIcon,
-  placeholder = 'Scrivi qui...',
+  placeholder = 'Write here...',
   disabled = false,
   error,
   className,
@@ -188,7 +188,7 @@ export function RichTextEditor({
       const currentDocument = editor.getJSON();
 
       if (!isRichTextDocument(currentDocument)) {
-        throw new Error('Documento rich text non valido.');
+        throw new Error('Invalid rich text document.');
       }
 
       const improvedDocumentJson = await improveText(stringifyRichTextContent(currentDocument));
@@ -340,8 +340,8 @@ export function RichTextEditor({
                 onClick={() => {
                   editor.chain().focus().deleteTable().run();
                 }}
-                title="Elimina tabella"
-                aria-label="Elimina tabella"
+                title="Delete table"
+                aria-label="Delete table"
               >
                 <Trash2 />
               </Button>

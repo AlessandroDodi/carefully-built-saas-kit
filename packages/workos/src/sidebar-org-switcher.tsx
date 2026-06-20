@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { ChevronDown, Plus, ShieldCheck } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { ChevronDown, Plus, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   Button,
@@ -21,7 +21,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@carefully-built/ui';
+} from "@carefully-built/ui";
 
 export interface WorkOSOrganization {
   readonly id: string;
@@ -29,12 +29,16 @@ export interface WorkOSOrganization {
   readonly role?: string;
 }
 
-export interface OrganizationsResponse<TOrganization extends WorkOSOrganization> {
+export interface OrganizationsResponse<
+  TOrganization extends WorkOSOrganization,
+> {
   readonly organizations: readonly TOrganization[];
   readonly currentOrganizationId?: string | null;
 }
 
-export interface SidebarOrgSwitcherBaseProps<TOrganization extends WorkOSOrganization> {
+export interface SidebarOrgSwitcherBaseProps<
+  TOrganization extends WorkOSOrganization,
+> {
   readonly canAccessSuperAdmin?: boolean;
   readonly collapsed?: boolean;
   readonly createOrganization: (props: {
@@ -43,23 +47,27 @@ export interface SidebarOrgSwitcherBaseProps<TOrganization extends WorkOSOrganiz
   }) => React.ReactElement;
   readonly currentOrganizationId?: string | null;
   readonly dashboardHref?: string;
-  readonly fetchOrganizations: () => Promise<OrganizationsResponse<TOrganization>>;
+  readonly fetchOrganizations: () => Promise<
+    OrganizationsResponse<TOrganization>
+  >;
   readonly initialOrganizationId?: string | null;
   readonly initialOrganizations?: readonly TOrganization[];
   readonly mobileSheet?: boolean;
   readonly onContextOrganizationChange?: (orgId: string) => void;
   readonly onSwitch?: (orgId: string) => void;
-  readonly renderLogo: (props: {
-    readonly org: Pick<TOrganization, 'id' | 'name'>;
-    readonly size: 'sm' | 'md';
+  readonly renderLogo?: (props: {
+    readonly org: Pick<TOrganization, "id" | "name">;
+    readonly size: "sm" | "md";
     readonly className?: string;
   }) => React.ReactNode;
-  readonly switchOrganization: (orgId: string) => Promise<{ readonly redirectUrl?: string } | void>;
+  readonly switchOrganization: (
+    orgId: string,
+  ) => Promise<{ readonly redirectUrl?: string } | void>;
   readonly superAdminHref?: string;
 }
 
 function cx(...classes: Array<string | false | null | undefined>): string {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 function getCurrentOrganization<TOrganization extends WorkOSOrganization>(
@@ -75,44 +83,56 @@ function getCurrentOrganization<TOrganization extends WorkOSOrganization>(
   }
 
   return (
-    organizations.find((organization) => organization.id === activeOrganizationId) ??
+    organizations.find(
+      (organization) => organization.id === activeOrganizationId,
+    ) ??
     organizations[0] ??
     null
   );
 }
 
-function FallbackOrgLogo({
-  name,
+export function getOrganizationInitials(name: string): string {
+  return (
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase() || "O"
+  );
+}
+
+export function OrganizationLogo({
+  className,
+  org,
   size,
 }: {
-  readonly name: string;
-  readonly size: 'sm' | 'md';
+  readonly className?: string;
+  readonly org: Pick<WorkOSOrganization, "id" | "name">;
+  readonly size: "sm" | "md";
 }): React.ReactElement {
-  const initials = name
-    .split(' ')
-    .map((word) => word[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-
   return (
     <div
       className={cx(
-        'bg-primary/10 text-primary flex shrink-0 items-center justify-center rounded-md font-semibold',
-        size === 'sm' ? 'size-6 text-xs' : 'size-8 text-xs',
+        "bg-primary/10 text-primary flex shrink-0 items-center justify-center rounded-md font-semibold",
+        size === "sm" ? "size-6 text-[10px]" : "size-8 text-xs",
+        className,
       )}
     >
-      {initials || 'O'}
+      {getOrganizationInitials(org.name)}
     </div>
   );
 }
 
-export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>({
+export function SidebarOrgSwitcherBase<
+  TOrganization extends WorkOSOrganization,
+>({
   canAccessSuperAdmin = false,
   collapsed = false,
   createOrganization: CreateOrganization,
   currentOrganizationId,
-  dashboardHref = '/dashboard/home',
+  dashboardHref = "/dashboard/home",
   fetchOrganizations,
   initialOrganizationId = null,
   initialOrganizations = [],
@@ -121,7 +141,7 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
   onSwitch,
   renderLogo,
   switchOrganization,
-  superAdminHref = '/super-admin/dashboard',
+  superAdminHref = "/super-admin/dashboard",
 }: SidebarOrgSwitcherBaseProps<TOrganization>): React.ReactElement {
   const router = useRouter();
   const [organizations, setOrganizations] = useState([...initialOrganizations]);
@@ -139,8 +159,12 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
     fetchOrganizations()
       .then((data) => {
         setOrganizations([...data.organizations]);
-        const activeOrganizationId = data.currentOrganizationId ?? currentOrganizationId;
-        const nextOrganization = getCurrentOrganization(data.organizations, activeOrganizationId);
+        const activeOrganizationId =
+          data.currentOrganizationId ?? currentOrganizationId;
+        const nextOrganization = getCurrentOrganization(
+          data.organizations,
+          activeOrganizationId,
+        );
 
         setCurrentOrg(nextOrganization);
 
@@ -164,7 +188,9 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
 
   useEffect(() => {
     setOrganizations([...initialOrganizations]);
-    setCurrentOrg(getCurrentOrganization(initialOrganizations, initialOrganizationId));
+    setCurrentOrg(
+      getCurrentOrganization(initialOrganizations, initialOrganizationId),
+    );
     setIsLoading(initialOrganizations.length === 0);
   }, [initialOrganizationId, initialOrganizations]);
 
@@ -177,9 +203,9 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
       fetchOrgs();
     };
 
-    globalThis.addEventListener('org-updated', handleOrgUpdate);
+    globalThis.addEventListener("org-updated", handleOrgUpdate);
     return (): void => {
-      globalThis.removeEventListener('org-updated', handleOrgUpdate);
+      globalThis.removeEventListener("org-updated", handleOrgUpdate);
     };
   }, [fetchOrgs, initialOrganizations.length]);
 
@@ -199,7 +225,7 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
       router.push(dashboardHref);
       router.refresh();
     } catch (error) {
-      console.error('Impossibile cambiare organizzazione:', error);
+      console.error("Unable to switch organization:", error);
     }
   };
 
@@ -207,7 +233,9 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
     fetchOrganizations()
       .then((data) => {
         setOrganizations([...data.organizations]);
-        const newOrg = data.organizations.find((organization) => organization.id === orgId);
+        const newOrg = data.organizations.find(
+          (organization) => organization.id === orgId,
+        );
         if (newOrg) {
           setCurrentOrg(newOrg);
           onContextOrganizationChange?.(newOrg.id);
@@ -222,14 +250,20 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
   };
 
   const logoFor = (
-    org: Pick<TOrganization, 'id' | 'name'>,
-    size: 'sm' | 'md',
+    org: Pick<TOrganization, "id" | "name">,
+    size: "sm" | "md",
     className?: string,
-  ): React.ReactNode => renderLogo({ org, size, className }) ?? <FallbackOrgLogo name={org.name} size={size} />;
+  ): React.ReactNode =>
+    renderLogo?.({ org, size, className }) ?? (
+      <OrganizationLogo className={className} org={org} size={size} />
+    );
 
   const dropdownContent = (
-    <DropdownMenuContent align={collapsed ? 'center' : 'start'} className="w-56">
-      <DropdownMenuLabel>Organizzazioni</DropdownMenuLabel>
+    <DropdownMenuContent
+      align={collapsed ? "center" : "start"}
+      className="w-56"
+    >
+      <DropdownMenuLabel>Organizations</DropdownMenuLabel>
       <DropdownMenuSeparator />
       {canAccessSuperAdmin ? (
         <>
@@ -245,17 +279,17 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
       {organizations.map((org) => (
         <DropdownMenuItem
           key={org.id}
-          className={cx(currentOrg?.id === org.id && 'bg-accent')}
+          className={cx(currentOrg?.id === org.id && "bg-accent")}
           onClick={(): void => {
             void handleSwitch(org);
           }}
         >
-          {logoFor(org, 'sm', 'mr-2')}
+          {logoFor(org, "sm", "mr-2")}
           <span className="truncate">{org.name}</span>
         </DropdownMenuItem>
       ))}
       {organizations.length === 0 ? (
-        <DropdownMenuItem disabled>Nessuna organizzazione</DropdownMenuItem>
+        <DropdownMenuItem disabled>No organization</DropdownMenuItem>
       ) : null}
       <DropdownMenuSeparator />
       <CreateOrganization onCreated={handleCreated}>
@@ -265,14 +299,15 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
           }}
         >
           <Plus className="mr-2 size-4" />
-          Crea organizzazione
+          Create organization
         </DropdownMenuItem>
       </CreateOrganization>
     </DropdownMenuContent>
   );
 
   const showSkeleton = isLoading && currentOrg === null;
-  const organizationName = currentOrg?.name ?? (showSkeleton ? null : 'Seleziona organizzazione');
+  const organizationName =
+    currentOrg?.name ?? (showSkeleton ? null : "Select organization");
 
   if (mobileSheet) {
     return (
@@ -286,11 +321,14 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
         >
           <span className="flex min-w-0 items-center gap-2">
             {currentOrg ? (
-              logoFor(currentOrg, 'sm')
+              logoFor(currentOrg, "sm")
             ) : showSkeleton ? (
               <Skeleton className="size-6 shrink-0 rounded" />
             ) : (
-              <FallbackOrgLogo name="Organizzazione" size="sm" />
+              <OrganizationLogo
+                org={{ id: "fallback", name: "Organization" }}
+                size="sm"
+              />
             )}
             {showSkeleton ? (
               <Skeleton className="h-4 w-32" />
@@ -302,11 +340,15 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
         </Button>
         <DrawerContent className="px-4 pb-[calc(env(safe-area-inset-bottom)+20px)]">
           <DrawerHeader className="px-0 pb-4">
-            <DrawerTitle>Organizzazioni</DrawerTitle>
+            <DrawerTitle>Organizations</DrawerTitle>
           </DrawerHeader>
           <div className="-mx-1 flex max-h-[70vh] flex-col gap-1 overflow-y-auto px-1 pb-2">
             {canAccessSuperAdmin ? (
-              <Button className="justify-start gap-2 px-2.5" variant="ghost" asChild>
+              <Button
+                className="justify-start gap-2 px-2.5"
+                variant="ghost"
+                asChild
+              >
                 <Link
                   href={superAdminHref}
                   onClick={() => {
@@ -323,22 +365,22 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
                 key={org.id}
                 type="button"
                 className={cx(
-                  'flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm transition-colors',
+                  "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm transition-colors",
                   currentOrg?.id === org.id
-                    ? 'bg-[rgba(151,112,255,0.17)] text-[#250089] dark:bg-[rgba(151,112,255,0.24)] dark:text-white'
-                    : 'text-sidebar-foreground/75 dark:text-sidebar-foreground/90 hover:bg-sidebar-accent hover:text-sidebar-primary dark:hover:text-white',
+                    ? "bg-[rgba(151,112,255,0.17)] text-[#250089] dark:bg-[rgba(151,112,255,0.24)] dark:text-white"
+                    : "text-sidebar-foreground/75 dark:text-sidebar-foreground/90 hover:bg-sidebar-accent hover:text-sidebar-primary dark:hover:text-white",
                 )}
                 onClick={() => {
                   void handleSwitch(org);
                 }}
               >
-                {logoFor(org, 'sm')}
+                {logoFor(org, "sm")}
                 <span className="truncate">{org.name}</span>
               </button>
             ))}
             {organizations.length === 0 ? (
               <div className="text-muted-foreground px-2.5 py-2 text-sm">
-                Nessuna organizzazione
+                No organization
               </div>
             ) : null}
           </div>
@@ -346,7 +388,7 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
             <CreateOrganization onCreated={handleCreated}>
               <Button className="w-full justify-start gap-2" variant="ghost">
                 <Plus className="size-4" />
-                Crea organizzazione
+                Create organization
               </Button>
             </CreateOrganization>
           </div>
@@ -363,16 +405,21 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
             <DropdownMenuTrigger asChild>
               <Button className="h-10 w-full" size="icon" variant="ghost">
                 {currentOrg ? (
-                  logoFor(currentOrg, 'md')
+                  logoFor(currentOrg, "md")
                 ) : showSkeleton ? (
                   <Skeleton className="size-8 rounded-md" />
                 ) : (
-                  <FallbackOrgLogo name="Organizzazione" size="md" />
+                  <OrganizationLogo
+                    org={{ id: "fallback", name: "Organizzazione" }}
+                    size="md"
+                  />
                 )}
               </Button>
             </DropdownMenuTrigger>
           </TooltipTrigger>
-          <TooltipContent side="right">{currentOrg?.name ?? 'Organizzazione'}</TooltipContent>
+          <TooltipContent side="right">
+            {currentOrg?.name ?? "Organizzazione"}
+          </TooltipContent>
         </Tooltip>
         {dropdownContent}
       </DropdownMenu>
@@ -385,11 +432,14 @@ export function SidebarOrgSwitcherBase<TOrganization extends WorkOSOrganization>
         <Button className="h-10 w-full justify-between px-2" variant="ghost">
           <span className="flex min-w-0 items-center gap-2">
             {currentOrg ? (
-              logoFor(currentOrg, 'sm')
+              logoFor(currentOrg, "sm")
             ) : showSkeleton ? (
               <Skeleton className="size-6 shrink-0 rounded" />
             ) : (
-              <FallbackOrgLogo name="Organizzazione" size="sm" />
+              <OrganizationLogo
+                org={{ id: "fallback", name: "Organizzazione" }}
+                size="sm"
+              />
             )}
             {showSkeleton ? (
               <Skeleton className="h-4 w-32" />

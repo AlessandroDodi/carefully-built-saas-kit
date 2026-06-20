@@ -79,7 +79,7 @@ export function CountryPhoneInput({
   localNumber,
   onCountryCodeChange,
   onLocalNumberChange,
-  label = 'Telefono',
+  label = 'Phone',
   required = false,
   className,
   localNumberId,
@@ -97,7 +97,7 @@ export function CountryPhoneInput({
           onValueChange={onCountryCodeChange}
           placeholder="Italia"
           className="w-full"
-          searchPlaceholder="Cerca paese o prefisso..."
+          searchPlaceholder="Search country or prefix..."
           options={countryOptions}
           renderValue={(selectedCountry) => (
             <span className="flex items-center gap-2">

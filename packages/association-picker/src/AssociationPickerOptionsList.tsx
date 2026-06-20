@@ -38,7 +38,7 @@ export function AssociationPickerOptionsList(props: AssociationPickerOptionsList
             className="mt-2"
             createableTypes={createableTypes}
             isMenuOpen={isCreateMenuOpen}
-            label={singleCreateType ? `Crea ${getAssociationTypeChipMeta(singleCreateType).label.toLowerCase()}` : 'Crea'}
+            label={singleCreateType ? `Create ${getAssociationTypeChipMeta(singleCreateType).label.toLowerCase()}` : 'Create'}
             openCreateFlow={openCreateFlow}
             setIsMenuOpen={setIsCreateMenuOpen}
             singleCreateType={singleCreateType}

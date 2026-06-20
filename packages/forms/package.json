@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/forms",
-  "version": "0.1.4",
+  "version": "0.1.8",
   "description": "Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -45,7 +45,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@carefully-built/agent-picker": ">=0.1.0",
+    "@carefully-built/user-picker": ">=0.1.0",
     "@carefully-built/association-picker": ">=0.1.1",
     "@carefully-built/ui": ">=0.1.14",
     "@hookform/resolvers": ">=5.0.0",
@@ -59,7 +59,7 @@
     "zod": ">=4.0.0"
   },
   "peerDependenciesMeta": {
-    "@carefully-built/agent-picker": {
+    "@carefully-built/user-picker": {
       "optional": true
     },
     "@carefully-built/association-picker": {
@@ -70,9 +70,9 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/agent-picker": "file:../agent-picker/carefully-built-agent-picker-0.1.0.tgz",
-    "@carefully-built/association-picker": "file:../association-picker/carefully-built-association-picker-0.1.1.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/user-picker": "workspace:*",
+    "@carefully-built/association-picker": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
     "lucide-react": "^1.8.0",
     "react": "^19.2.3",

@@ -9,7 +9,10 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -41,11 +44,15 @@
     "sonner": "^1.0.0 || ^2.0.0"
   },
   "peerDependenciesMeta": {
-    "@carefully-built/ui": { "optional": true },
-    "next": { "optional": true }
+    "@carefully-built/ui": {
+      "optional": true
+    },
+    "next": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.12.tgz",
+    "@carefully-built/ui": "workspace:*",
     "@radix-ui/react-slot": "^1.2.4",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

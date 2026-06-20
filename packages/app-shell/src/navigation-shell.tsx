@@ -29,6 +29,7 @@ export interface NavigationItem {
   readonly icon: NavigationIcon;
   readonly trailingIcon?: NavigationIcon;
   readonly activeMatch?: 'exact' | 'prefix';
+  readonly activePaths?: readonly string[];
 }
 
 export interface NavigationFooterRenderOptions {
@@ -47,6 +48,7 @@ export interface NavigationSearchRenderOptions {
 export interface AppNavigationShellProps {
   readonly currentPath: string;
   readonly logo: ReactNode;
+  readonly darkLogo?: ReactNode;
   readonly logoHref?: string;
   readonly navItems: readonly NavigationItem[];
   readonly bottomNavItems?: readonly NavigationItem[];
@@ -60,6 +62,10 @@ export interface AppNavigationShellProps {
 }
 
 export function isNavigationItemActive(pathname: string, item: NavigationItem): boolean {
+  if (item.activePaths?.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
+    return true;
+  }
+
   if (pathname === item.href) {
     return true;
   }
@@ -85,6 +91,25 @@ function NavigationAnchor({
   );
 }
 
+function NavigationLogo({
+  darkLogo,
+  logo,
+}: {
+  readonly darkLogo?: ReactNode;
+  readonly logo: ReactNode;
+}): React.ReactElement {
+  if (!darkLogo) {
+    return <>{logo}</>;
+  }
+
+  return (
+    <>
+      <span className="contents dark:hidden">{logo}</span>
+      <span className="hidden dark:contents">{darkLogo}</span>
+    </>
+  );
+}
+
 function DesktopNavLink({
   item,
   isCollapsed,
@@ -106,7 +131,7 @@ function DesktopNavLink({
       className={cn(
         'flex items-center gap-2.5 rounded-md px-2.5 py-1.5 text-sm transition-colors',
         isActive
-          ? 'bg-[rgba(151,112,255,0.17)] text-[#250089] dark:bg-[rgba(151,112,255,0.24)] dark:text-white'
+          ? 'bg-sidebar-primary/12 text-sidebar-primary shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--sidebar-primary)_20%,transparent)]'
           : 'text-sidebar-foreground/75 dark:text-sidebar-foreground/90 hover:bg-sidebar-accent hover:text-sidebar-primary dark:hover:text-white',
         isCollapsed && 'justify-center px-2',
       )}
@@ -153,7 +178,7 @@ function MobileNavLink({
       className={cn(
         'flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors',
         isActive
-          ? 'bg-[rgba(151,112,255,0.17)] text-[#250089] dark:bg-[rgba(151,112,255,0.24)] dark:text-white'
+          ? 'bg-sidebar-primary/12 text-sidebar-primary shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--sidebar-primary)_20%,transparent)]'
           : 'text-sidebar-foreground/75 dark:text-sidebar-foreground/90 hover:bg-sidebar-accent hover:text-sidebar-primary dark:hover:text-white',
       )}
     >
@@ -183,7 +208,7 @@ function MobileBottomNavLink({
       className={cn(
         'mx-1 my-1 flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-[11px] font-medium transition-colors',
         isActive
-          ? 'bg-[rgba(151,112,255,0.17)] text-[#250089] shadow-[inset_0_0_0_1px_rgba(151,112,255,0.22)] dark:bg-[rgba(151,112,255,0.24)] dark:text-white'
+          ? 'bg-primary/12 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--primary)_20%,transparent)]'
           : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
       )}
     >
@@ -196,6 +221,7 @@ function MobileBottomNavLink({
 function SidebarContent({
   bottomNavItems,
   closeLabel,
+  darkLogo,
   isCollapsed,
   isMobile = false,
   logo,
@@ -210,6 +236,7 @@ function SidebarContent({
 }: {
   readonly bottomNavItems: readonly NavigationItem[];
   readonly closeLabel: string;
+  readonly darkLogo?: ReactNode;
   readonly isCollapsed: boolean;
   readonly isMobile?: boolean;
   readonly logo: ReactNode;
@@ -248,7 +275,7 @@ function SidebarContent({
               className="flex min-w-0 flex-1 items-center gap-2 pl-3"
               onClick={onNavClick}
             >
-              {logo}
+              <NavigationLogo logo={logo} darkLogo={darkLogo} />
             </NavigationAnchor>
             {isMobile ? (
               <Button
@@ -275,7 +302,7 @@ function SidebarContent({
       </div>
 
       {renderSearch ? (
-        <div className="px-2 pb-3">
+        <div className="w-full px-2 pb-3">
           {renderSearch({
             isCollapsed,
             isMobile,
@@ -420,6 +447,7 @@ export function AppNavigationShell({
   closeLabel = 'Close sidebar',
   collapsedWidth = 56,
   currentPath,
+  darkLogo,
   logo,
   logoHref = '/',
   mobileNavigation,
@@ -453,6 +481,7 @@ export function AppNavigationShell({
             <SidebarContent
               bottomNavItems={bottomNavItems}
               closeLabel={closeLabel}
+              darkLogo={darkLogo}
               isCollapsed={isCollapsed}
               isMobile
               logo={logo}
@@ -476,6 +505,7 @@ export function AppNavigationShell({
         <SidebarContent
           bottomNavItems={bottomNavItems}
           closeLabel={closeLabel}
+          darkLogo={darkLogo}
           isCollapsed={isCollapsed}
           logo={logo}
           logoHref={logoHref}

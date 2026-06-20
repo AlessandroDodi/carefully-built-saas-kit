@@ -24,14 +24,14 @@ import type {
 
 const defaultLocaleConfig: Required<Omit<NotificationLocaleConfig, "locale">> = {
   allTabValue: "all",
-  allTabLabel: "Tutte",
-  title: "Notifiche",
-  description: "Nuovi aggiornamenti dai canali esterni.",
-  emptyAllLabel: "Nessuna notifica",
-  emptyFilteredLabel: "Nessuna notifica per questa categoria",
-  markAllSeenLabel: "Segna tutte come viste",
-  openNotificationsLabel: "Apri notifiche",
-  tooltipLabel: "Notifiche",
+  allTabLabel: "All",
+  title: "Notifications",
+  description: "Recent updates from your workspace.",
+  emptyAllLabel: "No notifications",
+  emptyFilteredLabel: "No notifications in this category",
+  markAllSeenLabel: "Mark all read",
+  openNotificationsLabel: "Open notifications",
+  tooltipLabel: "Notifications",
 };
 
 export interface NotificationCenterSheetProps<TNotification extends NotificationRecord> {

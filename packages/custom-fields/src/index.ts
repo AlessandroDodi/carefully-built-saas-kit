@@ -65,24 +65,24 @@ export const CUSTOM_FIELD_ENTITY_OPTIONS: readonly {
   readonly value: CustomFieldEntityType;
   readonly label: string;
 }[] = [
-  { value: 'contact', label: 'Contatto' },
-  { value: 'property', label: 'Proprietà' },
-  { value: 'request', label: 'Richiesta' },
-  { value: 'opportunity', label: 'Opportunità' },
-  { value: 'note', label: 'Nota' },
-  { value: 'document', label: 'Documento' },
-  { value: 'activity', label: 'Attività' },
+  { value: 'contact', label: 'Contact' },
+  { value: 'property', label: 'Property' },
+  { value: 'request', label: 'Request' },
+  { value: 'opportunity', label: 'Opportunity' },
+  { value: 'note', label: 'Note' },
+  { value: 'document', label: 'Document' },
+  { value: 'activity', label: 'Activity' },
 ];
 
 export const CUSTOM_FIELD_TYPE_OPTIONS: readonly {
   readonly value: CustomFieldType;
   readonly label: string;
 }[] = [
-  { value: 'boolean', label: 'Sì o no' },
-  { value: 'single_select', label: 'Lista' },
-  { value: 'long_text', label: 'Descrizione' },
-  { value: 'number', label: 'Numero' },
-  { value: 'date', label: 'Data' },
+  { value: 'boolean', label: 'Yes or no' },
+  { value: 'single_select', label: 'List' },
+  { value: 'long_text', label: 'Description' },
+  { value: 'number', label: 'Number' },
+  { value: 'date', label: 'Date' },
 ];
 
 export function getCustomFieldTypeLabel(fieldType: string): string {
@@ -338,13 +338,13 @@ export function formatCustomFieldDisplayValue(
 
   if (definition.fieldType === 'number') {
     return typeof value.numberValue === 'number'
-      ? new Intl.NumberFormat('it-IT').format(value.numberValue)
+      ? new Intl.NumberFormat('en-US').format(value.numberValue)
       : emptyValue;
   }
 
   if (definition.fieldType === 'boolean') {
     return typeof value.booleanValue === 'boolean'
-      ? (value.booleanValue ? 'Sì' : 'No')
+      ? (value.booleanValue ? 'Yes' : 'No')
       : emptyValue;
   }
 

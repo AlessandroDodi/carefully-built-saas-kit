@@ -2,7 +2,27 @@ import { ArrowLeft } from 'lucide-react';
 
 import type { ReactNode } from 'react';
 
+import { cn } from '@carefully-built/ui';
+
 export { privacyPolicyText, termsAndConditionsText } from './legal-texts';
+
+export interface LegalDocumentClassNames {
+  readonly root?: string;
+  readonly logoBar?: string;
+  readonly logoLink?: string;
+  readonly main?: string;
+  readonly container?: string;
+  readonly header?: string;
+  readonly backWrapper?: string;
+  readonly backLink?: string;
+  readonly title?: string;
+  readonly action?: string;
+  readonly content?: string;
+  readonly heading?: string;
+  readonly standaloneHeading?: string;
+  readonly paragraph?: string;
+  readonly link?: string;
+}
 
 export interface LegalDocumentProps {
   readonly title: string;
@@ -13,26 +33,24 @@ export interface LegalDocumentProps {
   readonly backLabel?: string;
   readonly action?: ReactNode;
   readonly standaloneHeadings?: ReadonlySet<string>;
+  readonly className?: string;
+  readonly classes?: LegalDocumentClassNames;
 }
 
 const defaultStandaloneHeadings = new Set([
-  'Titolare del Trattamento',
-  'Dati Personali',
-  'Categoria di Dati Personali trattati',
-  'Modalità di Trattamento dei Dati Personali',
-  'Finalità del Trattamento dei Dati personali e Base giuridica',
-  'Comunicazione dei Dati',
-  'Tempi del Trattamento',
-  'Cookie',
-  'Luogo del Trattamento e trasferimento dei Dati all’estero',
-  "Esercizio dei diritti dell'interessato",
-  'Strumenti utilizzati per il Trattamento dei Dati Personali',
-  'FORM DI CONTATTO',
-  'STATISTICA',
-  'TOOL DI AUTOMAZIONE',
-  'INTERAZIONE CON I SOCIAL NETWORK',
-  'REMARKETING E RETARGETING',
-  'Modifiche a questa Privacy Policy',
+  'Introduction',
+  'Information we collect',
+  'How we use information',
+  'Legal bases',
+  'Service providers',
+  'Cookies and analytics',
+  'Data retention',
+  'Security',
+  'International transfers',
+  'Your rights',
+  'Children',
+  'Changes',
+  'Contact',
 ]);
 
 function formatParagraph(paragraph: string): string {
@@ -53,9 +71,11 @@ export function LegalDocument({
   logo,
   logoHref = '/',
   backHref = '/login',
-  backLabel = 'Torna indietro',
+  backLabel = 'Go back',
   action,
   standaloneHeadings = defaultStandaloneHeadings,
+  className,
+  classes,
 }: LegalDocumentProps): React.ReactElement {
   const paragraphs = content
     .split(/\n\s*\n/g)
@@ -63,64 +83,88 @@ export function LegalDocument({
     .filter(Boolean);
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className={cn('bg-background min-h-screen', className, classes?.root)}>
       {logo ? (
-        <div className="px-5 py-5 sm:px-6 lg:px-8">
-          <a href={logoHref} className="inline-flex">
+        <div className={cn('px-5 py-5 sm:px-6 lg:px-8', classes?.logoBar)}>
+          <a href={logoHref} className={cn('inline-flex', classes?.logoLink)}>
             {logo}
           </a>
         </div>
       ) : null}
 
-      <main className="px-5 pt-4 pb-16 sm:px-6 lg:px-8 lg:pb-24">
-        <div className="mx-auto flex w-full max-w-[946px] flex-col gap-8">
-          <div className="grid items-center gap-4 sm:grid-cols-[1fr_auto_1fr]">
-            <div className="flex justify-start">
+      <main className={cn('px-5 pt-4 pb-16 sm:px-6 lg:px-8 lg:pb-24', classes?.main)}>
+        <div className={cn('mx-auto flex w-full max-w-[946px] flex-col gap-8', classes?.container)}>
+          <div className={cn('grid items-center gap-4 sm:grid-cols-[1fr_auto_1fr]', classes?.header)}>
+            <div className={cn('flex justify-start', classes?.backWrapper)}>
               <a
                 href={backHref}
-                className="text-foreground inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
+                className={cn(
+                  'text-foreground inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70',
+                  classes?.backLink,
+                )}
               >
                 <ArrowLeft className="size-4" />
                 {backLabel}
               </a>
             </div>
 
-            <h1 className="text-foreground text-center text-[28px] font-semibold tracking-[-0.03em] sm:text-[32px]">
+            <h1
+              className={cn(
+                'text-foreground text-center text-[28px] font-semibold tracking-[-0.03em] sm:text-[32px]',
+                classes?.title,
+              )}
+            >
               {title}
             </h1>
 
-            <div className="flex justify-start sm:justify-end">{action ?? null}</div>
+            <div className={cn('flex justify-start sm:justify-end', classes?.action)}>
+              {action ?? null}
+            </div>
           </div>
 
-          <div className="space-y-6 text-[15px] leading-7 tracking-[-0.018em] text-[#242529]">
+          <div
+            className={cn(
+              'space-y-6 text-[15px] leading-7 tracking-[-0.018em] text-[#242529]',
+              classes?.content,
+            )}
+          >
             {paragraphs.map((paragraph, index) =>
               isNumberedHeading(paragraph) ? (
                 <h2
                   key={`${title}-${index}`}
-                  className="text-foreground pt-2 text-[19px] leading-7 font-semibold tracking-[-0.03em]"
+                  className={cn(
+                    'text-foreground pt-2 text-[19px] leading-7 font-semibold tracking-[-0.03em]',
+                    classes?.heading,
+                  )}
                 >
                   {paragraph}
                 </h2>
               ) : standaloneHeadings.has(paragraph.trim()) ? (
                 <h3
                   key={`${title}-${index}`}
-                  className="text-foreground pt-1 text-[17px] leading-7 font-semibold tracking-[-0.025em]"
+                  className={cn(
+                    'text-foreground pt-1 text-[17px] leading-7 font-semibold tracking-[-0.025em]',
+                    classes?.standaloneHeading,
+                  )}
                 >
                   {paragraph}
                 </h3>
               ) : isUrlParagraph(paragraph) ? (
-                <p key={`${title}-${index}`} className="break-words">
+                <p key={`${title}-${index}`} className={cn('break-words', classes?.paragraph)}>
                   <a
                     href={paragraph.startsWith('http') ? paragraph : `https://${paragraph}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="underline underline-offset-4"
+                    className={cn('underline underline-offset-4', classes?.link)}
                   >
                     {paragraph}
                   </a>
                 </p>
               ) : (
-                <p key={`${title}-${index}`} className="whitespace-pre-line">
+                <p
+                  key={`${title}-${index}`}
+                  className={cn('whitespace-pre-line', classes?.paragraph)}
+                >
                   {formatParagraph(paragraph)}
                 </p>
               ),

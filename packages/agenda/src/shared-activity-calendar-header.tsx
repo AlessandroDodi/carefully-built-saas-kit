@@ -12,17 +12,17 @@ interface SharedActivityCalendarHeaderProps {
 }
 
 function formatHeaderMonth(date: Date): string {
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat('en-US', {
     month: 'long',
   }).format(date);
 }
 
 function formatHeaderContext(date: Date, today: Date): string {
-  const weekday = new Intl.DateTimeFormat('it-IT', {
+  const weekday = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
   }).format(date);
 
-  return date.toDateString() === today.toDateString() ? `Oggi, ${weekday}` : weekday;
+  return date.toDateString() === today.toDateString() ? `Today, ${weekday}` : weekday;
 }
 
 export function SharedActivityCalendarHeader({
@@ -34,7 +34,7 @@ export function SharedActivityCalendarHeader({
   return (
     <div className="flex items-start justify-between gap-3">
       <div className="flex min-w-0 items-start gap-2">
-        <div className="text-foreground text-[34px] leading-none font-semibold tracking-[-0.04em]">
+        <div className="text-foreground text-[34px] leading-none font-semibold tracking-normal">
           {selectedDate.getDate()}
         </div>
         <div className="min-w-0 pt-0.5">

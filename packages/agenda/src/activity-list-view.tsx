@@ -39,14 +39,14 @@ export function ActivityListView({
             <CalendarDays className="size-6" />
           </div>
           <div className="space-y-1.5">
-            <h3 className="text-lg font-medium tracking-tight">Nessuna attività trovata</h3>
+            <h3 className="text-lg font-medium tracking-tight">No activities found</h3>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Crea la prima attività o modifica i filtri per vedere piu risultati.
+              Create the first activity or change the filters to see more results.
             </p>
           </div>
           <Button className="mt-5" onClick={onCreate}>
             <Plus className="mr-2 size-4" />
-            Aggiungi attività
+            Add activity
           </Button>
         </CardContent>
       </Card>

@@ -68,11 +68,11 @@ export function KanbanBoard<TItem extends KanbanItem = KanbanItem>({
   onDelete,
   onCreateInStage,
   showDragHandle = true,
-  emptyColumnMessage = "Nessun elemento in questo step.",
-  emptyColumnActionLabel = "Aggiungi",
-  dropMessage = "Rilascia qui per spostare",
-  totalLabel = "Totale pipeline",
-  itemLabel = "elemento",
+  emptyColumnMessage = "No items in this stage.",
+  emptyColumnActionLabel = "Add",
+  dropMessage = "Drop here to move",
+  totalLabel = "Pipeline total",
+  itemLabel = "item",
 }: KanbanBoardProps<TItem>): React.ReactElement {
   const stages = columns.map((column) => column.stage);
   const pipelineTotal = getPipelineValueTotal(columns);

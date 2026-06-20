@@ -7,7 +7,8 @@ export type AssociationEntityType =
   | 'opportunity'
   | 'activity'
   | 'note'
-  | 'document';
+  | 'document'
+  | 'file';
 export type ActivityCalendarScope = 'day' | 'week' | 'month';
 export type ActivityDensity = 'large' | 'compact' | 'micro';
 export type ActivityVisibility = 'private' | 'internal' | 'team' | 'public';
@@ -81,11 +82,11 @@ function formatTimeRange(startAt?: number, endAt?: number): string | null {
     return null;
   }
 
-  const dateFormatter = new Intl.DateTimeFormat('it-IT', {
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     month: 'short',
   });
-  const timeFormatter = new Intl.DateTimeFormat('it-IT', {
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -122,7 +123,7 @@ export function buildActivityDisplayModel(
 ): ActivityDisplayModel {
   const masked = isPrivateForViewer(activity, options.viewerUserId);
   const baseModel: ActivityDisplayModel = {
-    title: masked ? 'Occupato' : activity.title,
+    title: masked ? 'Busy' : activity.title,
     timeLabel: formatTimeRange(activity.startAt, activity.endAt),
     typeLabel: masked ? null : activity.activityTypeLabel,
     assigneeLabel: masked ? null : (activity.assignedUserName ?? null),

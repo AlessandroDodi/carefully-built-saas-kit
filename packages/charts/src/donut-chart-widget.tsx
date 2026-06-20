@@ -32,7 +32,7 @@ export function DonutChartWidget({
   data,
   colors = DEFAULT_DONUT_COLORS,
   icon = BriefcaseBusiness,
-  emptyStateTitle = "Nessun dato disponibile",
+  emptyStateTitle = "No data available",
   emptyStateDescription,
   isLoading = false,
   innerRadius = "62%",
@@ -53,7 +53,7 @@ export function DonutChartWidget({
         title: emptyStateTitle,
         description:
           emptyStateDescription ??
-          "Appena arrivano dati per questo grafico, qui vedrai la distribuzione.",
+          "When data is available, the distribution will appear here.",
         minHeightClassName: "min-h-[264px]",
       }}
     >
@@ -92,8 +92,8 @@ export function DonutChartWidget({
               value: entry.value,
               color: getChartColor(colors, index),
             }))}
-            previousAriaLabel={legendPreviousAriaLabel ?? `Scorri legenda ${title} indietro`}
-            nextAriaLabel={legendNextAriaLabel ?? `Scorri legenda ${title} avanti`}
+            previousAriaLabel={legendPreviousAriaLabel ?? `Scroll ${title} legend backward`}
+            nextAriaLabel={legendNextAriaLabel ?? `Scroll ${title} legend forward`}
           />
         </div>
       ) : null}

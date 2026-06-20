@@ -220,7 +220,7 @@ export function useNotesPageState(options: UseNotesPageStateOptions) {
           tagIds: values.tagIds,
           visibility: values.visibility,
         });
-        toast.success('Nota aggiornata');
+        toast.success('Note updated');
       } else {
         await options.createNote({
           title: values.title,
@@ -229,13 +229,13 @@ export function useNotesPageState(options: UseNotesPageStateOptions) {
           tagIds: values.tagIds,
           visibility: values.visibility,
         });
-        toast.success('Nota aggiunta');
+        toast.success('Note added');
       }
 
       noteSheet.close();
     } catch (error) {
       console.error(error);
-      toast.error('Si e verificato un errore durante il salvataggio.');
+      toast.error('An error occurred while saving.');
     }
   }
 
@@ -247,7 +247,7 @@ export function useNotesPageState(options: UseNotesPageStateOptions) {
     const noteToArchive = editingNote;
     noteSheet.close();
     window.setTimeout(() => {
-      toast.error(`Vuoi archiviare "${noteToArchive.title}"?`, {
+      toast.error(`Archive "${noteToArchive.title}"?`, {
         action: {
           label: 'Conferma',
           onClick: () => {
@@ -255,10 +255,10 @@ export function useNotesPageState(options: UseNotesPageStateOptions) {
               try {
                 requireNoteContext();
                 await options.archiveNote(noteToArchive._id);
-                toast.success('Nota archiviata');
+                toast.success('Note archived');
               } catch (error) {
                 console.error(error);
-                toast.error('Impossibile archiviare la nota.');
+                toast.error('Unable to archive the note.');
               }
             })();
           },

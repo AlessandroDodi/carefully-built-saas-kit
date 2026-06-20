@@ -56,34 +56,34 @@ interface BuilderNodeData extends Record<string, unknown> {
 type BuilderNode = Node<BuilderNodeData>;
 
 const FIELD_LABELS: Record<string, string> = {
-  activityType: 'Tipo attività',
-  agentIds: 'Agente',
-  assignedUserId: 'Agente',
-  category: 'Categoria',
-  condition: 'Stato immobile',
-  contractType: 'Contratto',
-  createdAt: 'Creato il',
+  activityType: 'Activity type',
+  agentIds: 'Agent',
+  assignedUserId: 'Agent',
+  category: 'Category',
+  condition: 'Property status',
+  contractType: 'Contract',
+  createdAt: 'Created at',
   email: 'Email',
-  firstName: 'Nome',
-  lastName: 'Cognome',
-  mode: 'Tipo richiesta',
-  phone: 'Telefono',
-  propertyType: 'Tipo immobile',
-  roles: 'Ruolo',
-  stageKey: 'Pipeline e fase',
-  status: 'Stato',
+  firstName: 'First name',
+  lastName: 'Last name',
+  mode: 'Request type',
+  phone: 'Phone',
+  propertyType: 'Property type',
+  roles: 'Role',
+  stageKey: 'Pipeline and stage',
+  status: 'Status',
   tagIds: 'Tag',
-  title: 'Titolo',
+  title: 'Title',
 };
 
 const DEFAULT_ENTITY_LABELS: Record<string, string> = {
-  activity: 'Attivita',
-  contact: 'Contatto',
-  document: 'Documento',
-  note: 'Nota',
-  opportunity: 'Opportunita',
-  property: 'Proprieta',
-  request: 'Richiesta',
+  activity: 'Activity',
+  contact: 'Contact',
+  document: 'Document',
+  note: 'Note',
+  opportunity: 'Opportunity',
+  property: 'Property',
+  request: 'Request',
 };
 
 function formatEntityLabel(
@@ -190,7 +190,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
           }}
         >
           <Plus className="size-3.5" />
-          Aggiungi step
+          Add step
         </Button>
         <Handle type="source" position={Position.Bottom} className="opacity-0" />
       </div>
@@ -244,7 +244,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
                 }}
               >
                 <Pencil className="size-4" />
-                Modifica
+                Edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 variant="destructive"
@@ -254,7 +254,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
                 }}
               >
                 <Trash2 className="size-4" />
-                Elimina
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -396,7 +396,7 @@ function buildNodes(
       position: { x: 36, y },
       data: {
         kind: 'add',
-        label: 'Aggiungi step',
+        label: 'Add step',
         onAddStep,
       },
       draggable: false,

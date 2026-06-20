@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface NavigatorWithUserAgentData extends Navigator {
   readonly userAgentData?: {
@@ -6,37 +6,50 @@ interface NavigatorWithUserAgentData extends Navigator {
   };
 }
 
-function getDesktopShortcutModifierLabel(): string {
-  if (typeof navigator === 'undefined') {
-    return 'Ctrl';
+export function getDesktopShortcutModifierLabel(): string {
+  if (typeof navigator === "undefined") {
+    return "Ctrl";
   }
 
   const navigatorWithUserAgentData = navigator as NavigatorWithUserAgentData;
-  const platform = navigatorWithUserAgentData.userAgentData?.platform ?? navigator.userAgent;
+  const platform =
+    navigatorWithUserAgentData.userAgentData?.platform ?? navigator.userAgent;
 
-  return /Mac|iPhone|iPad|iPod/i.test(platform) ? 'Cmd' : 'Ctrl';
+  return /Mac|iPhone|iPad|iPod/i.test(platform) ? "Cmd" : "Ctrl";
 }
 
-function isAllowedConfirmShortcutEvent(event: KeyboardEvent, desktopModifierLabel: string): boolean {
-  if (event.key !== 'Enter' || event.repeat || event.isComposing) {
+export function isAllowedConfirmShortcutEvent(
+  event: KeyboardEvent,
+  desktopModifierLabel: string,
+): boolean {
+  if (event.key !== "Enter" || event.repeat || event.isComposing) {
     return false;
   }
 
-  const expectsMetaKey = desktopModifierLabel === 'Cmd';
+  const expectsMetaKey = desktopModifierLabel === "Cmd";
   const usedExpectedModifier = expectsMetaKey ? event.metaKey : event.ctrlKey;
   const usedOtherModifier = expectsMetaKey ? event.ctrlKey : event.metaKey;
   const usedShiftModifier = event.shiftKey;
   const usedAltModifier = event.altKey;
 
-  if (!usedExpectedModifier || usedOtherModifier || usedShiftModifier || usedAltModifier) {
+  if (
+    !usedExpectedModifier ||
+    usedOtherModifier ||
+    usedShiftModifier ||
+    usedAltModifier
+  ) {
     return false;
   }
 
   return true;
 }
 
-export function useDesktopShortcutModifierLabel(enabled: boolean): string | null {
-  const [desktopModifierLabel, setDesktopModifierLabel] = useState<string | null>(null);
+export function useDesktopShortcutModifierLabel(
+  enabled: boolean,
+): string | null {
+  const [desktopModifierLabel, setDesktopModifierLabel] = useState<
+    string | null
+  >(null);
 
   useEffect(() => {
     if (!enabled) {
@@ -81,10 +94,10 @@ export function useDesktopConfirmShortcut({
       onConfirm();
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [confirmDisabled, confirmLoading, enabled, onConfirm, open]);
 }

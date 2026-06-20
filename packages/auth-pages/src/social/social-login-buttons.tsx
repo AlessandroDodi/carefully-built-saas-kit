@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@carefully-built/ui";
+import { Button, cn } from "@carefully-built/ui";
 
 import {
   SocialProviderButton,
@@ -12,6 +12,10 @@ interface SocialLoginButtonsProps {
   readonly invitationToken?: string | null;
   readonly emailHref: string;
   readonly emailLabel?: string;
+  readonly className?: string;
+  readonly providerButtonClassName?: string;
+  readonly emailLinkClassName?: string;
+  readonly emailButtonClassName?: string;
 }
 
 export function SocialLoginButtons({
@@ -19,19 +23,24 @@ export function SocialLoginButtons({
   invitationToken,
   emailHref,
   emailLabel = "Continua con email",
+  className,
+  providerButtonClassName,
+  emailLinkClassName,
+  emailButtonClassName,
 }: SocialLoginButtonsProps): React.ReactElement {
   return (
-    <div className="mt-4 space-y-2">
+    <div className={cn("mt-4 space-y-2", className)}>
       {providers.map((provider) => (
         <SocialProviderButton
           invitationToken={invitationToken}
           key={provider.name}
           provider={provider}
+          className={providerButtonClassName}
         />
       ))}
 
-      <a className="block" href={emailHref}>
-        <Button variant="outline" className="w-full">
+      <a className={cn("block", emailLinkClassName)} href={emailHref}>
+        <Button variant="outline" className={cn("w-full", emailButtonClassName)}>
           {emailLabel}
         </Button>
       </a>

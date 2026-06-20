@@ -24,6 +24,7 @@ import { AppNavigationShell, SidebarInset, SidebarProvider } from '@carefully-bu
   <AppNavigationShell
     currentPath={pathname}
     logo={<Logo />}
+    darkLogo={<Logo variant="white" />}
     logoHref="/dashboard"
     navItems={navItems}
     bottomNavItems={bottomNavItems}
@@ -45,5 +46,7 @@ import { AppNavigationShell, SidebarInset, SidebarProvider } from '@carefully-bu
   </SidebarInset>
 </SidebarProvider>
 ```
+
+Pass `darkLogo` when a product needs a separate mark for dark sidebars or dark mode. If omitted, the shell uses `logo` in every theme.
 
 Keep app-specific nav items, org switchers, logos, search data, and route loading inside the consuming app. This package owns the repeated shell mechanics and responsive navigation behavior.

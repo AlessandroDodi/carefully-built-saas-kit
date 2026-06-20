@@ -57,7 +57,7 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "@carefully-built/ui": "workspace:*",
     "lucide-react": "^1.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

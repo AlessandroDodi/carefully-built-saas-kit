@@ -1,7 +1,8 @@
 # Package Docs
 
+Before creating local app components, read [Using SaaS Kit Components In Apps](../using-saas-kit-components.md). Apps should import kit components first and use optional `className` / `classes` props for product styling.
+
 - [`@carefully-built/agenda`](./agenda.md): Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps.
-- [`@carefully-built/agent-picker`](./agent-picker.md): Reusable agent/user picker for SaaS forms.
 - [`@carefully-built/app-shell`](./app-shell.md): Reusable dashboard shell primitives for Carefully Built SaaS apps.
 - [`@carefully-built/association-picker`](./association-picker.md): Reusable entity association picker for multitenant SaaS apps.
 - [`@carefully-built/auth-pages`](./auth-pages.md): Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps.
@@ -28,5 +29,6 @@
 - [`@carefully-built/superadmin`](./superadmin.md): Reusable superadmin UI for Carefully Built SaaS apps.
 - [`@carefully-built/theme-ui`](./theme-ui.md): Reusable SaaS theme, map theme, color, and shape selectors for Carefully Built apps.
 - [`@carefully-built/ui`](./ui.md): Reusable React UI primitives and data-display components for Carefully Built SaaS apps.
+- [`@carefully-built/user-picker`](./user-picker.md): Reusable user picker for SaaS forms.
 - [`@carefully-built/widgets`](./widgets.md): Reusable SaaS dashboard and detail widgets for Carefully Built apps.
 - [`@carefully-built/workos`](./workos.md): Reusable WorkOS organization creation and organization logo primitives for SaaS apps.

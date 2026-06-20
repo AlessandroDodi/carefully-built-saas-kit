@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 
 import type { SheetOutsideInteractionGuard } from './responsive-sheet';
+import type { ResponsiveSheetClassNames } from './responsive-sheet';
 
 import {
   Drawer,
@@ -23,16 +24,20 @@ import { cn } from '../utils/cn';
 interface SheetDescriptionBlockProps {
   readonly title: ReactNode;
   readonly description?: ReactNode;
+  readonly classes?: ResponsiveSheetClassNames;
 }
 
 function SheetDescriptionBlock({
   title,
   description,
+  classes,
 }: SheetDescriptionBlockProps): React.ReactElement {
   return (
     <>
-      <SheetTitle>{title}</SheetTitle>
-      {description ? <SheetDescription>{description}</SheetDescription> : null}
+      <SheetTitle className={classes?.title}>{title}</SheetTitle>
+      {description ? (
+        <SheetDescription className={classes?.description}>{description}</SheetDescription>
+      ) : null}
     </>
   );
 }
@@ -47,6 +52,9 @@ interface SharedSheetLayoutProps {
   readonly children: ReactNode;
   readonly footer: ReactNode;
   readonly mobileDrawerContentClassName?: string;
+  readonly contentClassName?: string;
+  readonly footerClassName?: string;
+  readonly classes?: ResponsiveSheetClassNames;
 }
 
 function shouldPreventOutsideInteraction(
@@ -79,6 +87,9 @@ export function MobileSheetLayout({
   children,
   footer,
   mobileDrawerContentClassName,
+  contentClassName,
+  footerClassName,
+  classes,
 }: MobileSheetLayoutProps): React.ReactElement {
   return (
     <Drawer open={open} onOpenChange={onOpenChange} modal={modal}>
@@ -87,6 +98,7 @@ export function MobileSheetLayout({
         className={cn(
           'px-4 pb-[calc(env(safe-area-inset-bottom)+20px)]',
           mobileDrawerContentClassName,
+          classes?.mobileContent,
         )}
         onInteractOutside={(event) => {
           if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
@@ -99,21 +111,31 @@ export function MobileSheetLayout({
           }
         }}
       >
-        <DrawerHeader className="px-0 pb-4">
-          <DrawerTitle>{title}</DrawerTitle>
+        <DrawerHeader className={cn('px-0 pb-4', classes?.header)}>
+          <DrawerTitle className={classes?.title}>{title}</DrawerTitle>
           {description ? (
-            <DrawerDescription>{description}</DrawerDescription>
+            <DrawerDescription className={classes?.description}>{description}</DrawerDescription>
           ) : (
             <DrawerDescription id="responsive-sheet-description-empty" className="sr-only">
-              Finestra di dialogo
+              Dialog
             </DrawerDescription>
           )}
         </DrawerHeader>
         <div className="flex min-h-0 flex-1 flex-col gap-4">
-          <div className="-mx-1 flex-1 overflow-y-auto px-1 pb-3 [scrollbar-gutter:stable]">
+          <div
+            className={cn(
+              '-mx-1 flex-1 overflow-y-auto px-1 pb-3 [scrollbar-gutter:stable]',
+              contentClassName,
+              classes?.body,
+            )}
+          >
             {children}
           </div>
-          {footer ? <div className="shrink-0 border-t pt-4 pb-3">{footer}</div> : null}
+          {footer ? (
+            <div className={cn('shrink-0 border-t pt-4 pb-3', footerClassName, classes?.footer)}>
+              {footer}
+            </div>
+          ) : null}
         </div>
       </DrawerContent>
     </Drawer>
@@ -134,13 +156,16 @@ export function DesktopSheetLayout({
   children,
   footer,
   width,
+  contentClassName,
+  footerClassName,
+  classes,
 }: DesktopSheetLayoutProps): React.ReactElement {
   return (
     <Sheet open={open} onOpenChange={onOpenChange} modal={modal}>
       <SheetContent
         aria-describedby={description ? undefined : 'responsive-sheet-description-empty'}
         style={{ width: `${String(width)}px`, maxWidth: '85vw' }}
-        className="flex flex-col gap-0 p-0"
+        className={cn('flex flex-col gap-0 p-0', classes?.desktopContent)}
         onInteractOutside={(event) => {
           if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
             event.preventDefault();
@@ -152,19 +177,29 @@ export function DesktopSheetLayout({
           }
         }}
       >
-        <SheetHeader className="border-b px-4 py-4">
-          <SheetDescriptionBlock title={title} description={description} />
+        <SheetHeader className={cn('border-b px-4 py-4', classes?.header)}>
+          <SheetDescriptionBlock title={title} description={description} classes={classes} />
         </SheetHeader>
         {description ? null : (
           <SheetDescription id="responsive-sheet-description-empty" className="sr-only">
-            Finestra di dialogo
+            Dialog
           </SheetDescription>
         )}
         <div className="flex min-h-0 flex-1 flex-col">
-          <div className="flex-1 overflow-x-visible overflow-y-auto px-4 pt-4 pb-6 [scrollbar-gutter:stable]">
+          <div
+            className={cn(
+              'flex-1 overflow-x-visible overflow-y-auto px-4 pt-4 pb-6 [scrollbar-gutter:stable]',
+              contentClassName,
+              classes?.body,
+            )}
+          >
             {children}
           </div>
-          {footer ? <div className="border-t px-4 py-4">{footer}</div> : null}
+          {footer ? (
+            <div className={cn('border-t px-4 py-4', footerClassName, classes?.footer)}>
+              {footer}
+            </div>
+          ) : null}
         </div>
       </SheetContent>
     </Sheet>

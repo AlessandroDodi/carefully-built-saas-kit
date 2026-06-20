@@ -70,7 +70,7 @@ export function CustomPasswordField<TValues extends FieldValues>({
               ) : (
                 <Eye className="text-muted-foreground size-4" />
               )}
-              <span className="sr-only">{showPassword ? 'Nascondi password' : 'Mostra password'}</span>
+              <span className="sr-only">{showPassword ? 'Hide password' : 'Show password'}</span>
             </Button>
           </div>
           <FieldMessage message={error?.message} />

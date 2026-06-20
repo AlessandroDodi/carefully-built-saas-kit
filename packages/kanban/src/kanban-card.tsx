@@ -85,7 +85,7 @@ function KanbanDetailsTooltip({
 
       <div className="grid gap-2 sm:grid-cols-2">
         <KanbanTooltipDetail
-          label="Stato"
+          label="Status"
           value={
             <span className="inline-flex items-center gap-1.5">
               <span className="size-2 rounded-full" style={{ backgroundColor: statusColor }} />
@@ -93,18 +93,18 @@ function KanbanDetailsTooltip({
             </span>
           }
         />
-        <KanbanTooltipDetail label="Valore" value={formattedValue ?? "Non indicato"} />
+        <KanbanTooltipDetail label="Value" value={formattedValue ?? "Not set"} />
       </div>
       <div className="grid gap-2 sm:grid-cols-2">
         <KanbanTooltipDetail
-          label="Operatore"
-          value={item.assignedUserName ?? "Non assegnato"}
+          label="Owner"
+          value={item.assignedUserName ?? "Unassigned"}
         />
       </div>
 
       {item.associations.length > 0 ? (
         <KanbanTooltipDetail
-          label="Collegamenti"
+          label="Associations"
           value={
             <AssociationDisplayList
               associations={item.associations}
@@ -113,7 +113,7 @@ function KanbanDetailsTooltip({
           }
         />
       ) : (
-        <KanbanTooltipDetail label="Collegamenti" value="Nessuna associazione" />
+        <KanbanTooltipDetail label="Associations" value="No association" />
       )}
 
       {notes ? <KanbanTooltipDetail label="Note" value={notes} /> : null}
@@ -289,7 +289,7 @@ export function KanbanCard<TItem extends KanbanItem = KanbanItem>({
                   />
                 ) : (
                   <span className="truncate text-[11px] text-muted-foreground">
-                    Nessuna associazione
+                    No association
                   </span>
                 )}
               </div>
@@ -319,8 +319,8 @@ export function KanbanCard<TItem extends KanbanItem = KanbanItem>({
         <Drawer open={isMoveDrawerOpen} onOpenChange={setIsMoveDrawerOpen}>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle>Sposta in</DrawerTitle>
-              <DrawerDescription>Seleziona il nuovo step per questo elemento.</DrawerDescription>
+              <DrawerTitle>Move to</DrawerTitle>
+              <DrawerDescription>Select the new stage for this item.</DrawerDescription>
             </DrawerHeader>
 
             <div className="space-y-2 px-4 pb-4">

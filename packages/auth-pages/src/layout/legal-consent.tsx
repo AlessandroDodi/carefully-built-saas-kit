@@ -1,37 +1,40 @@
 import type { LegalLinkConfig } from "../types";
+import { cn } from "@carefully-built/ui";
 
 export function LegalConsent({
   termsHref = "/terms",
   privacyHref = "/privacy",
   cookieHref,
-  consentText = "Continuando, accetti",
+  consentText = "By continuing, you agree to our",
+  className,
+  linkClassName,
 }: LegalLinkConfig): React.ReactElement {
   return (
-    <p className="text-muted-foreground mt-4 text-center text-xs">
+    <p className={cn("text-muted-foreground mt-4 text-center text-xs", className)}>
       {consentText}{" "}
       <a
-        className="underline"
+        className={cn("underline", linkClassName)}
         href={termsHref}
         rel="noopener noreferrer"
         target="_blank"
       >
-        Termini di servizio
+        Terms of Service
       </a>{" "}
-      e{" "}
+      and{" "}
       <a
-        className="underline"
+        className={cn("underline", linkClassName)}
         href={privacyHref}
         rel="noopener noreferrer"
         target="_blank"
       >
-        Informativa sulla privacy
+        Privacy Policy
       </a>
       {cookieHref ? (
         <>
           {" "}
-          e{" "}
+          and{" "}
           <a
-            className="underline"
+            className={cn("underline", linkClassName)}
             href={cookieHref}
             rel="noopener noreferrer"
             target="_blank"

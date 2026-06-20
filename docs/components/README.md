@@ -7,8 +7,6 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `AIActionButton` | `@carefully-built/rich-text` | [docs](../packages/rich-text.md) | `packages/rich-text/src/ai-action-button.tsx` |
 | `ActivityCalendarView` | `@carefully-built/agenda` | [docs](../packages/agenda.md) | `packages/agenda/src/activity-calendar-view.tsx` |
 | `ActivityListView` | `@carefully-built/agenda` | [docs](../packages/agenda.md) | `packages/agenda/src/activity-list-view.tsx` |
-| `AgentPicker` | `@carefully-built/agent-picker` | [docs](../packages/agent-picker.md) | `packages/agent-picker/src/agent-picker.tsx` |
-| `AgentPicker` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/agent-picker.tsx` |
 | `AppNavigationShell` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/navigation-shell.tsx` |
 | `ApplicationAccessActions` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/next-client.tsx` |
 | `AssociationDisplayList` | `@carefully-built/notes` | [docs](../packages/notes.md) | `packages/notes/src/association-display-list.tsx` |
@@ -49,8 +47,9 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `CreateOrganizationFormContent` | `@carefully-built/workos` | [docs](../packages/workos.md) | `packages/workos/src/create-organization-form-content.tsx` |
 | `CreateOrganization` | `@carefully-built/workos` | [docs](../packages/workos.md) | `packages/workos/src/create-organization.tsx` |
 | `CrudDataTable` | `@carefully-built/crud` | [docs](../packages/crud.md) | `packages/crud/src/crud-data-table.tsx` |
+| `CrudListTable` | `@carefully-built/crud` | [docs](../packages/crud.md) | `packages/crud/src/crud-list-table.tsx` |
+| `CrudResourceSheet` | `@carefully-built/crud` | [docs](../packages/crud.md) | `packages/crud/src/crud-resource-sheet.tsx` |
 | `CrudTableView` | `@carefully-built/crud` | [docs](../packages/crud.md) | `packages/crud/src/crud-table-view.tsx` |
-| `CustomAgentPickerField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-agent-picker-field.tsx` |
 | `CustomAssociationPickerField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-association-picker-field.tsx` |
 | `CustomBooleanChipField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-boolean-chip-field.tsx` |
 | `CustomChipSelectField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-chip-select-field.tsx` |
@@ -65,6 +64,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `CustomSelectField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-select-field.tsx` |
 | `CustomSingleAssociationPickerField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-single-association-picker-field.tsx` |
 | `CustomTextareaField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-textarea-field.tsx` |
+| `CustomUserPickerField` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/custom-user-picker-field.tsx` |
 | `DashboardPageHeader` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardPageLayout` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardWidget` | `@carefully-built/widgets` | [docs](../packages/widgets.md) | `packages/widgets/src/dashboard-widget.tsx` |
@@ -82,6 +82,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `DialogTrigger` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/dialog.tsx` |
 | `Dialog` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/dialog.tsx` |
 | `DisplayDate` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/display-date.tsx` |
+| `DocumentCardGrid` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/document-card-grid.tsx` |
 | `DocumentCard` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/document-card.tsx` |
 | `DocumentFormShell` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/document-form-shell.tsx` |
 | `DocumentSheetBase` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/document-sheet.tsx` |
@@ -98,6 +99,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `DropdownMenuSeparator` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/dropdown-menu.tsx` |
 | `DropdownMenuTrigger` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/dropdown-menu.tsx` |
 | `DropdownMenu` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/dropdown-menu.tsx` |
+| `EntityAssociatedEmptyTab` | `@carefully-built/resource-kit` | [docs](../packages/resource-kit.md) | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
 | `EntityAssociatedTabPanel` | `@carefully-built/resource-kit` | [docs](../packages/resource-kit.md) | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityDetailLoadingSidebar` | `@carefully-built/resource-kit` | [docs](../packages/resource-kit.md) | `packages/resource-kit/src/entity-detail-loading-sidebar.tsx` |
 | `EntityDetailShell` | `@carefully-built/resource-kit` | [docs](../packages/resource-kit.md) | `packages/resource-kit/src/entity-detail-shell.tsx` |
@@ -109,6 +111,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `FieldMessage` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/field-message.tsx` |
 | `FileCardSkeleton` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/file-card-skeleton.tsx` |
 | `FileDropzone` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/file-dropzone.tsx` |
+| `FileUploadSheet` | `@carefully-built/files` | [docs](../packages/files.md) | `packages/files/src/file-upload-sheet.tsx` |
 | `FilterDropdown` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `ForgotPasswordForm` | `@carefully-built/auth-pages` | [docs](../packages/auth-pages.md) | `packages/auth-pages/src/forms/forgot-password-form.tsx` |
 | `FormFieldLabel` | `@carefully-built/forms` | [docs](../packages/forms.md) | `packages/forms/src/fields/form-field-label.tsx` |
@@ -129,6 +132,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `MobileSheetLayout` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/overlays/responsive-sheet.layouts.tsx` |
 | `MobileView` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/smart-table/MobileView.tsx` |
 | `NoteCard` | `@carefully-built/notes` | [docs](../packages/notes.md) | `packages/notes/src/note-card.tsx` |
+| `NotesCrudPage` | `@carefully-built/notes` | [docs](../packages/notes.md) | `packages/notes/src/notes-crud-page.tsx` |
 | `NotesGrid` | `@carefully-built/notes` | [docs](../packages/notes.md) | `packages/notes/src/notes-grid.tsx` |
 | `NotesSheetFooter` | `@carefully-built/notes` | [docs](../packages/notes.md) | `packages/notes/src/notes-sheet-footer.tsx` |
 | `NotificationCenterButton` | `@carefully-built/notifications` | [docs](../packages/notifications.md) | `packages/notifications/src/notification-center-button.tsx` |
@@ -219,6 +223,8 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `TruncatedContent` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/smart-table/TruncatedContent.tsx` |
 | `UpdatePasswordForm` | `@carefully-built/auth-pages` | [docs](../packages/auth-pages.md) | `packages/auth-pages/src/forms/update-password-form.tsx` |
 | `UserGrowthChart` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/user-growth-chart.tsx` |
+| `UserPicker` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/user-picker.tsx` |
+| `UserPicker` | `@carefully-built/user-picker` | [docs](../packages/user-picker.md) | `packages/user-picker/src/user-picker.tsx` |
 
 ## Documentation Standard
 

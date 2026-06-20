@@ -33,7 +33,7 @@ async function createOrganizationWithDefaultApi(name: string): Promise<string> {
 
   if (!response.ok) {
     const data = (await response.json()) as { error?: string };
-    throw new Error(data.error ?? "Impossibile creare l'organizzazione");
+    throw new Error(data.error ?? 'Unable to create the organization');
   }
 
   const { organizationId } = (await response.json()) as { organizationId: string };
@@ -71,7 +71,7 @@ export function useCreateOrganizationDialog({
       resetForm();
       onCreated?.(organizationId);
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : 'Si e verificato un errore');
+      setError(submitError instanceof Error ? submitError.message : 'An error occurred');
     } finally {
       setLoading(false);
     }

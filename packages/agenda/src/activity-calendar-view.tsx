@@ -8,7 +8,6 @@ import type {
   EventContentArg,
   EventDropArg,
 } from '@fullcalendar/core';
-import itLocale from '@fullcalendar/core/locales/it';
 import interactionPlugin from '@fullcalendar/interaction';
 import type { DateClickArg } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -122,6 +121,10 @@ function addDays(date: Date, days: number): Date {
   return nextDate;
 }
 
+function formatHourAsScrollTime(hour: number): string {
+  return `${String(hour).padStart(2, '0')}:00:00`;
+}
+
 function startOfWeek(date: Date): Date {
   const nextDate = new Date(date);
   const day = nextDate.getDay();
@@ -160,7 +163,7 @@ interface CalendarTooltipSource {
 }
 
 function normalizeEventTitle(value: string | undefined): string {
-  return (value ?? '').trim().toLocaleLowerCase('it-IT');
+  return (value ?? '').trim().toLocaleLowerCase('en-US');
 }
 
 function areTimestampsClose(left?: number, right?: number, toleranceMs = 60_000): boolean {
@@ -218,7 +221,7 @@ function findMatchingGoogleCalendarEvent(args: {
 function getWeekOptions(anchorDate: Date): PickerOption[] {
   const startYear = anchorDate.getFullYear() - 2;
   const endYear = anchorDate.getFullYear() + 2;
-  const formatter = new Intl.DateTimeFormat('it-IT', {
+  const formatter = new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -236,7 +239,7 @@ function getWeekOptions(anchorDate: Date): PickerOption[] {
       value: `${weekStart.getFullYear()}-${String(weekStart.getMonth() + 1).padStart(2, '0')}-${String(weekStart.getDate()).padStart(2, '0')}`,
       label: `${formatter.format(weekStart)} - ${formatter.format(weekEnd)}`,
       date: weekStart,
-      searchText: `${weekStart.toLocaleDateString('it-IT')} ${weekEnd.toLocaleDateString('it-IT')}`,
+      searchText: `${weekStart.toLocaleDateString('en-US')} ${weekEnd.toLocaleDateString('en-US')}`,
     });
   }
 
@@ -246,7 +249,7 @@ function getWeekOptions(anchorDate: Date): PickerOption[] {
 function getMonthOptions(anchorDate: Date): PickerOption[] {
   const startYear = anchorDate.getFullYear() - 2;
   const endYear = anchorDate.getFullYear() + 2;
-  const formatter = new Intl.DateTimeFormat('it-IT', {
+  const formatter = new Intl.DateTimeFormat('en-US', {
     month: 'long',
     year: 'numeric',
   });
@@ -270,14 +273,14 @@ function getMonthOptions(anchorDate: Date): PickerOption[] {
 
 function formatTitleLabel(scope: ActivityCalendarScope, anchorDate: Date): string {
   if (scope === 'month') {
-    return new Intl.DateTimeFormat('it-IT', {
+    return new Intl.DateTimeFormat('en-US', {
       month: 'long',
       year: 'numeric',
     }).format(anchorDate);
   }
 
   if (scope === 'day') {
-    return new Intl.DateTimeFormat('it-IT', {
+    return new Intl.DateTimeFormat('en-US', {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -286,7 +289,7 @@ function formatTitleLabel(scope: ActivityCalendarScope, anchorDate: Date): strin
   }
 
   const rangeEnd = addDays(anchorDate, 6);
-  const formatter = new Intl.DateTimeFormat('it-IT', {
+  const formatter = new Intl.DateTimeFormat('en-US', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -303,6 +306,30 @@ function areSameAnchor(left: Date, right: Date): boolean {
   );
 }
 
+function isDateInVisibleScope(date: Date, anchorDate: Date, scope: ActivityCalendarScope): boolean {
+  if (scope === 'day') {
+    return areSameAnchor(date, anchorDate);
+  }
+
+  if (scope === 'week') {
+    const start = startOfWeek(anchorDate);
+    const end = addDays(start, 6);
+    end.setHours(23, 59, 59, 999);
+    return date >= start && date <= end;
+  }
+
+  return date.getFullYear() === anchorDate.getFullYear() && date.getMonth() === anchorDate.getMonth();
+}
+
+function getInitialScrollTime(anchorDate: Date, scope: ActivityCalendarScope): string {
+  const now = new Date();
+  if (isDateInVisibleScope(now, anchorDate, scope)) {
+    return formatHourAsScrollTime(Math.min(Math.max(now.getHours() - 2, 6), 16));
+  }
+
+  return '08:00:00';
+}
+
 function isPastActivity(activity: ActivityListItem): boolean {
   const referenceTimestamp = activity.endAt ?? activity.startAt ?? activity.dueAt;
   return typeof referenceTimestamp === 'number' ? referenceTimestamp < Date.now() : false;
@@ -314,7 +341,7 @@ function formatTooltipDateRange(startAt?: number, endAt?: number, allDay = false
   }
 
   if (allDay) {
-    const formatter = new Intl.DateTimeFormat('it-IT', {
+    const formatter = new Intl.DateTimeFormat('en-US', {
       weekday: 'short',
       day: 'numeric',
       month: 'long',
@@ -329,13 +356,13 @@ function formatTooltipDateRange(startAt?: number, endAt?: number, allDay = false
     return `${formatter.format(new Date(startAt))} - ${formatter.format(new Date(inclusiveEndAt))}`;
   }
 
-  const dateFormatter = new Intl.DateTimeFormat('it-IT', {
+  const dateFormatter = new Intl.DateTimeFormat('en-US', {
     weekday: 'short',
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
-  const timeFormatter = new Intl.DateTimeFormat('it-IT', {
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -398,12 +425,12 @@ function CalendarEventConnections({
 
   return (
     <div className="space-y-1.5">
-      <p className="text-[10px] font-medium tracking-[0.08em] uppercase opacity-65">Collegato su</p>
+      <p className="text-[10px] font-medium tracking-normal uppercase opacity-65">Connected to</p>
       <div className="space-y-1">
         {badges.hasApp ? (
           <div className="flex items-center gap-1.5 text-[11px] opacity-90">
-            <img src="/logos/square_logo.png" alt="" className="size-3.5 shrink-0" />
-            <span>Immobiliare in Cloud</span>
+            <span className="bg-primary size-3.5 shrink-0 rounded-sm" />
+            <span>Workspace</span>
           </div>
         ) : null}
         {badges.hasGoogleCalendar ? (
@@ -681,6 +708,10 @@ export function ActivityCalendarView({
   );
   const weekOptions = useMemo(() => getWeekOptions(anchorDate), [anchorDate]);
   const monthOptions = useMemo(() => getMonthOptions(anchorDate), [anchorDate]);
+  const scrollTime = useMemo(
+    () => getInitialScrollTime(anchorDate, effectiveScope),
+    [anchorDate, effectiveScope],
+  );
   const selectedWeekValue = useMemo(() => {
     const weekStart = startOfWeek(anchorDate);
     return `${weekStart.getFullYear()}-${String(weekStart.getMonth() + 1).padStart(2, '0')}-${String(weekStart.getDate()).padStart(2, '0')}`;
@@ -850,7 +881,7 @@ export function ActivityCalendarView({
   }
 
   return (
-    <div className="agenda-calendar-shell border-border bg-background rounded-2xl border p-3 md:p-4">
+    <div className="agenda-calendar-shell border-border bg-background rounded-lg border p-3 md:p-4">
       <div className="flex items-center justify-between gap-3 pb-4">
         {effectiveScope === 'day' ? (
           <Popover open={isPickerOpen} onOpenChange={setIsPickerOpen}>
@@ -869,7 +900,6 @@ export function ActivityCalendarView({
                 mode="single"
                 selected={anchorDate}
                 onSelect={handlePickerSelect}
-                locale={itLocale}
                 weekStartsOn={1}
               />
             </PopoverContent>
@@ -880,9 +910,9 @@ export function ActivityCalendarView({
             value={selectedWeekValue}
             onValueChange={handleWeekChange}
             options={weekOptions}
-            ariaLabel="Seleziona settimana"
-            placeholder="Seleziona settimana"
-            searchPlaceholder="Cerca settimana..."
+            ariaLabel="Select week"
+            placeholder="Select week"
+            searchPlaceholder="Search week..."
             className="max-w-full min-w-[20rem]"
             triggerClassName="agenda-calendar-searchable-trigger"
             contentClassName="w-[24rem]"
@@ -895,9 +925,9 @@ export function ActivityCalendarView({
             value={selectedMonthValue}
             onValueChange={handleMonthChange}
             options={monthOptions}
-            ariaLabel="Seleziona mese"
-            placeholder="Seleziona mese"
-            searchPlaceholder="Cerca mese..."
+            ariaLabel="Select month"
+            placeholder="Select month"
+            searchPlaceholder="Search month..."
             className="max-w-full min-w-[16rem]"
             triggerClassName="agenda-calendar-searchable-trigger"
             contentClassName="w-[20rem]"
@@ -914,7 +944,7 @@ export function ActivityCalendarView({
             onClick={() => {
               handleNavigate('prev');
             }}
-            aria-label="Periodo precedente"
+            aria-label="Previous period"
           >
             <ChevronLeft />
           </Button>
@@ -925,7 +955,7 @@ export function ActivityCalendarView({
             onClick={() => {
               handleNavigate('next');
             }}
-            aria-label="Periodo successivo"
+            aria-label="Next period"
           >
             <ChevronRight />
           </Button>
@@ -934,20 +964,19 @@ export function ActivityCalendarView({
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        locale={itLocale}
         initialView={formatCalendarTitle(effectiveScope)}
         initialDate={anchorDate}
         headerToolbar={false}
         buttonText={{
-          timeGridDay: 'giorno',
-          timeGridWeek: 'settimana',
-          dayGridMonth: 'mese',
-          today: 'oggi',
+          timeGridDay: 'day',
+          timeGridWeek: 'week',
+          dayGridMonth: 'month',
+          today: 'today',
         }}
         firstDay={1}
         allDaySlot
         nowIndicator
-        height="auto"
+        height="100%"
         expandRows
         dayMaxEvents
         slotEventOverlap={false}
@@ -956,6 +985,7 @@ export function ActivityCalendarView({
         editable
         slotMinTime="06:00:00"
         slotMaxTime="22:00:00"
+        scrollTime={scrollTime}
         events={events}
         datesSet={handleDatesSet}
         dateClick={handleDateClick}

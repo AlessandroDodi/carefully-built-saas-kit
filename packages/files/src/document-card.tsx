@@ -187,12 +187,12 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
             <div className="flex min-w-0 items-center gap-2">
               <p className="text-muted-foreground min-w-0 truncate text-xs">
                 {document.isPending
-                  ? 'Link pubblico attivo'
+                  ? 'Active public link'
                   : document.sourceType === 'external_link'
-                    ? `${document.fileCount} ${document.fileCount === 1 ? 'file caricato' : 'file caricati'}`
+                    ? `${document.fileCount} ${document.fileCount === 1 ? 'uploaded file' : 'uploaded files'}`
                     : document.fileSize
                       ? formatFileSize(document.fileSize)
-                      : 'Documento'}
+                      : 'Document'}
               </p>
               {document.sourceType === 'external_link' ? (
                 <Chip
@@ -222,12 +222,12 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onEdit(document)}>
                 <Pencil className="mr-2 size-4" />
-                Modifica
+                Edit
               </DropdownMenuItem>
               {publicUploadUrl ? (
                 <DropdownMenuItem onClick={() => onCopyLink(publicUploadUrl)}>
                   <Copy className="mr-2 size-4" />
-                  Copia link
+                  Copy link
                 </DropdownMenuItem>
               ) : null}
               {document.previewUrl ? (
@@ -239,7 +239,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                     rel="noopener noreferrer"
                   >
                     <Download className="mr-2 size-4" />
-                    Scarica file
+                    Download file
                   </a>
                 </DropdownMenuItem>
               ) : null}
@@ -248,7 +248,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                 onClick={() => onDelete(document._id)}
               >
                 <Trash2 className="mr-2 size-4" />
-                Elimina
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

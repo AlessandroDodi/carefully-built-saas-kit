@@ -5,7 +5,7 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomInputField } from "@carefully-built/forms";
-import { Button } from "@carefully-built/ui";
+import { Button, cn } from "@carefully-built/ui";
 
 import type { AuthFormState } from "../types";
 
@@ -17,6 +17,11 @@ interface ForgotPasswordFormProps<
   readonly sent?: boolean;
   readonly email?: string;
   readonly loginHref?: string;
+  readonly className?: string;
+  readonly sentClassName?: string;
+  readonly linkClassName?: string;
+  readonly errorClassName?: string;
+  readonly buttonClassName?: string;
 }
 
 export function ForgotPasswordForm<TValues extends FieldValues>({
@@ -27,10 +32,15 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
   error,
   email,
   loginHref = "/login/email",
+  className,
+  sentClassName,
+  linkClassName,
+  errorClassName,
+  buttonClassName,
 }: ForgotPasswordFormProps<TValues>): React.ReactElement {
   if (sent) {
     return (
-      <div className="space-y-4 text-center">
+      <div className={cn("space-y-4 text-center", sentClassName)}>
         <p className="text-muted-foreground text-sm">
           Abbiamo inviato un link per reimpostare la password
           {email ? (
@@ -40,7 +50,7 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
             </>
           ) : null}
         </p>
-        <a className="text-sm underline" href={loginHref}>
+        <a className={cn("text-sm underline", linkClassName)} href={loginHref}>
           Torna al login
         </a>
       </div>
@@ -50,7 +60,7 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
   return (
     <FormProvider {...form}>
       <form
-        className="space-y-4"
+        className={cn("space-y-4", className)}
         onSubmit={(event) => {
           void form.handleSubmit(onSubmit)(event);
         }}
@@ -64,15 +74,15 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
           disabled={loading}
         />
 
-        <AuthError error={error} />
+        <AuthError error={error} className={errorClassName} />
 
-        <Button className="w-full" disabled={loading} type="submit">
-          {loading ? "Invio in corso..." : "Invia link di reset"}
+        <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
+          {loading ? "Sending..." : "Send reset link"}
         </Button>
 
         <p className="text-muted-foreground text-center text-sm">
-          <a className="underline" href={loginHref}>
-            Torna al login
+          <a className={cn("underline", linkClassName)} href={loginHref}>
+            Back to login
           </a>
         </p>
       </form>

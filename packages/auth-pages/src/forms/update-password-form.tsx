@@ -5,7 +5,7 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomPasswordField } from "@carefully-built/forms";
-import { Button } from "@carefully-built/ui";
+import { Button, cn } from "@carefully-built/ui";
 
 import type { AuthFormState } from "../types";
 
@@ -16,6 +16,10 @@ interface UpdatePasswordFormProps<
 > extends AuthFormState<TValues> {
   readonly token?: string | null;
   readonly missingTokenMessage?: string;
+  readonly className?: string;
+  readonly errorClassName?: string;
+  readonly missingTokenClassName?: string;
+  readonly buttonClassName?: string;
 }
 
 export function UpdatePasswordForm<TValues extends FieldValues>({
@@ -24,11 +28,20 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   loading = false,
   error,
   token,
-  missingTokenMessage = "Token di reset non valido o mancante. Richiedi un nuovo link per reimpostare la password.",
+  missingTokenMessage = "Invalid or missing reset token. Request a new password reset link.",
+  className,
+  errorClassName,
+  missingTokenClassName,
+  buttonClassName,
 }: UpdatePasswordFormProps<TValues>): React.ReactElement {
   if (!token) {
     return (
-      <div className="bg-destructive/15 text-destructive rounded-md p-3 text-sm">
+      <div
+        className={cn(
+          "bg-destructive/15 text-destructive rounded-md p-3 text-sm",
+          missingTokenClassName,
+        )}
+      >
         {missingTokenMessage}
       </div>
     );
@@ -37,7 +50,7 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   return (
     <FormProvider {...form}>
       <form
-        className="space-y-4"
+        className={cn("space-y-4", className)}
         onSubmit={(event) => {
           void form.handleSubmit(onSubmit)(event);
         }}
@@ -58,9 +71,9 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
           disabled={loading}
         />
 
-        <AuthError error={error} />
+        <AuthError error={error} className={errorClassName} />
 
-        <Button className="w-full" disabled={loading} type="submit">
+        <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
           {loading ? "Aggiornamento..." : "Aggiorna password"}
         </Button>
       </form>

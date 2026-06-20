@@ -36,7 +36,7 @@ function CreateOrganizationTrigger({
       </Slot>
     ) : (
       <Button variant="outline" onClick={onOpen}>
-        Crea organizzazione
+        Create organization
       </Button>
     )
   );
@@ -61,9 +61,9 @@ function CreateOrganizationSheet({ dialog }: CreateOrganizationSheetProps): Reac
 
         handleClose();
       }}
-      title="Crea organizzazione"
-      description="Crea una nuova organizzazione per invitare il team e collaborare."
-      confirmLabel="Crea"
+      title="Create organization"
+      description="Create a new organization to invite your team and collaborate."
+      confirmLabel="Create"
       onCancel={handleClose}
       onConfirm={(): void => {
         formRef.current?.requestSubmit();

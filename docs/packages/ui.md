@@ -17,7 +17,7 @@ For local development in an app inside the same parent workspace, use the packed
 ## Component Usage
 
 ```tsx
-import { AgentPicker } from '@carefully-built/ui';
+import { Avatar } from '@carefully-built/ui';
 
 // Check the API catalog below for the component source and prop types.
 // Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
@@ -25,7 +25,6 @@ import { AgentPicker } from '@carefully-built/ui';
 
 Components in this package:
 
-- `AgentPicker`: import from `@carefully-built/ui`.
 - `Avatar`: import from `@carefully-built/ui`.
 - `AvatarFallback`: import from `@carefully-built/ui`.
 - `AvatarImage`: import from `@carefully-built/ui`.
@@ -119,6 +118,7 @@ Components in this package:
 - `TooltipProvider`: import from `@carefully-built/ui`.
 - `TooltipTrigger`: import from `@carefully-built/ui`.
 - `TruncatedContent`: import from `@carefully-built/ui`.
+- `UserPicker`: import from `@carefully-built/ui`.
 
 ## Hook Usage
 
@@ -149,8 +149,8 @@ import { AUTO_SEARCHABLE_SELECT_THRESHOLD } from '@carefully-built/ui';
 Helpers in this package:
 
 - `AUTO_SEARCHABLE_SELECT_THRESHOLD`
-- `buildAgentInitials`
 - `buildSearchText`
+- `buildUserInitials`
 - `buttonVariants`
 - `captureErrorToPostHog`
 - `captureErrorToPostHog`
@@ -159,20 +159,23 @@ Helpers in this package:
 - `createErrorReference`
 - `createErrorReference`
 - `ErrorCode`
-- `filterAgentsBySearch`
 - `filterAndRankBySearch`
 - `FilterDropdown`
-- `filterSelectableAgents`
+- `filterSelectableUsers`
+- `filterUsersBySearch`
 - `formatAbsoluteDate`
-- `formatAgentDisplayName`
 - `formatDisplayDate`
+- `formatSelectedUserSummary`
+- `formatUserDisplayName`
 - `getChipClassName`
 - `getColumnSortKey`
 - `getColumnTooltipText`
+- `getDesktopShortcutModifierLabel`
 - `getNotFoundPageContent`
 - `getNotFoundPageContent`
 - `getSearchableSelectPortalContainer`
 - `getTruncatedContentAlignmentClass`
+- `isAllowedConfirmShortcutEvent`
 - `isSearchableSelectPointerInside`
 - `rankBySearch`
 - `resolveErrorPageContent`
@@ -186,15 +189,13 @@ Helpers in this package:
 - `SmartTableActions`
 - `TableToolbar`
 - `tabsListVariants`
-- `toggleAgentSelection`
+- `toggleUserSelection`
 - `TruncatedContent`
 
 ## Types And Schemas
 
 - `ActionHandlers`
 - `ActionType`
-- `AgentPickerOption`
-- `AgentPickerProps`
 - `ChipSize`
 - `CollectionEmptyState`
 - `Column`
@@ -231,6 +232,9 @@ Helpers in this package:
 - `resolveCollectionEmptyState`
 - `ResolveCollectionEmptyStateOptions`
 - `ResolveErrorPageContentOptions`
+- `ResponsiveSheetClassNames`
+- `ResponsiveSheetProps`
+- `SaasErrorPageClassNames`
 - `SaasErrorPageProps`
 - `SaasNotFoundPageProps`
 - `SearchableSelectOption`
@@ -249,13 +253,15 @@ Helpers in this package:
 - `SortState`
 - `SortValue`
 - `TableToolbarProps`
+- `UserPickerCopy`
+- `UserPickerOption`
+- `UserPickerProps`
 
 
 ## API Catalog
 
 | Export | Kind | Source |
 |---|---|---|
-| `AgentPicker` | Component | `packages/ui/src/primitives/agent-picker.tsx` |
 | `Avatar` | Component | `packages/ui/src/primitives/avatar.tsx` |
 | `AvatarFallback` | Component | `packages/ui/src/primitives/avatar.tsx` |
 | `AvatarImage` | Component | `packages/ui/src/primitives/avatar.tsx` |
@@ -349,9 +355,10 @@ Helpers in this package:
 | `TooltipProvider` | Component | `packages/ui/src/primitives/tooltip.tsx` |
 | `TooltipTrigger` | Component | `packages/ui/src/primitives/tooltip.tsx` |
 | `TruncatedContent` | Component | `packages/ui/src/smart-table/TruncatedContent.tsx` |
+| `UserPicker` | Component | `packages/ui/src/primitives/user-picker.tsx` |
 | `AUTO_SEARCHABLE_SELECT_THRESHOLD` | Helper | `packages/ui/src/search/searchable-select.tsx` |
-| `buildAgentInitials` | Helper | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `buildSearchText` | Helper | `packages/ui/src/utils/search.ts` |
+| `buildUserInitials` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `buttonVariants` | Helper | `packages/ui/src/primitives/button.tsx` |
 | `captureErrorToPostHog` | Helper | `packages/ui/src/error-page/index.ts` |
 | `captureErrorToPostHog` | Helper | `packages/ui/src/error-page/posthog-error-capture.ts` |
@@ -360,20 +367,23 @@ Helpers in this package:
 | `createErrorReference` | Helper | `packages/ui/src/error-page/index.ts` |
 | `createErrorReference` | Helper | `packages/ui/src/error-page/posthog-error-capture.ts` |
 | `ErrorCode` | Helper | `packages/ui/src/error-page/index.ts` |
-| `filterAgentsBySearch` | Helper | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `filterAndRankBySearch` | Helper | `packages/ui/src/utils/search.ts` |
 | `FilterDropdown` | Helper | `packages/ui/src/table-toolbar/index.ts` |
-| `filterSelectableAgents` | Helper | `packages/ui/src/primitives/agent-picker-utils.ts` |
+| `filterSelectableUsers` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `filterUsersBySearch` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `formatAbsoluteDate` | Helper | `packages/ui/src/utils/date-display.ts` |
-| `formatAgentDisplayName` | Helper | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `formatDisplayDate` | Helper | `packages/ui/src/utils/date-display.ts` |
+| `formatSelectedUserSummary` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `formatUserDisplayName` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `getChipClassName` | Helper | `packages/ui/src/primitives/chip-utils.ts` |
 | `getColumnSortKey` | Helper | `packages/ui/src/smart-table/sorting.ts` |
 | `getColumnTooltipText` | Helper | `packages/ui/src/smart-table/utils.ts` |
+| `getDesktopShortcutModifierLabel` | Helper | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `getNotFoundPageContent` | Helper | `packages/ui/src/error-page/error-page-content.ts` |
 | `getNotFoundPageContent` | Helper | `packages/ui/src/error-page/index.ts` |
 | `getSearchableSelectPortalContainer` | Helper | `packages/ui/src/search/searchable-select.tsx` |
 | `getTruncatedContentAlignmentClass` | Helper | `packages/ui/src/smart-table/truncated-content.utils.ts` |
+| `isAllowedConfirmShortcutEvent` | Helper | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `isSearchableSelectPointerInside` | Helper | `packages/ui/src/search/searchable-select.tsx` |
 | `rankBySearch` | Helper | `packages/ui/src/utils/search.ts` |
 | `resolveErrorPageContent` | Helper | `packages/ui/src/error-page/error-page-content.ts` |
@@ -387,7 +397,7 @@ Helpers in this package:
 | `SmartTableActions` | Helper | `packages/ui/src/smart-table/index.ts` |
 | `TableToolbar` | Helper | `packages/ui/src/table-toolbar/index.ts` |
 | `tabsListVariants` | Helper | `packages/ui/src/primitives/tabs.tsx` |
-| `toggleAgentSelection` | Helper | `packages/ui/src/primitives/agent-picker-utils.ts` |
+| `toggleUserSelection` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `TruncatedContent` | Helper | `packages/ui/src/smart-table/index.ts` |
 | `useDesktopConfirmShortcut` | Hook | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `useDesktopShortcutModifierLabel` | Hook | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
@@ -397,8 +407,6 @@ Helpers in this package:
 | `useTableSorting` | Hook | `packages/ui/src/smart-table/sorting.ts` |
 | `ActionHandlers` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ActionType` | Type | `packages/ui/src/smart-table/types.ts` |
-| `AgentPickerOption` | Type | `packages/ui/src/primitives/agent-picker-utils.ts` |
-| `AgentPickerProps` | Type | `packages/ui/src/primitives/agent-picker.tsx` |
 | `ChipSize` | Type | `packages/ui/src/primitives/chip-utils.ts` |
 | `CollectionEmptyState` | Type | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `Column` | Type | `packages/ui/src/smart-table/types.ts` |
@@ -435,6 +443,9 @@ Helpers in this package:
 | `resolveCollectionEmptyState` | Type | `packages/ui/src/empty-state/index.ts` |
 | `ResolveCollectionEmptyStateOptions` | Type | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `ResolveErrorPageContentOptions` | Type | `packages/ui/src/error-page/error-page-content.ts` |
+| `ResponsiveSheetClassNames` | Type | `packages/ui/src/overlays/responsive-sheet.tsx` |
+| `ResponsiveSheetProps` | Type | `packages/ui/src/overlays/responsive-sheet.tsx` |
+| `SaasErrorPageClassNames` | Type | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasErrorPageProps` | Type | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasNotFoundPageProps` | Type | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SearchableSelectOption` | Type | `packages/ui/src/search/searchable-select.tsx` |
@@ -453,6 +464,9 @@ Helpers in this package:
 | `SortState` | Type | `packages/ui/src/smart-table/types.ts` |
 | `SortValue` | Type | `packages/ui/src/smart-table/types.ts` |
 | `TableToolbarProps` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
+| `UserPickerCopy` | Type | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `UserPickerOption` | Type | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `UserPickerProps` | Type | `packages/ui/src/primitives/user-picker.tsx` |
 
 
 ## Consumer Responsibilities

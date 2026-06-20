@@ -14,12 +14,21 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "association-picker", "entity-picker", "saas", "multitenant"],
+  "keywords": [
+    "react",
+    "association-picker",
+    "entity-picker",
+    "saas",
+    "multitenant"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -52,8 +61,8 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/search": "file:../search/carefully-built-search-0.1.1.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.7.tgz",
+    "@carefully-built/search": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "lucide-react": "^1.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

@@ -24,7 +24,7 @@ export function CreateOrganizationFormContent({
   return (
     <div className="grid gap-4">
       <div className="grid gap-2">
-        <Label>Logo organizzazione</Label>
+        <Label>Organization logo</Label>
         <OrganizationLogoDropzone
           previewUrl={logoPreview}
           onFileSelect={onLogoSelect}
@@ -32,7 +32,7 @@ export function CreateOrganizationFormContent({
         />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="name">Nome organizzazione</Label>
+        <Label htmlFor="name">Organization name</Label>
         <Input
           id="name"
           placeholder="Immobiliare in Cloud"

@@ -1,4 +1,9 @@
 export { CrudDataTable } from "./crud-data-table";
+export { CrudListTable, type CrudListTableProps } from "./crud-list-table";
+export {
+  CrudResourceSheet,
+  type CrudResourceSheetProps,
+} from "./crud-resource-sheet";
 export { CrudTableView } from "./crud-table-view";
 export { useCrudTableState } from "./use-crud-table-state";
 export { useUrlStringFilters } from "./use-url-string-filters";

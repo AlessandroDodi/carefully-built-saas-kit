@@ -8,7 +8,7 @@ import { Button, FileDropzone, cn } from '@carefully-built/ui';
 
 export const documentFormSchema = z.object({
   mode: z.enum(['manual', 'link']),
-  title: z.string().trim().min(1, 'Il nome del documento e obbligatorio'),
+  title: z.string().trim().min(1, 'Document name is required'),
   associations: z.array(z.string()),
   tagIds: z.array(z.string()),
 });
@@ -16,8 +16,8 @@ export const documentFormSchema = z.object({
 export type DocumentFormValues = z.infer<typeof documentFormSchema>;
 
 const modeOptions = [
-  { value: 'manual', label: 'Aggiunta manuale' },
-  { value: 'link', label: 'Aggiunta con Link' },
+  { value: 'manual', label: 'Manual upload' },
+  { value: 'link', label: 'Upload link' },
 ] as const;
 
 interface DocumentFormShellProps {
@@ -94,8 +94,8 @@ export function DocumentFormShell({
 
             <CustomInputField<DocumentFormValues>
               name="title"
-              label="Nome documento"
-              placeholder="Nome documento"
+              label="Document name"
+              placeholder="Document name"
             />
 
             {renderAssociationField()}
@@ -105,21 +105,16 @@ export function DocumentFormShell({
               <div className="space-y-2">
                 <FileDropzone
                   accept=".pdf,image/*"
-                  title="Lascia qui o esplora file"
-                  helperText="Formati: PDF, JPG, PNG"
-                  browseLabel="Esplora"
+                  title="Drop a file here or browse"
+                  helperText="Formats: PDF, JPG, PNG"
+                  browseLabel="Browse"
                   currentPreviewUrl={
                     selectedFile?.type.startsWith('image/') ? filePreviewUrl : null
                   }
                   emptyIcon={<Upload className="size-6" />}
-                  previewAlt={selectedFile?.name ?? 'Anteprima documento'}
+                  previewAlt={selectedFile?.name ?? 'Document preview'}
                   onFileSelect={onFileSelect}
                 />
-                {selectedFile ? (
-                  <p className="text-muted-foreground text-xs">
-                    File selezionato: {selectedFile.name}
-                  </p>
-                ) : null}
               </div>
             ) : (
               <div className="space-y-3 rounded-lg border p-3">
@@ -140,9 +135,8 @@ export function DocumentFormShell({
                 <div className="flex items-start gap-2 rounded-lg bg-primary/10 px-3 py-2 text-xs text-primary">
                   <Link2 className="mt-0.5 size-4 shrink-0" />
                   <p>
-                    Il link diventera attivo dopo aver cliccato Aggiungi. A quel
-                    punto verra copiato automaticamente e aprira la pagina con il
-                    dropzone pubblico.
+                    The link becomes active after you click Add. It will be copied
+                    automatically and will open the public dropzone page.
                   </p>
                 </div>
               </div>

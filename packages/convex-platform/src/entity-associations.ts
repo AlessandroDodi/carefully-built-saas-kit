@@ -87,22 +87,22 @@ export function getStringField(doc: Record<string, unknown>, key: string): strin
 
 const associationEntityConfigs: Record<AssociationEntityType, AssociationEntityConfig> = {
   contact: {
-    label: "Contatto",
+    label: "Contact",
     table: "contacts",
     getDisplayLabel: (doc) => getStringField(doc, "fullName"),
   },
   property: {
-    label: "Proprietà",
+    label: "Property",
     table: "properties",
     getDisplayLabel: (doc) => getStringField(doc, "title"),
   },
   request: {
-    label: "Richiesta",
+    label: "Request",
     table: "requests",
     getDisplayLabel: (doc) => getStringField(doc, "title"),
   },
   opportunity: {
-    label: "Opportunità",
+    label: "Opportunity",
     table: "opportunities",
     getDisplayLabel: (doc) => getStringField(doc, "title"),
   },
@@ -112,12 +112,12 @@ const associationEntityConfigs: Record<AssociationEntityType, AssociationEntityC
     getDisplayLabel: (doc) => getStringField(doc, "title"),
   },
   note: {
-    label: "Nota",
+    label: "Note",
     table: "notes",
     getDisplayLabel: (doc) => getStringField(doc, "title") || getStringField(doc, "body"),
   },
   document: {
-    label: "Documento",
+    label: "Document",
     table: "documents",
     getDisplayLabel: (doc) => getStringField(doc, "title"),
   },

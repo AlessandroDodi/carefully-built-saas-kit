@@ -28,6 +28,7 @@ Components in this package:
 
 - `CreateOrganization`: import from `@carefully-built/workos`.
 - `CreateOrganizationFormContent`: import from `@carefully-built/workos`.
+- `OrganizationLogo`: import from `@carefully-built/workos`.
 - `OrganizationLogoDropzone`: import from `@carefully-built/workos`.
 - `SidebarOrgSwitcherBase`: import from `@carefully-built/workos`.
 
@@ -58,6 +59,7 @@ Helpers in this package:
 - `createFilePreview`
 - `createWorkOSWidgetTokenResponse`
 - `getBestOrganizationAdminRoleSlug`
+- `getOrganizationInitials`
 - `getWorkOSWidgetToken`
 - `ORGANIZATION_LOGO_ACCEPT`
 - `ORGANIZATION_LOGO_CAPTION`
@@ -84,11 +86,13 @@ Helpers in this package:
 |---|---|---|
 | `CreateOrganization` | Component | `packages/workos/src/create-organization.tsx` |
 | `CreateOrganizationFormContent` | Component | `packages/workos/src/create-organization-form-content.tsx` |
+| `OrganizationLogo` | Component | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `OrganizationLogoDropzone` | Component | `packages/workos/src/organization-logo-dropzone.tsx` |
 | `SidebarOrgSwitcherBase` | Component | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `createFilePreview` | Helper | `packages/workos/src/organization-logo.ts` |
 | `createWorkOSWidgetTokenResponse` | Helper | `packages/workos/src/server.ts` |
 | `getBestOrganizationAdminRoleSlug` | Helper | `packages/workos/src/server.ts` |
+| `getOrganizationInitials` | Helper | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `getWorkOSWidgetToken` | Helper | `packages/workos/src/server.ts` |
 | `ORGANIZATION_LOGO_ACCEPT` | Helper | `packages/workos/src/organization-logo.ts` |
 | `ORGANIZATION_LOGO_CAPTION` | Helper | `packages/workos/src/organization-logo.ts` |

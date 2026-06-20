@@ -50,7 +50,7 @@ export function HelpInfoButton({
         onOpenChange={setOpen}
         title={title}
         description={description}
-        cancelLabel="Chiudi"
+        cancelLabel="Close"
         onCancel={() => {
           setOpen(false);
         }}

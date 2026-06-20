@@ -6,28 +6,28 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 export const forgotPasswordSchema = z.object({
-  email: z.email("Inserisci un indirizzo email valido"),
+  email: z.email("Enter a valid email address"),
 });
 
 export const loginSchema = z.object({
-  email: z.email("Inserisci un indirizzo email valido"),
-  password: z.string().min(8, "La password deve contenere almeno 8 caratteri"),
+  email: z.email("Enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export const signupSchema = z.object({
-  email: z.email("Inserisci un indirizzo email valido"),
-  password: z.string().min(8, "La password deve contenere almeno 8 caratteri"),
+  email: z.email("Enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export const resetPasswordSchema = z
   .object({
-    password: z.string().min(8, "La password deve contenere almeno 8 caratteri"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z
       .string()
-      .min(8, "La password deve contenere almeno 8 caratteri"),
+      .min(8, "Password must be at least 8 characters"),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Le password non coincidono",
+    message: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
@@ -112,7 +112,7 @@ export function useLoginForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "Si e verificato un errore imprevisto",
+          : messages?.unexpectedError ?? "An unexpected error occurred",
       );
       form.setValue("password", "");
     } finally {
@@ -174,7 +174,7 @@ export function useSignupForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "Si e verificato un errore imprevisto",
+          : messages?.unexpectedError ?? "An unexpected error occurred",
       );
       form.setValue("password", "");
     } finally {
@@ -237,7 +237,7 @@ export function useForgotPasswordForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "Si e verificato un errore imprevisto",
+          : messages?.unexpectedError ?? "An unexpected error occurred",
       );
     } finally {
       setLoading(false);
@@ -296,7 +296,7 @@ export function useUpdatePasswordForm({
     setError(undefined);
 
     if (!token) {
-      setError(messages?.invalidToken ?? "Token di reset non valido");
+      setError(messages?.invalidToken ?? "Invalid reset token");
       setLoading(false);
       return;
     }
@@ -313,7 +313,7 @@ export function useUpdatePasswordForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "Si e verificato un errore imprevisto",
+          : messages?.unexpectedError ?? "An unexpected error occurred",
       );
     } finally {
       setLoading(false);

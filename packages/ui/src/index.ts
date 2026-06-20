@@ -28,6 +28,8 @@ export * from './primitives/table';
 export * from './primitives/tabs';
 export * from './primitives/textarea';
 export * from './primitives/tooltip';
+export * from './primitives/user-picker';
+export * from './primitives/user-picker-utils';
 export * from './overlays/responsive-sheet';
 export * from './overlays/responsive-sheet.footer';
 export * from './overlays/responsive-sheet.shortcuts';

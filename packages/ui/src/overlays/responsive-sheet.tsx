@@ -8,13 +8,24 @@ import {
   useDesktopConfirmShortcut,
   useDesktopShortcutModifierLabel,
 } from './responsive-sheet.shortcuts';
+import { cn } from '../utils/cn';
 import { useIsMobile } from '../utils/use-media-query';
 
 export interface SheetOutsideInteractionGuard {
   readonly selectors: readonly string[];
 }
 
-interface ResponsiveSheetProps {
+export interface ResponsiveSheetClassNames {
+  readonly desktopContent?: string;
+  readonly mobileContent?: string;
+  readonly header?: string;
+  readonly body?: string;
+  readonly footer?: string;
+  readonly title?: string;
+  readonly description?: string;
+}
+
+export interface ResponsiveSheetProps {
   readonly open: boolean;
   readonly onOpenChange: (open: boolean) => void;
   readonly title: ReactNode;
@@ -32,6 +43,10 @@ interface ResponsiveSheetProps {
   readonly outsideInteractionGuard?: SheetOutsideInteractionGuard;
   readonly enableDesktopConfirmShortcut?: boolean;
   readonly mobileDrawerContentClassName?: string;
+  readonly className?: string;
+  readonly contentClassName?: string;
+  readonly footerClassName?: string;
+  readonly classes?: ResponsiveSheetClassNames;
 }
 
 export function ResponsiveSheet({
@@ -42,9 +57,9 @@ export function ResponsiveSheet({
   children,
   footer,
   onCancel,
-  cancelLabel = 'Annulla',
+  cancelLabel = 'Cancel',
   onConfirm,
-  confirmLabel = 'Salva',
+  confirmLabel = 'Save',
   confirmDisabled = false,
   confirmLoading = false,
   width = 550,
@@ -52,6 +67,10 @@ export function ResponsiveSheet({
   outsideInteractionGuard,
   enableDesktopConfirmShortcut = true,
   mobileDrawerContentClassName,
+  className,
+  contentClassName,
+  footerClassName,
+  classes,
 }: ResponsiveSheetProps): React.ReactElement {
   const isMobile = useIsMobile();
   const desktopConfirmShortcutEnabled =
@@ -95,7 +114,14 @@ export function ResponsiveSheet({
     description,
     footer: hasFooter ? resolvedFooter : null,
     children,
+    contentClassName,
+    footerClassName,
     mobileDrawerContentClassName,
+    classes: {
+      ...classes,
+      desktopContent: cn(className, classes?.desktopContent),
+      mobileContent: cn(className, mobileDrawerContentClassName, classes?.mobileContent),
+    },
   };
 
   return isMobile ? (

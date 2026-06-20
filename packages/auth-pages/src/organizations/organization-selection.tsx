@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { Button } from "@carefully-built/ui";
+import { Button, cn } from "@carefully-built/ui";
 
 export interface OrganizationSelectorItem {
   readonly id: string;
@@ -18,6 +18,8 @@ export interface OrganizationSelectorProps {
   readonly emptyDescription?: string;
   readonly itemDescription?: string;
   readonly searchThreshold?: number;
+  readonly className?: string;
+  readonly classes?: OrganizationSelectorClassNames;
 }
 
 export interface OrganizationSelectionPageProps
@@ -30,6 +32,37 @@ export interface OrganizationSelectionPageProps
   readonly loginHref?: string;
   readonly dashboardLabel?: string;
   readonly loginLabel?: string;
+  readonly pageClassName?: string;
+  readonly pageClasses?: OrganizationSelectionPageClassNames;
+}
+
+export interface OrganizationSelectorClassNames {
+  readonly root?: string;
+  readonly searchWrapper?: string;
+  readonly searchInput?: string;
+  readonly list?: string;
+  readonly item?: string;
+  readonly itemContent?: string;
+  readonly itemText?: string;
+  readonly itemName?: string;
+  readonly itemDescription?: string;
+  readonly itemIcon?: string;
+  readonly logo?: string;
+  readonly logoImage?: string;
+  readonly logoFallback?: string;
+  readonly emptyState?: string;
+  readonly emptyTitle?: string;
+  readonly emptyDescription?: string;
+}
+
+export interface OrganizationSelectionPageClassNames {
+  readonly root?: string;
+  readonly container?: string;
+  readonly panel?: string;
+  readonly header?: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly actions?: string;
 }
 
 function getOrganizationInitials(name: string): string {
@@ -44,20 +77,41 @@ function getOrganizationInitials(name: string): string {
 export function OrganizationLogo({
   name,
   logoUrl,
+  className,
+  imageClassName,
+  fallbackClassName,
 }: {
   readonly name: string;
   readonly logoUrl?: string | null;
+  readonly className?: string;
+  readonly imageClassName?: string;
+  readonly fallbackClassName?: string;
 }): React.ReactElement {
   if (logoUrl) {
     return (
-      <div className="relative size-10 shrink-0 overflow-hidden rounded-xl ring-1 ring-border/60">
-        <img alt={name} className="size-full object-cover" src={logoUrl} />
+      <div
+        className={cn(
+          "relative size-10 shrink-0 overflow-hidden rounded-xl ring-1 ring-border/60",
+          className,
+        )}
+      >
+        <img
+          alt={name}
+          className={cn("size-full object-cover", imageClassName)}
+          src={logoUrl}
+        />
       </div>
     );
   }
 
   return (
-    <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-sm font-semibold text-primary">
+    <div
+      className={cn(
+        "flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-sm font-semibold text-primary",
+        className,
+        fallbackClassName,
+      )}
+    >
       {getOrganizationInitials(name)}
     </div>
   );
@@ -74,11 +128,13 @@ function getSelectionHref(
 export function OrganizationSelector({
   organizations,
   selectionEndpoint = "/api/auth/organization-selection",
-  searchPlaceholder = "Cerca un'organizzazione...",
-  emptyTitle = "Nessuna organizzazione trovata",
-  emptyDescription = "Prova a cercare con un nome diverso.",
-  itemDescription = "Continua con questa organizzazione",
+  searchPlaceholder = "Search organization...",
+  emptyTitle = "No organization found",
+  emptyDescription = "Try searching with a different name.",
+  itemDescription = "Continue with this organization",
   searchThreshold = 6,
+  className,
+  classes,
 }: OrganizationSelectorProps): React.ReactElement {
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLocaleLowerCase();
@@ -94,40 +150,54 @@ export function OrganizationSelector({
   }, [normalizedSearch, organizations]);
 
   return (
-    <div className="space-y-3">
+    <div className={cn("space-y-3", className, classes?.root)}>
       {showSearch ? (
-        <div className="relative">
+        <div className={cn("relative", classes?.searchWrapper)}>
           <input
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder={searchPlaceholder}
-            className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring h-10 w-full rounded-md border px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+            className={cn(
+              "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring h-10 w-full rounded-md border px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+              classes?.searchInput,
+            )}
           />
         </div>
       ) : null}
 
       {filteredOrganizations.length > 0 ? (
-        <div className="space-y-2.5">
+        <div className={cn("space-y-2.5", classes?.list)}>
           {filteredOrganizations.map((organization) => (
             <a
-              className="border-border bg-card text-card-foreground hover:border-primary/40 hover:bg-muted/40 block rounded-lg border shadow-sm transition-colors"
+              className={cn(
+                "border-border bg-card text-card-foreground hover:border-primary/40 hover:bg-muted/40 block rounded-lg border shadow-sm transition-colors",
+                classes?.item,
+              )}
               href={getSelectionHref(selectionEndpoint, organization.id)}
               key={organization.id}
             >
-              <div className="flex items-center gap-4 px-4 py-3">
+              <div className={cn("flex items-center gap-4 px-4 py-3", classes?.itemContent)}>
                 <OrganizationLogo
                   logoUrl={organization.logoUrl}
                   name={organization.name}
+                  className={classes?.logo}
+                  imageClassName={classes?.logoImage}
+                  fallbackClassName={classes?.logoFallback}
                 />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-foreground">
+                <div className={cn("min-w-0 flex-1", classes?.itemText)}>
+                  <p className={cn("truncate text-sm font-semibold text-foreground", classes?.itemName)}>
                     {organization.name}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className={cn("text-xs text-muted-foreground", classes?.itemDescription)}>
                     {itemDescription}
                   </p>
                 </div>
-                <div className="flex shrink-0 items-center self-stretch text-muted-foreground">
+                <div
+                  className={cn(
+                    "flex shrink-0 items-center self-stretch text-muted-foreground",
+                    classes?.itemIcon,
+                  )}
+                >
                   &gt;
                 </div>
               </div>
@@ -135,9 +205,16 @@ export function OrganizationSelector({
           ))}
         </div>
       ) : (
-        <div className="border-border bg-muted/20 rounded-lg border border-dashed px-4 py-6 text-center">
-          <p className="text-sm font-medium text-foreground">{emptyTitle}</p>
-          <p className="mt-1 text-xs text-muted-foreground">
+        <div
+          className={cn(
+            "border-border bg-muted/20 rounded-lg border border-dashed px-4 py-6 text-center",
+            classes?.emptyState,
+          )}
+        >
+          <p className={cn("text-sm font-medium text-foreground", classes?.emptyTitle)}>
+            {emptyTitle}
+          </p>
+          <p className={cn("mt-1 text-xs text-muted-foreground", classes?.emptyDescription)}>
             {emptyDescription}
           </p>
         </div>
@@ -148,31 +225,33 @@ export function OrganizationSelector({
 
 export function OrganizationSelectionPage({
   organizations,
-  title = "Benvenuto",
-  description = "Hai accesso a piu organizzazioni. Seleziona quella con cui vuoi continuare.",
-  noOrganizationsTitle = "Nessuna organizzazione disponibile",
-  noOrganizationsDescription = "Il tuo account e autenticato, ma devi ancora scegliere o creare un'organizzazione.",
+  title = "Welcome",
+  description = "You have access to multiple organizations. Select the one you want to continue with.",
+  noOrganizationsTitle = "No organization available",
+  noOrganizationsDescription = "Your account is authenticated, but you still need to choose or create an organization.",
   dashboardHref = "/dashboard",
   loginHref = "/login",
-  dashboardLabel = "Vai alla dashboard",
-  loginLabel = "Torna al login",
+  dashboardLabel = "Go to dashboard",
+  loginLabel = "Back to login",
+  pageClassName,
+  pageClasses,
   ...selectorProps
 }: OrganizationSelectionPageProps): React.ReactElement {
   if (organizations.length === 0) {
     return (
-      <main className="min-h-screen bg-background px-6 py-12 sm:px-8">
-        <div className="mx-auto flex min-h-[calc(100vh-6rem)] max-w-2xl items-center justify-center">
-          <div className="border-border bg-card w-full space-y-6 rounded-3xl border p-8 shadow-sm">
-            <div className="space-y-2 text-center">
-              <h1 className="text-2xl font-semibold tracking-tight">
+      <main className={cn("min-h-screen bg-background px-6 py-12 sm:px-8", pageClassName, pageClasses?.root)}>
+        <div className={cn("mx-auto flex min-h-[calc(100vh-6rem)] max-w-2xl items-center justify-center", pageClasses?.container)}>
+          <div className={cn("border-border bg-card w-full space-y-6 rounded-3xl border p-8 shadow-sm", pageClasses?.panel)}>
+            <div className={cn("space-y-2 text-center", pageClasses?.header)}>
+              <h1 className={cn("text-2xl font-semibold tracking-tight", pageClasses?.title)}>
                 {noOrganizationsTitle}
               </h1>
-              <p className="text-sm text-muted-foreground">
+              <p className={cn("text-sm text-muted-foreground", pageClasses?.description)}>
                 {noOrganizationsDescription}
               </p>
             </div>
 
-            <div className="space-y-2">
+            <div className={cn("space-y-2", pageClasses?.actions)}>
               <a className="block" href={dashboardHref}>
                 <Button className="w-full" variant="default">
                   {dashboardLabel}
@@ -191,12 +270,16 @@ export function OrganizationSelectionPage({
   }
 
   return (
-    <main className="min-h-screen bg-background px-6 py-10 sm:px-8">
-      <div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center justify-center">
-        <div className="border-border bg-card w-full space-y-5 rounded-3xl border p-7 shadow-sm">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
-            <p className="text-sm text-muted-foreground">{description}</p>
+    <main className={cn("min-h-screen bg-background px-6 py-10 sm:px-8", pageClassName, pageClasses?.root)}>
+      <div className={cn("mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center justify-center", pageClasses?.container)}>
+        <div className={cn("border-border bg-card w-full space-y-5 rounded-3xl border p-7 shadow-sm", pageClasses?.panel)}>
+          <div className={cn("space-y-2", pageClasses?.header)}>
+            <h1 className={cn("text-3xl font-semibold tracking-tight", pageClasses?.title)}>
+              {title}
+            </h1>
+            <p className={cn("text-sm text-muted-foreground", pageClasses?.description)}>
+              {description}
+            </p>
           </div>
 
           <OrganizationSelector

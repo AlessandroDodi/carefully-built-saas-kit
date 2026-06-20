@@ -27,22 +27,22 @@ export interface AssociationTypeChipMeta {
 
 export const associationTypeChipMeta: Record<AssociationEntityType, AssociationTypeChipMeta> = {
   contact: {
-    label: 'Contatto',
+    label: 'Contact',
     className: 'bg-[#9770ff2b] text-[#250089] dark:bg-violet-500/25 dark:text-violet-200',
     icon: UserRound,
   },
   property: {
-    label: 'Proprietà',
+    label: 'Property',
     className: 'bg-[#ff8d281a] text-[#ff8d28] dark:bg-orange-500/20 dark:text-orange-200',
     icon: House,
   },
   request: {
-    label: 'Richiesta',
+    label: 'Request',
     className: 'bg-[#ffe1ea] text-[#b4234d] dark:bg-rose-500/20 dark:text-rose-200',
     icon: CircleDashed,
   },
   opportunity: {
-    label: 'Opportunità',
+    label: 'Opportunity',
     className: 'bg-[#70ff8f2b] text-[#008947] dark:bg-emerald-500/20 dark:text-emerald-200',
     icon: Handshake,
   },
@@ -52,12 +52,12 @@ export const associationTypeChipMeta: Record<AssociationEntityType, AssociationT
     icon: CalendarDays,
   },
   note: {
-    label: 'Nota',
+    label: 'Note',
     className: 'bg-[#ffe27a33] text-[#8a6d00] dark:bg-amber-500/20 dark:text-amber-200',
     icon: NotebookPen,
   },
   document: {
-    label: 'Documento',
+    label: 'Document',
     className: 'bg-[#dbeafe] text-[#1d4ed8] dark:bg-blue-500/20 dark:text-blue-200',
     icon: FileText,
   },

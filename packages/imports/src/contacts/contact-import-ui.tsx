@@ -67,7 +67,7 @@ function formatRoles(roles: readonly ('buyer' | 'seller')[] | undefined): string
     return '-';
   }
 
-  return roles.map((role) => (role === 'buyer' ? 'Acquirente' : 'Venditore')).join(', ');
+  return roles.map((role) => (role === 'buyer' ? 'Buyer' : 'Seller')).join(', ');
 }
 
 function getActionLabel(action: ContactImportPreviewRow['action']): string {
@@ -145,13 +145,13 @@ export function ContactsImportSheet({
   const columns = useMemo<Column<ContactImportPreviewRow>[]>(
     () => [
       {
-        header: 'Nome',
+        header: 'First name',
         accessor: 'normalized.firstName',
         width: '16%',
         render: (_, row) => row.normalized?.firstName ?? '-',
       },
       {
-        header: 'Cognome',
+        header: 'Last name',
         accessor: 'normalized.lastName',
         width: '16%',
         render: (_, row) => row.normalized?.lastName || '-',
@@ -163,19 +163,19 @@ export function ContactsImportSheet({
         render: (_, row) => row.normalized?.email || '-',
       },
       {
-        header: 'Telefono',
+        header: 'Phone',
         accessor: 'normalized.phone',
         width: '16%',
         render: (_, row) => formatPhoneDisplay(row.normalized?.phone),
       },
       {
-        header: 'Ruoli',
+        header: 'Roles',
         accessor: 'normalized.roles',
         width: '12%',
         render: (_, row) => formatRoles(row.normalized?.roles),
       },
       {
-        header: 'Compleanno',
+        header: 'Birthday',
         accessor: 'normalized.birthday',
         width: '14%',
         render: (_, row) =>
@@ -270,7 +270,7 @@ export function ContactsImportSheet({
             data={sortedData}
             columns={columns}
             isLoading={false}
-            noDataMessage="Nessuna riga disponibile"
+            noDataMessage="No rows available"
             stickyHeader
             maxHeight="320px"
             sortState={sortState}

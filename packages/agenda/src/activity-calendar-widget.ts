@@ -70,7 +70,7 @@ export function formatCalendarWidgetTime(activity: CalendarWidgetActivity): stri
     return null;
   }
 
-  const timeFormatter = new Intl.DateTimeFormat('it-IT', {
+  const timeFormatter = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
   });

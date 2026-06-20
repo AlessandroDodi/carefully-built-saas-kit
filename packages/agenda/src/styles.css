@@ -1,0 +1,259 @@
+.agenda-calendar-shell,
+.agenda-calendar-shell * {
+  box-sizing: border-box;
+}
+
+.agenda-calendar-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--muted) 24%, transparent), transparent 120px),
+    var(--background);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+@media (max-width: 767px) {
+  .agenda-calendar-shell,
+  .agenda-calendar-shell * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .agenda-calendar-shell::-webkit-scrollbar,
+  .agenda-calendar-shell *::-webkit-scrollbar {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+}
+
+.agenda-calendar-shell .fc {
+  --fc-border-color: var(--border);
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: color-mix(in srgb, var(--muted) 46%, transparent);
+  --fc-today-bg-color: color-mix(in srgb, var(--primary) 10%, transparent);
+  --fc-now-indicator-color: var(--primary);
+  --fc-event-border-color: transparent;
+  --fc-button-bg-color: var(--background);
+  --fc-button-border-color: var(--border);
+  --fc-button-text-color: var(--foreground);
+  --fc-button-hover-bg-color: var(--muted);
+  --fc-button-hover-border-color: var(--border);
+  --fc-button-active-bg-color: var(--primary);
+  --fc-button-active-border-color: var(--primary);
+  --fc-button-active-text-color: var(--primary-foreground);
+  color: var(--foreground);
+  flex: 1 1 auto;
+  font-family: inherit;
+  min-height: 0;
+}
+
+.agenda-calendar-shell .fc-view-harness {
+  min-height: 0;
+}
+
+.agenda-calendar-title-trigger {
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+.agenda-calendar-title-trigger:hover,
+.agenda-calendar-title-trigger:focus-visible {
+  background: color-mix(in srgb, var(--muted) 70%, transparent);
+}
+
+.agenda-calendar-searchable-trigger {
+  align-items: center !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: 0.4rem !important;
+  justify-content: flex-start !important;
+  letter-spacing: 0;
+  min-height: 2.25rem;
+  padding-inline: 0.25rem !important;
+  text-transform: none;
+  width: auto !important;
+}
+
+.agenda-calendar-searchable-trigger:hover,
+.agenda-calendar-searchable-trigger:focus-visible {
+  background: color-mix(in srgb, var(--muted) 70%, transparent) !important;
+  border-color: transparent !important;
+}
+
+.agenda-calendar-shell .fc-scrollgrid {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.agenda-calendar-shell .fc-theme-standard td,
+.agenda-calendar-shell .fc-theme-standard th {
+  border-color: color-mix(in srgb, var(--border) 78%, transparent);
+}
+
+.agenda-calendar-shell .fc-col-header-cell {
+  background: color-mix(in srgb, var(--muted) 34%, transparent);
+}
+
+.agenda-calendar-shell .fc-col-header-cell-cushion {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  padding-block: 0.85rem;
+  text-transform: uppercase;
+}
+
+.agenda-calendar-shell .fc-daygrid-day-frame,
+.agenda-calendar-shell .fc-timegrid-col-frame {
+  background: color-mix(in srgb, var(--background) 96%, var(--muted));
+}
+
+.agenda-calendar-shell .fc-daygrid-day-number {
+  color: var(--foreground);
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.65rem 0.75rem 0;
+}
+
+.agenda-calendar-shell .fc-day-today .fc-daygrid-day-number,
+.agenda-calendar-shell .fc-day-today .fc-col-header-cell-cushion {
+  color: var(--primary);
+}
+
+.agenda-calendar-shell .fc-timegrid-axis-cushion,
+.agenda-calendar-shell .fc-timegrid-slot-label-cushion {
+  color: var(--muted-foreground);
+  font-size: 0.72rem;
+}
+
+.agenda-calendar-shell .fc-timegrid-slot {
+  height: 3rem;
+}
+
+.agenda-calendar-shell .fc-timegrid-slot-lane,
+.agenda-calendar-shell .fc-daygrid-day-frame {
+  transition:
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.agenda-calendar-shell .fc-timegrid-slot-lane:hover,
+.agenda-calendar-shell .fc-daygrid-day:hover .fc-daygrid-day-frame {
+  background: color-mix(in srgb, var(--primary) 7%, var(--background));
+}
+
+.agenda-calendar-shell .fc-highlight {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.agenda-calendar-shell .fc-event {
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.agenda-calendar-shell .fc-event.fc-event-dragging,
+.agenda-calendar-shell .fc-event.fc-event-mirror {
+  box-shadow: 0 16px 32px rgb(15 23 42 / 0.12);
+  opacity: 0.92;
+}
+
+.agenda-calendar-shell .fc-daygrid-event {
+  margin-inline: 0.35rem;
+  margin-top: 0.2rem;
+}
+
+.agenda-calendar-shell .fc-timegrid-event,
+.agenda-calendar-shell .fc-timegrid-event-harness,
+.agenda-calendar-shell .fc-timegrid-event .fc-event-main {
+  min-width: 0;
+}
+
+.agenda-calendar-shell .fc-timegrid-event .fc-event-main {
+  height: 100%;
+}
+
+.agenda-calendar-shell .fc-event-mirror,
+.agenda-calendar-shell .fc-select-mirror .fc-event,
+.agenda-calendar-shell .fc-timegrid-event.fc-event-mirror,
+.agenda-calendar-shell .fc-daygrid-event.fc-event-mirror {
+  background: color-mix(in srgb, var(--primary) 20%, white) !important;
+  border-color: color-mix(in srgb, var(--primary) 55%, white) !important;
+  color: var(--foreground) !important;
+}
+
+.agenda-calendar-event__content {
+  align-items: stretch;
+  background: inherit;
+  border-radius: inherit;
+  display: flex;
+  gap: 0.55rem;
+  min-height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0.45rem 1.35rem 0.55rem 0.55rem;
+  position: relative;
+  width: 100%;
+}
+
+.agenda-calendar-event__content--past .agenda-calendar-event__title {
+  opacity: 0.74;
+  text-decoration: line-through;
+}
+
+.agenda-calendar-event__accent {
+  border-radius: 9999px;
+  flex: 0 0 4px;
+}
+
+.agenda-calendar-event__text {
+  min-width: 0;
+}
+
+.agenda-calendar-event__meta {
+  align-items: center;
+  bottom: 0.35rem;
+  display: flex;
+  gap: 0.25rem;
+  pointer-events: none;
+  position: absolute;
+  right: 0.45rem;
+}
+
+.agenda-calendar-event__icon {
+  flex: 0 0 auto;
+  height: 0.82rem;
+  object-fit: contain;
+  width: 0.82rem;
+}
+
+.agenda-calendar-event__time {
+  color: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin-bottom: 0.15rem;
+}
+
+.agenda-calendar-event__title {
+  color: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -67,7 +67,7 @@ export function CountryVatInput({
           onValueChange={onCountryCodeChange}
           placeholder="Italia"
           className="w-full"
-          searchPlaceholder="Cerca paese..."
+          searchPlaceholder="Search country..."
           options={countryOptions}
           renderValue={(selectedCountry) => (
             <span className="flex items-center gap-2">

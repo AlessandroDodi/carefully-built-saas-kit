@@ -35,7 +35,7 @@ export function useOrganizationLogoInput(): UseOrganizationLogoInputResult {
       setLogoFile(file);
       setLogoPreview(preview);
     } catch (previewError) {
-      toast.error(previewError instanceof Error ? previewError.message : 'Impossibile leggere il file selezionato');
+      toast.error(previewError instanceof Error ? previewError.message : 'Unable to read the selected file');
     }
   };
 

@@ -20,8 +20,8 @@ export function SharedActivityCalendarEvents({
     return (
       <WidgetEmptyState
         icon={CalendarRange}
-        title="Nessun evento"
-        description="Non ci sono appuntamenti per il giorno selezionato."
+        title="No events"
+        description="There are no appointments for the selected day."
         minHeightClassName="min-h-[180px]"
       />
     );
@@ -40,11 +40,11 @@ export function SharedActivityCalendarEvents({
             />
             <div className="min-w-0 space-y-0.5">
               <p className="text-muted-foreground text-[11px] font-medium">
-                {formatCalendarWidgetTime(activity) ?? 'Orario non definito'}
+                {formatCalendarWidgetTime(activity) ?? 'No time set'}
               </p>
               <p
                 className={cn(
-                  'truncate text-[15px] leading-snug font-semibold tracking-[-0.02em]',
+                  'truncate text-[15px] leading-snug font-semibold tracking-normal',
                   isPast && 'text-muted-foreground line-through'
                 )}
               >

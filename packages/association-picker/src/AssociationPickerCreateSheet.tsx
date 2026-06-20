@@ -32,7 +32,7 @@ export function AssociationPickerCreateSheet({
     return null;
   }
 
-  const title = `Crea ${getAssociationTypeChipMeta(creatingType).label.toLowerCase()}`;
+  const title = `Create ${getAssociationTypeChipMeta(creatingType).label.toLowerCase()}`;
 
   return (
     <ResponsiveSheet
@@ -43,7 +43,7 @@ export function AssociationPickerCreateSheet({
         }
       }}
       title={title}
-      confirmLabel={activeHandler.confirmLabel ?? 'Aggiungi'}
+      confirmLabel={activeHandler.confirmLabel ?? 'Add'}
       confirmDisabled={confirmDisabled}
       onCancel={() => {
         setCreatingType(null);

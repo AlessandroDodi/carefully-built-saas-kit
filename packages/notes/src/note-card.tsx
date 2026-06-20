@@ -66,7 +66,7 @@ export function NoteCard({
           <div className="flex w-full items-center justify-between gap-3 text-xs">
             <AssociationDisplayList
               associations={associations ?? []}
-              emptyValue="Nessuna associazione"
+              emptyValue="No association"
               className="flex-1 flex-nowrap overflow-hidden"
               getAssociationHref={getAssociationHref}
             />

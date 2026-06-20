@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "superadmin", "admin", "saas"],
+  "keywords": [
+    "react",
+    "superadmin",
+    "admin",
+    "saas"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -39,7 +47,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsdown src/index.ts src/server.ts src/next.tsx --format esm --dts",
+    "build": "tsdown src/index.ts src/server.ts src/next.tsx --format esm --dts --unbundle",
     "prepublishOnly": "bun run typecheck && bun run build",
     "typecheck": "tsc --noEmit"
   },
@@ -65,8 +73,8 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/app-shell": "file:../app-shell/carefully-built-app-shell-0.1.2.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.15.tgz",
+    "@carefully-built/app-shell": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "@types/node": "^24.0.0",
     "lucide-react": "^1.8.0",
     "next": "^16.0.8",

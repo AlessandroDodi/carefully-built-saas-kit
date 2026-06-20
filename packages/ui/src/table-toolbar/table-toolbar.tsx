@@ -46,7 +46,7 @@ export function FilterDropdown<T extends string>({
       }}
       placeholder={label}
       className={className ?? 'w-full sm:w-[140px]'}
-      searchPlaceholder={`Cerca ${label.toLocaleLowerCase()}...`}
+      searchPlaceholder={`Search ${label.toLocaleLowerCase()}...`}
       options={[...(allowAll ? [{ value: 'all', label: `Tutti: ${label}` }] : []), ...options]}
     />
   );
@@ -62,7 +62,7 @@ interface SearchInputProps {
 export function SearchInput({
   value,
   onChange,
-  placeholder = 'Cerca...',
+  placeholder = 'Search...',
   className,
 }: SearchInputProps): React.ReactElement {
   return (
@@ -240,10 +240,10 @@ export function TableToolbar({
   );
   const applyButtonLabel =
     typeof draftResultCount === 'number'
-      ? `Mostra ${draftResultCount.toLocaleString('it-IT')} ${
-          draftResultCount === 1 ? 'risultato' : 'risultati'
+      ? `Show ${draftResultCount.toLocaleString('en-US')} ${
+          draftResultCount === 1 ? 'result' : 'results'
         }`
-      : 'Mostra risultati';
+      : 'Show results';
 
   function openFiltersSheet(): void {
     setDraftFilterValues(filterValues);
@@ -360,7 +360,7 @@ export function TableToolbar({
         {hasFilters ? (
           <Button variant="outline" className="relative gap-2" onClick={openFiltersSheet}>
             <Filter className="size-4" />
-            Filtri
+            Filters
             {activeFilterTotal > 0 ? (
               <span className="bg-primary text-primary-foreground absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-[10px]">
                 {activeFilterTotal}
@@ -378,7 +378,7 @@ export function TableToolbar({
         <ResponsiveSheet
           open={filtersOpen}
           onOpenChange={setFiltersOpen}
-          title="Filtri"
+          title="Filters"
           description="Restringi l'elenco con i criteri disponibili."
           onConfirm={applyDraftFilters}
           footer={

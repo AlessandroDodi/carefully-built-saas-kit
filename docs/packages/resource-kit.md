@@ -17,7 +17,7 @@ For local development in an app inside the same parent workspace, use the packed
 ## Component Usage
 
 ```tsx
-import { EntityAssociatedTabPanel } from '@carefully-built/resource-kit';
+import { EntityAssociatedEmptyTab } from '@carefully-built/resource-kit';
 
 // Check the API catalog below for the component source and prop types.
 // Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
@@ -25,6 +25,7 @@ import { EntityAssociatedTabPanel } from '@carefully-built/resource-kit';
 
 Components in this package:
 
+- `EntityAssociatedEmptyTab`: import from `@carefully-built/resource-kit`.
 - `EntityAssociatedTabPanel`: import from `@carefully-built/resource-kit`.
 - `EntityDetailLoadingSidebar`: import from `@carefully-built/resource-kit`.
 - `EntityDetailShell`: import from `@carefully-built/resource-kit`.
@@ -63,6 +64,7 @@ Helpers in this package:
 - `createEntityAssociationOption`
 - `ENTITY_DETAIL_TABS`
 - `ENTITY_DETAIL_TABS`
+- `EntityAssociatedEmptyTab`
 - `EntityAssociatedTabPanel`
 - `EntityDetailLoadingSidebar`
 - `EntityDetailShell`
@@ -101,6 +103,7 @@ Helpers in this package:
 - `buildEntityAssociationValue`
 - `createCurrentEntityAssociationRecord`
 - `createCurrentEntityAssociationRecord`
+- `EntityAssociatedEmptyTabProps`
 - `EntityAssociatedTabPanelBaseProps`
 - `EntityAssociatedTabPanelProps`
 - `EntityAssociationPayload`
@@ -123,6 +126,7 @@ Helpers in this package:
 
 | Export | Kind | Source |
 |---|---|---|
+| `EntityAssociatedEmptyTab` | Component | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
 | `EntityAssociatedTabPanel` | Component | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityDetailLoadingSidebar` | Component | `packages/resource-kit/src/entity-detail-loading-sidebar.tsx` |
 | `EntityDetailShell` | Component | `packages/resource-kit/src/entity-detail-shell.tsx` |
@@ -136,6 +140,7 @@ Helpers in this package:
 | `createEntityAssociationOption` | Helper | `packages/resource-kit/src/index.ts` |
 | `ENTITY_DETAIL_TABS` | Helper | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `ENTITY_DETAIL_TABS` | Helper | `packages/resource-kit/src/index.ts` |
+| `EntityAssociatedEmptyTab` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityAssociatedTabPanel` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityDetailLoadingSidebar` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityDetailShell` | Helper | `packages/resource-kit/src/index.ts` |
@@ -173,6 +178,7 @@ Helpers in this package:
 | `buildEntityAssociationValue` | Type | `packages/resource-kit/src/index.ts` |
 | `createCurrentEntityAssociationRecord` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `createCurrentEntityAssociationRecord` | Type | `packages/resource-kit/src/index.ts` |
+| `EntityAssociatedEmptyTabProps` | Type | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
 | `EntityAssociatedTabPanelBaseProps` | Type | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityAssociatedTabPanelProps` | Type | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityAssociationPayload` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |

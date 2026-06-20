@@ -74,7 +74,7 @@ export function SheetActionFooter({
           className={`${footerButtonClassName} relative`}
         >
           <span className="inline-flex w-full items-center justify-center">
-            <span>{confirmLoading ? 'Salvataggio...' : confirmLabel}</span>
+            <span>{confirmLoading ? 'Saving...' : confirmLabel}</span>
             {desktopConfirmShortcutEnabled && desktopModifierLabel ? (
               <span className="absolute top-1/2 right-2 -translate-y-1/2">
                 <DesktopConfirmShortcutHint desktopModifierLabel={desktopModifierLabel} />

@@ -36,7 +36,7 @@ export function EntityDetailLoadingSidebar({
           <Icon className="text-muted-foreground size-4" />
           {title ? <span>{title}</span> : <Skeleton className={titleSkeletonClassName} />}
         </div>
-        <Button type="button" variant="ghost" size="icon-sm" disabled aria-label="Modifica">
+        <Button type="button" variant="ghost" size="icon-sm" disabled aria-label="Edit">
           <Pencil className="size-4" />
         </Button>
       </div>

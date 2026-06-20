@@ -205,7 +205,7 @@ export function getApplicationById(
 export function createSuperAdminDataLoader({
   workos,
   getOrganizationLogoUrl,
-  errorMessage = 'Impossibile caricare i dati WorkOS in questo momento.',
+  errorMessage = 'Unable to load WorkOS data right now.',
 }: CreateSuperAdminDataLoaderOptions): () => Promise<SuperAdminData> {
   async function listOrganizationUsers(organizationId: string): Promise<SuperAdminUser[]> {
     const memberships = await workos.userManagement.listOrganizationMemberships({

@@ -17,7 +17,7 @@ For local development in an app inside the same parent workspace, use the packed
 ## Component Usage
 
 ```tsx
-import { CustomAgentPickerField } from '@carefully-built/forms';
+import { CustomAssociationPickerField } from '@carefully-built/forms';
 
 // Check the API catalog below for the component source and prop types.
 // Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
@@ -25,7 +25,6 @@ import { CustomAgentPickerField } from '@carefully-built/forms';
 
 Components in this package:
 
-- `CustomAgentPickerField`: import from `@carefully-built/forms`.
 - `CustomAssociationPickerField`: import from `@carefully-built/forms`.
 - `CustomBooleanChipField`: import from `@carefully-built/forms`.
 - `CustomChipSelectField`: import from `@carefully-built/forms`.
@@ -40,18 +39,18 @@ Components in this package:
 - `CustomSelectField`: import from `@carefully-built/forms`.
 - `CustomSingleAssociationPickerField`: import from `@carefully-built/forms`.
 - `CustomTextareaField`: import from `@carefully-built/forms`.
+- `CustomUserPickerField`: import from `@carefully-built/forms`.
 - `FieldMessage`: import from `@carefully-built/forms`.
 - `FormFieldLabel`: import from `@carefully-built/forms`.
 
 ## Helper Usage
 
 ```ts
-import { CustomAgentPickerField } from '@carefully-built/forms';
+import { CustomAssociationPickerField } from '@carefully-built/forms';
 ```
 
 Helpers in this package:
 
-- `CustomAgentPickerField`
 - `CustomAssociationPickerField`
 - `CustomBooleanChipField`
 - `CustomChipSelectField`
@@ -66,6 +65,7 @@ Helpers in this package:
 - `CustomSelectField`
 - `CustomSingleAssociationPickerField`
 - `CustomTextareaField`
+- `CustomUserPickerField`
 - `FieldMessage`
 - `formatCompactCurrencyDisplay`
 - `formatCompactCurrencyDisplay`
@@ -105,7 +105,6 @@ Helpers in this package:
 
 | Export | Kind | Source |
 |---|---|---|
-| `CustomAgentPickerField` | Component | `packages/forms/src/fields/custom-agent-picker-field.tsx` |
 | `CustomAssociationPickerField` | Component | `packages/forms/src/fields/custom-association-picker-field.tsx` |
 | `CustomBooleanChipField` | Component | `packages/forms/src/fields/custom-boolean-chip-field.tsx` |
 | `CustomChipSelectField` | Component | `packages/forms/src/fields/custom-chip-select-field.tsx` |
@@ -120,9 +119,9 @@ Helpers in this package:
 | `CustomSelectField` | Component | `packages/forms/src/fields/custom-select-field.tsx` |
 | `CustomSingleAssociationPickerField` | Component | `packages/forms/src/fields/custom-single-association-picker-field.tsx` |
 | `CustomTextareaField` | Component | `packages/forms/src/fields/custom-textarea-field.tsx` |
+| `CustomUserPickerField` | Component | `packages/forms/src/fields/custom-user-picker-field.tsx` |
 | `FieldMessage` | Component | `packages/forms/src/fields/field-message.tsx` |
 | `FormFieldLabel` | Component | `packages/forms/src/fields/form-field-label.tsx` |
-| `CustomAgentPickerField` | Helper | `packages/forms/src/index.ts` |
 | `CustomAssociationPickerField` | Helper | `packages/forms/src/index.ts` |
 | `CustomBooleanChipField` | Helper | `packages/forms/src/index.ts` |
 | `CustomChipSelectField` | Helper | `packages/forms/src/index.ts` |
@@ -137,6 +136,7 @@ Helpers in this package:
 | `CustomSelectField` | Helper | `packages/forms/src/index.ts` |
 | `CustomSingleAssociationPickerField` | Helper | `packages/forms/src/index.ts` |
 | `CustomTextareaField` | Helper | `packages/forms/src/index.ts` |
+| `CustomUserPickerField` | Helper | `packages/forms/src/index.ts` |
 | `FieldMessage` | Helper | `packages/forms/src/index.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `packages/forms/src/fields/compact-currency.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `packages/forms/src/index.ts` |

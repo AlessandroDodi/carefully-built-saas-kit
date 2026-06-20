@@ -8,7 +8,7 @@ export function CrudTableView<TItem extends object>({
   state,
   columns,
   isLoading,
-  searchPlaceholder = "Cerca...",
+  searchPlaceholder = "Search...",
   filters = [],
   actions,
   actionHandlers,

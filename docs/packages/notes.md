@@ -27,6 +27,7 @@ Components in this package:
 
 - `AssociationDisplayList`: import from `@carefully-built/notes`.
 - `NoteCard`: import from `@carefully-built/notes`.
+- `NotesCrudPage`: import from `@carefully-built/notes`.
 - `NotesGrid`: import from `@carefully-built/notes`.
 - `NotesSheetFooter`: import from `@carefully-built/notes`.
 
@@ -62,6 +63,7 @@ Helpers in this package:
 - `normalizeAssociationEntityType`
 - `normalizeAssociationEntityType`
 - `NoteCard`
+- `NotesCrudPage`
 - `NotesGrid`
 - `NotesSheetFooter`
 
@@ -71,6 +73,7 @@ Helpers in this package:
 - `FilterNotesOptions`
 - `NoteAssociation`
 - `NoteAssociationOption`
+- `NoteCrudValues`
 - `NoteFormValuesLike`
 - `NoteListItem`
 - `SupportedNoteAssociationEntityType`
@@ -82,6 +85,7 @@ Helpers in this package:
 |---|---|---|
 | `AssociationDisplayList` | Component | `packages/notes/src/association-display-list.tsx` |
 | `NoteCard` | Component | `packages/notes/src/note-card.tsx` |
+| `NotesCrudPage` | Component | `packages/notes/src/notes-crud-page.tsx` |
 | `NotesGrid` | Component | `packages/notes/src/notes-grid.tsx` |
 | `NotesSheetFooter` | Component | `packages/notes/src/notes-sheet-footer.tsx` |
 | `AssociationDisplayList` | Helper | `packages/notes/src/index.ts` |
@@ -92,6 +96,7 @@ Helpers in this package:
 | `normalizeAssociationEntityType` | Helper | `packages/notes/src/index.ts` |
 | `normalizeAssociationEntityType` | Helper | `packages/notes/src/note-helpers.ts` |
 | `NoteCard` | Helper | `packages/notes/src/index.ts` |
+| `NotesCrudPage` | Helper | `packages/notes/src/index.ts` |
 | `NotesGrid` | Helper | `packages/notes/src/index.ts` |
 | `NotesSheetFooter` | Helper | `packages/notes/src/index.ts` |
 | `useNotesPageState` | Hook | `packages/notes/src/index.ts` |
@@ -100,6 +105,7 @@ Helpers in this package:
 | `FilterNotesOptions` | Type | `packages/notes/src/note-helpers.ts` |
 | `NoteAssociation` | Type | `packages/notes/src/note-helpers.ts` |
 | `NoteAssociationOption` | Type | `packages/notes/src/use-notes-page-state.ts` |
+| `NoteCrudValues` | Type | `packages/notes/src/notes-crud-page.tsx` |
 | `NoteFormValuesLike` | Type | `packages/notes/src/use-notes-page-state.ts` |
 | `NoteListItem` | Type | `packages/notes/src/note-helpers.ts` |
 | `SupportedNoteAssociationEntityType` | Type | `packages/notes/src/note-helpers.ts` |

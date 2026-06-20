@@ -49,7 +49,7 @@ export function buildDocumentAssociationSummary(
   const firstAssociation = associations[0];
 
   if (!firstAssociation) {
-    return document.associationLabel ?? 'Nessuna associazione';
+    return document.associationLabel ?? 'No association';
   }
 
   const remaining = associations.length - 1;

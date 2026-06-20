@@ -9,7 +9,10 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -43,16 +46,24 @@
     "zod": ">=3.0.0 || >=4.0.0"
   },
   "peerDependenciesMeta": {
-    "@carefully-built/convex-crud": { "optional": true },
-    "@carefully-built/forms": { "optional": true },
-    "@carefully-built/search": { "optional": true },
-    "@carefully-built/ui": { "optional": true }
+    "@carefully-built/convex-crud": {
+      "optional": true
+    },
+    "@carefully-built/forms": {
+      "optional": true
+    },
+    "@carefully-built/search": {
+      "optional": true
+    },
+    "@carefully-built/ui": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@carefully-built/convex-crud": "file:../convex-crud/carefully-built-convex-crud-0.1.8.tgz",
-    "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.1.tgz",
-    "@carefully-built/search": "file:../search/carefully-built-search-0.1.1.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/convex-crud": "workspace:*",
+    "@carefully-built/forms": "workspace:*",
+    "@carefully-built/search": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "lucide-react": "^1.8.0",

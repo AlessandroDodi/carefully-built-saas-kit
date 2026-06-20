@@ -92,7 +92,7 @@ function SortableHeaderContent<T>({
         column.align === 'right' && 'ml-auto',
         column.align === 'center' && 'mx-auto',
       )}
-      aria-label={`Ordina per ${column.header}`}
+      aria-label={`Sort by ${column.header}`}
       onClick={() => {
         onSortChange(getNextSortState(sortState ?? null, sortKey));
       }}
@@ -185,7 +185,7 @@ export function DesktopView<T>({
             }
             className="w-28 min-w-28 overflow-visible text-right whitespace-nowrap"
           >
-            Azioni
+            Actions
           </TableHead>
         ) : null}
       </TableRow>

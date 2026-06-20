@@ -17,6 +17,12 @@ const statusClassName: Record<SuperAdminStatus, string> = {
   sospeso: 'border-[#fecaca] bg-[#fef2f2] text-[#b91c1c]',
 };
 
+const statusLabels: Record<SuperAdminStatus, string> = {
+  attivo: 'Active',
+  prova: 'Trial',
+  sospeso: 'Suspended',
+};
+
 export function DataWarning({ message }: { readonly message?: string }): React.ReactElement | null {
   if (!message) {
     return null;
@@ -50,7 +56,7 @@ export function Badge({
 
 export function PlanBadge({ plan }: { readonly plan: SuperAdminPlan | null }): React.ReactElement {
   if (!plan) {
-    return <Badge className="border-[#e5e7eb] bg-[#f9fafb] text-[#364153]">Non impostato</Badge>;
+    return <Badge className="border-[#e5e7eb] bg-[#f9fafb] text-[#364153]">Not set</Badge>;
   }
 
   return <Badge className={planClassName[plan]}>{plan}</Badge>;
@@ -62,10 +68,10 @@ export function StatusBadge({
   readonly status: SuperAdminStatus | null;
 }): React.ReactElement {
   if (!status) {
-    return <Badge className="border-[#e5e7eb] bg-[#f9fafb] text-[#364153]">Non impostato</Badge>;
+    return <Badge className="border-[#e5e7eb] bg-[#f9fafb] text-[#364153]">Not set</Badge>;
   }
 
-  return <Badge className={statusClassName[status]}>{status}</Badge>;
+  return <Badge className={statusClassName[status]}>{statusLabels[status]}</Badge>;
 }
 
 export function MetricCard({

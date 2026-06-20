@@ -33,6 +33,7 @@ import {
   useIsMobile,
 } from '@carefully-built/ui';
 
+import { getCommandPaletteFallbackIconStyle } from './command-palette-fallback';
 import { buildSearchText, rankBySearch } from './index';
 
 export interface CommandPaletteTypeOption<TType extends string> {
@@ -47,6 +48,7 @@ export interface CommandPaletteItemMeta {
   readonly label: ReactNode;
   readonly className?: string;
   readonly icon?: LucideIcon | React.ComponentType<{ className?: string }>;
+  readonly iconColor?: string | null;
 }
 
 export interface CommandPaletteProps<TItem, TType extends string> {
@@ -171,13 +173,13 @@ export function CommandPalette<TItem, TType extends string>({
   isLoading = false,
   isMobile = false,
   items,
-  loadingLabel = 'Caricamento...',
-  noResultsLabel = 'Nessun risultato trovato',
+  loadingLabel = 'Loading...',
+  noResultsLabel = 'No results found',
   onSelect,
-  placeholder = 'Cerca...',
-  title = 'Cerca',
-  triggerLabel = 'Cerca',
-  triggerTooltip = 'Cerca',
+  placeholder = 'Search...',
+  title = 'Search',
+  triggerLabel = 'Search',
+  triggerTooltip = 'Search',
   triggerVariant = 'sidebar',
   typeOptions,
 }: CommandPaletteProps<TItem, TType>): React.ReactElement {
@@ -326,6 +328,7 @@ export function CommandPalette<TItem, TType extends string>({
       type="button"
       variant="ghost"
       className={cn(
+        'w-full',
         isBottomNavTrigger
           ? 'text-muted-foreground hover:text-foreground mx-1 my-1 h-auto min-w-0 flex-1 flex-col gap-1 rounded-xl px-2 py-2 text-[11px] font-medium'
           : 'border-sidebar-border bg-background/70 text-sidebar-foreground/75 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:bg-sidebar-accent hover:text-sidebar-primary dark:text-sidebar-foreground/90 dark:hover:text-white border',
@@ -685,6 +688,7 @@ function CommandPaletteRow<TItem>({
   const meta = getItemMeta?.(item);
   const Icon = meta?.icon;
   const imageUrl = getItemImageUrl?.(item);
+  const fallbackIconStyle = getCommandPaletteFallbackIconStyle(meta?.iconColor);
 
   return (
     <button
@@ -706,8 +710,18 @@ function CommandPaletteRow<TItem>({
           className="bg-muted h-11 w-11 shrink-0 rounded-md object-cover"
         />
       ) : (
-        <span className="bg-muted grid h-11 w-11 shrink-0 place-items-center rounded-md">
-          {Icon ? <Icon className="text-muted-foreground size-5" /> : null}
+        <span
+          className="bg-muted grid h-11 w-11 shrink-0 place-items-center rounded-md"
+          style={fallbackIconStyle}
+        >
+          {Icon ? (
+            <Icon
+              className={cn(
+                'size-5',
+                fallbackIconStyle ? 'text-current' : 'text-muted-foreground',
+              )}
+            />
+          ) : null}
         </span>
       )}
       <span className="min-w-0 flex-1">

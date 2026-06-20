@@ -21,7 +21,7 @@ function normalizeContactBirthdayInput(value: string | undefined): string | unde
   const day = isoMatch ? Number(isoMatch[3]) : localizedMatch ? Number(localizedMatch[1]) : NaN;
 
   if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day) || !isValidDateParts(year, month, day)) {
-    throw new Error('Compleanno non valido');
+    throw new Error('Invalid birthday');
   }
 
   return [
@@ -32,28 +32,28 @@ function normalizeContactBirthdayInput(value: string | undefined): string | unde
 }
 
 export const CONTACT_IMPORT_HEADERS = [
-  'nome',
-  'cognome',
+  'firstName',
+  'lastName',
   'email',
-  'telefono',
-  'ruoli',
-  'note',
-  'compleanno',
+  'phone',
+  'roles',
+  'notes',
+  'birthday',
 ] as const;
 
 const CONTACT_ROLE_LABELS = {
-  Acquirente: 'buyer',
-  Venditore: 'seller',
+  Buyer: 'buyer',
+  Seller: 'seller',
 } as const;
 
 const importedContactRowSchema = z.object({
-  nome: z.string().trim().min(1, 'Il nome è obbligatorio'),
-  cognome: z.string().trim().optional().default(''),
+  firstName: z.string().trim().min(1, 'First name is required'),
+  lastName: z.string().trim().optional().default(''),
   email: z.string().trim().optional().default(''),
-  telefono: z.string().trim().optional().default(''),
-  ruoli: z.string().trim().min(1, 'I ruoli sono obbligatori'),
-  note: z.string().trim().optional().default(''),
-  compleanno: z.string().trim().optional().default(''),
+  phone: z.string().trim().optional().default(''),
+  roles: z.string().trim().min(1, 'Roles are required'),
+  notes: z.string().trim().optional().default(''),
+  birthday: z.string().trim().optional().default(''),
 });
 
 export type ImportedContactRoles = 'buyer' | 'seller';
@@ -83,7 +83,7 @@ export function parseImportedContactRoles(value: string): ImportedContactRoles[]
   );
 
   if (unsupportedLabels.length > 0) {
-    throw new Error(`Ruoli non supportati: ${unsupportedLabels.join(', ')}`);
+    throw new Error(`Unsupported roles: ${unsupportedLabels.join(', ')}`);
   }
 
   return Array.from(
@@ -101,13 +101,13 @@ export function normalizeImportedContactRow(
   const parsed = importedContactRowSchema.parse(row);
 
   return {
-    firstName: parsed.nome,
-    lastName: parsed.cognome || '',
+    firstName: parsed.firstName,
+    lastName: parsed.lastName || '',
     email: parsed.email || '',
-    phone: parsed.telefono || '',
-    roles: parseImportedContactRoles(parsed.ruoli),
-    notes: parsed.note || '',
-    birthday: normalizeContactBirthdayInput(parsed.compleanno) ?? '',
+    phone: parsed.phone || '',
+    roles: parseImportedContactRoles(parsed.roles),
+    notes: parsed.notes || '',
+    birthday: normalizeContactBirthdayInput(parsed.birthday) ?? '',
   };
 }
 

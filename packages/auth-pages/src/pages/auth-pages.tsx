@@ -222,8 +222,8 @@ export interface AuthForgotPasswordPageProps extends AuthPageBranding {
 
 export function AuthForgotPasswordPage({
   sendPasswordResetEmail,
-  title = "Password dimenticata",
-  subtitle = "Inserisci la tua email per ricevere un link di reset della password",
+  title = "Forgot password",
+  subtitle = "Enter your email to receive a password reset link",
   children,
   ...branding
 }: AuthForgotPasswordPageProps): React.ReactElement {
@@ -249,8 +249,8 @@ export interface AuthUpdatePasswordPageProps extends AuthPageBranding {
 
 export function AuthUpdatePasswordPage({
   resetPassword,
-  title = "Aggiorna password",
-  subtitle = "Inserisci la tua nuova password",
+  title = "Update password",
+  subtitle = "Enter your new password",
   successHref = "/login/email?reset=success",
   children,
   ...branding

@@ -50,17 +50,17 @@ export function resolveErrorPageContent(
   if (getErrorStatusCode(error) === NOT_FOUND_STATUS) {
     return {
       code: "404",
-      title: "Pagina non trovata",
-      description: "La pagina che stai cercando non esiste oppure e stata spostata.",
+      title: "Page not found",
+      description: "The page you are looking for does not exist or has been moved.",
       shouldCapture: false,
     };
   }
 
   return {
     code: options.fallbackCode ?? "500",
-    title: options.fallbackTitle ?? "Si e verificato un errore",
+    title: options.fallbackTitle ?? "An error occurred",
     description:
-      options.fallbackDescription ?? "Si e verificato un errore imprevisto. Riprova piu tardi.",
+      options.fallbackDescription ?? "An unexpected error occurred. Please try again later.",
     shouldCapture: true,
   };
 }
@@ -68,8 +68,8 @@ export function resolveErrorPageContent(
 export function getNotFoundPageContent(): ErrorPageContent {
   return {
     code: "404",
-    title: "Pagina non trovata",
-    description: "La pagina che stai cercando non esiste oppure e stata spostata.",
+    title: "Page not found",
+    description: "The page you are looking for does not exist or has been moved.",
     shouldCapture: false,
   };
 }

@@ -251,7 +251,7 @@ function buildDocumentCreateRecord(args: {
   const association = normalizeAssociationInput(args.data);
 
   return {
-    title: normalizeOptionalString(args.data.title) ?? 'Documento senza nome',
+    title: normalizeOptionalString(args.data.title) ?? 'Untitled document',
     type: args.data.type ?? 'other',
     description: normalizeOptionalString(args.data.description),
     sourceType: args.data.sourceType,
@@ -328,7 +328,7 @@ export function createDocumentMutationSet(factory: DocumentMutationFactoryArgs) 
         const publicUploadUrl = buildPendingPublicUploadUrl(args.publicOrigin, token);
         const association = normalizeAssociationInput(args);
         const documentId = await ctx.db.insert('documents', {
-          title: normalizeOptionalString(args.title) ?? 'Documento senza nome',
+          title: normalizeOptionalString(args.title) ?? 'Untitled document',
           type: 'other',
           description: normalizeOptionalString(args.description),
           sourceType: 'external_link',

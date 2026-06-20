@@ -39,7 +39,7 @@ function UserGrowthTooltip({ active, payload }: TooltipProps): React.ReactElemen
     <div className="rounded-lg border border-[#e5e7eb] bg-white px-3 py-2 text-sm shadow-sm">
       <div className="font-medium text-[#101828]">{item.rangeLabel}</div>
       <div className="mt-1 text-[#4a5565]">
-        {item.value === 1 ? '1 nuovo utente' : `${String(item.value)} nuovi utenti`}
+        {item.value === 1 ? '1 new user' : `${String(item.value)} new users`}
       </div>
     </div>
   );
@@ -55,7 +55,7 @@ export function UserGrowthChart({
   if (isEmpty) {
     return (
       <div className="mt-6 flex h-56 items-center justify-center rounded-lg border border-dashed border-[#d1d5dc] text-sm text-[#6a7282]">
-        Nessuna registrazione WorkOS nelle ultime 8 settimane.
+        No registrations in the last 8 weeks.
       </div>
     );
   }

@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "charts", "dashboard", "saas"],
+  "keywords": [
+    "react",
+    "charts",
+    "dashboard",
+    "saas"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -45,12 +53,16 @@
     "recharts": ">=2.0.0"
   },
   "peerDependenciesMeta": {
-    "@carefully-built/ui": { "optional": true },
-    "@carefully-built/widgets": { "optional": true }
+    "@carefully-built/ui": {
+      "optional": true
+    },
+    "@carefully-built/widgets": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
-    "@carefully-built/widgets": "file:../widgets/carefully-built-widgets-0.1.0.tgz",
+    "@carefully-built/ui": "workspace:*",
+    "@carefully-built/widgets": "workspace:*",
     "lucide-react": "^1.8.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

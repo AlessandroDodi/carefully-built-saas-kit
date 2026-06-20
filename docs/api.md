@@ -32,13 +32,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `AgendaFilterConfig` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaIntegrationPreferences` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaUserLike` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
-| `AgentPickerOption` | Type | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `AgentPickerOption` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
-| `AgentPickerProps` | Type | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker.tsx` |
-| `AgentPickerProps` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker.tsx` |
-| `AgentPicker` | Component | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker.tsx` |
-| `AgentPicker` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker.tsx` |
-| `AgentPicker` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
 | `AppNavigationShellProps` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/navigation-shell.tsx` |
 | `AppNavigationShell` | Component | `@carefully-built/app-shell` | `packages/app-shell/src/navigation-shell.tsx` |
 | `AppNavigationShell` | Helper | `@carefully-built/app-shell` | `packages/app-shell/src/index.ts` |
@@ -82,6 +75,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `AuthForgotPasswordPage` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/pages.ts` |
 | `AuthFormState` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/types.ts` |
 | `AuthLayoutBranding` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/types.ts` |
+| `AuthLayoutClassNames` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/types.ts` |
 | `AuthLayout` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/layout/auth-layout.tsx` |
 | `AuthLayout` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/index.ts` |
 | `AuthLoginPageProps` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/pages/auth-pages.tsx` |
@@ -177,14 +171,18 @@ Generated list of public exports detected in `packages/*/src`.
 | `CrudDataTable` | Helper | `@carefully-built/crud` | `packages/crud/src/index.ts` |
 | `CrudEmptyState` | Type | `@carefully-built/crud` | `packages/crud/src/types.ts` |
 | `CrudFilterDefinition` | Type | `@carefully-built/crud` | `packages/crud/src/types.ts` |
+| `CrudListTableProps` | Type | `@carefully-built/crud` | `packages/crud/src/crud-list-table.tsx` |
+| `CrudListTable` | Component | `@carefully-built/crud` | `packages/crud/src/crud-list-table.tsx` |
+| `CrudListTable` | Helper | `@carefully-built/crud` | `packages/crud/src/index.ts` |
 | `CrudPaginationState` | Type | `@carefully-built/crud` | `packages/crud/src/pagination.ts` |
+| `CrudResourceSheetProps` | Type | `@carefully-built/crud` | `packages/crud/src/crud-resource-sheet.tsx` |
+| `CrudResourceSheet` | Component | `@carefully-built/crud` | `packages/crud/src/crud-resource-sheet.tsx` |
+| `CrudResourceSheet` | Helper | `@carefully-built/crud` | `packages/crud/src/index.ts` |
 | `CrudTableState` | Type | `@carefully-built/crud` | `packages/crud/src/types.ts` |
 | `CrudTableViewProps` | Type | `@carefully-built/crud` | `packages/crud/src/types.ts` |
 | `CrudTableView` | Component | `@carefully-built/crud` | `packages/crud/src/crud-table-view.tsx` |
 | `CrudTableView` | Helper | `@carefully-built/crud` | `packages/crud/src/index.ts` |
 | `CsvExportColumn` | Type | `@carefully-built/import-export` | `packages/imports/src/export-csv.ts` |
-| `CustomAgentPickerField` | Component | `@carefully-built/forms` | `packages/forms/src/fields/custom-agent-picker-field.tsx` |
-| `CustomAgentPickerField` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `CustomAssociationPickerField` | Component | `@carefully-built/forms` | `packages/forms/src/fields/custom-association-picker-field.tsx` |
 | `CustomAssociationPickerField` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `CustomBooleanChipField` | Component | `@carefully-built/forms` | `packages/forms/src/fields/custom-boolean-chip-field.tsx` |
@@ -224,6 +222,8 @@ Generated list of public exports detected in `packages/*/src`.
 | `CustomTableToolbarFilter` | Type | `@carefully-built/ui` | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `CustomTextareaField` | Component | `@carefully-built/forms` | `packages/forms/src/fields/custom-textarea-field.tsx` |
 | `CustomTextareaField` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
+| `CustomUserPickerField` | Component | `@carefully-built/forms` | `packages/forms/src/fields/custom-user-picker-field.tsx` |
+| `CustomUserPickerField` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `DEFAULT_ACTIVITY_END_TIME` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
 | `DEFAULT_ACTIVITY_START_TIME` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
 | `DEFAULT_ACTIVITY_TYPES` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-types.ts` |
@@ -233,6 +233,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `DEFAULT_SETTINGS_TAB` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `DEFAULT_THEME_OPTIONS` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/index.ts` |
 | `DEFAULT_THEME_OPTIONS` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/theme-selector.tsx` |
+| `DOCUMENT_CARD_GRID_CLASS` | Helper | `@carefully-built/files` | `packages/files/src/document-card-grid.tsx` |
 | `DashboardMobileNavigationConfig` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/mobile-navigation.ts` |
 | `DashboardPageHeaderProps` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardPageHeader` | Component | `@carefully-built/app-shell` | `packages/app-shell/src/dashboard-page-layout.tsx` |
@@ -265,6 +266,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `DocumentAssociationSummaryItem` | Type | `@carefully-built/files` | `packages/files/src/document-helpers.ts` |
 | `DocumentAssociationValueItem` | Type | `@carefully-built/files` | `packages/files/src/document-helpers.ts` |
 | `DocumentCardAssociationItem` | Type | `@carefully-built/files` | `packages/files/src/document-card.tsx` |
+| `DocumentCardGrid` | Component | `@carefully-built/files` | `packages/files/src/document-card-grid.tsx` |
 | `DocumentCardItem` | Type | `@carefully-built/files` | `packages/files/src/document-card.tsx` |
 | `DocumentCard` | Component | `@carefully-built/files` | `packages/files/src/document-card.tsx` |
 | `DocumentFilterOptions` | Type | `@carefully-built/files` | `packages/files/src/document-helpers.ts` |
@@ -299,6 +301,9 @@ Generated list of public exports detected in `packages/*/src`.
 | `EmptyStateCardProps` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/empty-state-card.tsx` |
 | `EmptyStateCard` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/empty-state-card.tsx` |
 | `EmptyStateCard` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/index.ts` |
+| `EntityAssociatedEmptyTabProps` | Type | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
+| `EntityAssociatedEmptyTab` | Component | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
+| `EntityAssociatedEmptyTab` | Helper | `@carefully-built/resource-kit` | `packages/resource-kit/src/index.ts` |
 | `EntityAssociatedTabPanelBaseProps` | Type | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityAssociatedTabPanelProps` | Type | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityAssociatedTabPanel` | Component | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
@@ -336,6 +341,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `FieldMessage` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `FileCardSkeleton` | Component | `@carefully-built/files` | `packages/files/src/file-card-skeleton.tsx` |
 | `FileDropzone` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/file-dropzone.tsx` |
+| `FileUploadSheet` | Component | `@carefully-built/files` | `packages/files/src/file-upload-sheet.tsx` |
 | `FilterConfig` | Type | `@carefully-built/ui` | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `FilterDropdown` | Component | `@carefully-built/ui` | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `FilterDropdown` | Helper | `@carefully-built/ui` | `packages/ui/src/table-toolbar/index.ts` |
@@ -400,6 +406,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `Label` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/label.tsx` |
 | `LegalConsent` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/layout/legal-consent.tsx` |
 | `LegalConsent` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/index.ts` |
+| `LegalDocumentClassNames` | Type | `@carefully-built/legal-ui` | `packages/legal-ui/src/index.tsx` |
 | `LegalDocumentProps` | Type | `@carefully-built/legal-ui` | `packages/legal-ui/src/index.tsx` |
 | `LegalDocument` | Component | `@carefully-built/legal-ui` | `packages/legal-ui/src/index.tsx` |
 | `LegalLinkConfig` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/types.ts` |
@@ -438,8 +445,11 @@ Generated list of public exports detected in `packages/*/src`.
 | `NoteAssociation` | Type | `@carefully-built/notes` | `packages/notes/src/note-helpers.ts` |
 | `NoteCard` | Component | `@carefully-built/notes` | `packages/notes/src/note-card.tsx` |
 | `NoteCard` | Helper | `@carefully-built/notes` | `packages/notes/src/index.ts` |
+| `NoteCrudValues` | Type | `@carefully-built/notes` | `packages/notes/src/notes-crud-page.tsx` |
 | `NoteFormValuesLike` | Type | `@carefully-built/notes` | `packages/notes/src/use-notes-page-state.ts` |
 | `NoteListItem` | Type | `@carefully-built/notes` | `packages/notes/src/note-helpers.ts` |
+| `NotesCrudPage` | Component | `@carefully-built/notes` | `packages/notes/src/notes-crud-page.tsx` |
+| `NotesCrudPage` | Helper | `@carefully-built/notes` | `packages/notes/src/index.ts` |
 | `NotesGrid` | Component | `@carefully-built/notes` | `packages/notes/src/notes-grid.tsx` |
 | `NotesGrid` | Helper | `@carefully-built/notes` | `packages/notes/src/index.ts` |
 | `NotesSheetFooter` | Component | `@carefully-built/notes` | `packages/notes/src/notes-sheet-footer.tsx` |
@@ -472,9 +482,11 @@ Generated list of public exports detected in `packages/*/src`.
 | `OrganizationLogo` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationLogo` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations.ts` |
 | `OrganizationRecord` | Type | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
+| `OrganizationSelectionPageClassNames` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectionPageProps` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectionPage` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectionPage` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations.ts` |
+| `OrganizationSelectorClassNames` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectorItem` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelectorProps` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelector` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
@@ -504,6 +516,8 @@ Generated list of public exports detected in `packages/*/src`.
 | `ResponsiveButtonState` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButton` | Component | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButton` | Helper | `@carefully-built/app-shell` | `packages/app-shell/src/index.ts` |
+| `ResponsiveSheetClassNames` | Type | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
+| `ResponsiveSheetProps` | Type | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `ResponsiveSheet` | Component | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `RichTextEditorProps` | Type | `@carefully-built/rich-text` | `packages/rich-text/src/rich-text-editor.tsx` |
 | `RichTextEditor` | Component | `@carefully-built/rich-text` | `packages/rich-text/src/rich-text-editor.tsx` |
@@ -516,6 +530,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `SHAPE_PREVIEW_VALUES` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/index.ts` |
 | `SHAPE_PREVIEW_VALUES` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/shape-preview-icon.tsx` |
 | `STEP_KIND_OPTIONS` | Helper | `@carefully-built/automations` | `packages/automations/src/automation-options.ts` |
+| `SaasErrorPageClassNames` | Type | `@carefully-built/ui` | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasErrorPageProps` | Type | `@carefully-built/ui` | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasErrorPage` | Component | `@carefully-built/ui` | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasErrorPage` | Helper | `@carefully-built/ui` | `packages/ui/src/error-page/index.ts` |
@@ -690,6 +705,15 @@ Generated list of public exports detected in `packages/*/src`.
 | `UseUrlPaginationOptions` | Type | `@carefully-built/crud` | `packages/crud/src/use-url-pagination.ts` |
 | `UserGrowthChart` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/user-growth-chart.tsx` |
 | `UserGrowthChart` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
+| `UserPickerCopy` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `UserPickerCopy` | Type | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
+| `UserPickerOption` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `UserPickerOption` | Type | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
+| `UserPickerProps` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker.tsx` |
+| `UserPickerProps` | Type | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker.tsx` |
+| `UserPicker` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker.tsx` |
+| `UserPicker` | Component | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker.tsx` |
+| `UserPicker` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
 | `WidgetEmptyStateAction` | Type | `@carefully-built/widgets` | `packages/widgets/src/widget-empty-state.tsx` |
 | `WidgetEmptyStateConfig` | Type | `@carefully-built/widgets` | `packages/widgets/src/widget-empty-state.tsx` |
 | `WidgetEmptyStateProps` | Type | `@carefully-built/widgets` | `packages/widgets/src/widget-empty-state.tsx` |
@@ -724,9 +748,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `associationTypeChipMeta` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/associationTypeMeta.tsx` |
 | `associationTypeChipMeta` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `buildActivityDisplayModel` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
-| `buildAgentInitials` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `buildAgentInitials` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
-| `buildAgentInitials` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `buildAssociationCreateOption` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/defaultCreateHandlers.shared.ts` |
 | `buildAssociationCreateOption` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `buildAssociationValue` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/entity-associations.ts` |
@@ -756,6 +777,9 @@ Generated list of public exports detected in `packages/*/src`.
 | `buildPublicUploadRequestResult` | Convex helper | `@carefully-built/files` | `packages/files/src/convex.ts` |
 | `buildSearchText` | Helper | `@carefully-built/search` | `packages/search/src/index.ts` |
 | `buildSearchText` | Helper | `@carefully-built/ui` | `packages/ui/src/utils/search.ts` |
+| `buildUserInitials` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `buildUserInitials` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `buildUserInitials` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
 | `buildWeeklyUserRegistrations` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/data-adapter.ts` |
 | `buildWeeklyUserRegistrations` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `buildWeeklyUserRegistrations` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/server.ts` |
@@ -796,9 +820,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `deleteWorkosUserRecords` | Convex helper | `@carefully-built/convex-workos` | `packages/convex-workos/src/index.ts` |
 | `documentFormSchema` | Schema | `@carefully-built/files` | `packages/files/src/document-form-shell.tsx` |
 | `filterActivities` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
-| `filterAgentsBySearch` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `filterAgentsBySearch` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
-| `filterAgentsBySearch` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `filterAndRankBySearch` | Helper | `@carefully-built/search` | `packages/search/src/index.ts` |
 | `filterAndRankBySearch` | Helper | `@carefully-built/ui` | `packages/ui/src/utils/search.ts` |
 | `filterAssociatedActivities` | Helper | `@carefully-built/resource-kit` | `packages/resource-kit/src/entity-detail-helpers.ts` |
@@ -818,17 +839,17 @@ Generated list of public exports detected in `packages/*/src`.
 | `filterDocuments` | Helper | `@carefully-built/files` | `packages/files/src/document-helpers.ts` |
 | `filterNotes` | Helper | `@carefully-built/notes` | `packages/notes/src/index.ts` |
 | `filterNotes` | Helper | `@carefully-built/notes` | `packages/notes/src/note-helpers.ts` |
-| `filterSelectableAgents` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `filterSelectableAgents` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
-| `filterSelectableAgents` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
+| `filterSelectableUsers` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `filterSelectableUsers` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `filterSelectableUsers` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
+| `filterUsersBySearch` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `filterUsersBySearch` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `filterUsersBySearch` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
 | `findCurrentUserByWorkosId` | Convex helper | `@carefully-built/convex-multitenant` | `packages/convex-multitenant/src/index.ts` |
 | `forgotPasswordSchema` | Schema | `@carefully-built/auth-pages` | `packages/auth-pages/src/controllers.ts` |
 | `forgotPasswordSchema` | Schema | `@carefully-built/auth-pages` | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `formatAbsoluteDate` | Helper | `@carefully-built/ui` | `packages/ui/src/utils/date-display.ts` |
 | `formatActivityTypeOptionValue` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
-| `formatAgentDisplayName` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `formatAgentDisplayName` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
-| `formatAgentDisplayName` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
 | `formatCalendarWidgetTime` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-calendar-widget.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `@carefully-built/forms` | `packages/forms/src/fields/compact-currency.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
@@ -846,10 +867,16 @@ Generated list of public exports detected in `packages/*/src`.
 | `formatKanbanCurrencyDisplay` | Helper | `@carefully-built/kanban` | `packages/kanban/src/kanban-helpers.ts` |
 | `formatKanbanStatusLabel` | Helper | `@carefully-built/kanban` | `packages/kanban/src/index.ts` |
 | `formatKanbanStatusLabel` | Helper | `@carefully-built/kanban` | `packages/kanban/src/kanban-helpers.ts` |
+| `formatSelectedUserSummary` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `formatSelectedUserSummary` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `formatSelectedUserSummary` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
 | `formatShortDate` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `formatShortDate` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/server.ts` |
 | `formatShortDate` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/types.ts` |
 | `formatTimeInputValue` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
+| `formatUserDisplayName` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `formatUserDisplayName` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `formatUserDisplayName` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
 | `generatePublicUploadToken` | Convex helper | `@carefully-built/files` | `packages/files/src/convex.ts` |
 | `getActiveOrgRecord` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `getActivitiesForDay` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-calendar-widget.ts` |
@@ -881,6 +908,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `getCreateableAssociationTypes` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `getCustomFieldTypeChipMeta` | Helper | `@carefully-built/custom-fields` | `packages/custom-fields/src/index.ts` |
 | `getCustomFieldTypeLabel` | Helper | `@carefully-built/custom-fields` | `packages/custom-fields/src/index.ts` |
+| `getDesktopShortcutModifierLabel` | Helper | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `getFilteredAssociationOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/associationPicker.options.tsx` |
 | `getFilteredAssociationOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `getFormInvitationToken` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/workos.ts` |
@@ -923,6 +951,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `insertWithAudit` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `isActivityPast` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-calendar-widget.ts` |
 | `isAllDayActivityRange` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
+| `isAllowedConfirmShortcutEvent` | Helper | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `isChoiceCustomField` | Helper | `@carefully-built/custom-fields` | `packages/custom-fields/src/index.ts` |
 | `isMapTheme` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/index.ts` |
 | `isMapTheme` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/map-theme.ts` |
@@ -1033,9 +1062,9 @@ Generated list of public exports detected in `packages/*/src`.
 | `termsAndConditionsText` | Helper | `@carefully-built/legal-ui` | `packages/legal-ui/src/legal-texts.ts` |
 | `toAlphaColor` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
 | `toLocalTimestamp` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
-| `toggleAgentSelection` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/agent-picker-utils.ts` |
-| `toggleAgentSelection` | Helper | `@carefully-built/agent-picker` | `packages/agent-picker/src/index.ts` |
-| `toggleAgentSelection` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/agent-picker-utils.ts` |
+| `toggleUserSelection` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `toggleUserSelection` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/index.ts` |
+| `toggleUserSelection` | Helper | `@carefully-built/user-picker` | `packages/user-picker/src/user-picker-utils.ts` |
 | `trimTagName` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `updateAuditFields` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `updateTimestampFields` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |

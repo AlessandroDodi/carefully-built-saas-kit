@@ -27,8 +27,8 @@ export function BarDistributionWidget({
   data,
   colors = DEFAULT_BAR_COLORS,
   icon = CircleDashed,
-  emptyStateTitle = "Nessun dato disponibile",
-  emptyStateDescription = "Appena arrivano dati coerenti, qui vedrai la distribuzione.",
+  emptyStateTitle = "No data available",
+  emptyStateDescription = "When data is available, the distribution will appear here.",
   isLoading = false,
 }: BarDistributionWidgetProps): React.ReactElement {
   const isEmpty = data.length === 0;

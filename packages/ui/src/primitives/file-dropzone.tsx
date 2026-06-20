@@ -1,6 +1,6 @@
 'use client';
 
-import { Upload, X } from 'lucide-react';
+import { Check, FileText, Upload, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 import { Button } from './button';
@@ -25,6 +25,22 @@ interface FileDropzoneProps {
   readonly title?: string;
 }
 
+function formatFileSize(size: number): string {
+  if (size < 1024) {
+    return `${size} B`;
+  }
+
+  if (size < 1024 * 1024) {
+    return `${Math.round(size / 1024)} KB`;
+  }
+
+  return `${(size / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function getFileTypeLabel(file: File): string {
+  return file.type || file.name.split('.').pop()?.toUpperCase() || 'File';
+}
+
 export function FileDropzone({
   accept,
   browseLabel = 'Esplora',
@@ -34,7 +50,7 @@ export function FileDropzone({
   disabled = false,
   emptyIcon,
   helperText,
-  footerText = 'Trascina un file oppure clicca sul riquadro per selezionarlo.',
+  footerText = 'Drag a file here or click the box to select one.',
   inputClassName,
   multiple = false,
   onFileSelect,
@@ -45,6 +61,8 @@ export function FileDropzone({
 }: FileDropzoneProps): React.ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const hasSelectedFiles = selectedFiles.length > 0;
 
   const openFilePicker = (): void => {
     if (disabled) {
@@ -59,6 +77,8 @@ export function FileDropzone({
     if (selectedFiles.length === 0 || disabled) {
       return;
     }
+
+    setSelectedFiles(selectedFiles);
 
     if (multiple && onFilesSelect) {
       onFilesSelect(selectedFiles);
@@ -85,6 +105,7 @@ export function FileDropzone({
 
   const handleRemove = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.stopPropagation();
+    setSelectedFiles([]);
     onRemove?.();
   };
 
@@ -153,6 +174,16 @@ export function FileDropzone({
                 <X className="size-3.5" />
               </Button>
             ) : null}
+            {hasSelectedFiles ? (
+              <div className="bg-background/95 absolute right-2 bottom-2 left-2 rounded-md border px-3 py-2 text-left shadow-sm backdrop-blur">
+                <p className="truncate text-sm font-medium">{selectedFiles[0]?.name}</p>
+                {selectedFiles[0] ? (
+                  <p className="text-muted-foreground text-xs">
+                    {getFileTypeLabel(selectedFiles[0])} | {formatFileSize(selectedFiles[0].size)}
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         ) : (
           <>
@@ -165,11 +196,8 @@ export function FileDropzone({
             </div>
             <Button
               type="button"
-              variant="outline"
-              className={cn(
-                'bg-background mt-4 border-[var(--main,#713dff)] text-[color:var(--main-dark,#250089)] shadow-[0px_1px_1px_rgba(5,32,81,0.05)]',
-                browseButtonClassName,
-              )}
+              size="sm"
+              className={cn('mt-4 shadow-[0px_1px_1px_rgba(5,32,81,0.05)]', browseButtonClassName)}
               onClick={(event): void => {
                 event.stopPropagation();
                 openFilePicker();
@@ -178,6 +206,25 @@ export function FileDropzone({
             >
               {browseLabel}
             </Button>
+            {hasSelectedFiles ? (
+              <div className="mt-4 w-full space-y-2">
+                {selectedFiles.map((file) => (
+                  <div
+                    key={`${file.name}-${file.size}-${file.lastModified}`}
+                    className="bg-background flex min-w-0 items-center gap-3 rounded-md border px-3 py-2 text-left"
+                  >
+                    <FileText className="text-muted-foreground size-4 shrink-0" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{file.name}</p>
+                      <p className="text-muted-foreground text-xs">
+                        {getFileTypeLabel(file)} | {formatFileSize(file.size)}
+                      </p>
+                    </div>
+                    <Check className="text-primary size-4 shrink-0" />
+                  </div>
+                ))}
+              </div>
+            ) : null}
           </>
         )}
       </div>

@@ -27,7 +27,7 @@ export interface NotificationListItemProps<TNotification extends NotificationRec
 
 function getNotificationActionLabel(notification: NotificationRecord, isSeen: boolean): string {
   if (notification.href) {
-    return `Apri ${notification.title}`;
+    return `Open ${notification.title}`;
   }
 
   return isSeen ? notification.title : `Segna come vista: ${notification.title}`;

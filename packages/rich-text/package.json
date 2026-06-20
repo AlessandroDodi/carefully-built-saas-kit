@@ -14,12 +14,21 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "rich-text", "tiptap", "saas", "ai"],
+  "keywords": [
+    "react",
+    "rich-text",
+    "tiptap",
+    "saas",
+    "ai"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -59,8 +68,8 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.0.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "@carefully-built/forms": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "@tiptap/extension-link": "^3.22.0",
     "@tiptap/extension-table": "^3.22.0",
     "@tiptap/extension-table-cell": "^3.22.0",

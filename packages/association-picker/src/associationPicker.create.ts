@@ -30,8 +30,8 @@ export function getCreateableAssociationTypes(
 
 export function getCreateButtonLabel(entityType: AssociationEntityType | null): string {
   if (!entityType) {
-    return 'Crea';
+    return 'Create';
   }
 
-  return `Crea ${getAssociationTypeChipMeta(entityType).label.toLowerCase()}`;
+  return `Create ${getAssociationTypeChipMeta(entityType).label.toLowerCase()}`;
 }

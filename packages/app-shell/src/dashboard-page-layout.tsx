@@ -31,12 +31,12 @@ export function DashboardPageHeader({
 }: DashboardPageHeaderProps): React.ReactElement {
   const backButton = backHref ? (
     <Button variant="ghost" size="icon-sm" asChild>
-      <a href={backHref} aria-label="Indietro">
+      <a href={backHref} aria-label="Back">
         <ArrowLeft className="size-4" />
       </a>
     </Button>
   ) : onBack ? (
-    <Button variant="ghost" size="icon-sm" aria-label="Indietro" onClick={onBack}>
+    <Button variant="ghost" size="icon-sm" aria-label="Back" onClick={onBack}>
       <ArrowLeft className="size-4" />
     </Button>
   ) : null;

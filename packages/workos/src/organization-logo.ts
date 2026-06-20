@@ -26,7 +26,7 @@ export async function createFilePreview(file: File): Promise<string> {
     };
 
     reader.onerror = (): void => {
-      reject(new Error('Impossibile leggere il file selezionato'));
+      reject(new Error('Unable to read the selected file'));
     };
 
     reader.readAsDataURL(file);
@@ -47,7 +47,7 @@ export async function uploadOrganizationLogo(args: {
   });
 
   if (!response.ok) {
-    throw new Error('Impossibile caricare il logo');
+    throw new Error('Unable to upload the logo');
   }
 
   const result = (await response.json()) as { storageId: string };

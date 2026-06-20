@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "notifications", "saas", "dashboard"],
+  "keywords": [
+    "react",
+    "notifications",
+    "saas",
+    "dashboard"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -49,7 +57,7 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/ui": "workspace:*",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.475.0",
     "react": "^19.2.3",

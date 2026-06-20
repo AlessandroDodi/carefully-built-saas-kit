@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 
 import { OrganizationLogoMark, PlanBadge, StatusBadge } from './ui';
 import { formatShortDate } from './types';
+import { createSuperAdminHref } from './navigation';
 
 import type { Column } from '@carefully-built/ui';
 import type { SuperAdminApplication, SuperAdminUser } from './types';
@@ -28,9 +29,9 @@ const planOptions = [
 ] as const;
 
 const statusOptions = [
-  { value: 'attivo', label: 'Attivo' },
-  { value: 'prova', label: 'Prova' },
-  { value: 'sospeso', label: 'Sospeso' },
+  { value: 'attivo', label: 'Active' },
+  { value: 'prova', label: 'Trial' },
+  { value: 'sospeso', label: 'Suspended' },
 ] as const;
 
 function normalizeSearch(value: string): string {
@@ -96,13 +97,13 @@ function UserOrganizationsCell({
   readonly organizations: readonly SuperAdminUserOrganization[];
 }): React.ReactElement {
   if (!organizations.length) {
-    return <span className="text-muted-foreground text-sm">Nessuna org</span>;
+    return <span className="text-muted-foreground text-sm">No org</span>;
   }
 
   const primaryOrganization = organizations[0];
 
   if (!primaryOrganization) {
-    return <span className="text-muted-foreground text-sm">Nessuna org</span>;
+    return <span className="text-muted-foreground text-sm">No org</span>;
   }
 
   const title =
@@ -126,9 +127,11 @@ function UserOrganizationsCell({
 }
 
 function UserDetailSheet({
+  basePath,
   onOpenChange,
   user,
 }: {
+  readonly basePath?: string;
   readonly onOpenChange: (open: boolean) => void;
   readonly user: SuperAdminUser | null;
 }): React.ReactElement {
@@ -138,37 +141,37 @@ function UserDetailSheet({
     <Sheet open={Boolean(user)} onOpenChange={onOpenChange}>
       <SheetContent className="sm:max-w-lg">
         <SheetHeader className="border-b">
-          <SheetTitle>{user?.name ?? 'Utente'}</SheetTitle>
+          <SheetTitle>{user?.name ?? 'User'}</SheetTitle>
           <SheetDescription>{user?.email}</SheetDescription>
         </SheetHeader>
         {user ? (
           <div className="min-h-0 space-y-4 overflow-y-auto px-4 pb-4">
             <section className="space-y-2">
-              <div className="text-foreground text-sm font-medium">Recap</div>
+              <div className="text-foreground text-sm font-medium">Summary</div>
               <div className="border-border grid gap-2 rounded-lg border p-3 text-sm">
                 <MobileMetaRow label="Email" value={user.email} />
                 <MobileMetaRow
                   label="ID"
                   value={<TruncatedContent tooltip={user.id}>{user.id}</TruncatedContent>}
                 />
-                <MobileMetaRow label="Ruolo" value={user.role} />
+                <MobileMetaRow label="Role" value={user.role} />
                 <MobileMetaRow label="Org" value={String(organizations.length)} />
-                <MobileMetaRow label="Creato" value={formatShortDate(user.createdAt)} />
+                <MobileMetaRow label="Created" value={formatShortDate(user.createdAt)} />
               </div>
             </section>
 
             <section className="space-y-2">
-              <div className="text-foreground text-sm font-medium">Organizzazioni</div>
+              <div className="text-foreground text-sm font-medium">Organizations</div>
               {organizations.length ? (
                 <div className="border-border overflow-hidden rounded-lg border">
                   <div className="bg-muted/40 text-muted-foreground grid grid-cols-[minmax(0,1fr)_112px] gap-3 px-3 py-2 text-xs font-medium">
-                    <span>Organizzazione</span>
-                    <span>Ruolo</span>
+                    <span>Organization</span>
+                    <span>Role</span>
                   </div>
                   {organizations.map((organization) => (
                     <a
                       key={organization.id}
-                      href={`/super-admin/applications/${organization.id}`}
+                      href={createSuperAdminHref(basePath, `/applications/${organization.id}`)}
                       className="border-border hover:bg-muted/40 grid grid-cols-[minmax(0,1fr)_112px] items-center gap-3 border-t px-3 py-2 outline-none focus-visible:ring-2 focus-visible:ring-[#9770ff]/35"
                     >
                       <div className="flex min-w-0 items-center gap-2.5">
@@ -193,7 +196,7 @@ function UserDetailSheet({
                 </div>
               ) : (
                 <div className="border-border text-muted-foreground rounded-lg border border-dashed px-3 py-8 text-center text-sm">
-                  Nessuna organizzazione associata.
+                  No organization associated.
                 </div>
               )}
             </section>
@@ -230,24 +233,28 @@ function filterApplications(
 
 function ApplicationMobileCard({
   application,
+  basePath,
   showAction,
 }: {
   readonly application: SuperAdminApplication;
+  readonly basePath?: string;
   readonly showAction: boolean;
 }): React.ReactElement {
   return (
     <div className="space-y-3">
       <ApplicationIdentity application={application} />
       <div className="border-border/70 grid gap-2 border-t pt-3">
-        <MobileMetaRow label="Piano" value={<PlanBadge plan={application.plan} />} />
-        <MobileMetaRow label="Stato" value={<StatusBadge status={application.status} />} />
-        <MobileMetaRow label="Utenti" value={String(application.userCount)} />
-        <MobileMetaRow label="Creata" value={formatShortDate(application.createdAt)} />
+        <MobileMetaRow label="Plan" value={<PlanBadge plan={application.plan} />} />
+        <MobileMetaRow label="Status" value={<StatusBadge status={application.status} />} />
+        <MobileMetaRow label="Users" value={String(application.userCount)} />
+        <MobileMetaRow label="Created" value={formatShortDate(application.createdAt)} />
       </div>
       {showAction ? (
         <div className="mt-3 flex justify-end border-t pt-2.5">
           <Button variant="ghost" size="sm" asChild>
-            <a href={`/super-admin/applications/${application.id}`}>Gestisci</a>
+            <a href={createSuperAdminHref(basePath, `/applications/${application.id}`)}>
+              Manage
+            </a>
           </Button>
         </div>
       ) : null}
@@ -257,40 +264,42 @@ function ApplicationMobileCard({
 
 export function SuperAdminApplicationsTable({
   applications,
+  basePath,
   showAction = true,
 }: {
   readonly applications: readonly SuperAdminApplication[];
+  readonly basePath?: string;
   readonly showAction?: boolean;
 }): React.ReactElement {
   const columns: Column<SuperAdminApplication>[] = [
     {
-      header: 'Applicazione',
+      header: 'Application',
       accessor: 'name',
       width: '34%',
       render: (_, application) => <ApplicationIdentity application={application} />,
     },
     {
-      header: 'Piano',
+      header: 'Plan',
       accessor: 'plan',
       width: '16%',
       truncate: false,
       render: (_, application) => <PlanBadge plan={application.plan} />,
     },
     {
-      header: 'Stato',
+      header: 'Status',
       accessor: 'status',
       width: '16%',
       truncate: false,
       render: (_, application) => <StatusBadge status={application.status} />,
     },
     {
-      header: 'Utenti',
+      header: 'Users',
       accessor: 'userCount',
       width: '12%',
       render: (_, application) => String(application.userCount),
     },
     {
-      header: 'Creata',
+      header: 'Created',
       accessor: 'createdAt',
       width: showAction ? '14%' : '22%',
       render: (_, application) => formatShortDate(application.createdAt),
@@ -311,15 +320,21 @@ export function SuperAdminApplicationsTable({
         showAction
           ? (application) => (
               <Button variant="ghost" size="sm" asChild>
-                <a href={`/super-admin/applications/${application.id}`}>Gestisci</a>
+                <a href={createSuperAdminHref(basePath, `/applications/${application.id}`)}>
+                  Manage
+                </a>
               </Button>
             )
           : undefined
       }
       renderMobileCard={(application) => (
-        <ApplicationMobileCard application={application} showAction={showAction} />
+        <ApplicationMobileCard
+          application={application}
+          basePath={basePath}
+          showAction={showAction}
+        />
       )}
-      noDataMessage="Nessuna applicazione trovata"
+      noDataMessage="No applications found"
       sortState={sortState}
       onSortChange={setSortState}
     />
@@ -328,8 +343,10 @@ export function SuperAdminApplicationsTable({
 
 export function SuperAdminApplicationsList({
   applications,
+  basePath,
 }: {
   readonly applications: readonly SuperAdminApplication[];
+  readonly basePath?: string;
 }): React.ReactElement {
   const [search, setSearch] = useState('');
   const [selectedPlan, setSelectedPlan] = useState('all');
@@ -351,12 +368,12 @@ export function SuperAdminApplicationsList({
   return (
     <>
       <TableToolbar
-        search={{ value: search, onChange: setSearch, placeholder: 'Cerca applicazioni' }}
+        search={{ value: search, onChange: setSearch, placeholder: 'Search applications' }}
         filters={[
           {
             config: {
               key: 'plan',
-              label: 'Piano',
+              label: 'Plan',
               icon: ShieldCheck,
               options: planOptions,
             },
@@ -366,7 +383,7 @@ export function SuperAdminApplicationsList({
           {
             config: {
               key: 'status',
-              label: 'Stato',
+              label: 'Status',
               icon: CalendarDays,
               options: statusOptions,
             },
@@ -380,7 +397,7 @@ export function SuperAdminApplicationsList({
         }}
         getDraftResultCount={getDraftResultCount}
       />
-      <SuperAdminApplicationsTable applications={filteredApplications} />
+      <SuperAdminApplicationsTable applications={filteredApplications} basePath={basePath} />
     </>
   );
 }
@@ -407,25 +424,25 @@ export function SuperAdminCompaniesList({
   );
   const columns: Column<SuperAdminApplication>[] = [
     {
-      header: 'Azienda',
+      header: 'Company',
       accessor: 'companyName',
       width: '42%',
       render: (_, application) => <ApplicationIdentity application={application} companyOnly />,
     },
     {
-      header: 'Applicazione',
+      header: 'Application',
       accessor: 'name',
       width: '28%',
     },
     {
-      header: 'Stato',
+      header: 'Status',
       accessor: 'status',
       width: '14%',
       truncate: false,
       render: (_, application) => <StatusBadge status={application.status} />,
     },
     {
-      header: 'Creata',
+      header: 'Created',
       accessor: 'createdAt',
       width: '16%',
       render: (_, application) => formatShortDate(application.createdAt),
@@ -439,12 +456,12 @@ export function SuperAdminCompaniesList({
   return (
     <>
       <TableToolbar
-        search={{ value: search, onChange: setSearch, placeholder: 'Cerca aziende' }}
+        search={{ value: search, onChange: setSearch, placeholder: 'Search companies' }}
         filters={[
           {
             config: {
               key: 'status',
-              label: 'Stato',
+              label: 'Status',
               icon: Building2,
               options: statusOptions,
             },
@@ -474,13 +491,13 @@ export function SuperAdminCompaniesList({
           <div className="space-y-3">
             <ApplicationIdentity application={application} companyOnly />
             <div className="border-border/70 grid gap-2 border-t pt-3">
-              <MobileMetaRow label="Applicazione" value={application.name} />
-              <MobileMetaRow label="Stato" value={<StatusBadge status={application.status} />} />
-              <MobileMetaRow label="Creata" value={formatShortDate(application.createdAt)} />
+              <MobileMetaRow label="Application" value={application.name} />
+              <MobileMetaRow label="Status" value={<StatusBadge status={application.status} />} />
+              <MobileMetaRow label="Created" value={formatShortDate(application.createdAt)} />
             </div>
           </div>
         )}
-        noDataMessage="Nessuna azienda trovata"
+        noDataMessage="No companies found"
         sortState={sortState}
         onSortChange={setSortState}
       />
@@ -489,8 +506,10 @@ export function SuperAdminCompaniesList({
 }
 
 export function SuperAdminUsersList({
+  basePath,
   users,
 }: {
+  readonly basePath?: string;
   readonly users: readonly SuperAdminUser[];
 }): React.ReactElement {
   const [search, setSearch] = useState('');
@@ -515,23 +534,25 @@ export function SuperAdminUsersList({
 
   return (
     <>
-      <TableToolbar search={{ value: search, onChange: setSearch, placeholder: 'Cerca utenti' }} />
-      <SuperAdminUsersTable users={filteredUsers} showOrganizations />
+      <TableToolbar search={{ value: search, onChange: setSearch, placeholder: 'Search users' }} />
+      <SuperAdminUsersTable users={filteredUsers} basePath={basePath} showOrganizations />
     </>
   );
 }
 
 export function SuperAdminUsersTable({
+  basePath,
   showOrganizations = false,
   users,
 }: {
+  readonly basePath?: string;
   readonly showOrganizations?: boolean;
   readonly users: readonly SuperAdminUser[];
 }): React.ReactElement {
   const [selectedUser, setSelectedUser] = useState<SuperAdminUser | null>(null);
   const columns: Column<SuperAdminUser>[] = [
     {
-      header: 'Nome',
+      header: 'Name',
       accessor: 'name',
       width: showOrganizations ? '24%' : '30%',
       render: (_, user) => (
@@ -560,12 +581,12 @@ export function SuperAdminUsersTable({
         ]
       : []),
     {
-      header: 'Ruolo',
+      header: 'Role',
       accessor: 'role',
       width: showOrganizations ? '10%' : '18%',
     },
     {
-      header: 'Creata',
+      header: 'Created',
       accessor: 'createdAt',
       width: showOrganizations ? '10%' : '18%',
       render: (_, user) => formatShortDate(user.createdAt),
@@ -607,16 +628,17 @@ export function SuperAdminUsersTable({
                 />
               ) : null}
               <MobileMetaRow label="Ruolo" value={user.role} />
-              <MobileMetaRow label="Creata" value={formatShortDate(user.createdAt)} />
+              <MobileMetaRow label="Created" value={formatShortDate(user.createdAt)} />
             </div>
           </div>
         )}
-        noDataMessage="Nessun utente trovato"
+        noDataMessage="No users found"
         sortState={sortState}
         onSortChange={setSortState}
       />
       {showOrganizations ? (
         <UserDetailSheet
+          basePath={basePath}
           user={selectedUser}
           onOpenChange={(open) => {
             if (!open) {

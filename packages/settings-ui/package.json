@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "settings", "tabs", "saas"],
+  "keywords": [
+    "react",
+    "settings",
+    "tabs",
+    "saas"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -54,7 +62,7 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.15.tgz",
+    "@carefully-built/ui": "workspace:*",
     "lucide-react": "^1.8.0",
     "nuqs": "^2.8.8",
     "react": "^19.2.3",

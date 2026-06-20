@@ -81,10 +81,10 @@ export function createCurrentEntityAssociationRecord({
     label,
     typeLabel:
       entityType === 'contact'
-        ? 'Contatto'
+        ? 'Contact'
         : entityType === 'property'
-          ? 'Proprietà'
-          : 'Richiesta',
+          ? 'Property'
+          : 'Request',
   };
 }
 

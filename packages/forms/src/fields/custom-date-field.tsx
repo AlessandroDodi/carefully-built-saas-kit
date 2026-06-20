@@ -88,7 +88,7 @@ export function CustomDateField({
   id,
   value,
   onChange,
-  placeholder = 'Seleziona data',
+  placeholder = 'Select date',
   hasError = false,
   disabled = false,
 }: CustomDateFieldProps): React.ReactElement {

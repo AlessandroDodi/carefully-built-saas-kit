@@ -105,6 +105,44 @@ export default async function SelectOrganizationPage(): Promise<React.ReactEleme
 }
 ```
 
+## Styling Example
+
+All styling props are optional and default to the package style. Use `className` for simple root changes and `classes` for named internal slots.
+
+```tsx
+<AuthLayout
+  title="Welcome back"
+  subtitle="Sign in to continue"
+  logo={<Logo />}
+  classes={{
+    root: 'bg-background',
+    content: 'max-w-sm',
+    title: 'text-2xl',
+  }}
+  visual={{
+    backgroundSrc: '/auth-bg.png',
+    className: 'bg-muted',
+    foregroundClassName: 'shadow-xl',
+  }}
+>
+  <LoginEmailForm state={loginState} className="gap-4" buttonClassName="w-full" />
+</AuthLayout>
+```
+
+Organization selection exposes both page-level and selector-level slots:
+
+```tsx
+<OrganizationSelectionPage
+  organizations={organizations}
+  pageClasses={{ content: 'max-w-md' }}
+  classes={{
+    search: 'h-10',
+    item: 'hover:bg-muted/70',
+    logoFallback: 'bg-primary text-primary-foreground',
+  }}
+/>;
+```
+
 ## WorkOS Server Action Example
 
 ```ts

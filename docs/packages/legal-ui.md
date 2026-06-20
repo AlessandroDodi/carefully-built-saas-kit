@@ -42,6 +42,7 @@ Helpers in this package:
 
 ## Types And Schemas
 
+- `LegalDocumentClassNames`
 - `LegalDocumentProps`
 
 
@@ -54,6 +55,7 @@ Helpers in this package:
 | `privacyPolicyText` | Helper | `packages/legal-ui/src/legal-texts.ts` |
 | `termsAndConditionsText` | Helper | `packages/legal-ui/src/index.tsx` |
 | `termsAndConditionsText` | Helper | `packages/legal-ui/src/legal-texts.ts` |
+| `LegalDocumentClassNames` | Type | `packages/legal-ui/src/index.tsx` |
 | `LegalDocumentProps` | Type | `packages/legal-ui/src/index.tsx` |
 
 

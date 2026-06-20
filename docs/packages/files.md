@@ -27,9 +27,11 @@ import { DocumentCard } from '@carefully-built/files';
 Components in this package:
 
 - `DocumentCard`: import from `@carefully-built/files`.
+- `DocumentCardGrid`: import from `@carefully-built/files`.
 - `DocumentFormShell`: import from `@carefully-built/files`.
 - `DocumentSheetBase`: import from `@carefully-built/files`.
 - `FileCardSkeleton`: import from `@carefully-built/files`.
+- `FileUploadSheet`: import from `@carefully-built/files`.
 
 ## Helper Usage
 
@@ -52,6 +54,7 @@ Helpers in this package:
 - `normalizeOptionalString`
 - `shouldBackfillLegacyFile`
 - `buildDocumentAssociationSummary`
+- `DOCUMENT_CARD_GRID_CLASS`
 - `filterDocuments`
 - `formatFileSize`
 - `isPreviewable`
@@ -81,9 +84,11 @@ Helpers in this package:
 | Export | Kind | Source |
 |---|---|---|
 | `DocumentCard` | Component | `packages/files/src/document-card.tsx` |
+| `DocumentCardGrid` | Component | `packages/files/src/document-card-grid.tsx` |
 | `DocumentFormShell` | Component | `packages/files/src/document-form-shell.tsx` |
 | `DocumentSheetBase` | Component | `packages/files/src/document-sheet.tsx` |
 | `FileCardSkeleton` | Component | `packages/files/src/file-card-skeleton.tsx` |
+| `FileUploadSheet` | Component | `packages/files/src/file-upload-sheet.tsx` |
 | `buildDocumentListItems` | Convex helper | `packages/files/src/convex.ts` |
 | `buildPendingPublicUploadUrl` | Convex helper | `packages/files/src/convex.ts` |
 | `buildPublicUploadRequestResult` | Convex helper | `packages/files/src/convex.ts` |
@@ -97,6 +102,7 @@ Helpers in this package:
 | `normalizeOptionalString` | Convex helper | `packages/files/src/convex.ts` |
 | `shouldBackfillLegacyFile` | Convex helper | `packages/files/src/convex.ts` |
 | `buildDocumentAssociationSummary` | Helper | `packages/files/src/document-helpers.ts` |
+| `DOCUMENT_CARD_GRID_CLASS` | Helper | `packages/files/src/document-card-grid.tsx` |
 | `filterDocuments` | Helper | `packages/files/src/document-helpers.ts` |
 | `formatFileSize` | Helper | `packages/files/src/file-utils.ts` |
 | `isPreviewable` | Helper | `packages/files/src/file-utils.ts` |

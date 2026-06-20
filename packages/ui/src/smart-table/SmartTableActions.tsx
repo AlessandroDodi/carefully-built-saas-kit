@@ -24,8 +24,8 @@ const actionIcons: Record<ActionType, typeof Eye> = {
 
 const actionLabels: Record<ActionType, string> = {
   view: 'Visualizza',
-  edit: 'Modifica',
-  delete: 'Elimina',
+  edit: 'Edit',
+  delete: 'Delete',
 };
 
 export function SmartTableActions<T>({

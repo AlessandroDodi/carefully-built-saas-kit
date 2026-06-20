@@ -19,9 +19,16 @@ For local development in an app inside the same parent workspace, use the packed
 ```tsx
 import { AppNavigationShell } from '@carefully-built/app-shell';
 
-// Check the API catalog below for the component source and prop types.
-// Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
+<AppNavigationShell
+  currentPath={pathname}
+  logo={<Logo />}
+  darkLogo={<Logo variant="white" />}
+  logoHref="/dashboard"
+  navItems={navItems}
+/>;
 ```
+
+Use `darkLogo` for a dark-mode-specific product mark. When it is omitted, `logo` is used in every theme.
 
 Components in this package:
 

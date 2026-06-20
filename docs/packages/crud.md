@@ -26,6 +26,8 @@ import { CrudDataTable } from '@carefully-built/crud';
 Components in this package:
 
 - `CrudDataTable`: import from `@carefully-built/crud`.
+- `CrudListTable`: import from `@carefully-built/crud`.
+- `CrudResourceSheet`: import from `@carefully-built/crud`.
 - `CrudTableView`: import from `@carefully-built/crud`.
 
 ## Hook Usage
@@ -58,6 +60,8 @@ Helpers in this package:
 
 - `buildCrudSearchText`
 - `CrudDataTable`
+- `CrudListTable`
+- `CrudResourceSheet`
 - `CrudTableView`
 - `getValidPage`
 - `matchesCrudSearch`
@@ -68,7 +72,9 @@ Helpers in this package:
 - `CrudDataTableProps`
 - `CrudEmptyState`
 - `CrudFilterDefinition`
+- `CrudListTableProps`
 - `CrudPaginationState`
+- `CrudResourceSheetProps`
 - `CrudTableState`
 - `CrudTableViewProps`
 - `UrlPaginationState`
@@ -83,9 +89,13 @@ Helpers in this package:
 | Export | Kind | Source |
 |---|---|---|
 | `CrudDataTable` | Component | `packages/crud/src/crud-data-table.tsx` |
+| `CrudListTable` | Component | `packages/crud/src/crud-list-table.tsx` |
+| `CrudResourceSheet` | Component | `packages/crud/src/crud-resource-sheet.tsx` |
 | `CrudTableView` | Component | `packages/crud/src/crud-table-view.tsx` |
 | `buildCrudSearchText` | Helper | `packages/crud/src/search.ts` |
 | `CrudDataTable` | Helper | `packages/crud/src/index.ts` |
+| `CrudListTable` | Helper | `packages/crud/src/index.ts` |
+| `CrudResourceSheet` | Helper | `packages/crud/src/index.ts` |
 | `CrudTableView` | Helper | `packages/crud/src/index.ts` |
 | `getValidPage` | Helper | `packages/crud/src/pagination.ts` |
 | `matchesCrudSearch` | Helper | `packages/crud/src/search.ts` |
@@ -99,7 +109,9 @@ Helpers in this package:
 | `CrudDataTableProps` | Type | `packages/crud/src/types.ts` |
 | `CrudEmptyState` | Type | `packages/crud/src/types.ts` |
 | `CrudFilterDefinition` | Type | `packages/crud/src/types.ts` |
+| `CrudListTableProps` | Type | `packages/crud/src/crud-list-table.tsx` |
 | `CrudPaginationState` | Type | `packages/crud/src/pagination.ts` |
+| `CrudResourceSheetProps` | Type | `packages/crud/src/crud-resource-sheet.tsx` |
 | `CrudTableState` | Type | `packages/crud/src/types.ts` |
 | `CrudTableViewProps` | Type | `packages/crud/src/types.ts` |
 | `UrlPaginationState` | Type | `packages/crud/src/use-url-pagination.ts` |

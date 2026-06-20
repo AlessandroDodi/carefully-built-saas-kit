@@ -57,7 +57,7 @@ export function CustomMultiSelectDropdownField<TValues extends FieldValues>({
   label,
   labelIcon,
   options,
-  placeholder = 'Seleziona opzioni',
+  placeholder = 'Select options',
   disabled = false,
   className,
 }: CustomMultiSelectDropdownFieldProps<TValues>): React.ReactElement {

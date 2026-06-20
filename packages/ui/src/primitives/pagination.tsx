@@ -52,11 +52,11 @@ export function Pagination({
       {/* Items info */}
       <div className="text-xs text-muted-foreground">
         {totalItems === 0 ? (
-          'Nessun elemento'
+          'No items'
         ) : (
           <>
-            Mostra <span className="font-medium">{startIndex + 1}</span> -{' '}
-            <span className="font-medium">{endIndex}</span> di{' '}
+            Showing <span className="font-medium">{startIndex + 1}</span> -{' '}
+            <span className="font-medium">{endIndex}</span> of{' '}
             <span className="font-medium">{totalItems}</span>
           </>
         )}
@@ -66,7 +66,7 @@ export function Pagination({
         {/* Page size selector */}
         {pageSizeOptions && onPageSizeChange && (
           <div className="hidden items-center gap-1.5 sm:flex">
-            <span className="text-xs text-muted-foreground">Righe:</span>
+            <span className="text-xs text-muted-foreground">Rows:</span>
             <select
               value={String(pageSize)}
               onChange={(event) => {
@@ -85,7 +85,7 @@ export function Pagination({
 
         {/* Page info */}
         <div className="hidden text-xs text-muted-foreground sm:block">
-          Pagina {currentPage} di {totalPages}
+          Page {currentPage} of {totalPages}
         </div>
 
         {/* Navigation buttons */}
@@ -98,7 +98,7 @@ export function Pagination({
             disabled={!hasPrevPage}
           >
             <ChevronsLeft className="size-3.5" />
-            <span className="sr-only">Prima pagina</span>
+            <span className="sr-only">First page</span>
           </Button>
           <Button
             variant="outline"
@@ -108,7 +108,7 @@ export function Pagination({
             disabled={!hasPrevPage}
           >
             <ChevronLeft className="size-3.5" />
-            <span className="sr-only">Pagina precedente</span>
+            <span className="sr-only">Previous page</span>
           </Button>
 
           {/* Mobile page indicator */}
@@ -124,7 +124,7 @@ export function Pagination({
             disabled={!hasNextPage}
           >
             <ChevronRight className="size-3.5" />
-            <span className="sr-only">Pagina successiva</span>
+            <span className="sr-only">Next page</span>
           </Button>
           <Button
             variant="outline"
@@ -134,7 +134,7 @@ export function Pagination({
             disabled={!hasNextPage}
           >
             <ChevronsRight className="size-3.5" />
-            <span className="sr-only">Ultima pagina</span>
+            <span className="sr-only">Last page</span>
           </Button>
         </div>
       </div>

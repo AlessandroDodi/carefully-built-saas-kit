@@ -27,8 +27,8 @@ export function NotificationCenterButton<TNotification extends NotificationRecor
   ...sheetProps
 }: NotificationCenterButtonProps<TNotification>): React.ReactElement {
   const [open, setOpen] = useState(false);
-  const openLabel = localeConfig?.openNotificationsLabel ?? "Apri notifiche";
-  const tooltipLabel = localeConfig?.tooltipLabel ?? "Notifiche";
+  const openLabel = localeConfig?.openNotificationsLabel ?? "Open notifications";
+  const tooltipLabel = localeConfig?.tooltipLabel ?? "Notifications";
 
   return (
     <>

@@ -200,7 +200,7 @@ export function createWorkOSAuthActions<TUser = WorkOSAuthenticatedUser>(
         error: getUserFacingErrorMessage(
           config,
           error,
-          config.messages?.signUpFailed ?? "Impossibile creare l'account",
+          config.messages?.signUpFailed ?? "Unable to create the account",
         ),
       };
     }
@@ -228,7 +228,7 @@ export function createWorkOSAuthActions<TUser = WorkOSAuthenticatedUser>(
         error: getUserFacingErrorMessage(
           config,
           error,
-          config.messages?.signInFailed ?? "Email o password non validi",
+          config.messages?.signInFailed ?? "Invalid email or password",
         ),
       };
     }
@@ -251,7 +251,7 @@ export function createWorkOSAuthActions<TUser = WorkOSAuthenticatedUser>(
           config,
           error,
           config.messages?.resetEmailFailed ??
-            "Impossibile inviare l'email di reset",
+            "Unable to send the reset email",
         ),
       };
     }
@@ -276,7 +276,7 @@ export function createWorkOSAuthActions<TUser = WorkOSAuthenticatedUser>(
           config,
           error,
           config.messages?.resetPasswordFailed ??
-            "Impossibile reimpostare la password",
+            "Unable to reset the password",
         ),
       };
     }

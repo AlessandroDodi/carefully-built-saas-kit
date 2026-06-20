@@ -41,15 +41,15 @@ export function NotesGrid<TNote extends NoteListItem>({
       <div className="w-full">
         {emptyState === "no-results" ? (
           <NoResultsState
-            title="Nessuna nota trovata"
-            subtitle="La ricerca non ha portato risultati."
+            title="No notes found"
+            subtitle="Try changing your search or filters."
           />
         ) : (
           <EmptyStateCard
             icon={<FileText className="size-7" />}
-            title="Nessuna nota trovata"
-            subtitle="Aggiungi una nota per iniziare a raccogliere informazioni utili."
-            actionLabel="Aggiungi nota"
+            title="No notes yet"
+            subtitle="Add a note to start collecting useful context."
+            actionLabel="Add note"
             actionIcon={<Plus className="size-4" />}
             onAction={onCreate}
           />

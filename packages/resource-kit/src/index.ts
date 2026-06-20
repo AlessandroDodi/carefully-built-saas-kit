@@ -14,6 +14,10 @@ export type {
   EntityAssociatedTabPanelProps,
 } from './entity-associated-tab-panel';
 export {
+  EntityAssociatedEmptyTab,
+  type EntityAssociatedEmptyTabProps,
+} from './entity-associated-empty-tab';
+export {
   ENTITY_DETAIL_TABS,
   buildEntityAssociationOptions,
   buildEntityAssociationValue,

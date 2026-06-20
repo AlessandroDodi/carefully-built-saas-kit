@@ -22,6 +22,17 @@ export interface SaasErrorPageProps {
   readonly metadata?: Record<string, unknown>;
   readonly content?: Partial<ErrorPageContent>;
   readonly className?: string;
+  readonly classes?: SaasErrorPageClassNames;
+}
+
+export interface SaasErrorPageClassNames {
+  readonly root?: string;
+  readonly content?: string;
+  readonly code?: string;
+  readonly text?: string;
+  readonly title?: string;
+  readonly description?: string;
+  readonly actions?: string;
 }
 
 function resolveContent(
@@ -47,6 +58,7 @@ export function SaasErrorPage({
   metadata,
   content,
   className,
+  classes,
 }: SaasErrorPageProps): React.ReactElement {
   const resolvedContent = useMemo(() => resolveContent(error, content), [content, error]);
   const [reference] = useState(() => (error ? createErrorReference(error) : null));
@@ -70,15 +82,23 @@ export function SaasErrorPage({
       className={cn(
         "bg-background text-foreground flex min-h-screen flex-col items-center justify-center gap-4 px-6 text-center",
         className,
+        classes?.root,
       )}
     >
-      <div className="space-y-3">
-        <p className="text-8xl font-semibold leading-none text-muted-foreground/25 sm:text-9xl">
+      <div className={cn("space-y-3", classes?.content)}>
+        <p
+          className={cn(
+            "text-8xl font-semibold leading-none text-muted-foreground/25 sm:text-9xl",
+            classes?.code,
+          )}
+        >
           {resolvedContent.code}
         </p>
-        <div className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">{resolvedContent.title}</h1>
-          <p className="mx-auto max-w-md text-sm text-muted-foreground">
+        <div className={cn("space-y-2", classes?.text)}>
+          <h1 className={cn("text-2xl font-semibold tracking-tight", classes?.title)}>
+            {resolvedContent.title}
+          </h1>
+          <p className={cn("mx-auto max-w-md text-sm text-muted-foreground", classes?.description)}>
             {resolvedContent.description}
           </p>
         </div>
@@ -86,7 +106,7 @@ export function SaasErrorPage({
 
       <ErrorCode code={resolvedContent.code} reference={reference} />
 
-      <div className="mt-2 flex flex-wrap justify-center gap-3">
+      <div className={cn("mt-2 flex flex-wrap justify-center gap-3", classes?.actions)}>
         {reset ? (
           <Button type="button" variant="outline" onClick={reset}>
             {retryLabel}
@@ -116,9 +136,9 @@ export function SaasNotFoundPage({
       {...props}
       content={{
         code: "404",
-        title: title ?? "Pagina non trovata",
+        title: title ?? "Page not found",
         description:
-          description ?? "La pagina che stai cercando non esiste oppure e stata spostata.",
+          description ?? "The page you are looking for does not exist or has been moved.",
         shouldCapture: false,
       }}
     />

@@ -12,8 +12,8 @@ export interface NoResultsStateProps {
 
 export function NoResultsState({
   icon = <SearchX className="size-7" />,
-  title = "Nessun risultato",
-  subtitle = "La ricerca non ha portato risultati.",
+  title = "No results",
+  subtitle = "Try changing your search or filters.",
   className,
 }: NoResultsStateProps): React.ReactElement {
   return <EmptyStateCard icon={icon} title={title} subtitle={subtitle} className={className} />;

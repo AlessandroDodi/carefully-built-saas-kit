@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "kanban", "pipeline", "saas"],
+  "keywords": [
+    "react",
+    "kanban",
+    "pipeline",
+    "saas"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -56,9 +64,9 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/notes": "file:../notes/carefully-built-notes-0.1.0.tgz",
-    "@carefully-built/rich-text": "file:../rich-text/carefully-built-rich-text-0.1.0.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/notes": "workspace:*",
+    "@carefully-built/rich-text": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "lucide-react": "^0.475.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

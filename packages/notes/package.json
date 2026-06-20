@@ -14,12 +14,21 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["react", "notes", "saas", "markdown", "rich-text"],
+  "keywords": [
+    "react",
+    "notes",
+    "saas",
+    "markdown",
+    "rich-text"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -66,11 +75,11 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/crud": "file:../crud/carefully-built-crud-0.1.2.tgz",
-    "@carefully-built/resource-kit": "file:../resource-kit/carefully-built-resource-kit-0.1.2.tgz",
-    "@carefully-built/rich-text": "file:../rich-text/carefully-built-rich-text-0.1.0.tgz",
-    "@carefully-built/search": "file:../search/carefully-built-search-0.1.1.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/crud": "workspace:*",
+    "@carefully-built/resource-kit": "workspace:*",
+    "@carefully-built/rich-text": "workspace:*",
+    "@carefully-built/search": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "lucide-react": "^0.475.0",
     "nuqs": "^2.8.8",
     "react": "^19.2.3",

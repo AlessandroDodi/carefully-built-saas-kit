@@ -29,7 +29,7 @@ export function CustomSelectField<TValues extends FieldValues>({
   name,
   label,
   labelIcon,
-  placeholder = 'Seleziona...',
+  placeholder = 'Select...',
   options,
   disabled = false,
   className,

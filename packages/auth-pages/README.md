@@ -26,6 +26,34 @@ The root export is server-safe for Next.js App Router. Use `/forms`, `/controlle
 
 The consuming app should eventually mount auth with one import and one config object, keeping app-side auth code under 200 LOC.
 
+## Styling And Theming
+
+Auth components ship with default Tailwind/shadcn-compatible classes. Consuming apps can keep page files clean by defining product-specific classes in an app config file and passing them through optional `className` and `classes` props.
+
+```tsx
+import { AuthLoginPage } from '@carefully-built/auth-pages/pages';
+
+<AuthLoginPage
+  logo={<Logo />}
+  providers={providers}
+  legal={{
+    termsHref: '/terms',
+    privacyHref: '/privacy',
+    className: 'text-center',
+    linkClassName: 'underline-offset-4',
+  }}
+  classes={{
+    content: 'max-w-sm',
+    title: 'text-2xl',
+    subtitle: 'text-sm',
+  }}
+/>;
+```
+
+`AuthLayout`, lazy auth pages, legal consent, bottom nav, social buttons, email/password forms, and organization selection all keep the same default style when these props are omitted.
+
+Use `OrganizationSelectionPage` from `@carefully-built/auth-pages/organizations` for multi-organization auth instead of rebuilding the card list in each app.
+
 ## Component Docs
 
 - [Auth Pages](./docs/auth-pages.md)

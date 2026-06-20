@@ -50,7 +50,7 @@ function isRawServerErrorMessage(message: string): boolean {
 
 export function getUserFacingErrorMessage(
   error: unknown,
-  fallback = 'Si è verificato un problema. Riprova tra poco.',
+  fallback = 'A problem occurred. Please try again shortly.',
 ): string {
   const convexMessage = getConvexErrorMessage(error);
   if (convexMessage) {

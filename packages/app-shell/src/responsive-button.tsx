@@ -37,7 +37,7 @@ export interface ResponsiveButtonState {
 }
 
 function isGenericAddAction(label: ReactNode): label is string {
-  return typeof label === 'string' && label.trim().toLocaleLowerCase().startsWith('aggiungi');
+  return typeof label === 'string' && label.trim().toLocaleLowerCase().startsWith('add');
 }
 
 export function resolveResponsiveButtonState({
@@ -51,7 +51,7 @@ export function resolveResponsiveButtonState({
 }: ResolveResponsiveButtonStateArgs): ResponsiveButtonState {
   const isAddAction = isGenericAddAction(desktopLabel);
   const resolvedMobileLabel =
-    isMobile && mobileLabel === undefined && isAddAction ? 'Aggiungi' : mobileLabel;
+    isMobile && mobileLabel === undefined && isAddAction ? 'Add' : mobileLabel;
   const visibleLabel = isMobile ? resolvedMobileLabel : desktopLabel;
   const isIconOnlyMobile = isMobile && (visibleLabel === null || visibleLabel === undefined);
 

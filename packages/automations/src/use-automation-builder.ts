@@ -117,15 +117,15 @@ function getTriggerEntityType(trigger: AutomationTriggerDraft | null): string {
 function getDefaultStepName(type: AutomationStepType): string {
   switch (type) {
     case 'send_whatsapp':
-      return 'Manda messaggio WhatsApp';
+      return 'Send WhatsApp message';
     case 'send_email':
-      return 'Manda email';
+      return 'Send email';
     case 'add_tag':
-      return 'Aggiungi tag';
+      return 'Add tag';
     case 'update_field':
-      return 'Modifica campo';
+      return 'Edit field';
     case 'delay':
-      return 'Attendi';
+      return 'Wait';
     case 'filter':
       return 'Filtro';
     case 'path':

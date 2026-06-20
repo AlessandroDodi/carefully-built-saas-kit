@@ -151,16 +151,16 @@ function getStepConfigError(step: AutomationStepInput): string | null {
 
   if (step.type === 'update_field' && step.config.type === 'update_field') {
     if (!step.config.field.trim()) {
-      return 'Scegli il campo da modificare.';
+      return 'Choose the field to edit.';
     }
 
     if (!step.config.value.trim()) {
-      return 'Inserisci il nuovo valore del campo.';
+      return 'Enter the new field value.';
     }
   }
 
   if (step.type === 'delay' && step.config.type === 'delay' && step.config.amount <= 0) {
-    return 'Imposta una durata valida per il ritardo.';
+    return 'Set a valid delay duration.';
   }
 
   if (
@@ -168,7 +168,7 @@ function getStepConfigError(step: AutomationStepInput): string | null {
     && step.config.type === 'filter'
     && step.config.filterGroups.every((group) => group.conditions.length === 0)
   ) {
-    return 'Aggiungi almeno una condizione al filtro.';
+    return 'Add at least one condition to the filter.';
   }
 
   if (step.type === 'path' && step.config.type === 'path') {

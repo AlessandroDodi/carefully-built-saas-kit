@@ -1,14 +1,18 @@
 'use client';
 
 import {
+  BarChart3,
   Building2,
   ExternalLink,
   LayoutDashboard,
   LogIn,
   PanelsTopLeft,
+  Sparkles,
+  Trash2,
   UserPlus,
   UserRoundPlus,
   UsersRound,
+  Workflow,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useActionState, useEffect, useState } from 'react';
@@ -36,12 +40,35 @@ import {
 } from '@carefully-built/ui';
 import {
   AppNavigationShell,
+  DashboardPageLayout,
   SidebarInset,
   SidebarProvider,
   type NavigationItem,
 } from '@carefully-built/app-shell';
 
-import type { SuperAdminFeatureFlag, SuperAdminRole } from './types';
+import {
+  SuperAdminApplicationsList,
+  SuperAdminApplicationsTable,
+  SuperAdminCompaniesList,
+  SuperAdminUsersList,
+  SuperAdminUsersTable,
+} from './lists';
+import {
+  buildWeeklyUserRegistrations,
+  getApplicationById,
+} from './data-adapter';
+import {
+  DataWarning,
+  MetricCard,
+  OrganizationLogoMark,
+  PlanBadge,
+} from './ui';
+import { formatShortDate } from './types';
+import type {
+  SuperAdminData,
+  SuperAdminFeatureFlag,
+  SuperAdminRole,
+} from './types';
 
 export interface SuperAdminActionState {
   readonly error?: string;
@@ -55,6 +82,30 @@ export type SuperAdminStateAction = (
 
 export type SuperAdminFormAction = (formData: FormData) => Promise<void>;
 
+type UserGrowthDatum = ReturnType<typeof buildWeeklyUserRegistrations>[number];
+
+interface SuperAdminSessionUser {
+  readonly id: string;
+  readonly email: string;
+  readonly firstName?: string | null;
+  readonly lastName?: string | null;
+  readonly profilePictureUrl?: string | null;
+}
+
+export interface SuperAdminExtraNavItem {
+  readonly activeMatch?: 'exact' | 'prefix';
+  readonly href: string;
+  readonly key: string;
+  readonly label: string;
+}
+
+export interface SuperAdminClientActions {
+  readonly addSelfToApplication: SuperAdminStateAction;
+  readonly deleteOrganization: SuperAdminStateAction;
+  readonly enterApplication: SuperAdminFormAction;
+  readonly inviteApplicationUser: SuperAdminStateAction;
+}
+
 const defaultNavItems: readonly NavigationItem[] = [
   {
     key: 'dashboard',
@@ -64,21 +115,21 @@ const defaultNavItems: readonly NavigationItem[] = [
   },
   {
     key: 'applications',
-    label: 'Applicazioni',
+    label: 'Applications',
     href: '/super-admin/applications',
     icon: PanelsTopLeft,
     activeMatch: 'prefix',
   },
   {
     key: 'companies',
-    label: 'Aziende',
+    label: 'Companies',
     href: '/super-admin/companies',
     icon: Building2,
     activeMatch: 'prefix',
   },
   {
     key: 'users',
-    label: 'Utenti',
+    label: 'Users',
     href: '/super-admin/users',
     icon: UsersRound,
     activeMatch: 'prefix',
@@ -151,10 +202,16 @@ export function SuperAdminRouteShell({
   readonly basePath: string;
   readonly children: React.ReactNode;
   readonly currentPath: string;
-  readonly extraNavItems?: readonly NavigationItem[];
+  readonly extraNavItems?: readonly SuperAdminExtraNavItem[];
   readonly userName: string;
 }): React.ReactElement {
-  const navItems = [...defaultNavItems.map((item) => withBasePath(item, basePath)), ...extraNavItems];
+  const navItems = [
+    ...defaultNavItems.map((item) => withBasePath(item, basePath)),
+    ...extraNavItems.map((item) => ({
+      ...item,
+      icon: Sparkles,
+    })),
+  ];
   const bottomNavItems = defaultBottomNavItems.map((item) => withBasePath(item, basePath));
 
   return (
@@ -185,6 +242,353 @@ export function SuperAdminRouteShell({
         </div>
       </SidebarProvider>
     </TooltipProvider>
+  );
+}
+
+function UserGrowthBars({
+  data,
+}: {
+  readonly data: readonly UserGrowthDatum[];
+}): React.ReactElement {
+  const maxValue = Math.max(...data.map((item) => item.value), 0);
+
+  if (maxValue === 0) {
+    return (
+      <div className="mt-6 flex h-56 items-center justify-center rounded-lg border border-dashed border-[#d1d5dc] text-sm text-[#6a7282]">
+        No registrations in the last 8 weeks.
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-6 flex h-64 items-end gap-2">
+      {data.map((item) => (
+        <div key={item.rangeLabel} className="flex min-w-0 flex-1 flex-col items-center gap-2">
+          <div
+            className="w-full rounded-t-md bg-gradient-to-t from-[#7c3aed] to-[#ec4899]"
+            style={{ height: `${Math.max((item.value / maxValue) * 100, 6)}%` }}
+            title={`${item.rangeLabel}: ${String(item.value)}`}
+          />
+          <div className="text-muted-foreground max-w-full truncate text-[11px]">{item.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DashboardPage({
+  basePath,
+  data,
+}: {
+  readonly basePath: string;
+  readonly data: SuperAdminData;
+}): React.ReactElement {
+  const enterpriseClients = data.applications.filter(
+    (application) => application.plan === 'enterprise',
+  ).length;
+  const freeTrials = data.applications.filter((application) => application.status === 'prova').length;
+  const weeklyRegistrations = buildWeeklyUserRegistrations(data.users);
+
+  return (
+    <DashboardPageLayout title="Dashboard" fillViewport={false} className="space-y-4">
+      <DataWarning message={data.error} />
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <MetricCard icon={Workflow} label="Total applications" value={data.applications.length} />
+        <MetricCard icon={UsersRound} label="Total users" value={data.users.length} />
+        <MetricCard icon={Building2} label="Enterprise clients" value={enterpriseClients} />
+        <MetricCard icon={Sparkles} label="Active trials" value={freeTrials} />
+      </div>
+
+      <section className="rounded-[14px] border border-[#e5e7eb] bg-white p-4">
+        <div>
+          <div className="text-sm font-medium text-[#101828]">User growth</div>
+          <div className="mt-1 text-xs text-[#6a7282]">
+            New registrations by weekly interval
+          </div>
+        </div>
+        <UserGrowthBars data={weeklyRegistrations} />
+      </section>
+
+      <section className="space-y-3 rounded-[14px] border border-[#e5e7eb] bg-white p-4">
+        <div>
+          <div className="text-sm font-medium text-[#101828]">Recent applications</div>
+          <div className="mt-1 text-xs text-[#6a7282]">
+            Manage all client applications and their configurations
+          </div>
+        </div>
+        {data.applications.length ? (
+          <SuperAdminApplicationsTable
+            applications={data.applications.slice(0, 6)}
+            basePath={basePath}
+          />
+        ) : (
+          <div className="flex min-h-40 flex-col items-center justify-center gap-2 text-sm text-[#6a7282]">
+            <BarChart3 className="size-5" />
+            No applications found
+          </div>
+        )}
+      </section>
+    </DashboardPageLayout>
+  );
+}
+
+function ApplicationsPage({
+  basePath,
+  data,
+}: {
+  readonly basePath: string;
+  readonly data: SuperAdminData;
+}): React.ReactElement {
+  return (
+    <DashboardPageLayout title="Applications">
+      <DataWarning message={data.error} />
+      <SuperAdminApplicationsList applications={data.applications} basePath={basePath} />
+    </DashboardPageLayout>
+  );
+}
+
+function CompaniesPage({ data }: { readonly data: SuperAdminData }): React.ReactElement {
+  return (
+    <DashboardPageLayout title="Companies">
+      <DataWarning message={data.error} />
+      <SuperAdminCompaniesList applications={data.applications} />
+    </DashboardPageLayout>
+  );
+}
+
+function UsersPage({
+  basePath,
+  data,
+}: {
+  readonly basePath: string;
+  readonly data: SuperAdminData;
+}): React.ReactElement {
+  return (
+    <DashboardPageLayout title="Users">
+      <DataWarning message={data.error} />
+      <SuperAdminUsersList users={data.users} basePath={basePath} />
+    </DashboardPageLayout>
+  );
+}
+
+function ApplicationDetailPage({
+  actions,
+  admin,
+  applicationId,
+  basePath,
+  data,
+}: {
+  readonly actions: SuperAdminClientActions;
+  readonly admin: SuperAdminSessionUser;
+  readonly applicationId: string;
+  readonly basePath: string;
+  readonly data: SuperAdminData;
+}): React.ReactElement {
+  const application = getApplicationById(data, applicationId);
+
+  if (!application) {
+    return (
+      <DashboardPageLayout title="Application">
+        <DataWarning message={data.error ?? 'Application not found.'} />
+      </DashboardPageLayout>
+    );
+  }
+
+  const canEnterApplication = application.users.some((user) => user.id === admin.id);
+
+  return (
+    <DashboardPageLayout
+      fillViewport={false}
+      title={application.name}
+      backHref={`${basePath}/applications`}
+      actions={<PlanBadge plan={application.plan} />}
+      className="space-y-6"
+    >
+      <DataWarning message={data.error} />
+
+      <section className="space-y-3">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex min-w-0 items-start gap-3">
+            <OrganizationLogoMark
+              logoUrl={application.logoUrl}
+              name={application.companyName}
+              size="lg"
+            />
+            <div className="min-w-0">
+              <h2 className="truncate text-xl font-semibold tracking-normal text-[#101828]">
+                {application.name}
+              </h2>
+              <p className="mt-1 truncate text-sm text-[#6a7282]">{application.companyName}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="grid gap-3 md:grid-cols-3">
+        <MetricCard
+          label="Application ID"
+          value={`#${application.id.slice(-6)}`}
+          description="Unique identifier"
+        />
+        <MetricCard
+          label="Total users"
+          value={application.userCount}
+          description={`${String(application.adminCount)} admin`}
+        />
+        <MetricCard
+          label="Created"
+          value={formatShortDate(application.createdAt)}
+          description="Creation date"
+        />
+      </div>
+
+      <section className="space-y-4 rounded-[14px] border border-[#e5e7eb] bg-white p-4">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="text-sm font-medium text-[#101828]">Users</div>
+            <div className="mt-1 text-xs text-[#6a7282]">
+              Active users for this application
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <ApplicationAccessActions
+              addSelfAction={actions.addSelfToApplication}
+              canEnter={canEnterApplication}
+              enterAction={actions.enterApplication}
+              organizationId={application.id}
+            />
+            <InviteUserDialog
+              inviteAction={actions.inviteApplicationUser}
+              organizationId={application.id}
+              roles={application.roles}
+            />
+          </div>
+        </div>
+
+        <SuperAdminUsersTable users={application.users} />
+      </section>
+
+      <section className="space-y-4 rounded-[14px] border border-[#e5e7eb] bg-white p-4">
+        <div>
+          <div className="text-sm font-medium text-[#101828]">Feature flags</div>
+          <div className="mt-1 flex items-center gap-2 text-xs text-[#6a7282]">
+            Feature flags configured for this application
+          </div>
+        </div>
+        <FeatureFlagList featureFlags={application.featureFlags} />
+      </section>
+
+      <section className="space-y-4 rounded-[14px] border border-red-200 bg-red-50/50 p-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="text-sm font-medium text-red-950">Danger zone</div>
+            <div className="mt-1 text-xs text-red-700">
+              Delete this organization after confirming its exact name.
+            </div>
+          </div>
+          <DeleteOrganizationDialog
+            deleteAction={actions.deleteOrganization}
+            organizationId={application.id}
+            organizationName={application.companyName}
+          />
+        </div>
+      </section>
+    </DashboardPageLayout>
+  );
+}
+
+function renderSuperAdminContent({
+  actions,
+  admin,
+  basePath,
+  data,
+  extensionContent,
+  segments,
+}: {
+  readonly actions: SuperAdminClientActions;
+  readonly admin: SuperAdminSessionUser;
+  readonly basePath: string;
+  readonly data: SuperAdminData;
+  readonly extensionContent?: React.ReactNode;
+  readonly segments: readonly string[];
+}): React.ReactNode {
+  if (extensionContent) {
+    return extensionContent;
+  }
+
+  if (segments[0] === 'dashboard') {
+    return <DashboardPage data={data} basePath={basePath} />;
+  }
+
+  if (segments[0] === 'applications' && segments[1]) {
+    return (
+      <ApplicationDetailPage
+        actions={actions}
+        admin={admin}
+        applicationId={segments[1]}
+        basePath={basePath}
+        data={data}
+      />
+    );
+  }
+
+  if (segments[0] === 'applications') {
+    return <ApplicationsPage data={data} basePath={basePath} />;
+  }
+
+  if (segments[0] === 'companies') {
+    return <CompaniesPage data={data} />;
+  }
+
+  return <UsersPage data={data} basePath={basePath} />;
+}
+
+export function SuperAdminClientPage({
+  actions,
+  admin,
+  basePath,
+  currentPath,
+  data,
+  extensionContent,
+  extraNavItems,
+  renderShell = true,
+  segments,
+  userName,
+}: {
+  readonly actions: SuperAdminClientActions;
+  readonly admin: SuperAdminSessionUser;
+  readonly basePath: string;
+  readonly currentPath: string;
+  readonly data: SuperAdminData;
+  readonly extensionContent?: React.ReactNode;
+  readonly extraNavItems?: readonly SuperAdminExtraNavItem[];
+  readonly renderShell?: boolean;
+  readonly segments: readonly string[];
+  readonly userName: string;
+}): React.ReactElement {
+  const content = renderSuperAdminContent({
+    actions,
+    admin,
+    basePath,
+    data,
+    extensionContent,
+    segments,
+  });
+
+  if (!renderShell) {
+    return <>{content}</>;
+  }
+
+  return (
+    <SuperAdminRouteShell
+      basePath={basePath}
+      currentPath={currentPath}
+      extraNavItems={extraNavItems}
+      userName={userName}
+    >
+      {content}
+    </SuperAdminRouteShell>
   );
 }
 
@@ -221,7 +625,7 @@ export function ApplicationAccessActions({
         <input type="hidden" name="organizationId" value={organizationId} />
         <Button size="sm" type="submit" variant="secondary">
           <LogIn className="size-4" />
-          Entra
+          Enter
         </Button>
       </form>
     );
@@ -232,7 +636,7 @@ export function ApplicationAccessActions({
       <input type="hidden" name="organizationId" value={organizationId} />
       <Button size="sm" type="submit" variant="secondary" disabled={isPending}>
         <UserRoundPlus className="size-4" />
-        {isPending ? 'Aggiungo...' : 'Aggiungimi'}
+        {isPending ? 'Adding...' : 'Add me'}
       </Button>
     </form>
   );
@@ -266,14 +670,14 @@ export function InviteUserDialog({
       <DialogTrigger asChild>
         <Button size="sm">
           <UserPlus className="size-4" />
-          Invita utente
+          Invite user
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Invita utente</DialogTitle>
+          <DialogTitle>Invite user</DialogTitle>
           <DialogDescription>
-            Invia un invito WorkOS per aggiungere un utente a questa applicazione.
+            Send an invitation to add a user to this application.
           </DialogDescription>
         </DialogHeader>
 
@@ -286,17 +690,17 @@ export function InviteUserDialog({
               id="invite-email"
               name="email"
               type="email"
-              placeholder="nome@azienda.com"
+              placeholder="name@company.com"
               required
             />
           </div>
 
           {roles.length ? (
             <div className="space-y-2">
-              <Label htmlFor="invite-role">Ruolo</Label>
+              <Label htmlFor="invite-role">Role</Label>
               <Select name="roleSlug" defaultValue={roles[0]?.slug}>
                 <SelectTrigger id="invite-role" className="w-full">
-                  <SelectValue placeholder="Seleziona ruolo" />
+                  <SelectValue placeholder="Select role" />
                 </SelectTrigger>
                 <SelectContent>
                   {roles.map((role) => (
@@ -311,7 +715,75 @@ export function InviteUserDialog({
 
           <DialogFooter>
             <Button type="submit" disabled={isPending}>
-              {isPending ? 'Invio...' : 'Invia invito'}
+              {isPending ? 'Sending...' : 'Send invitation'}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+export function DeleteOrganizationDialog({
+  deleteAction,
+  organizationId,
+  organizationName,
+}: {
+  readonly deleteAction: SuperAdminStateAction;
+  readonly organizationId: string;
+  readonly organizationName: string;
+}): React.ReactElement {
+  const [open, setOpen] = useState(false);
+  const [confirmationName, setConfirmationName] = useState('');
+  const [state, formAction, isPending] = useActionState(deleteAction, initialState);
+  const canDelete = confirmationName.trim() === organizationName;
+
+  useEffect(() => {
+    if (state.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="destructive" size="sm">
+          <Trash2 className="size-4" />
+          Delete organization
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Delete organization</DialogTitle>
+          <DialogDescription>
+            This permanently removes {organizationName}. Type the organization name to confirm.
+          </DialogDescription>
+        </DialogHeader>
+        <form action={formAction} className="space-y-4">
+          <input type="hidden" name="organizationId" value={organizationId} />
+          <div className="space-y-2">
+            <Label htmlFor="delete-confirmation-name">Organization name</Label>
+            <Input
+              id="delete-confirmation-name"
+              name="confirmationName"
+              value={confirmationName}
+              onChange={(event) => setConfirmationName(event.target.value)}
+              placeholder={organizationName}
+              autoComplete="off"
+            />
+          </div>
+          <DialogFooter>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setOpen(false)}
+              disabled={isPending}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" variant="destructive" disabled={!canDelete || isPending}>
+              <Trash2 className="size-4" />
+              {isPending ? 'Deleting...' : 'Delete organization'}
             </Button>
           </DialogFooter>
         </form>
@@ -328,7 +800,7 @@ export function FeatureFlagList({
   if (!featureFlags.length) {
     return (
       <div className="rounded-lg border border-dashed border-[#d1d5dc] px-3 py-8 text-center text-sm text-[#6a7282]">
-        Nessuna feature flag configurata in WorkOS per questa applicazione.
+        No feature flags configured for this application.
       </div>
     );
   }

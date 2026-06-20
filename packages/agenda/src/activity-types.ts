@@ -20,13 +20,13 @@ export interface AvailableActivityType {
 }
 
 export const DEFAULT_ACTIVITY_TYPES = [
-  { label: 'Appuntamento', color: '#0EA5E9' },
-  { label: 'Telefonata', color: '#06B6D4' },
-  { label: 'Sopralluogo', color: '#EA580C' },
-  { label: 'Riunione', color: '#713DFF' },
+  { label: 'Meeting', color: '#0EA5E9' },
+  { label: 'Call', color: '#06B6D4' },
+  { label: 'Visit', color: '#EA580C' },
+  { label: 'Review', color: '#713DFF' },
 ] as const;
 
-const MISSING_ACTIVITY_TYPE_LABEL = 'Tipologia non disponibile';
+const MISSING_ACTIVITY_TYPE_LABEL = 'Activity type unavailable';
 
 function normalizeNamedColor(color: string | undefined): string {
   const value = color?.trim();
@@ -95,13 +95,13 @@ function addActivityDerivedTypes(
 
 function buildFallbackTypes(activityTypes: readonly AvailableActivityType[]): AvailableActivityType[] {
   const labels = new Set(
-    activityTypes.map((activityType) => activityType.label.trim().toLocaleLowerCase())
+    activityTypes.map((activityType) => activityType.label.trim().toLocaleLowerCase('en-US'))
   );
 
   return DEFAULT_ACTIVITY_TYPES
-    .filter((activityType) => !labels.has(activityType.label.trim().toLocaleLowerCase()))
+    .filter((activityType) => !labels.has(activityType.label.trim().toLocaleLowerCase('en-US')))
     .map((activityType) => ({
-      _id: `default:${activityType.label.trim().toLocaleLowerCase()}`,
+      _id: `default:${activityType.label.trim().toLocaleLowerCase('en-US')}`,
       label: activityType.label,
       color: normalizeNamedColor(activityType.color),
       isFallback: true,

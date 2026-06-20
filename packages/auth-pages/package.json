@@ -103,8 +103,8 @@
     }
   },
   "devDependencies": {
-    "@carefully-built/forms": "file:../forms/carefully-built-forms-0.1.0.tgz",
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.4.tgz",
+    "@carefully-built/forms": "workspace:*",
+    "@carefully-built/ui": "workspace:*",
     "@hookform/resolvers": "^5.2.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

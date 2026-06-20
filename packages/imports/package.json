@@ -9,7 +9,10 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -35,10 +38,12 @@
     "zod": "^3.0.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
-    "@carefully-built/ui": { "optional": true }
+    "@carefully-built/ui": {
+      "optional": true
+    }
   },
   "devDependencies": {
-    "@carefully-built/ui": "file:../ui/carefully-built-ui-0.1.14.tgz",
+    "@carefully-built/ui": "workspace:*",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",

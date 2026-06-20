@@ -72,7 +72,7 @@ export function buildContactImportPreview({
         rowNumber: row.rowNumber,
         normalized: row.normalized,
         action: 'reject',
-        reason: 'Match ambiguo: email e telefono puntano a contatti diversi',
+        reason: 'Ambiguous match: email and phone point to different contacts',
       };
     }
 
@@ -83,8 +83,8 @@ export function buildContactImportPreview({
         normalized: row.normalized,
         action: overwriteExisting ? 'update' : 'skip',
         reason: overwriteExisting
-          ? 'Contatto esistente aggiornabile via email o telefono'
-          : 'Contatto esistente trovato via email o telefono',
+          ? 'Existing contact can be updated by email or phone'
+          : 'Existing contact found by email or phone',
         matchedContactId,
       };
     }

@@ -5,7 +5,7 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomInputField, CustomPasswordField } from "@carefully-built/forms";
-import { Button } from "@carefully-built/ui";
+import { Button, cn } from "@carefully-built/ui";
 
 import type { AuthFormState } from "../types";
 
@@ -15,6 +15,10 @@ interface LoginEmailFormProps<
   TValues extends FieldValues,
 > extends AuthFormState<TValues> {
   readonly forgotPasswordHref?: string;
+  readonly className?: string;
+  readonly forgotPasswordClassName?: string;
+  readonly errorClassName?: string;
+  readonly buttonClassName?: string;
 }
 
 export function LoginEmailForm<TValues extends FieldValues>({
@@ -23,11 +27,15 @@ export function LoginEmailForm<TValues extends FieldValues>({
   loading = false,
   error,
   forgotPasswordHref = "/forgot-password",
+  className,
+  forgotPasswordClassName,
+  errorClassName,
+  buttonClassName,
 }: LoginEmailFormProps<TValues>): React.ReactElement {
   return (
     <FormProvider {...form}>
       <form
-        className="space-y-3"
+        className={cn("space-y-3", className)}
         onSubmit={(event) => {
           void form.handleSubmit(onSubmit)(event);
         }}
@@ -49,7 +57,10 @@ export function LoginEmailForm<TValues extends FieldValues>({
           />
           <div className="flex justify-end">
             <a
-              className="text-sm underline-offset-4 hover:underline"
+              className={cn(
+                "text-sm underline-offset-4 hover:underline",
+                forgotPasswordClassName,
+              )}
               href={forgotPasswordHref}
             >
               Hai dimenticato la password?
@@ -57,9 +68,9 @@ export function LoginEmailForm<TValues extends FieldValues>({
           </div>
         </div>
 
-        <AuthError error={error} />
+        <AuthError error={error} className={errorClassName} />
 
-        <Button className="w-full" disabled={loading} type="submit">
+        <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
           {loading ? "Accesso in corso..." : "Accedi"}
         </Button>
       </form>

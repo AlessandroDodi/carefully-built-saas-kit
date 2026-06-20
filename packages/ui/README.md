@@ -20,6 +20,35 @@ import { SmartTable, useTableSorting, type Column } from '@carefully-built/ui';
 
 This package assumes your app provides Tailwind-compatible design tokens such as `bg-card`, `text-muted-foreground`, `border`, and `ring`.
 
+## Styling And Theming
+
+Components keep their default style when styling props are omitted. For app-specific theme differences, pass `className`, focused slot props such as `contentClassName`, or `classes` objects instead of copying primitives into the app.
+
+```tsx
+import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
+
+<ResponsiveSheet
+  open={open}
+  onOpenChange={setOpen}
+  title="Edit resource"
+  contentClassName="sm:max-w-xl"
+  classes={{
+    body: 'gap-4',
+    footer: 'border-t',
+  }}
+/>;
+
+<SaasErrorPage
+  error={error}
+  reset={reset}
+  source="app-error-boundary"
+  classes={{
+    content: 'max-w-lg',
+    title: 'text-2xl',
+  }}
+/>;
+```
+
 ## Components
 
 ### Primitives
@@ -44,6 +73,7 @@ This package assumes your app provides Tailwind-compatible design tokens such as
 - `DesktopConfirmShortcutHint`: visual hint for the desktop confirm shortcut.
 - `useDesktopConfirmShortcut`: handles Cmd/Ctrl+Enter confirmation in open sheets.
 - `useDesktopShortcutModifierLabel`: resolves the platform-specific modifier label.
+- `SaasErrorPage` and `SaasNotFoundPage`: default application error and 404 states for Next.js app routes.
 
 ### Search
 

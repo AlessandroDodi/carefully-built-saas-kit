@@ -47,7 +47,7 @@ export function SettingsAddButton({
   return (
     <Button type="button" onClick={onClick}>
       <Plus className="size-4" />
-      Aggiungi
+      Add
     </Button>
   );
 }
@@ -100,7 +100,7 @@ export function SettingsEditDeleteActions({
 export function SettingsFormSheet({
   children,
   confirmDisabled,
-  confirmLabel = "Salva modifiche",
+  confirmLabel = "Save changes",
   description,
   loading,
   onOpenChange,

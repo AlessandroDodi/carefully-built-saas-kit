@@ -173,7 +173,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
 
   async function handleSubmit(values: DocumentFormValues): Promise<void> {
     if (!organizationId || !currentUserId) {
-      toast.error('Contesto organizzazione non disponibile');
+      toast.error('Organization context is not available');
       return;
     }
 
@@ -191,7 +191,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
     try {
       if (isEditMode) {
         if (!document) {
-          toast.error('Documento non disponibile');
+          toast.error('Document is not available');
           return;
         }
 
@@ -207,10 +207,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
           tagIds: values.tagIds as TTagId[],
         });
 
-        toast.success('Documento aggiornato');
+        toast.success('Document updated');
       } else if (values.mode === 'manual') {
         if (!selectedFile) {
-          toast.error('Seleziona un file prima di continuare');
+          toast.error('Select a file before continuing');
           return;
         }
 
@@ -231,7 +231,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
           tagIds: values.tagIds as TTagId[],
         });
 
-        toast.success('Documento aggiunto');
+        toast.success('Document added');
       } else {
         await createPublicRequest({
           currentUserId,
@@ -247,14 +247,14 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
         });
 
         await navigator.clipboard.writeText(publicUploadUrl);
-        toast.success('Link creato e copiato');
+        toast.success('Link created and copied');
       }
 
       onOpenChange(false);
       setSelectedFile(null);
     } catch (error) {
       console.error(error);
-      toast.error('Si e verificato un errore durante il salvataggio.');
+      toast.error('Something went wrong while saving.');
     } finally {
       setIsSubmitting(false);
     }
@@ -263,10 +263,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
   async function handleCopyLinkPreview(): Promise<void> {
     try {
       await navigator.clipboard.writeText(publicUploadUrl);
-      toast.success('Link copiato. Salva il documento per attivarlo.');
+      toast.success('Link copied. Save the document to activate it.');
     } catch (error) {
       console.error(error);
-      toast.error('Non sono riuscito a copiare il link.');
+      toast.error('Could not copy the link.');
     }
   }
 
@@ -274,10 +274,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
     <ResponsiveSheet
       open={open}
       onOpenChange={onOpenChange}
-      title={isEditMode ? 'Modifica documento' : 'Aggiungi documento'}
+      title={isEditMode ? 'Edit document' : 'Add document'}
       onCancel={() => onOpenChange(false)}
       onConfirm={submitDocumentForm}
-      confirmLabel={isEditMode ? 'Salva' : 'Aggiungi'}
+      confirmLabel={isEditMode ? 'Save' : 'Add'}
       confirmDisabled={!organizationId || !currentUserId || isSubmitting}
       confirmLoading={isSubmitting}
     >

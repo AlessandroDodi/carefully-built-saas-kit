@@ -7,7 +7,7 @@ export { CustomDateField } from './fields/custom-date-field';
 export { CustomDateFormField } from './fields/custom-date-form-field';
 export { CountryPhoneInput, getPhoneCountryOptions } from './fields/country-phone-input';
 export { CountryVatInput } from './fields/country-vat-input';
-export { CustomAgentPickerField } from './fields/custom-agent-picker-field';
+export { CustomUserPickerField } from './fields/custom-user-picker-field';
 export { CustomAssociationPickerField } from './fields/custom-association-picker-field';
 export { CustomBooleanChipField } from './fields/custom-boolean-chip-field';
 export { CustomChipSelectField } from './fields/custom-chip-select-field';
