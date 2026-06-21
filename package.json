@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "bun run --filter './packages/*' build",
+    "build:vercel": "bun run --sequential --filter './packages/*' build",
     "check": "bun run typecheck && bun run knip && bun run build",
     "docs": "node scripts/generate-docs.mjs",
     "knip": "knip",
