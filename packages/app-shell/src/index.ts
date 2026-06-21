@@ -35,3 +35,8 @@ export {
   type ResponsiveButtonProps,
   type ResponsiveButtonState,
 } from './responsive-button';
+export {
+  ResponsivePageActions,
+  type ResponsivePageAction,
+  type ResponsivePageActionsProps,
+} from './responsive-page-actions';
