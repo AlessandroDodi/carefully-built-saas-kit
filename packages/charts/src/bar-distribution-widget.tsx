@@ -38,6 +38,7 @@ export function BarDistributionWidget({
       icon={icon}
       title={title}
       className="min-h-[320px]"
+      contentClassName="flex min-h-0 flex-1"
       isLoading={isLoading}
       isEmpty={isEmpty}
       emptyState={{
@@ -47,7 +48,7 @@ export function BarDistributionWidget({
       }}
     >
       {!isEmpty ? (
-        <div className="h-[264px] w-full pt-2">
+        <div className="h-full min-h-[264px] w-full pt-2">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={[...data]} margin={{ top: 8, right: 8, left: -24, bottom: 8 }}>
               <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />

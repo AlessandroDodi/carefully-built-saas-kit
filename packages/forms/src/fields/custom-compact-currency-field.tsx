@@ -134,7 +134,7 @@ export function CustomCompactCurrencyField<TValues extends FieldValues>({
               onClick={applySuggestion}
             >
               <span>{suggestion.label}</span>
-              <span className="text-muted-foreground text-xs">Applica</span>
+              <span className="text-muted-foreground text-xs">Apply</span>
             </button>
           </div>
         ) : null}

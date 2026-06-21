@@ -87,8 +87,8 @@ export function RichTextEditor({
   className,
   improveText,
   onImproveError,
-  improveLabel = 'Migliora',
-  improvingLabel = 'Miglioro...',
+  improveLabel = 'Improve',
+  improvingLabel = 'Improving...',
 }: RichTextEditorProps): React.ReactElement {
   const improveFlashTimeoutRef = useRef<number | null>(null);
   const [isImproving, setIsImproving] = useState(false);
@@ -196,7 +196,7 @@ export function RichTextEditor({
       const improvedDocument = parseSerializedRichTextDocument(improvedDocumentJson);
 
       if (!improvedDocument) {
-        throw new Error('OpenAI non ha restituito un documento rich text valido.');
+        throw new Error('The AI did not return a valid rich text document.');
       }
 
       editor.commands.setContent(improvedDocument);
@@ -240,7 +240,7 @@ export function RichTextEditor({
           )}
         >
           <ToolbarButton
-            label="Grassetto"
+            label="Bold"
             icon={Bold}
             active={editor?.isActive('bold')}
             disabled={disabled || !editor?.can().chain().focus().toggleBold().run()}
@@ -249,7 +249,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Corsivo"
+            label="Italic"
             icon={Italic}
             active={editor?.isActive('italic')}
             disabled={disabled || !editor?.can().chain().focus().toggleItalic().run()}
@@ -265,7 +265,7 @@ export function RichTextEditor({
             onClick={setLink}
           />
           <ToolbarButton
-            label="Rimuovi link"
+            label="Remove link"
             icon={Unlink}
             disabled={disabled || !editor?.isActive('link')}
             onClick={() => {
@@ -273,7 +273,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Elenco puntato"
+            label="Bulleted list"
             icon={List}
             active={editor?.isActive('bulletList')}
             disabled={disabled || !editor?.can().chain().focus().toggleBulletList().run()}
@@ -282,7 +282,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Elenco numerato"
+            label="Numbered list"
             icon={ListOrdered}
             active={editor?.isActive('orderedList')}
             disabled={disabled || !editor?.can().chain().focus().toggleOrderedList().run()}
@@ -291,7 +291,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Tabella"
+            label="Table"
             icon={Table2}
             active={editor?.isActive('table')}
             disabled={disabled || !editor}
@@ -319,7 +319,7 @@ export function RichTextEditor({
                   editor.chain().focus().addRowAfter().run();
                 }}
               >
-                Riga
+                Row
               </Button>
               <Button
                 type="button"
@@ -330,7 +330,7 @@ export function RichTextEditor({
                   editor.chain().focus().addColumnAfter().run();
                 }}
               >
-                Colonna
+                Column
               </Button>
               <Button
                 type="button"

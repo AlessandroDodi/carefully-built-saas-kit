@@ -31,7 +31,7 @@ interface PhoneCountryOption {
   readonly searchText: string;
 }
 
-export function getPhoneCountryOptions(locale = 'it-IT'): PhoneCountryOption[] {
+export function getPhoneCountryOptions(locale = 'en-US'): PhoneCountryOption[] {
   const displayNames = typeof Intl.DisplayNames !== 'undefined'
     ? new Intl.DisplayNames([locale], { type: 'region' })
     : null;
@@ -86,7 +86,7 @@ export function CountryPhoneInput({
   placeholder = '392 0178571',
   error,
 }: CountryPhoneInputProps): React.ReactElement {
-  const countryOptions = useMemo(() => getPhoneCountryOptions('it-IT'), []);
+  const countryOptions = useMemo(() => getPhoneCountryOptions('en-US'), []);
 
   return (
     <div className={cn('space-y-2', className)}>
@@ -95,7 +95,7 @@ export function CountryPhoneInput({
         <SearchableSelect
           value={countryCode || 'IT'}
           onValueChange={onCountryCodeChange}
-          placeholder="Italia"
+          placeholder="Country"
           className="w-full"
           searchPlaceholder="Search country or prefix..."
           options={countryOptions}

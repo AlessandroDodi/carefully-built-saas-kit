@@ -350,7 +350,7 @@ export function formatCustomFieldDisplayValue(
 
   if (definition.fieldType === 'date') {
     return typeof value.dateValue === 'number'
-      ? new Intl.DateTimeFormat('it-IT', {
+      ? new Intl.DateTimeFormat('en-US', {
           day: '2-digit',
           month: '2-digit',
           year: 'numeric',
