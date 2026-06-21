@@ -1,7 +1,9 @@
-export { SettingsSectionCard, type SettingsSectionCardProps } from "./settings-section-card";
 export {
-  DEFAULT_SETTINGS_TAB,
-  getAvailableSettingsTabs,
+  SettingsSectionCard,
+  type SettingsSectionCardProps,
+} from "./settings-section-card";
+export {
   resolveSettingsTab,
   type SettingsTab,
+  type SettingsTabDefinition,
 } from "./settings-tabs.model";

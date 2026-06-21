@@ -1,40 +1,19 @@
-export const DEFAULT_SETTINGS_TAB = "general" as const;
+export type SettingsTab = string;
 
-const settingsTabsWithoutOrganization = ["general", "account"] as const;
-const settingsTabsWithOrganization = [
-  "general",
-  "match",
-  "organization",
-  "account",
-  "integrations",
-  "pipeline",
-  "website",
-  "valuator",
-  "documentation",
-  "reports",
-  "tags",
-  "custom-fields",
-] as const;
-
-export type SettingsTab =
-  | (typeof settingsTabsWithoutOrganization)[number]
-  | (typeof settingsTabsWithOrganization)[number];
-
-export function getAvailableSettingsTabs(hasOrganization: boolean): SettingsTab[] {
-  return hasOrganization
-    ? [...settingsTabsWithOrganization]
-    : [...settingsTabsWithoutOrganization];
+export interface SettingsTabDefinition {
+  readonly value: SettingsTab;
 }
 
 export function resolveSettingsTab(
   requestedTab: string | null | undefined,
-  hasOrganization: boolean,
+  tabs: readonly SettingsTabDefinition[],
+  fallbackTab: SettingsTab = tabs[0]?.value ?? "",
 ): SettingsTab {
-  const availableTabs = getAvailableSettingsTabs(hasOrganization);
+  const availableTabs = tabs.map((tab) => tab.value);
 
-  if (requestedTab && availableTabs.includes(requestedTab as SettingsTab)) {
-    return requestedTab as SettingsTab;
+  if (requestedTab && availableTabs.includes(requestedTab)) {
+    return requestedTab;
   }
 
-  return DEFAULT_SETTINGS_TAB;
+  return fallbackTab;
 }

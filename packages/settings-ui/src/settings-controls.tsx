@@ -1,7 +1,7 @@
 "use client";
 
 import { Pencil, Plus, Trash2 } from "lucide-react";
-import type { ReactNode } from "react";
+import type { MouseEventHandler, ReactNode } from "react";
 
 import {
   Button,
@@ -165,6 +165,44 @@ export function SettingsSwitchRow({
         disabled={disabled}
         onCheckedChange={onCheckedChange}
       />
+    </div>
+  );
+}
+
+export function SettingsPipesWidgetPanel({
+  authToken,
+  className,
+  errorText,
+  hasError,
+  loadingText,
+  onClickCapture,
+  renderWidget,
+}: {
+  readonly authToken?: string;
+  readonly className?: string;
+  readonly errorText: string;
+  readonly hasError: boolean;
+  readonly loadingText: string;
+  readonly onClickCapture?: MouseEventHandler<HTMLDivElement>;
+  readonly renderWidget: (authToken: string) => ReactNode;
+}): React.ReactElement {
+  const classes = ["min-h-48 rounded-lg border border-border p-3", className]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div className={classes} onClickCapture={onClickCapture}>
+      {hasError ? (
+        <div className="flex min-h-40 items-center justify-center text-sm text-destructive">
+          {errorText}
+        </div>
+      ) : authToken ? (
+        renderWidget(authToken)
+      ) : (
+        <div className="flex min-h-40 items-center justify-center text-sm text-muted-foreground">
+          {loadingText}
+        </div>
+      )}
     </div>
   );
 }

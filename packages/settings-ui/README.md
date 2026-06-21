@@ -4,8 +4,8 @@ Reusable settings UI for SaaS apps.
 
 ## What It Includes
 
-- `SettingsTabs` for common SaaS settings pages.
-- `resolveSettingsTab` and `SettingsTab` for URL-safe settings tab handling.
+- `SettingsTabs` for URL-aware, horizontally scrollable settings tabs.
+- `resolveSettingsTab` and `SettingsTab` for validating app-defined settings tabs.
 - `SettingsSectionCard` for repeated settings sections with title, subtitle, and action slot.
 - `ProgressMetricCard` for compact quota/progress rows.
 
@@ -14,12 +14,14 @@ Reusable settings UI for SaaS apps.
 ```tsx
 import { SettingsTabs, resolveSettingsTab } from "@carefully-built/settings-ui";
 
-const initialTab = resolveSettingsTab(searchParams.tab, Boolean(organization));
+const tabs = [
+  { value: "general", label: "General", content: <GeneralSection /> },
+  { value: "account", label: "Account", content: <AccountSection /> },
+] as const;
+const initialTab = resolveSettingsTab(searchParams.tab, tabs);
 
 <SettingsTabs
-  hasOrganization={Boolean(organization)}
   initialTab={initialTab}
-  generalContent={<GeneralSection />}
-  accountContent={<AccountSection />}
+  tabs={tabs}
 />;
 ```
