@@ -31,6 +31,7 @@ Components in this package:
 - `SettingsEditDeleteActions`: import from `@carefully-built/settings-ui`.
 - `SettingsFormSheet`: import from `@carefully-built/settings-ui`.
 - `SettingsHelpTitle`: import from `@carefully-built/settings-ui`.
+- `SettingsPipesWidgetPanel`: import from `@carefully-built/settings-ui`.
 - `SettingsSectionCard`: import from `@carefully-built/settings-ui`.
 - `SettingsSwitchRow`: import from `@carefully-built/settings-ui`.
 - `SettingsTabs`: import from `@carefully-built/settings-ui`.
@@ -38,15 +39,11 @@ Components in this package:
 ## Helper Usage
 
 ```ts
-import { DEFAULT_SETTINGS_TAB } from '@carefully-built/settings-ui';
+import { ProgressMetricCard } from '@carefully-built/settings-ui';
 ```
 
 Helpers in this package:
 
-- `DEFAULT_SETTINGS_TAB`
-- `DEFAULT_SETTINGS_TAB`
-- `getAvailableSettingsTabs`
-- `getAvailableSettingsTabs`
 - `ProgressMetricCard`
 - `resolveSettingsTab`
 - `resolveSettingsTab`
@@ -54,6 +51,7 @@ Helpers in this package:
 - `SettingsEditDeleteActions`
 - `SettingsFormSheet`
 - `SettingsHelpTitle`
+- `SettingsPipesWidgetPanel`
 - `SettingsSectionCard`
 - `SettingsSwitchRow`
 - `SettingsTabs`
@@ -63,6 +61,8 @@ Helpers in this package:
 - `ProgressMetricCardProps`
 - `SettingsSectionCardProps`
 - `SettingsTab`
+- `SettingsTabDefinition`
+- `SettingsTabItem`
 - `SettingsTabsProps`
 
 
@@ -75,13 +75,10 @@ Helpers in this package:
 | `SettingsEditDeleteActions` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsFormSheet` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsHelpTitle` | Component | `packages/settings-ui/src/settings-controls.tsx` |
+| `SettingsPipesWidgetPanel` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsSectionCard` | Component | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsSwitchRow` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsTabs` | Component | `packages/settings-ui/src/settings-tabs.tsx` |
-| `DEFAULT_SETTINGS_TAB` | Helper | `packages/settings-ui/src/index.ts` |
-| `DEFAULT_SETTINGS_TAB` | Helper | `packages/settings-ui/src/settings-tabs.model.ts` |
-| `getAvailableSettingsTabs` | Helper | `packages/settings-ui/src/index.ts` |
-| `getAvailableSettingsTabs` | Helper | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `ProgressMetricCard` | Helper | `packages/settings-ui/src/client.ts` |
 | `resolveSettingsTab` | Helper | `packages/settings-ui/src/index.ts` |
 | `resolveSettingsTab` | Helper | `packages/settings-ui/src/settings-tabs.model.ts` |
@@ -89,12 +86,15 @@ Helpers in this package:
 | `SettingsEditDeleteActions` | Helper | `packages/settings-ui/src/client.ts` |
 | `SettingsFormSheet` | Helper | `packages/settings-ui/src/client.ts` |
 | `SettingsHelpTitle` | Helper | `packages/settings-ui/src/client.ts` |
+| `SettingsPipesWidgetPanel` | Helper | `packages/settings-ui/src/client.ts` |
 | `SettingsSectionCard` | Helper | `packages/settings-ui/src/index.ts` |
 | `SettingsSwitchRow` | Helper | `packages/settings-ui/src/client.ts` |
 | `SettingsTabs` | Helper | `packages/settings-ui/src/client.ts` |
 | `ProgressMetricCardProps` | Type | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `SettingsSectionCardProps` | Type | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsTab` | Type | `packages/settings-ui/src/settings-tabs.model.ts` |
+| `SettingsTabDefinition` | Type | `packages/settings-ui/src/settings-tabs.model.ts` |
+| `SettingsTabItem` | Type | `packages/settings-ui/src/settings-tabs.tsx` |
 | `SettingsTabsProps` | Type | `packages/settings-ui/src/settings-tabs.tsx` |
 
 

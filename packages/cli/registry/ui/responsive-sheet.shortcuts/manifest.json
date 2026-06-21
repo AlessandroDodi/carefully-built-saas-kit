@@ -1,0 +1,34 @@
+{
+  "name": "responsive-sheet.shortcuts",
+  "description": "Editable source registry entry for responsive-sheet.shortcuts.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "getDesktopShortcutModifierLabel",
+    "isAllowedConfirmShortcutEvent",
+    "useDesktopConfirmShortcut",
+    "useDesktopShortcutModifierLabel"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "overlays/responsive-sheet.shortcuts.ts",
+      "target": "components/ui/responsive-sheet.shortcuts.ts"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

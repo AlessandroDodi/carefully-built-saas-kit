@@ -1,0 +1,37 @@
+{
+  "name": "dropdown-menu",
+  "description": "Editable source registry entry for dropdown-menu.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "DropdownMenu",
+    "DropdownMenuCheckboxItem",
+    "DropdownMenuContent",
+    "DropdownMenuItem",
+    "DropdownMenuLabel",
+    "DropdownMenuSeparator",
+    "DropdownMenuTrigger"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/dropdown-menu.tsx",
+      "target": "components/ui/dropdown-menu.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

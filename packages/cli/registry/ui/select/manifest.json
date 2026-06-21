@@ -1,0 +1,37 @@
+{
+  "name": "select",
+  "description": "Editable source registry entry for select.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Select",
+    "SelectContent",
+    "SelectItem",
+    "SelectScrollDownButton",
+    "SelectScrollUpButton",
+    "SelectTrigger",
+    "SelectValue"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/select.tsx",
+      "target": "components/ui/select.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

@@ -38,6 +38,7 @@ Helpers in this package:
 
 - `buildSearchText`
 - `filterAndRankBySearch`
+- `getCommandPaletteFallbackIconStyle`
 - `getCommandPaletteTypeCompletion`
 - `moveCommandPaletteIndex`
 - `rankBySearch`
@@ -45,6 +46,7 @@ Helpers in this package:
 
 ## Types And Schemas
 
+- `CommandPaletteFallbackIconStyle`
 - `CommandPaletteItemMeta`
 - `CommandPaletteProps`
 - `CommandPaletteTypeOption`
@@ -58,10 +60,12 @@ Helpers in this package:
 | `CommandPalette` | Component | `packages/search/src/command-palette.tsx` |
 | `buildSearchText` | Helper | `packages/search/src/index.ts` |
 | `filterAndRankBySearch` | Helper | `packages/search/src/index.ts` |
+| `getCommandPaletteFallbackIconStyle` | Helper | `packages/search/src/command-palette-fallback.ts` |
 | `getCommandPaletteTypeCompletion` | Helper | `packages/search/src/command-palette.tsx` |
 | `moveCommandPaletteIndex` | Helper | `packages/search/src/command-palette.tsx` |
 | `rankBySearch` | Helper | `packages/search/src/index.ts` |
 | `scoreFuzzyMatch` | Helper | `packages/search/src/index.ts` |
+| `CommandPaletteFallbackIconStyle` | Type | `packages/search/src/command-palette-fallback.ts` |
 | `CommandPaletteItemMeta` | Type | `packages/search/src/command-palette.tsx` |
 | `CommandPaletteProps` | Type | `packages/search/src/command-palette.tsx` |
 | `CommandPaletteTypeOption` | Type | `packages/search/src/command-palette.tsx` |

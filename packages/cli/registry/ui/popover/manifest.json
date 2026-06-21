@@ -1,0 +1,33 @@
+{
+  "name": "popover",
+  "description": "Editable source registry entry for popover.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Popover",
+    "PopoverContent",
+    "PopoverTrigger"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/popover.tsx",
+      "target": "components/ui/popover.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "error-page",
+  "description": "Editable source registry entry for error-page.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "ErrorCode",
+    "ErrorCodeProps",
+    "ErrorPageContent",
+    "ErrorPageKind",
+    "PostHogErrorCapturePayload",
+    "ResolveErrorPageContentOptions",
+    "SaasErrorPage",
+    "SaasErrorPageProps",
+    "SaasNotFoundPage",
+    "SaasNotFoundPageProps",
+    "captureErrorToPostHog",
+    "createErrorReference",
+    "getNotFoundPageContent",
+    "resolveErrorPageContent"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "error-page/error-code.tsx",
+      "target": "components/ui/error-page/error-code.tsx"
+    },
+    {
+      "source": "error-page/error-page-content.ts",
+      "target": "components/ui/error-page/error-page-content.ts"
+    },
+    {
+      "source": "error-page/index.ts",
+      "target": "components/ui/error-page/index.ts"
+    },
+    {
+      "source": "error-page/posthog-error-capture.ts",
+      "target": "components/ui/error-page/posthog-error-capture.ts"
+    },
+    {
+      "source": "error-page/saas-error-page.tsx",
+      "target": "components/ui/error-page/saas-error-page.tsx"
+    },
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

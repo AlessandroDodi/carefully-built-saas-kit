@@ -249,7 +249,7 @@ let configuredActionOptions: CreateSuperAdminPageOptions<SuperAdminSession> | nu
 function configureSuperAdminActionOptions<TSession extends SuperAdminSession>(
   options: CreateSuperAdminPageOptions<TSession>,
 ): void {
-  configuredActionOptions = options as CreateSuperAdminPageOptions<SuperAdminSession>;
+  configuredActionOptions = options as unknown as CreateSuperAdminPageOptions<SuperAdminSession>;
 }
 
 function getConfiguredActionOptions(): CreateSuperAdminPageOptions<SuperAdminSession> {

@@ -1,0 +1,52 @@
+{
+  "name": "user-picker",
+  "description": "Editable source registry entry for user-picker.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "UserPicker",
+    "UserPickerProps"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/avatar.tsx",
+      "target": "components/ui/avatar.tsx"
+    },
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/input.tsx",
+      "target": "components/ui/input.tsx"
+    },
+    {
+      "source": "primitives/popover.tsx",
+      "target": "components/ui/popover.tsx"
+    },
+    {
+      "source": "primitives/user-picker-utils.ts",
+      "target": "components/ui/user-picker-utils.ts"
+    },
+    {
+      "source": "primitives/user-picker.tsx",
+      "target": "components/ui/user-picker.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

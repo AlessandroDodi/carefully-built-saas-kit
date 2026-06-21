@@ -1,0 +1,93 @@
+{
+  "name": "table-toolbar",
+  "description": "Editable source registry entry for table-toolbar.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "CustomTableToolbarFilter",
+    "FilterConfig",
+    "FilterDropdown",
+    "FilterOption",
+    "SearchInput",
+    "TableToolbar",
+    "TableToolbarProps"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "overlays/responsive-sheet.footer.tsx",
+      "target": "components/ui/responsive-sheet.footer.tsx"
+    },
+    {
+      "source": "overlays/responsive-sheet.layouts.tsx",
+      "target": "components/ui/responsive-sheet.layouts.tsx"
+    },
+    {
+      "source": "overlays/responsive-sheet.shortcuts.ts",
+      "target": "components/ui/responsive-sheet.shortcuts.ts"
+    },
+    {
+      "source": "overlays/responsive-sheet.tsx",
+      "target": "components/ui/responsive-sheet.tsx"
+    },
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/drawer.tsx",
+      "target": "components/ui/drawer.tsx"
+    },
+    {
+      "source": "primitives/input.tsx",
+      "target": "components/ui/input.tsx"
+    },
+    {
+      "source": "primitives/keyboard-shortcut-hint.tsx",
+      "target": "components/ui/keyboard-shortcut-hint.tsx"
+    },
+    {
+      "source": "primitives/sheet.tsx",
+      "target": "components/ui/sheet.tsx"
+    },
+    {
+      "source": "search/searchable-select-position.ts",
+      "target": "components/ui/search/searchable-select-position.ts"
+    },
+    {
+      "source": "search/searchable-select.tsx",
+      "target": "components/ui/search/searchable-select.tsx"
+    },
+    {
+      "source": "table-toolbar/index.ts",
+      "target": "components/ui/table-toolbar/index.ts"
+    },
+    {
+      "source": "table-toolbar/table-toolbar.tsx",
+      "target": "components/ui/table-toolbar/table-toolbar.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    },
+    {
+      "source": "utils/search.ts",
+      "target": "components/ui/search.ts"
+    },
+    {
+      "source": "utils/use-media-query.ts",
+      "target": "components/ui/use-media-query.ts"
+    }
+  ]
+}

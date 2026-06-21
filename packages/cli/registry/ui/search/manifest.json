@@ -1,0 +1,35 @@
+{
+  "name": "search",
+  "description": "Editable source registry entry for search.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "SearchTextPart",
+    "buildSearchText",
+    "filterAndRankBySearch",
+    "rankBySearch",
+    "scoreFuzzyMatch"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    },
+    {
+      "source": "utils/search.ts",
+      "target": "components/ui/search.ts"
+    }
+  ]
+}

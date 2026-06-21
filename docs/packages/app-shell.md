@@ -19,16 +19,9 @@ For local development in an app inside the same parent workspace, use the packed
 ```tsx
 import { AppNavigationShell } from '@carefully-built/app-shell';
 
-<AppNavigationShell
-  currentPath={pathname}
-  logo={<Logo />}
-  darkLogo={<Logo variant="white" />}
-  logoHref="/dashboard"
-  navItems={navItems}
-/>;
+// Check the API catalog below for the component source and prop types.
+// Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
 ```
-
-Use `darkLogo` for a dark-mode-specific product mark. When it is omitted, `logo` is used in every theme.
 
 Components in this package:
 
@@ -36,6 +29,7 @@ Components in this package:
 - `DashboardPageHeader`: import from `@carefully-built/app-shell`.
 - `DashboardPageLayout`: import from `@carefully-built/app-shell`.
 - `ResponsiveButton`: import from `@carefully-built/app-shell`.
+- `ResponsivePageActions`: import from `@carefully-built/app-shell`.
 - `SidebarContext`: import from `@carefully-built/app-shell`.
 - `SidebarInset`: import from `@carefully-built/app-shell`.
 - `SidebarProvider`: import from `@carefully-built/app-shell`.
@@ -70,6 +64,7 @@ Helpers in this package:
 - `resolveMobileBottomNavigation`
 - `resolveMobileBottomNavigation`
 - `ResponsiveButton`
+- `ResponsivePageActions`
 - `SidebarContext`
 - `SidebarInset`
 - `SidebarProvider`
@@ -92,6 +87,8 @@ Helpers in this package:
 - `resolveResponsiveButtonState`
 - `ResponsiveButtonProps`
 - `ResponsiveButtonState`
+- `ResponsivePageAction`
+- `ResponsivePageActionsProps`
 - `SidebarContextValue`
 - `SidebarInsetProps`
 
@@ -104,6 +101,7 @@ Helpers in this package:
 | `DashboardPageHeader` | Component | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardPageLayout` | Component | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `ResponsiveButton` | Component | `packages/app-shell/src/responsive-button.tsx` |
+| `ResponsivePageActions` | Component | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `SidebarContext` | Component | `packages/app-shell/src/sidebar.tsx` |
 | `SidebarInset` | Component | `packages/app-shell/src/sidebar.tsx` |
 | `SidebarProvider` | Component | `packages/app-shell/src/sidebar.tsx` |
@@ -113,6 +111,7 @@ Helpers in this package:
 | `resolveMobileBottomNavigation` | Helper | `packages/app-shell/src/index.ts` |
 | `resolveMobileBottomNavigation` | Helper | `packages/app-shell/src/mobile-navigation.ts` |
 | `ResponsiveButton` | Helper | `packages/app-shell/src/index.ts` |
+| `ResponsivePageActions` | Helper | `packages/app-shell/src/index.ts` |
 | `SidebarContext` | Helper | `packages/app-shell/src/index.ts` |
 | `SidebarInset` | Helper | `packages/app-shell/src/index.ts` |
 | `SidebarProvider` | Helper | `packages/app-shell/src/index.ts` |
@@ -134,6 +133,8 @@ Helpers in this package:
 | `resolveResponsiveButtonState` | Type | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButtonProps` | Type | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButtonState` | Type | `packages/app-shell/src/responsive-button.tsx` |
+| `ResponsivePageAction` | Type | `packages/app-shell/src/responsive-page-actions.tsx` |
+| `ResponsivePageActionsProps` | Type | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `SidebarContextValue` | Type | `packages/app-shell/src/sidebar.tsx` |
 | `SidebarInsetProps` | Type | `packages/app-shell/src/sidebar.tsx` |
 

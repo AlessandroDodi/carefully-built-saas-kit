@@ -13,6 +13,7 @@ For local development in an app inside the same parent workspace, use the packed
 ## Import Paths
 
 - `@carefully-built/agenda`
+- `@carefully-built/agenda/styles.css`
 
 ## Component Usage
 
@@ -26,6 +27,7 @@ import { ActivityCalendarView } from '@carefully-built/agenda';
 Components in this package:
 
 - `ActivityCalendarView`: import from `@carefully-built/agenda`.
+- `ActivityForm`: import from `@carefully-built/agenda`.
 - `ActivityListView`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarDayPicker`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarEvents`: import from `@carefully-built/agenda`.
@@ -113,6 +115,7 @@ Helpers in this package:
 | Export | Kind | Source |
 |---|---|---|
 | `ActivityCalendarView` | Component | `packages/agenda/src/activity-calendar-view.tsx` |
+| `ActivityForm` | Component | `packages/agenda/src/activity-form.tsx` |
 | `ActivityListView` | Component | `packages/agenda/src/activity-list-view.tsx` |
 | `SharedActivityCalendarDayPicker` | Component | `packages/agenda/src/shared-activity-calendar-day-picker.tsx` |
 | `SharedActivityCalendarEvents` | Component | `packages/agenda/src/shared-activity-calendar-events.tsx` |

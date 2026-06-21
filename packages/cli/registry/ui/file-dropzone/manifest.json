@@ -1,0 +1,35 @@
+{
+  "name": "file-dropzone",
+  "description": "Editable source registry entry for file-dropzone.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "FileDropzone"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/file-dropzone.tsx",
+      "target": "components/ui/file-dropzone.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

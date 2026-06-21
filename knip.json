@@ -31,6 +31,10 @@
     "packages/auth-pages": {
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
+    },
+    "packages/cli": {
+      "entry": ["package.json"],
+      "project": ["src/**/*.ts"]
     }
   }
 }

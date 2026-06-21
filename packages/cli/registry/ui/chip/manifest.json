@@ -1,0 +1,36 @@
+{
+  "name": "chip",
+  "description": "Editable source registry entry for chip.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Chip",
+    "ChipButton"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/chip-utils.ts",
+      "target": "components/ui/chip-utils.ts"
+    },
+    {
+      "source": "primitives/chip.tsx",
+      "target": "components/ui/chip.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

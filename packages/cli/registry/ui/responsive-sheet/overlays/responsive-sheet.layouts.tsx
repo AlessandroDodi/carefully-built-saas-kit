@@ -1,0 +1,207 @@
+'use client';
+
+import type { ReactNode } from 'react';
+
+import type { SheetOutsideInteractionGuard } from '@/components/ui/responsive-sheet';
+import type { ResponsiveSheetClassNames } from '@/components/ui/responsive-sheet';
+
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import { cn } from '@/lib/utils';
+
+interface SheetDescriptionBlockProps {
+  readonly title: ReactNode;
+  readonly description?: ReactNode;
+  readonly classes?: ResponsiveSheetClassNames;
+}
+
+function SheetDescriptionBlock({
+  title,
+  description,
+  classes,
+}: SheetDescriptionBlockProps): React.ReactElement {
+  return (
+    <>
+      <SheetTitle className={classes?.title}>{title}</SheetTitle>
+      {description ? (
+        <SheetDescription className={classes?.description}>{description}</SheetDescription>
+      ) : null}
+    </>
+  );
+}
+
+interface SharedSheetLayoutProps {
+  readonly open: boolean;
+  readonly onOpenChange: (open: boolean) => void;
+  readonly modal: boolean;
+  readonly outsideInteractionGuard?: SheetOutsideInteractionGuard;
+  readonly title: ReactNode;
+  readonly description?: ReactNode;
+  readonly children: ReactNode;
+  readonly footer: ReactNode;
+  readonly mobileDrawerContentClassName?: string;
+  readonly contentClassName?: string;
+  readonly footerClassName?: string;
+  readonly classes?: ResponsiveSheetClassNames;
+}
+
+function shouldPreventOutsideInteraction(
+  target: EventTarget | null,
+  guard?: SheetOutsideInteractionGuard,
+): boolean {
+  const element =
+    target instanceof Element ? target : target instanceof Node ? target.parentElement : null;
+
+  if (!element) {
+    return false;
+  }
+
+  if (element.closest('[data-searchable-select-content]')) {
+    return true;
+  }
+
+  return guard?.selectors.some((selector) => element.closest(selector)) ?? false;
+}
+
+type MobileSheetLayoutProps = SharedSheetLayoutProps;
+
+export function MobileSheetLayout({
+  open,
+  onOpenChange,
+  modal,
+  outsideInteractionGuard,
+  title,
+  description,
+  children,
+  footer,
+  mobileDrawerContentClassName,
+  contentClassName,
+  footerClassName,
+  classes,
+}: MobileSheetLayoutProps): React.ReactElement {
+  return (
+    <Drawer open={open} onOpenChange={onOpenChange} modal={modal}>
+      <DrawerContent
+        aria-describedby={description ? undefined : 'responsive-sheet-description-empty'}
+        className={cn(
+          'px-4 pb-[calc(env(safe-area-inset-bottom)+20px)]',
+          mobileDrawerContentClassName,
+          classes?.mobileContent,
+        )}
+        onInteractOutside={(event) => {
+          if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
+            event.preventDefault();
+          }
+        }}
+        onPointerDownOutside={(event) => {
+          if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
+            event.preventDefault();
+          }
+        }}
+      >
+        <DrawerHeader className={cn('px-0 pb-4', classes?.header)}>
+          <DrawerTitle className={classes?.title}>{title}</DrawerTitle>
+          {description ? (
+            <DrawerDescription className={classes?.description}>{description}</DrawerDescription>
+          ) : (
+            <DrawerDescription id="responsive-sheet-description-empty" className="sr-only">
+              Dialog
+            </DrawerDescription>
+          )}
+        </DrawerHeader>
+        <div className="flex min-h-0 flex-1 flex-col gap-4">
+          <div
+            className={cn(
+              '-mx-1 flex-1 overflow-y-auto px-1 pb-3 [scrollbar-gutter:stable]',
+              contentClassName,
+              classes?.body,
+            )}
+          >
+            {children}
+          </div>
+          {footer ? (
+            <div className={cn('shrink-0 border-t pt-4 pb-3', footerClassName, classes?.footer)}>
+              {footer}
+            </div>
+          ) : null}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
+interface DesktopSheetLayoutProps extends SharedSheetLayoutProps {
+  readonly width: number;
+}
+
+export function DesktopSheetLayout({
+  open,
+  onOpenChange,
+  modal,
+  outsideInteractionGuard,
+  title,
+  description,
+  children,
+  footer,
+  width,
+  contentClassName,
+  footerClassName,
+  classes,
+}: DesktopSheetLayoutProps): React.ReactElement {
+  return (
+    <Sheet open={open} onOpenChange={onOpenChange} modal={modal}>
+      <SheetContent
+        aria-describedby={description ? undefined : 'responsive-sheet-description-empty'}
+        style={{ width: `${String(width)}px`, maxWidth: '85vw' }}
+        className={cn('flex flex-col gap-0 p-0', classes?.desktopContent)}
+        onInteractOutside={(event) => {
+          if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
+            event.preventDefault();
+          }
+        }}
+        onPointerDownOutside={(event) => {
+          if (shouldPreventOutsideInteraction(event.target, outsideInteractionGuard)) {
+            event.preventDefault();
+          }
+        }}
+      >
+        <SheetHeader className={cn('border-b px-4 py-4', classes?.header)}>
+          <SheetDescriptionBlock title={title} description={description} classes={classes} />
+        </SheetHeader>
+        {description ? null : (
+          <SheetDescription id="responsive-sheet-description-empty" className="sr-only">
+            Dialog
+          </SheetDescription>
+        )}
+        <div className="flex min-h-0 flex-1 flex-col">
+          <div
+            className={cn(
+              'flex-1 overflow-x-visible overflow-y-auto px-4 pt-4 pb-6 [scrollbar-gutter:stable]',
+              contentClassName,
+              classes?.body,
+            )}
+          >
+            {children}
+          </div>
+          {footer ? (
+            <div className={cn('border-t px-4 py-4', footerClassName, classes?.footer)}>
+              {footer}
+            </div>
+          ) : null}
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}

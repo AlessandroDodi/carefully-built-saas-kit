@@ -1,0 +1,43 @@
+{
+  "name": "dialog",
+  "description": "Editable source registry entry for dialog.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Dialog",
+    "DialogContent",
+    "DialogDescription",
+    "DialogFooter",
+    "DialogHeader",
+    "DialogOverlay",
+    "DialogPortal",
+    "DialogTitle",
+    "DialogTrigger"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/dialog.tsx",
+      "target": "components/ui/dialog.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

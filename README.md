@@ -1,19 +1,46 @@
 # Carefully Built SaaS Kit
 
+![Carefully Built SaaS Kit hero](./docs/saas-kit/images/hero.png)
+
 Reusable packages for building B2B SaaS apps with React, Next.js, Convex, WorkOS, and strongly typed CRUD/resource patterns.
 
 The goal of this repo is to collect the boring-but-important SaaS building blocks once, keep them polished, and reuse them across projects instead of rebuilding tables, filters, organization flows, CRUD screens, and dashboard shells every time.
+
+## Usage
+
+Use the main npm package when you want one dependency for the kit: [`@carefully-built/saas-kit`](https://www.npmjs.com/package/@carefully-built/saas-kit).
+
+```bash
+bun add @carefully-built/saas-kit
+```
+
+```tsx
+import { SmartTable } from '@carefully-built/saas-kit';
+import { DashboardPageLayout } from '@carefully-built/saas-kit/app-shell';
+import { createWorkOSWidgetTokenResponse } from '@carefully-built/saas-kit/server';
+```
+
+Use the CLI when you want shadcn-style editable source code copied into your app:
+
+```bash
+bunx @carefully-built/cli list
+bunx @carefully-built/cli add smart-table
+```
+
+The CLI is published on npm as [`@carefully-built/cli`](https://www.npmjs.com/package/@carefully-built/cli). The modular packages below remain available for apps that only want one slice of the kit, but the recommended public install is [`@carefully-built/saas-kit`](https://www.npmjs.com/package/@carefully-built/saas-kit).
 
 ## Packages
 
 | Package | Version | Purpose |
 |---|---:|---|
+| [`@carefully-built/saas-kit`](https://www.npmjs.com/package/@carefully-built/saas-kit) | 0.1.0 | One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components. |
 | [`@carefully-built/agenda`](./docs/packages/agenda.md) | 0.1.5 | Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps. |
 | [`@carefully-built/app-shell`](./docs/packages/app-shell.md) | 0.1.2 | Reusable dashboard shell primitives for Carefully Built SaaS apps. |
 | [`@carefully-built/association-picker`](./docs/packages/association-picker.md) | 0.1.1 | Reusable entity association picker for multitenant SaaS apps. |
 | [`@carefully-built/auth-pages`](./docs/packages/auth-pages.md) | 0.1.7 | Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps. |
 | [`@carefully-built/automations`](./docs/packages/automations.md) | 0.1.1 | Reusable automation builder primitives, canvas, options, and draft validation for SaaS apps. |
 | [`@carefully-built/charts`](./docs/packages/charts.md) | 0.1.1 | Reusable chart widgets, cards, and legends for Carefully Built SaaS apps. |
+| [`@carefully-built/cli`](./docs/packages/cli.md) | 0.1.4 | Add Carefully Built SaaS components to apps as editable source, with package imports when you want managed upgrades. |
 | [`@carefully-built/convex-crud`](./docs/packages/convex-crud.md) | 0.1.8 | Reusable Convex CRUD audit, archive, and organization-record helpers. |
 | [`@carefully-built/convex-multitenant`](./docs/packages/convex-multitenant.md) | 0.1.2 | Reusable Convex multitenant guards and organization-scoped lookup helpers. |
 | [`@carefully-built/convex-platform`](./docs/packages/convex-platform.md) | 0.1.7 | Reusable Convex SaaS platform helpers for org-scoped CRUD, entity associations, and multitenant apps. |

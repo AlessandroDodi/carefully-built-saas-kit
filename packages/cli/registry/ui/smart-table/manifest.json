@@ -1,0 +1,115 @@
+{
+  "name": "smart-table",
+  "description": "Editable source registry entry for smart-table.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "ActionHandlers",
+    "ActionType",
+    "Column",
+    "ColumnAlign",
+    "PaginationConfig",
+    "SmartTable",
+    "SmartTableActions",
+    "SmartTableProps",
+    "SortDirection",
+    "SortState",
+    "SortValue",
+    "TruncatedContent",
+    "useTableSorting"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/card.tsx",
+      "target": "components/ui/card.tsx"
+    },
+    {
+      "source": "primitives/display-date.tsx",
+      "target": "components/ui/display-date.tsx"
+    },
+    {
+      "source": "primitives/pagination.tsx",
+      "target": "components/ui/pagination.tsx"
+    },
+    {
+      "source": "primitives/skeleton.tsx",
+      "target": "components/ui/skeleton.tsx"
+    },
+    {
+      "source": "primitives/table.tsx",
+      "target": "components/ui/table.tsx"
+    },
+    {
+      "source": "primitives/tooltip.tsx",
+      "target": "components/ui/tooltip.tsx"
+    },
+    {
+      "source": "smart-table/DesktopView.tsx",
+      "target": "components/ui/smart-table/DesktopView.tsx"
+    },
+    {
+      "source": "smart-table/MobileView.tsx",
+      "target": "components/ui/smart-table/MobileView.tsx"
+    },
+    {
+      "source": "smart-table/SmartTable.tsx",
+      "target": "components/ui/smart-table/SmartTable.tsx"
+    },
+    {
+      "source": "smart-table/SmartTableActions.tsx",
+      "target": "components/ui/smart-table/SmartTableActions.tsx"
+    },
+    {
+      "source": "smart-table/TruncatedContent.tsx",
+      "target": "components/ui/smart-table/TruncatedContent.tsx"
+    },
+    {
+      "source": "smart-table/index.ts",
+      "target": "components/ui/smart-table/index.ts"
+    },
+    {
+      "source": "smart-table/sorting.ts",
+      "target": "components/ui/smart-table/sorting.ts"
+    },
+    {
+      "source": "smart-table/truncated-content.utils.ts",
+      "target": "components/ui/smart-table/truncated-content.utils.ts"
+    },
+    {
+      "source": "smart-table/types.ts",
+      "target": "components/ui/smart-table/types.ts"
+    },
+    {
+      "source": "smart-table/utils.ts",
+      "target": "components/ui/smart-table/utils.ts"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    },
+    {
+      "source": "utils/date-display.ts",
+      "target": "components/ui/date-display.ts"
+    },
+    {
+      "source": "utils/use-media-query.ts",
+      "target": "components/ui/use-media-query.ts"
+    }
+  ]
+}

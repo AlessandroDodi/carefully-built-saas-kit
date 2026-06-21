@@ -1,0 +1,33 @@
+{
+  "name": "date-display",
+  "description": "Editable source registry entry for date-display.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "DateDisplayValue",
+    "formatAbsoluteDate",
+    "formatDisplayDate"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    },
+    {
+      "source": "utils/date-display.ts",
+      "target": "components/ui/date-display.ts"
+    }
+  ]
+}

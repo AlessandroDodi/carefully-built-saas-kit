@@ -21,11 +21,14 @@ Generated list of public exports detected in `packages/*/src`.
 | `ActivityDisplayModel` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
 | `ActivityDraftPreset` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
 | `ActivityFilters` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
+| `ActivityForm` | Component | `@carefully-built/agenda` | `packages/agenda/src/activity-form.tsx` |
 | `ActivityItem` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-item.tsx` |
 | `ActivityListItem` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
 | `ActivityListView` | Component | `@carefully-built/agenda` | `packages/agenda/src/activity-list-view.tsx` |
 | `ActivityStatus` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
 | `ActivityVisibility` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-helpers.ts` |
+| `AddComponentOptions` | Type | `@carefully-built/cli` | `packages/cli/src/add.ts` |
+| `AddComponentResult` | Type | `@carefully-built/cli` | `packages/cli/src/add.ts` |
 | `AgendaActivityFormValues` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaActivityMutationPayload` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaAssociationOption` | Type | `@carefully-built/agenda` | `packages/agenda/src/activity-page-state.ts` |
@@ -141,6 +144,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `CollectionEmptyState` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `ColumnAlign` | Type | `@carefully-built/ui` | `packages/ui/src/smart-table/types.ts` |
 | `Column` | Type | `@carefully-built/ui` | `packages/ui/src/smart-table/types.ts` |
+| `CommandPaletteFallbackIconStyle` | Type | `@carefully-built/search` | `packages/search/src/command-palette-fallback.ts` |
 | `CommandPaletteItemMeta` | Type | `@carefully-built/search` | `packages/search/src/command-palette.tsx` |
 | `CommandPaletteProps` | Type | `@carefully-built/search` | `packages/search/src/command-palette.tsx` |
 | `CommandPaletteTypeOption` | Type | `@carefully-built/search` | `packages/search/src/command-palette.tsx` |
@@ -229,8 +233,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `DEFAULT_ACTIVITY_TYPES` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-types.ts` |
 | `DEFAULT_MAP_THEME` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/index.ts` |
 | `DEFAULT_MAP_THEME` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/map-theme.ts` |
-| `DEFAULT_SETTINGS_TAB` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/index.ts` |
-| `DEFAULT_SETTINGS_TAB` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `DEFAULT_THEME_OPTIONS` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/index.ts` |
 | `DEFAULT_THEME_OPTIONS` | Helper | `@carefully-built/theme-ui` | `packages/theme-ui/src/theme-selector.tsx` |
 | `DOCUMENT_CARD_GRID_CLASS` | Helper | `@carefully-built/files` | `packages/files/src/document-card-grid.tsx` |
@@ -247,6 +249,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `DataWarning` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/ui.tsx` |
 | `DataWarning` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `DateDisplayValue` | Type | `@carefully-built/ui` | `packages/ui/src/utils/date-display.ts` |
+| `DeleteOrganizationDialog` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/next-client.tsx` |
 | `DesktopConfirmShortcutHint` | Component | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.footer.tsx` |
 | `DesktopSheetLayout` | Component | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.layouts.tsx` |
 | `DesktopView` | Component | `@carefully-built/ui` | `packages/ui/src/smart-table/DesktopView.tsx` |
@@ -382,7 +385,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `HelpInfoButtonProps` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/help-info-button.tsx` |
 | `HelpInfoButton` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/help-info-button.tsx` |
 | `ImportPreviewRow` | Type | `@carefully-built/import-export` | `packages/imports/src/import-types.ts` |
-| `ImportedContactRoles` | Type | `@carefully-built/import-export` | `packages/imports/src/contacts/contact-import-schema.ts` |
+| `ImportedContactStatus` | Type | `@carefully-built/import-export` | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `InitialEmptyStateProps` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/initial-empty-state.tsx` |
 | `InitialEmptyState` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/index.ts` |
 | `InitialEmptyState` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/initial-empty-state.tsx` |
@@ -480,6 +483,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `OrganizationLogoMark` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/ui.tsx` |
 | `OrganizationLogoMark` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `OrganizationLogo` | Component | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
+| `OrganizationLogo` | Component | `@carefully-built/workos` | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `OrganizationLogo` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations.ts` |
 | `OrganizationRecord` | Type | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `OrganizationSelectionPageClassNames` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/organizations/organization-selection.tsx` |
@@ -506,6 +510,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `ProgressMetricCardProps` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `ProgressMetricCard` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `ProgressMetricCard` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/client.ts` |
+| `RegistryComponent` | Type | `@carefully-built/cli` | `packages/cli/src/registry.ts` |
 | `ResetPasswordFormData` | Type | `@carefully-built/auth-pages` | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `ResolveCollectionEmptyStateOptions` | Type | `@carefully-built/ui` | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `ResolveErrorPageContentOptions` | Type | `@carefully-built/ui` | `packages/ui/src/error-page/error-page-content.ts` |
@@ -516,6 +521,10 @@ Generated list of public exports detected in `packages/*/src`.
 | `ResponsiveButtonState` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButton` | Component | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButton` | Helper | `@carefully-built/app-shell` | `packages/app-shell/src/index.ts` |
+| `ResponsivePageAction` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-page-actions.tsx` |
+| `ResponsivePageActionsProps` | Type | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-page-actions.tsx` |
+| `ResponsivePageActions` | Component | `@carefully-built/app-shell` | `packages/app-shell/src/responsive-page-actions.tsx` |
+| `ResponsivePageActions` | Helper | `@carefully-built/app-shell` | `packages/app-shell/src/index.ts` |
 | `ResponsiveSheetClassNames` | Type | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `ResponsiveSheetProps` | Type | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `ResponsiveSheet` | Component | `@carefully-built/ui` | `packages/ui/src/overlays/responsive-sheet.tsx` |
@@ -569,11 +578,15 @@ Generated list of public exports detected in `packages/*/src`.
 | `SettingsFormSheet` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/client.ts` |
 | `SettingsHelpTitle` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsHelpTitle` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/client.ts` |
+| `SettingsPipesWidgetPanel` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-controls.tsx` |
+| `SettingsPipesWidgetPanel` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/client.ts` |
 | `SettingsSectionCardProps` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsSectionCard` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsSectionCard` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/index.ts` |
 | `SettingsSwitchRow` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsSwitchRow` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/client.ts` |
+| `SettingsTabDefinition` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
+| `SettingsTabItem` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.tsx` |
 | `SettingsTab` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `SettingsTabsProps` | Type | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.tsx` |
 | `SettingsTabs` | Component | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.tsx` |
@@ -629,9 +642,12 @@ Generated list of public exports detected in `packages/*/src`.
 | `SuperAdminApplicationsList` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `SuperAdminApplicationsTable` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminApplicationsTable` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
+| `SuperAdminClientActions` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/next-client.tsx` |
+| `SuperAdminClientPage` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminCompaniesList` | Component | `@carefully-built/superadmin` | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminCompaniesList` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `SuperAdminData` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/types.ts` |
+| `SuperAdminExtraNavItem` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminFeatureFlag` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/types.ts` |
 | `SuperAdminFormAction` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminPlan` | Type | `@carefully-built/superadmin` | `packages/superadmin/src/types.ts` |
@@ -734,6 +750,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `WorkOSWidgetTokenOptions` | Type | `@carefully-built/workos` | `packages/workos/src/server.ts` |
 | `WorkosProfile` | Type | `@carefully-built/convex-workos` | `packages/convex-workos/src/index.ts` |
 | `WorkosUserRecord` | Type | `@carefully-built/convex-workos` | `packages/convex-workos/src/index.ts` |
+| `addComponent` | Helper | `@carefully-built/cli` | `packages/cli/src/add.ts` |
 | `addLocalDays` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-calendar-widget.ts` |
 | `addOneHourToTime` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-form-time.ts` |
 | `appendInvitationToken` | Helper | `@carefully-built/auth-pages` | `packages/auth-pages/src/workos.ts` |
@@ -792,6 +809,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `captureError` | Helper | `@carefully-built/resource-kit` | `packages/resource-kit/src/index.ts` |
 | `captureReactError` | Helper | `@carefully-built/resource-kit` | `packages/resource-kit/src/error-handling.ts` |
 | `captureReactError` | Helper | `@carefully-built/resource-kit` | `packages/resource-kit/src/index.ts` |
+| `cn` | Helper | `@carefully-built/cli` | `packages/cli/src/add.test.ts` |
 | `cn` | Helper | `@carefully-built/ui` | `packages/ui/src/utils/cn.ts` |
 | `createAssociatedEntityMutationSet` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `createAuditFields` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
@@ -810,6 +828,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `createSuperAdminDataLoader` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/data-adapter.ts` |
 | `createSuperAdminDataLoader` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `createSuperAdminDataLoader` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/server.ts` |
+| `createSuperAdminHref` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/navigation.ts` |
 | `createSuperAdminPage` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/next.tsx` |
 | `createTagMutationSet` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
 | `createTimestampFields` | Convex helper | `@carefully-built/convex-crud` | `packages/convex-crud/src/index.ts` |
@@ -890,8 +909,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `getAssociationTypeChipMeta` | Helper | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `getAssociationTypeLabel` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/entity-associations.ts` |
 | `getAssociationTypeLabel` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/index.ts` |
-| `getAvailableSettingsTabs` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/index.ts` |
-| `getAvailableSettingsTabs` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `getAvailableTypeOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/associationPicker.options.tsx` |
 | `getAvailableTypeOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `getBestOrganizationAdminRoleSlug` | Helper | `@carefully-built/workos` | `packages/workos/src/server.ts` |
@@ -899,6 +916,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `getColumnSortKey` | Helper | `@carefully-built/ui` | `packages/ui/src/smart-table/sorting.ts` |
 | `getColumnTooltipText` | Helper | `@carefully-built/ui` | `packages/ui/src/smart-table/utils.ts` |
 | `getColumnValue` | Type | `@carefully-built/ui` | `packages/ui/src/smart-table/utils.ts` |
+| `getCommandPaletteFallbackIconStyle` | Helper | `@carefully-built/search` | `packages/search/src/command-palette-fallback.ts` |
 | `getCommandPaletteTypeCompletion` | Helper | `@carefully-built/search` | `packages/search/src/command-palette.tsx` |
 | `getCompactCurrencySuggestion` | Helper | `@carefully-built/forms` | `packages/forms/src/fields/compact-currency.ts` |
 | `getCompactCurrencySuggestion` | Helper | `@carefully-built/forms` | `packages/forms/src/index.ts` |
@@ -925,11 +943,13 @@ Generated list of public exports detected in `packages/*/src`.
 | `getNotePreview` | Helper | `@carefully-built/notes` | `packages/notes/src/note-helpers.ts` |
 | `getOrganizationInitials` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/index.ts` |
 | `getOrganizationInitials` | Helper | `@carefully-built/superadmin` | `packages/superadmin/src/logo.ts` |
+| `getOrganizationInitials` | Helper | `@carefully-built/workos` | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `getPhoneCountryOptions` | Type | `@carefully-built/forms` | `packages/forms/src/fields/country-phone-input.tsx` |
 | `getPhoneCountryOptions` | Type | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `getPlainTextFromRichText` | Helper | `@carefully-built/rich-text` | `packages/rich-text/src/index.ts` |
 | `getPlainTextFromRichText` | Helper | `@carefully-built/rich-text` | `packages/rich-text/src/rich-text-utils.ts` |
 | `getPublicUploadFileDownload` | Convex helper | `@carefully-built/files` | `packages/files/src/convex.ts` |
+| `getRegistryComponent` | Helper | `@carefully-built/cli` | `packages/cli/src/registry.ts` |
 | `getScheduledTimestamp` | Helper | `@carefully-built/agenda` | `packages/agenda/src/activity-calendar-widget.ts` |
 | `getSearchableSelectPortalContainer` | Helper | `@carefully-built/ui` | `packages/ui/src/search/searchable-select.tsx` |
 | `getStepOption` | Helper | `@carefully-built/automations` | `packages/automations/src/automation-options.ts` |
@@ -970,6 +990,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `listEntityAssociations` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/entity-associations.ts` |
 | `listEntityAssociations` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/index.ts` |
 | `listPublicDocumentFiles` | Convex helper | `@carefully-built/files` | `packages/files/src/convex.ts` |
+| `listRegistryComponents` | Helper | `@carefully-built/cli` | `packages/cli/src/registry.ts` |
 | `loadGoogleMapsApi` | Helper | `@carefully-built/maps-ui` | `packages/maps-ui/src/google-maps.ts` |
 | `loadGoogleMapsPlacesApi` | Helper | `@carefully-built/maps-ui` | `packages/maps-ui/src/google-maps.ts` |
 | `loginSchema` | Schema | `@carefully-built/auth-pages` | `packages/auth-pages/src/controllers.ts` |
@@ -1004,7 +1025,6 @@ Generated list of public exports detected in `packages/*/src`.
 | `parseCompactCurrencyInput` | Type | `@carefully-built/forms` | `packages/forms/src/index.ts` |
 | `parseDatePickerValue` | Type | `@carefully-built/forms` | `packages/forms/src/fields/date-picker-value.ts` |
 | `parseDatePickerValue` | Type | `@carefully-built/forms` | `packages/forms/src/index.ts` |
-| `parseImportedContactRoles` | Helper | `@carefully-built/import-export` | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `parseImportedContactRow` | Helper | `@carefully-built/import-export` | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `parseRichTextContent` | Helper | `@carefully-built/rich-text` | `packages/rich-text/src/index.ts` |
 | `parseRichTextContent` | Helper | `@carefully-built/rich-text` | `packages/rich-text/src/rich-text-utils.ts` |
@@ -1040,6 +1060,7 @@ Generated list of public exports detected in `packages/*/src`.
 | `resolveSearchableSelectDropdownPosition` | Helper | `@carefully-built/ui` | `packages/ui/src/search/searchable-select-position.ts` |
 | `resolveSettingsTab` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/index.ts` |
 | `resolveSettingsTab` | Helper | `@carefully-built/settings-ui` | `packages/settings-ui/src/settings-tabs.model.ts` |
+| `runCli` | Helper | `@carefully-built/cli` | `packages/cli/src/index.ts` |
 | `scoreFuzzyMatch` | Helper | `@carefully-built/search` | `packages/search/src/index.ts` |
 | `scoreFuzzyMatch` | Helper | `@carefully-built/ui` | `packages/ui/src/utils/search.ts` |
 | `selectActiveRelationsForEntity` | Convex helper | `@carefully-built/convex-platform` | `packages/convex-platform/src/entity-associations.ts` |

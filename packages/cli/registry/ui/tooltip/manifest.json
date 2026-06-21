@@ -1,0 +1,34 @@
+{
+  "name": "tooltip",
+  "description": "Editable source registry entry for tooltip.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Tooltip",
+    "TooltipContent",
+    "TooltipProvider",
+    "TooltipTrigger"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/tooltip.tsx",
+      "target": "components/ui/tooltip.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

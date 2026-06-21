@@ -1,0 +1,32 @@
+{
+  "name": "field-detail-row",
+  "description": "Editable source registry entry for field-detail-row.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "FieldDetailRow",
+    "FieldDetailRowProps"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/field-detail-row.tsx",
+      "target": "components/ui/field-detail-row.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

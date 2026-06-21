@@ -6,6 +6,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 |---|---|---|---|
 | `AIActionButton` | `@carefully-built/rich-text` | [docs](../packages/rich-text.md) | `packages/rich-text/src/ai-action-button.tsx` |
 | `ActivityCalendarView` | `@carefully-built/agenda` | [docs](../packages/agenda.md) | `packages/agenda/src/activity-calendar-view.tsx` |
+| `ActivityForm` | `@carefully-built/agenda` | [docs](../packages/agenda.md) | `packages/agenda/src/activity-form.tsx` |
 | `ActivityListView` | `@carefully-built/agenda` | [docs](../packages/agenda.md) | `packages/agenda/src/activity-list-view.tsx` |
 | `AppNavigationShell` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/navigation-shell.tsx` |
 | `ApplicationAccessActions` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/next-client.tsx` |
@@ -69,6 +70,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `DashboardPageLayout` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardWidget` | `@carefully-built/widgets` | [docs](../packages/widgets.md) | `packages/widgets/src/dashboard-widget.tsx` |
 | `DataWarning` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/ui.tsx` |
+| `DeleteOrganizationDialog` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/next-client.tsx` |
 | `DesktopConfirmShortcutHint` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/overlays/responsive-sheet.footer.tsx` |
 | `DesktopSheetLayout` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/overlays/responsive-sheet.layouts.tsx` |
 | `DesktopView` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/smart-table/DesktopView.tsx` |
@@ -141,6 +143,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `OrganizationLogoDropzone` | `@carefully-built/workos` | [docs](../packages/workos.md) | `packages/workos/src/organization-logo-dropzone.tsx` |
 | `OrganizationLogoMark` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/ui.tsx` |
 | `OrganizationLogo` | `@carefully-built/auth-pages` | [docs](../packages/auth-pages.md) | `packages/auth-pages/src/organizations/organization-selection.tsx` |
+| `OrganizationLogo` | `@carefully-built/workos` | [docs](../packages/workos.md) | `packages/workos/src/sidebar-org-switcher.tsx` |
 | `OrganizationSelectionPage` | `@carefully-built/auth-pages` | [docs](../packages/auth-pages.md) | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `OrganizationSelector` | `@carefully-built/auth-pages` | [docs](../packages/auth-pages.md) | `packages/auth-pages/src/organizations/organization-selection.tsx` |
 | `Pagination` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/pagination.tsx` |
@@ -150,6 +153,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `Popover` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/popover.tsx` |
 | `ProgressMetricCard` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `ResponsiveButton` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/responsive-button.tsx` |
+| `ResponsivePageActions` | `@carefully-built/app-shell` | [docs](../packages/app-shell.md) | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `ResponsiveSheet` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `RichTextEditor` | `@carefully-built/rich-text` | [docs](../packages/rich-text.md) | `packages/rich-text/src/rich-text-editor.tsx` |
 | `RichTextRenderer` | `@carefully-built/rich-text` | [docs](../packages/rich-text.md) | `packages/rich-text/src/rich-text-renderer.tsx` |
@@ -167,6 +171,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `SettingsEditDeleteActions` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsFormSheet` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsHelpTitle` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-controls.tsx` |
+| `SettingsPipesWidgetPanel` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsSectionCard` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsSwitchRow` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsTabs` | `@carefully-built/settings-ui` | [docs](../packages/settings-ui.md) | `packages/settings-ui/src/settings-tabs.tsx` |
@@ -195,6 +200,7 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `StatusBadge` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/ui.tsx` |
 | `SuperAdminApplicationsList` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminApplicationsTable` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/lists.tsx` |
+| `SuperAdminClientPage` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminCompaniesList` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminRouteShell` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminUsersList` | `@carefully-built/superadmin` | [docs](../packages/superadmin.md) | `packages/superadmin/src/lists.tsx` |

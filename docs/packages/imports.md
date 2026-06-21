@@ -57,7 +57,6 @@ Helpers in this package:
 - `buildCsvExport`
 - `CONTACT_IMPORT_HEADERS`
 - `normalizeImportedContactRow`
-- `parseImportedContactRoles`
 - `parseImportedContactRow`
 - `parseTabularImportRows`
 - `summarizeContactImportPreview`
@@ -71,7 +70,7 @@ Helpers in this package:
 - `ContactImportSummary`
 - `ContactsImportSheetProps`
 - `CsvExportColumn`
-- `ImportedContactRoles`
+- `ImportedContactStatus`
 - `ImportPreviewRow`
 - `NormalizedImportedContactRow`
 - `ParsedTabularFile`
@@ -92,7 +91,6 @@ Helpers in this package:
 | `buildCsvExport` | Helper | `packages/imports/src/export-csv.ts` |
 | `CONTACT_IMPORT_HEADERS` | Helper | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `normalizeImportedContactRow` | Helper | `packages/imports/src/contacts/contact-import-schema.ts` |
-| `parseImportedContactRoles` | Helper | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `parseImportedContactRow` | Helper | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `parseTabularImportRows` | Helper | `packages/imports/src/parse-tabular-import-file.ts` |
 | `summarizeContactImportPreview` | Helper | `packages/imports/src/contacts/contact-import-ui.tsx` |
@@ -104,7 +102,7 @@ Helpers in this package:
 | `ContactImportSummary` | Type | `packages/imports/src/contacts/contact-import-ui.tsx` |
 | `ContactsImportSheetProps` | Type | `packages/imports/src/contacts/contact-import-ui.tsx` |
 | `CsvExportColumn` | Type | `packages/imports/src/export-csv.ts` |
-| `ImportedContactRoles` | Type | `packages/imports/src/contacts/contact-import-schema.ts` |
+| `ImportedContactStatus` | Type | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `ImportPreviewRow` | Type | `packages/imports/src/import-types.ts` |
 | `NormalizedImportedContactRow` | Type | `packages/imports/src/contacts/contact-import-schema.ts` |
 | `ParsedTabularFile` | Type | `packages/imports/src/parse-tabular-import-file.ts` |

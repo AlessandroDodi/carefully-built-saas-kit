@@ -1,0 +1,37 @@
+{
+  "name": "drawer",
+  "description": "Editable source registry entry for drawer.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Drawer",
+    "DrawerContent",
+    "DrawerDescription",
+    "DrawerHeader",
+    "DrawerOverlay",
+    "DrawerPortal",
+    "DrawerTitle"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/drawer.tsx",
+      "target": "components/ui/drawer.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

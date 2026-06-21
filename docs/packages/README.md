@@ -1,13 +1,12 @@
 # Package Docs
 
-Before creating local app components, read [Using SaaS Kit Components In Apps](../using-saas-kit-components.md). Apps should import kit components first and use optional `className` / `classes` props for product styling.
-
 - [`@carefully-built/agenda`](./agenda.md): Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps.
 - [`@carefully-built/app-shell`](./app-shell.md): Reusable dashboard shell primitives for Carefully Built SaaS apps.
 - [`@carefully-built/association-picker`](./association-picker.md): Reusable entity association picker for multitenant SaaS apps.
 - [`@carefully-built/auth-pages`](./auth-pages.md): Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps.
 - [`@carefully-built/automations`](./automations.md): Reusable automation builder primitives, canvas, options, and draft validation for SaaS apps.
 - [`@carefully-built/charts`](./charts.md): Reusable chart widgets, cards, and legends for Carefully Built SaaS apps.
+- [`@carefully-built/cli`](./cli.md): Add Carefully Built SaaS components to apps as editable source, with package imports when you want managed upgrades.
 - [`@carefully-built/convex-crud`](./convex-crud.md): Reusable Convex CRUD audit, archive, and organization-record helpers.
 - [`@carefully-built/convex-multitenant`](./convex-multitenant.md): Reusable Convex multitenant guards and organization-scoped lookup helpers.
 - [`@carefully-built/convex-platform`](./convex-platform.md): Reusable Convex SaaS platform helpers for org-scoped CRUD, entity associations, and multitenant apps.
@@ -24,6 +23,7 @@ Before creating local app components, read [Using SaaS Kit Components In Apps](.
 - [`@carefully-built/notifications`](./notifications.md): Reusable notification center UI for Carefully Built SaaS apps.
 - [`@carefully-built/resource-kit`](./resource-kit.md): Reusable resource-page state helpers for CRUD SaaS surfaces.
 - [`@carefully-built/rich-text`](./rich-text.md): Reusable rich text editor, renderer, AI action affordances, and serialization helpers for SaaS apps.
+- [`@carefully-built/saas-kit`](./saas-kit.md): One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components.
 - [`@carefully-built/search`](./search.md): Reusable fuzzy search and ranking helpers for Carefully Built SaaS apps.
 - [`@carefully-built/settings-ui`](./settings-ui.md): Reusable SaaS settings tabs, section cards, and settings metrics for Carefully Built apps.
 - [`@carefully-built/superadmin`](./superadmin.md): Reusable superadmin UI for Carefully Built SaaS apps.

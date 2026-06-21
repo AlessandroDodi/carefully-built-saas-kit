@@ -1,0 +1,38 @@
+{
+  "name": "user-picker-utils",
+  "description": "Editable source registry entry for user-picker-utils.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "UserPickerCopy",
+    "UserPickerOption",
+    "buildUserInitials",
+    "filterSelectableUsers",
+    "filterUsersBySearch",
+    "formatSelectedUserSummary",
+    "formatUserDisplayName",
+    "toggleUserSelection"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/user-picker-utils.ts",
+      "target": "components/ui/user-picker-utils.ts"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

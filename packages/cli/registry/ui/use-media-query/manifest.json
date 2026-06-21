@@ -1,0 +1,32 @@
+{
+  "name": "use-media-query",
+  "description": "Editable source registry entry for use-media-query.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "useIsMobile",
+    "useMediaQuery"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    },
+    {
+      "source": "utils/use-media-query.ts",
+      "target": "components/ui/use-media-query.ts"
+    }
+  ]
+}

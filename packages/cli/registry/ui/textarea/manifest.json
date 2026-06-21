@@ -1,0 +1,31 @@
+{
+  "name": "textarea",
+  "description": "Editable source registry entry for textarea.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Textarea"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/textarea.tsx",
+      "target": "components/ui/textarea.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

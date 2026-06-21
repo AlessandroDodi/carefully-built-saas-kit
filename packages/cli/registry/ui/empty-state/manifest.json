@@ -1,0 +1,63 @@
+{
+  "name": "empty-state",
+  "description": "Editable source registry entry for empty-state.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "CollectionEmptyState",
+    "EmptyStateCard",
+    "EmptyStateCardProps",
+    "InitialEmptyState",
+    "InitialEmptyStateProps",
+    "NoResultsState",
+    "NoResultsStateProps",
+    "ResolveCollectionEmptyStateOptions",
+    "resolveCollectionEmptyState"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "empty-state/collection-empty-state.ts",
+      "target": "components/ui/empty-state/collection-empty-state.ts"
+    },
+    {
+      "source": "empty-state/empty-state-card.tsx",
+      "target": "components/ui/empty-state/empty-state-card.tsx"
+    },
+    {
+      "source": "empty-state/index.ts",
+      "target": "components/ui/empty-state/index.ts"
+    },
+    {
+      "source": "empty-state/initial-empty-state.tsx",
+      "target": "components/ui/empty-state/initial-empty-state.tsx"
+    },
+    {
+      "source": "empty-state/no-results-state.tsx",
+      "target": "components/ui/empty-state/no-results-state.tsx"
+    },
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "primitives/card.tsx",
+      "target": "components/ui/card.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

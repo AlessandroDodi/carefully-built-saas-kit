@@ -1,0 +1,330 @@
+{
+  "name": "@carefully-built/saas-kit",
+  "version": "0.1.0",
+  "description": "One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/saas-kit"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "convex",
+    "workos",
+    "saas",
+    "components",
+    "shadcn"
+  ],
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./agenda": {
+      "types": "./dist/agenda.d.mts",
+      "import": "./dist/agenda.mjs",
+      "default": "./dist/agenda.mjs"
+    },
+    "./app-shell": {
+      "types": "./dist/app-shell.d.mts",
+      "import": "./dist/app-shell.mjs",
+      "default": "./dist/app-shell.mjs"
+    },
+    "./association-picker": {
+      "types": "./dist/association-picker.d.mts",
+      "import": "./dist/association-picker.mjs",
+      "default": "./dist/association-picker.mjs"
+    },
+    "./auth-pages": {
+      "types": "./dist/auth-pages.d.mts",
+      "import": "./dist/auth-pages.mjs",
+      "default": "./dist/auth-pages.mjs"
+    },
+    "./automations": {
+      "types": "./dist/automations.d.mts",
+      "import": "./dist/automations.mjs",
+      "default": "./dist/automations.mjs"
+    },
+    "./charts": {
+      "types": "./dist/charts.d.mts",
+      "import": "./dist/charts.mjs",
+      "default": "./dist/charts.mjs"
+    },
+    "./convex-crud": {
+      "types": "./dist/convex-crud.d.mts",
+      "import": "./dist/convex-crud.mjs",
+      "default": "./dist/convex-crud.mjs"
+    },
+    "./convex-multitenant": {
+      "types": "./dist/convex-multitenant.d.mts",
+      "import": "./dist/convex-multitenant.mjs",
+      "default": "./dist/convex-multitenant.mjs"
+    },
+    "./convex-platform": {
+      "types": "./dist/convex-platform.d.mts",
+      "import": "./dist/convex-platform.mjs",
+      "default": "./dist/convex-platform.mjs"
+    },
+    "./convex-workos": {
+      "types": "./dist/convex-workos.d.mts",
+      "import": "./dist/convex-workos.mjs",
+      "default": "./dist/convex-workos.mjs"
+    },
+    "./crud": {
+      "types": "./dist/crud.d.mts",
+      "import": "./dist/crud.mjs",
+      "default": "./dist/crud.mjs"
+    },
+    "./custom-fields": {
+      "types": "./dist/custom-fields.d.mts",
+      "import": "./dist/custom-fields.mjs",
+      "default": "./dist/custom-fields.mjs"
+    },
+    "./files": {
+      "types": "./dist/files.d.mts",
+      "import": "./dist/files.mjs",
+      "default": "./dist/files.mjs"
+    },
+    "./forms": {
+      "types": "./dist/forms.d.mts",
+      "import": "./dist/forms.mjs",
+      "default": "./dist/forms.mjs"
+    },
+    "./import-export": {
+      "types": "./dist/import-export.d.mts",
+      "import": "./dist/import-export.mjs",
+      "default": "./dist/import-export.mjs"
+    },
+    "./kanban": {
+      "types": "./dist/kanban.d.mts",
+      "import": "./dist/kanban.mjs",
+      "default": "./dist/kanban.mjs"
+    },
+    "./legal-ui": {
+      "types": "./dist/legal-ui.d.mts",
+      "import": "./dist/legal-ui.mjs",
+      "default": "./dist/legal-ui.mjs"
+    },
+    "./maps-ui": {
+      "types": "./dist/maps-ui.d.mts",
+      "import": "./dist/maps-ui.mjs",
+      "default": "./dist/maps-ui.mjs"
+    },
+    "./notes": {
+      "types": "./dist/notes.d.mts",
+      "import": "./dist/notes.mjs",
+      "default": "./dist/notes.mjs"
+    },
+    "./notifications": {
+      "types": "./dist/notifications.d.mts",
+      "import": "./dist/notifications.mjs",
+      "default": "./dist/notifications.mjs"
+    },
+    "./resource-kit": {
+      "types": "./dist/resource-kit.d.mts",
+      "import": "./dist/resource-kit.mjs",
+      "default": "./dist/resource-kit.mjs"
+    },
+    "./rich-text": {
+      "types": "./dist/rich-text.d.mts",
+      "import": "./dist/rich-text.mjs",
+      "default": "./dist/rich-text.mjs"
+    },
+    "./search": {
+      "types": "./dist/search.d.mts",
+      "import": "./dist/search.mjs",
+      "default": "./dist/search.mjs"
+    },
+    "./settings-ui": {
+      "types": "./dist/settings-ui.d.mts",
+      "import": "./dist/settings-ui.mjs",
+      "default": "./dist/settings-ui.mjs"
+    },
+    "./superadmin": {
+      "types": "./dist/superadmin.d.mts",
+      "import": "./dist/superadmin.mjs",
+      "default": "./dist/superadmin.mjs"
+    },
+    "./theme-ui": {
+      "types": "./dist/theme-ui.d.mts",
+      "import": "./dist/theme-ui.mjs",
+      "default": "./dist/theme-ui.mjs"
+    },
+    "./ui": {
+      "types": "./dist/ui.d.mts",
+      "import": "./dist/ui.mjs",
+      "default": "./dist/ui.mjs"
+    },
+    "./user-picker": {
+      "types": "./dist/user-picker.d.mts",
+      "import": "./dist/user-picker.mjs",
+      "default": "./dist/user-picker.mjs"
+    },
+    "./widgets": {
+      "types": "./dist/widgets.d.mts",
+      "import": "./dist/widgets.mjs",
+      "default": "./dist/widgets.mjs"
+    },
+    "./workos": {
+      "types": "./dist/workos.d.mts",
+      "import": "./dist/workos.mjs",
+      "default": "./dist/workos.mjs"
+    },
+    "./auth-pages/forms": {
+      "types": "./dist/auth-pages/forms.d.mts",
+      "import": "./dist/auth-pages/forms.mjs",
+      "default": "./dist/auth-pages/forms.mjs"
+    },
+    "./auth-pages/controllers": {
+      "types": "./dist/auth-pages/controllers.d.mts",
+      "import": "./dist/auth-pages/controllers.mjs",
+      "default": "./dist/auth-pages/controllers.mjs"
+    },
+    "./auth-pages/config": {
+      "types": "./dist/auth-pages/config.d.mts",
+      "import": "./dist/auth-pages/config.mjs",
+      "default": "./dist/auth-pages/config.mjs"
+    },
+    "./auth-pages/organizations": {
+      "types": "./dist/auth-pages/organizations.d.mts",
+      "import": "./dist/auth-pages/organizations.mjs",
+      "default": "./dist/auth-pages/organizations.mjs"
+    },
+    "./auth-pages/pages": {
+      "types": "./dist/auth-pages/pages.d.mts",
+      "import": "./dist/auth-pages/pages.mjs",
+      "default": "./dist/auth-pages/pages.mjs"
+    },
+    "./auth-pages/social": {
+      "types": "./dist/auth-pages/social.d.mts",
+      "import": "./dist/auth-pages/social.mjs",
+      "default": "./dist/auth-pages/social.mjs"
+    },
+    "./auth-pages/workos": {
+      "types": "./dist/auth-pages/workos.d.mts",
+      "import": "./dist/auth-pages/workos.mjs",
+      "default": "./dist/auth-pages/workos.mjs"
+    },
+    "./agenda/styles.css": "./dist/agenda/styles.css",
+    "./files/convex": {
+      "types": "./dist/files/convex.d.mts",
+      "import": "./dist/files/convex.mjs",
+      "default": "./dist/files/convex.mjs"
+    },
+    "./next": {
+      "types": "./dist/next.d.mts",
+      "import": "./dist/next.mjs",
+      "default": "./dist/next.mjs"
+    },
+    "./search/command-palette": {
+      "types": "./dist/search/command-palette.d.mts",
+      "import": "./dist/search/command-palette.mjs",
+      "default": "./dist/search/command-palette.mjs"
+    },
+    "./server": {
+      "types": "./dist/server.d.mts",
+      "import": "./dist/server.mjs",
+      "default": "./dist/server.mjs"
+    },
+    "./settings/client": {
+      "types": "./dist/settings/client.d.mts",
+      "import": "./dist/settings/client.mjs",
+      "default": "./dist/settings/client.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts src/agenda.ts src/app-shell.ts src/association-picker.ts src/auth-pages.ts src/automations.ts src/charts.ts src/convex-crud.ts src/convex-multitenant.ts src/convex-platform.ts src/convex-workos.ts src/crud.ts src/custom-fields.ts src/files.ts src/forms.ts src/import-export.ts src/kanban.ts src/legal-ui.ts src/maps-ui.ts src/notes.ts src/notifications.ts src/resource-kit.ts src/rich-text.ts src/search.ts src/settings-ui.ts src/superadmin.ts src/theme-ui.ts src/ui.ts src/user-picker.ts src/widgets.ts src/workos.ts src/server.ts src/next.ts src/auth-pages/forms.ts src/auth-pages/controllers.ts src/auth-pages/config.ts src/auth-pages/organizations.ts src/auth-pages/pages.ts src/auth-pages/social.ts src/auth-pages/workos.ts src/files/convex.ts src/search/command-palette.ts src/settings/client.ts --format esm --dts --unbundle && mkdir -p dist/agenda && cp src/agenda/styles.css dist/agenda/styles.css",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@carefully-built/agenda": "0.1.5",
+    "@carefully-built/app-shell": "0.1.2",
+    "@carefully-built/association-picker": "0.1.1",
+    "@carefully-built/auth-pages": "0.1.7",
+    "@carefully-built/automations": "0.1.1",
+    "@carefully-built/charts": "0.1.1",
+    "@carefully-built/convex-crud": "0.1.8",
+    "@carefully-built/convex-multitenant": "0.1.2",
+    "@carefully-built/convex-platform": "0.1.7",
+    "@carefully-built/convex-workos": "0.1.0",
+    "@carefully-built/crud": "0.1.2",
+    "@carefully-built/custom-fields": "0.1.2",
+    "@carefully-built/files": "0.1.4",
+    "@carefully-built/forms": "0.1.8",
+    "@carefully-built/import-export": "0.1.2",
+    "@carefully-built/kanban": "0.1.0",
+    "@carefully-built/legal-ui": "0.1.1",
+    "@carefully-built/maps-ui": "0.1.3",
+    "@carefully-built/notes": "0.1.2",
+    "@carefully-built/notifications": "0.1.0",
+    "@carefully-built/resource-kit": "0.1.2",
+    "@carefully-built/rich-text": "0.1.0",
+    "@carefully-built/search": "0.1.1",
+    "@carefully-built/settings-ui": "0.1.4",
+    "@carefully-built/superadmin": "0.1.8",
+    "@carefully-built/theme-ui": "0.1.0",
+    "@carefully-built/ui": "0.1.15",
+    "@carefully-built/user-picker": "0.1.1",
+    "@carefully-built/widgets": "0.1.0",
+    "@carefully-built/workos": "0.1.2"
+  },
+  "peerDependencies": {
+    "@fullcalendar/core": "^6.1.0",
+    "@fullcalendar/daygrid": "^6.1.0",
+    "@fullcalendar/interaction": "^6.1.0",
+    "@fullcalendar/react": "^6.1.0",
+    "@fullcalendar/timegrid": "^6.1.0",
+    "@hookform/resolvers": ">=5.0.0",
+    "@radix-ui/react-slot": "^1.0.0",
+    "@tiptap/extension-link": ">=3.0.0",
+    "@tiptap/extension-table": ">=3.0.0",
+    "@tiptap/extension-table-cell": ">=3.0.0",
+    "@tiptap/extension-table-header": ">=3.0.0",
+    "@tiptap/extension-table-row": ">=3.0.0",
+    "@tiptap/react": ">=3.0.0",
+    "@tiptap/starter-kit": ">=3.0.0",
+    "@xyflow/react": "^12.10.2",
+    "class-variance-authority": ">=0.7.0",
+    "clsx": ">=2.0.0",
+    "convex": ">=1.0.0",
+    "date-fns": ">=4.0.0",
+    "lucide-react": ">=0.400.0 || >=1.0.0",
+    "next": ">=15.0.0 || >=16.0.0",
+    "nuqs": ">=2.0.0",
+    "papaparse": "^5.0.0",
+    "radix-ui": ">=1.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-country-flag": ">=3.0.0",
+    "react-day-picker": ">=9.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "react-hook-form": ">=7.0.0",
+    "react-phone-number-input": ">=3.0.0",
+    "recharts": ">=2.0.0",
+    "sonner": ">=1.0.0 || >=2.0.0",
+    "tailwind-merge": ">=2.0.0 || >=3.0.0",
+    "vaul": ">=1.0.0",
+    "zod": ">=4.0.0"
+  }
+}

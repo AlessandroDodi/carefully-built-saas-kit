@@ -1,0 +1,54 @@
+{
+  "name": "@carefully-built/cli",
+  "version": "0.1.4",
+  "description": "Add Carefully Built SaaS components to apps as editable source, with package imports when you want managed upgrades.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "cli",
+    "shadcn",
+    "saas"
+  ],
+  "bin": {
+    "carefully-built": "dist/index.mjs"
+  },
+  "files": [
+    "assets",
+    "dist",
+    "registry",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts --format esm --dts",
+    "prepublishOnly": "bun run registry:build && bun run typecheck && bun run test && bun run build",
+    "registry:build": "node scripts/build-registry.mjs",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.5"
+  }
+}

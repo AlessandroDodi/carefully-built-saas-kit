@@ -1,0 +1,35 @@
+{
+  "name": "button",
+  "description": "Editable source registry entry for button.",
+  "importPath": "@carefully-built/ui",
+  "exports": [
+    "Button",
+    "ButtonProps",
+    "ButtonSize",
+    "ButtonVariant",
+    "buttonVariants"
+  ],
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "react",
+    "react-dom",
+    "radix-ui",
+    "lucide-react",
+    "react-day-picker",
+    "vaul"
+  ],
+  "files": [
+    {
+      "source": "primitives/button.tsx",
+      "target": "components/ui/button.tsx"
+    },
+    {
+      "source": "utils/cn.ts",
+      "target": "lib/utils.ts"
+    }
+  ]
+}

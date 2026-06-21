@@ -30,6 +30,7 @@ Components in this package:
 - `ApplicationAccessActions`: import from `@carefully-built/superadmin`.
 - `Badge`: import from `@carefully-built/superadmin`.
 - `DataWarning`: import from `@carefully-built/superadmin`.
+- `DeleteOrganizationDialog`: import from `@carefully-built/superadmin`.
 - `FeatureFlagList`: import from `@carefully-built/superadmin`.
 - `InviteUserDialog`: import from `@carefully-built/superadmin`.
 - `MetricCard`: import from `@carefully-built/superadmin`.
@@ -38,6 +39,7 @@ Components in this package:
 - `StatusBadge`: import from `@carefully-built/superadmin`.
 - `SuperAdminApplicationsList`: import from `@carefully-built/superadmin`.
 - `SuperAdminApplicationsTable`: import from `@carefully-built/superadmin`.
+- `SuperAdminClientPage`: import from `@carefully-built/superadmin`.
 - `SuperAdminCompaniesList`: import from `@carefully-built/superadmin`.
 - `SuperAdminRouteShell`: import from `@carefully-built/superadmin`.
 - `SuperAdminUsersList`: import from `@carefully-built/superadmin`.
@@ -59,6 +61,7 @@ Helpers in this package:
 - `createSuperAdminDataLoader`
 - `createSuperAdminDataLoader`
 - `createSuperAdminDataLoader`
+- `createSuperAdminHref`
 - `createSuperAdminPage`
 - `DataWarning`
 - `formatShortDate`
@@ -87,7 +90,9 @@ Helpers in this package:
 - `CreateSuperAdminPageOptions`
 - `SuperAdminActionState`
 - `SuperAdminApplication`
+- `SuperAdminClientActions`
 - `SuperAdminData`
+- `SuperAdminExtraNavItem`
 - `SuperAdminFeatureFlag`
 - `SuperAdminFormAction`
 - `SuperAdminPlan`
@@ -106,6 +111,7 @@ Helpers in this package:
 | `ApplicationAccessActions` | Component | `packages/superadmin/src/next-client.tsx` |
 | `Badge` | Component | `packages/superadmin/src/ui.tsx` |
 | `DataWarning` | Component | `packages/superadmin/src/ui.tsx` |
+| `DeleteOrganizationDialog` | Component | `packages/superadmin/src/next-client.tsx` |
 | `FeatureFlagList` | Component | `packages/superadmin/src/next-client.tsx` |
 | `InviteUserDialog` | Component | `packages/superadmin/src/next-client.tsx` |
 | `MetricCard` | Component | `packages/superadmin/src/ui.tsx` |
@@ -114,6 +120,7 @@ Helpers in this package:
 | `StatusBadge` | Component | `packages/superadmin/src/ui.tsx` |
 | `SuperAdminApplicationsList` | Component | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminApplicationsTable` | Component | `packages/superadmin/src/lists.tsx` |
+| `SuperAdminClientPage` | Component | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminCompaniesList` | Component | `packages/superadmin/src/lists.tsx` |
 | `SuperAdminRouteShell` | Component | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminUsersList` | Component | `packages/superadmin/src/lists.tsx` |
@@ -126,6 +133,7 @@ Helpers in this package:
 | `createSuperAdminDataLoader` | Helper | `packages/superadmin/src/data-adapter.ts` |
 | `createSuperAdminDataLoader` | Helper | `packages/superadmin/src/index.ts` |
 | `createSuperAdminDataLoader` | Helper | `packages/superadmin/src/server.ts` |
+| `createSuperAdminHref` | Helper | `packages/superadmin/src/navigation.ts` |
 | `createSuperAdminPage` | Helper | `packages/superadmin/src/next.tsx` |
 | `DataWarning` | Helper | `packages/superadmin/src/index.ts` |
 | `formatShortDate` | Helper | `packages/superadmin/src/index.ts` |
@@ -151,7 +159,9 @@ Helpers in this package:
 | `CreateSuperAdminPageOptions` | Type | `packages/superadmin/src/next.tsx` |
 | `SuperAdminActionState` | Type | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminApplication` | Type | `packages/superadmin/src/types.ts` |
+| `SuperAdminClientActions` | Type | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminData` | Type | `packages/superadmin/src/types.ts` |
+| `SuperAdminExtraNavItem` | Type | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminFeatureFlag` | Type | `packages/superadmin/src/types.ts` |
 | `SuperAdminFormAction` | Type | `packages/superadmin/src/next-client.tsx` |
 | `SuperAdminPlan` | Type | `packages/superadmin/src/types.ts` |
