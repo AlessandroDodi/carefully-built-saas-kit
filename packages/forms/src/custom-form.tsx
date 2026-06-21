@@ -5,12 +5,11 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import type { ReactNode } from 'react';
 import type { DefaultValues, FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form';
-import type { z } from 'zod';
 
 import { buildCustomFormOptions } from './custom-form-options';
 
 interface CustomFormProps<T extends FieldValues> {
-  readonly schema: z.ZodType<T>;
+  readonly schema: unknown;
   readonly defaultValues: DefaultValues<T>;
   readonly onSubmit: SubmitHandler<T>;
   readonly children: ReactNode | ((methods: UseFormReturn<T>) => ReactNode);

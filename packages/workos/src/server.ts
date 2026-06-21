@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 export type WidgetScopes =
   | 'widgets:users-table:manage'
   | 'widgets:sso:manage'
@@ -30,7 +28,7 @@ type WorkOSWidgetTokenResult =
       readonly token: string;
     }
   | {
-      readonly response: NextResponse;
+      readonly response: Response;
     };
 
 const ADMIN_ROLE_SLUG_HINTS = [
@@ -51,13 +49,13 @@ export async function getWorkOSWidgetToken({
 
   if (!session?.user) {
     return {
-      response: NextResponse.json({ error: 'Non autorizzato' }, { status: 401 }),
+      response: Response.json({ error: 'Non autorizzato' }, { status: 401 }),
     };
   }
 
   if (!session.organizationId) {
     return {
-      response: NextResponse.json(
+      response: Response.json(
         { error: 'Organizzazione non disponibile nella sessione' },
         { status: 400 },
       ),
@@ -74,21 +72,21 @@ export async function getWorkOSWidgetToken({
   } catch (error) {
     console.error(`Failed to ${logContext}:`, error);
     return {
-      response: NextResponse.json({ error: errorMessage }, { status: 500 }),
+      response: Response.json({ error: errorMessage }, { status: 500 }),
     };
   }
 }
 
 export async function createWorkOSWidgetTokenResponse(
   options: WorkOSWidgetTokenOptions,
-): Promise<NextResponse> {
+): Promise<Response> {
   const result = await getWorkOSWidgetToken(options);
 
   if ('response' in result) {
     return result.response;
   }
 
-  return NextResponse.json({ token: result.token });
+  return Response.json({ token: result.token });
 }
 
 export interface WorkOSOrganizationRole {
