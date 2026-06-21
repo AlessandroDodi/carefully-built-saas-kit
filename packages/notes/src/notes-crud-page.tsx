@@ -29,6 +29,10 @@ interface NotesCrudPageProps<TNote extends NoteListItem> {
     readonly value: readonly string[];
     readonly onChange: (value: readonly string[]) => void;
   }) => React.ReactNode;
+  readonly bodyField?: (args: {
+    readonly value: string;
+    readonly onChange: (value: string) => void;
+  }) => React.ReactNode;
   readonly onCreate: (values: NoteCrudValues) => Promise<void> | void;
   readonly onDelete: (note: TNote) => Promise<void> | void;
   readonly onUpdate: (note: TNote, values: NoteCrudValues) => Promise<void> | void;
@@ -45,6 +49,7 @@ export function NotesCrudPage<TNote extends NoteListItem>({
   isLoading = false,
   notes,
   associationField,
+  bodyField,
   onCreate,
   onDelete,
   onUpdate,
@@ -187,18 +192,25 @@ export function NotesCrudPage<TNote extends NoteListItem>({
               placeholder="Note title"
             />
           </div>
-          <div className="space-y-2">
-            <Label htmlFor="note-body">Body</Label>
-            <Textarea
-              id="note-body"
-              value={draft.body}
-              onChange={(event) => {
-                setDraft((current) => ({ ...current, body: event.target.value }));
-              }}
-              placeholder="Write the note..."
-              className="min-h-40"
-            />
-          </div>
+          {bodyField?.({
+            value: draft.body,
+            onChange: (body) => {
+              setDraft((current) => ({ ...current, body }));
+            },
+          }) ?? (
+            <div className="space-y-2">
+              <Label htmlFor="note-body">Body</Label>
+              <Textarea
+                id="note-body"
+                value={draft.body}
+                onChange={(event) => {
+                  setDraft((current) => ({ ...current, body: event.target.value }));
+                }}
+                placeholder="Write the note..."
+                className="min-h-40"
+              />
+            </div>
+          )}
           {associationField?.({
             value: draft.associations,
             onChange: (associations) => {
