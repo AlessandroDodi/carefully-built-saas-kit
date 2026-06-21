@@ -3,13 +3,7 @@
 import { Download, FileSpreadsheet } from 'lucide-react';
 import { useMemo } from 'react';
 
-import {
-  Button,
-  DisplayDate,
-  FileDropzone,
-  SmartTable,
-  useTableSorting,
-} from '@carefully-built/ui';
+import { Button, FileDropzone, SmartTable, useTableSorting } from '@carefully-built/ui';
 import type { Column } from '@carefully-built/ui';
 
 import { EntityImportSheet } from '../entity-import-sheet';
@@ -28,11 +22,11 @@ export interface ContactImportSummary {
 
 export function summarizeContactImportPreview(summary: ContactImportSummary) {
   return [
-    { key: 'total', label: 'Totali', value: summary.total },
-    { key: 'create', label: 'Nuovi', value: summary.create },
-    { key: 'update', label: 'Aggiornati', value: summary.update },
-    { key: 'skip', label: 'Saltati', value: summary.skip },
-    { key: 'reject', label: 'Scartati', value: summary.reject },
+    { key: 'total', label: 'Total', value: summary.total },
+    { key: 'create', label: 'New', value: summary.create },
+    { key: 'update', label: 'Updated', value: summary.update },
+    { key: 'skip', label: 'Skipped', value: summary.skip },
+    { key: 'reject', label: 'Rejected', value: summary.reject },
   ] as const;
 }
 
@@ -62,24 +56,16 @@ export function buildContactImportMutationPayload(rows: ContactImportPreviewRow[
   };
 }
 
-function formatRoles(roles: readonly ('buyer' | 'seller')[] | undefined): string {
-  if (!roles || roles.length === 0) {
-    return '-';
-  }
-
-  return roles.map((role) => (role === 'buyer' ? 'Buyer' : 'Seller')).join(', ');
-}
-
 function getActionLabel(action: ContactImportPreviewRow['action']): string {
   switch (action) {
     case 'create':
-      return 'Nuovo';
+      return 'New';
     case 'update':
-      return 'Aggiorna';
+      return 'Update';
     case 'skip':
-      return 'Salta';
+      return 'Skip';
     case 'reject':
-      return 'Scarta';
+      return 'Reject';
     default:
       return action;
   }
@@ -145,16 +131,16 @@ export function ContactsImportSheet({
   const columns = useMemo<Column<ContactImportPreviewRow>[]>(
     () => [
       {
-        header: 'First name',
-        accessor: 'normalized.firstName',
+        header: 'Name',
+        accessor: 'normalized.name',
         width: '16%',
-        render: (_, row) => row.normalized?.firstName ?? '-',
+        render: (_, row) => row.normalized?.name ?? '-',
       },
       {
-        header: 'Last name',
-        accessor: 'normalized.lastName',
+        header: 'Company',
+        accessor: 'normalized.company',
         width: '16%',
-        render: (_, row) => row.normalized?.lastName || '-',
+        render: (_, row) => row.normalized?.company || '-',
       },
       {
         header: 'Email',
@@ -169,20 +155,19 @@ export function ContactsImportSheet({
         render: (_, row) => formatPhoneDisplay(row.normalized?.phone),
       },
       {
-        header: 'Roles',
-        accessor: 'normalized.roles',
+        header: 'Status',
+        accessor: 'normalized.status',
         width: '12%',
-        render: (_, row) => formatRoles(row.normalized?.roles),
+        render: (_, row) => row.normalized?.status ?? '-',
       },
       {
-        header: 'Birthday',
-        accessor: 'normalized.birthday',
+        header: 'Owner',
+        accessor: 'normalized.owner',
         width: '14%',
-        render: (_, row) =>
-          row.normalized?.birthday ? <DisplayDate value={row.normalized.birthday} /> : '-',
+        render: (_, row) => row.normalized?.owner || '-',
       },
       {
-        header: 'Esito',
+        header: 'Result',
         accessor: 'action',
         width: '10%',
         render: (_, row) => (
@@ -194,7 +179,7 @@ export function ContactsImportSheet({
         ),
       },
       {
-        header: 'Dettaglio',
+        header: 'Detail',
         accessor: 'reason',
         width: '20%',
         render: (_, row) => row.reason || '-',
@@ -211,8 +196,8 @@ export function ContactsImportSheet({
     <EntityImportSheet
       open={open}
       onOpenChange={onOpenChange}
-      title="Importa contatti da CSV"
-      confirmLabel={isImporting ? 'Importazione in corso...' : 'Importa'}
+      title="Import contacts from CSV"
+      confirmLabel={isImporting ? 'Importing...' : 'Import'}
       confirmDisabled={
         isParsing ||
         isImporting ||
@@ -227,16 +212,16 @@ export function ContactsImportSheet({
         <div className="flex flex-wrap gap-2">
           <Button type="button" variant="outline" onClick={onDownloadTemplate}>
             <Download className="size-4" />
-            Scarica template CSV
+            Download CSV template
           </Button>
         </div>
 
         <FileDropzone
           accept=".csv"
           onFileSelect={onFileSelected}
-          previewAlt="File import contatti"
-          title={fileName ? `File selezionato: ${fileName}` : 'Lascia qui o esplora file'}
-          helperText={isParsing ? 'Parsing del file in corso...' : 'Formato supportato: .csv'}
+          previewAlt="Contact import file"
+          title={fileName ? `Selected file: ${fileName}` : 'Drop CSV here or browse'}
+          helperText={isParsing ? 'Parsing file...' : 'Supported format: .csv'}
           emptyIcon={<FileSpreadsheet className="size-8" />}
         />
 
@@ -246,7 +231,7 @@ export function ContactsImportSheet({
             checked={overwriteExisting}
             onChange={(event) => onOverwriteExistingChange(event.target.checked)}
           />
-          Sovrascrivi contatti esistenti
+          Overwrite existing contacts
         </label>
 
         {fileError ? <p className="text-destructive text-sm">{fileError}</p> : null}

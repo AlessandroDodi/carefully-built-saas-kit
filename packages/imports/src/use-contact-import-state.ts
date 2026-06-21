@@ -124,7 +124,7 @@ export function useContactImportState({
       );
 
       if (missingHeaders.length > 0) {
-        throw new Error(`Intestazioni mancanti: ${missingHeaders.join(', ')}`);
+        throw new Error(`Missing headers: ${missingHeaders.join(', ')}`);
       }
 
       const rows = parsedFile.rows.map((row, index) => parseImportedContactRow(row, index + 2));
@@ -155,7 +155,7 @@ export function useContactImportState({
     },
     downloadCsvTemplate: () => {
       downloadBlob(
-        'template-import-contatti.csv',
+        'contacts-import-template.csv',
         new Blob([buildContactImportCsvTemplate()], {
           type: 'text/csv;charset=utf-8',
         }),

@@ -1,98 +1,76 @@
-import { z } from 'zod';
 import type { ParsedTabularImportRow } from '../import-types';
-
-function isValidDateParts(year: number, month: number, day: number): boolean {
-  const date = new Date(year, month - 1, day);
-
-  return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
-}
-
-function normalizeContactBirthdayInput(value: string | undefined): string | undefined {
-  const normalizedValue = value?.trim();
-
-  if (!normalizedValue) {
-    return undefined;
-  }
-
-  const isoMatch = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalizedValue);
-  const localizedMatch = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(normalizedValue);
-  const year = isoMatch ? Number(isoMatch[1]) : localizedMatch ? Number(localizedMatch[3]) : NaN;
-  const month = isoMatch ? Number(isoMatch[2]) : localizedMatch ? Number(localizedMatch[2]) : NaN;
-  const day = isoMatch ? Number(isoMatch[3]) : localizedMatch ? Number(localizedMatch[1]) : NaN;
-
-  if (!Number.isInteger(year) || !Number.isInteger(month) || !Number.isInteger(day) || !isValidDateParts(year, month, day)) {
-    throw new Error('Invalid birthday');
-  }
-
-  return [
-    String(year).padStart(4, '0'),
-    String(month).padStart(2, '0'),
-    String(day).padStart(2, '0'),
-  ].join('-');
-}
+import { z } from 'zod';
 
 export const CONTACT_IMPORT_HEADERS = [
-  'firstName',
-  'lastName',
+  'name',
+  'company',
   'email',
   'phone',
-  'roles',
+  'role',
+  'owner',
+  'status',
+  'value',
   'notes',
-  'birthday',
 ] as const;
 
-const CONTACT_ROLE_LABELS = {
-  Buyer: 'buyer',
-  Seller: 'seller',
-} as const;
+const CONTACT_STATUS_VALUES = ['new', 'qualified', 'proposal', 'customer'] as const;
 
 const importedContactRowSchema = z.object({
-  firstName: z.string().trim().min(1, 'First name is required'),
-  lastName: z.string().trim().optional().default(''),
+  name: z.string().trim().min(1, 'Name is required'),
+  company: z.string().trim().min(1, 'Company is required'),
   email: z.string().trim().optional().default(''),
   phone: z.string().trim().optional().default(''),
-  roles: z.string().trim().min(1, 'Roles are required'),
+  role: z.string().trim().optional().default(''),
+  owner: z.string().trim().optional().default(''),
+  status: z.string().trim().optional().default('new'),
+  value: z.string().trim().optional().default(''),
   notes: z.string().trim().optional().default(''),
-  birthday: z.string().trim().optional().default(''),
 });
 
-export type ImportedContactRoles = 'buyer' | 'seller';
+export type ImportedContactStatus = (typeof CONTACT_STATUS_VALUES)[number];
 
 export interface NormalizedImportedContactRow {
-  readonly firstName: string;
-  readonly lastName: string;
+  readonly name: string;
+  readonly company: string;
   readonly email: string;
   readonly phone: string;
-  readonly roles: ImportedContactRoles[];
+  readonly role: string;
+  readonly owner: string;
+  readonly status: ImportedContactStatus;
+  readonly value?: number;
   readonly notes: string;
-  readonly birthday: string;
 }
 
 function normalizeContactImportValue(value: string): string {
   return value.trim();
 }
 
-export function parseImportedContactRoles(value: string): ImportedContactRoles[] {
-  const labels = value
-    .split(';')
-    .map((entry) => normalizeContactImportValue(entry))
-    .filter((entry) => entry.length > 0);
+function normalizeStatus(value: string): ImportedContactStatus {
+  const normalizedStatus = normalizeContactImportValue(value).toLowerCase().replace(/\s+/g, '_');
 
-  const unsupportedLabels = labels.filter(
-    (label) => !(label in CONTACT_ROLE_LABELS)
-  );
-
-  if (unsupportedLabels.length > 0) {
-    throw new Error(`Unsupported roles: ${unsupportedLabels.join(', ')}`);
+  if (!normalizedStatus) {
+    return 'new';
   }
 
-  return Array.from(
-    new Set(
-      labels.map(
-        (label) => CONTACT_ROLE_LABELS[label as keyof typeof CONTACT_ROLE_LABELS]
-      )
-    )
-  ).sort();
+  if (!CONTACT_STATUS_VALUES.includes(normalizedStatus as ImportedContactStatus)) {
+    throw new Error(`Unsupported status: ${value}`);
+  }
+
+  return normalizedStatus as ImportedContactStatus;
+}
+
+function normalizeValue(value: string): number | undefined {
+  const normalizedValue = normalizeContactImportValue(value).replaceAll(',', '');
+  if (!normalizedValue) {
+    return undefined;
+  }
+
+  const parsedValue = Number(normalizedValue);
+  if (!Number.isFinite(parsedValue)) {
+    throw new Error(`Invalid value: ${value}`);
+  }
+
+  return parsedValue;
 }
 
 export function normalizeImportedContactRow(
@@ -101,13 +79,15 @@ export function normalizeImportedContactRow(
   const parsed = importedContactRowSchema.parse(row);
 
   return {
-    firstName: parsed.firstName,
-    lastName: parsed.lastName || '',
+    name: parsed.name,
+    company: parsed.company,
     email: parsed.email || '',
     phone: parsed.phone || '',
-    roles: parseImportedContactRoles(parsed.roles),
+    role: parsed.role || '',
+    owner: parsed.owner || '',
+    status: normalizeStatus(parsed.status),
+    value: normalizeValue(parsed.value),
     notes: parsed.notes || '',
-    birthday: normalizeContactBirthdayInput(parsed.birthday) ?? '',
   };
 }
 
