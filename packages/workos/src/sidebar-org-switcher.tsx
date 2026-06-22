@@ -25,6 +25,7 @@ import {
 
 export interface WorkOSOrganization {
   readonly id: string;
+  readonly logoUrl?: string | null;
   readonly name: string;
   readonly role?: string;
 }
@@ -56,7 +57,7 @@ export interface SidebarOrgSwitcherBaseProps<
   readonly onContextOrganizationChange?: (orgId: string) => void;
   readonly onSwitch?: (orgId: string) => void;
   readonly renderLogo?: (props: {
-    readonly org: Pick<TOrganization, "id" | "name">;
+    readonly org: Pick<TOrganization, "id" | "logoUrl" | "name">;
     readonly size: "sm" | "md";
     readonly className?: string;
   }) => React.ReactNode;
@@ -109,14 +110,34 @@ export function OrganizationLogo({
   size,
 }: {
   readonly className?: string;
-  readonly org: Pick<WorkOSOrganization, "id" | "name">;
+  readonly org: Pick<WorkOSOrganization, "id" | "logoUrl" | "name">;
   readonly size: "sm" | "md";
 }): React.ReactElement {
+  const sizeClassName = size === "sm" ? "size-6 text-[10px]" : "size-8 text-xs";
+
+  if (org.logoUrl) {
+    return (
+      <div
+        className={cx(
+          "bg-muted flex shrink-0 items-center justify-center overflow-hidden rounded-md",
+          sizeClassName,
+          className,
+        )}
+      >
+        <img
+          alt={`${org.name} logo`}
+          className="size-full object-cover"
+          src={org.logoUrl}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cx(
         "bg-primary/10 text-primary flex shrink-0 items-center justify-center rounded-md font-semibold",
-        size === "sm" ? "size-6 text-[10px]" : "size-8 text-xs",
+        sizeClassName,
         className,
       )}
     >
@@ -250,7 +271,7 @@ export function SidebarOrgSwitcherBase<
   };
 
   const logoFor = (
-    org: Pick<TOrganization, "id" | "name">,
+    org: Pick<TOrganization, "id" | "logoUrl" | "name">,
     size: "sm" | "md",
     className?: string,
   ): React.ReactNode =>
