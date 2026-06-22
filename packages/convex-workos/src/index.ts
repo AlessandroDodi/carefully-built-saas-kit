@@ -157,3 +157,5 @@ export async function deleteWorkosUserRecords(args: {
     }),
   );
 }
+
+export * from '../../workos/src/index.js';
