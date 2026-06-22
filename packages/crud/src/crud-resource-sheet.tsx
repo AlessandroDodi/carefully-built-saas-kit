@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 
 import { ResponsiveSheet } from "@carefully-built/ui";
-import type { ResponsiveSheetClassNames } from "@carefully-built/ui";
+import type { ResponsiveSheetClassNames, SheetOutsideInteractionGuard } from "@carefully-built/ui";
 
 export interface CrudResourceSheetProps {
   readonly open: boolean;
@@ -20,6 +20,7 @@ export interface CrudResourceSheetProps {
   readonly confirmLoading?: boolean;
   readonly confirmCloseWhenDirty?: boolean;
   readonly width?: number;
+  readonly outsideInteractionGuard?: SheetOutsideInteractionGuard;
   readonly className?: string;
   readonly contentClassName?: string;
   readonly footerClassName?: string;
@@ -31,6 +32,7 @@ export function CrudResourceSheet({
   formId,
   onConfirm,
   confirmCloseWhenDirty: _confirmCloseWhenDirty,
+  outsideInteractionGuard,
   ...sheetProps
 }: CrudResourceSheetProps): React.ReactElement {
   const submitForm = (): void => {
@@ -47,6 +49,7 @@ export function CrudResourceSheet({
   return (
     <ResponsiveSheet
       {...sheetProps}
+      outsideInteractionGuard={outsideInteractionGuard}
       onConfirm={formId || onConfirm ? submitForm : undefined}
     >
       {children}

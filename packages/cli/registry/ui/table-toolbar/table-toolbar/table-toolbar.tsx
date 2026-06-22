@@ -422,7 +422,7 @@ export function TableToolbar({
 
               return (
                 <div key={filter.config.key} className="flex flex-col gap-1.5">
-                  <span className="flex items-center gap-2 text-sm font-medium text-[#1f2328]">
+                  <span className="text-foreground flex items-center gap-2 text-sm font-medium">
                     {Icon ? (
                       <Icon className="text-foreground/70 size-3.5 shrink-0" strokeWidth={1.8} />
                     ) : null}
@@ -446,7 +446,7 @@ export function TableToolbar({
 
               return (
                 <div key={filter.key} className="flex flex-col gap-1.5">
-                  <span className="flex items-center gap-2 text-sm font-medium text-[#1f2328]">
+                  <span className="text-foreground flex items-center gap-2 text-sm font-medium">
                     {Icon ? (
                       <Icon className="text-foreground/70 size-3.5 shrink-0" strokeWidth={1.8} />
                     ) : null}
@@ -466,7 +466,7 @@ export function TableToolbar({
 
               return (
                 <div key={filter.key} className="flex flex-col gap-1.5">
-                  <span className="flex items-center gap-2 text-sm font-medium text-[#1f2328]">
+                  <span className="text-foreground flex items-center gap-2 text-sm font-medium">
                     {Icon ? (
                       <Icon className="text-foreground/70 size-3.5 shrink-0" strokeWidth={1.8} />
                     ) : null}
@@ -490,7 +490,7 @@ export function TableToolbar({
 
               return (
                 <div key={filter.key} className="flex flex-col gap-1.5">
-                  <span className="flex items-center gap-2 text-sm font-medium text-[#1f2328]">
+                  <span className="text-foreground flex items-center gap-2 text-sm font-medium">
                     {Icon ? (
                       <Icon className="text-foreground/70 size-3.5 shrink-0" strokeWidth={1.8} />
                     ) : null}

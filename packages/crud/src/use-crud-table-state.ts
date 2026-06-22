@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 
 import type { UseCrudTableStateOptions, CrudTableState } from "./types";
 
@@ -8,6 +8,8 @@ import { useTableSorting } from "@carefully-built/ui";
 
 import { buildCrudSearchText, matchesCrudSearch } from "./search";
 import { getValidPage, paginateCrudData } from "./pagination";
+import { useUrlPagination } from "./use-url-pagination";
+import { useUrlStringFilters, type UrlStringFilterDefinition } from "./use-url-string-filters";
 
 function buildInitialFilters<TItem>(
   filters: readonly { readonly key: Extract<keyof TItem, string> }[],
@@ -57,11 +59,30 @@ export function useCrudTableState<TItem extends object>({
   pageSize = 20,
   initialSortState = null,
 }: UseCrudTableStateOptions<TItem>): CrudTableState<TItem> {
-  const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState<Record<string, string>>(() =>
-    buildInitialFilters(filterDefinitions),
+  const urlFilterDefinitions = useMemo(
+    () =>
+      [
+        { key: "search", defaultValue: "", clearValue: "" },
+        ...filterDefinitions.map((filter) => ({
+          key: filter.key,
+          defaultValue: "all",
+          clearValue: "all",
+        })),
+      ] satisfies readonly UrlStringFilterDefinition[],
+    [filterDefinitions],
   );
-  const [currentPage, setCurrentPage] = useState(1);
+  const urlFilters = useUrlStringFilters(urlFilterDefinitions);
+  const { page: currentPage, setPage: setCurrentPage } = useUrlPagination("page");
+  const search = urlFilters.values.search ?? "";
+  const filters = useMemo(
+    () => ({
+      ...buildInitialFilters(filterDefinitions),
+      ...Object.fromEntries(
+        filterDefinitions.map((filter) => [filter.key, urlFilters.values[filter.key] ?? "all"]),
+      ),
+    }),
+    [filterDefinitions, urlFilters.values],
+  );
 
   const filteredData = useMemo(
     () => filterCrudData(data, search, filters, searchFields),
@@ -83,23 +104,19 @@ export function useCrudTableState<TItem extends object>({
   );
 
   const setFilter = useCallback((key: string, value: string) => {
-    setFilters((currentFilters) => ({
-      ...currentFilters,
-      [key]: value,
-    }));
-    setCurrentPage(1);
-  }, []);
+    urlFilters.setValue(key, value);
+    void setCurrentPage(1);
+  }, [setCurrentPage, urlFilters]);
 
   const updateSearch = useCallback((value: string) => {
-    setSearch(value);
-    setCurrentPage(1);
-  }, []);
+    urlFilters.setValue("search", value);
+    void setCurrentPage(1);
+  }, [setCurrentPage, urlFilters]);
 
   const clearAll = useCallback(() => {
-    setSearch("");
-    setFilters(buildInitialFilters(filterDefinitions));
-    setCurrentPage(1);
-  }, [filterDefinitions]);
+    urlFilters.clear();
+    void setCurrentPage(1);
+  }, [setCurrentPage, urlFilters]);
 
   const getDraftFilterResultCount = useCallback(
     (draftValues: Record<string, string>) =>

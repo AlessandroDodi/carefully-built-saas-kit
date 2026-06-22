@@ -2,7 +2,7 @@
 
 import { Bell } from "lucide-react";
 
-import { Skeleton } from "@carefully-built/ui";
+import { EmptyStateCard, Skeleton } from "@carefully-built/ui";
 
 import { NotificationListItem } from "./notification-list-item";
 import type {
@@ -42,10 +42,11 @@ export function NotificationList<TNotification extends NotificationRecord>({
 
   if (notifications.length === 0) {
     return (
-      <div className="flex min-h-52 flex-col items-center justify-center rounded-lg border border-dashed p-6 text-center">
-        <Bell className="text-muted-foreground mb-2 size-5" />
-        <p className="text-foreground text-sm font-medium">{emptyLabel}</p>
-      </div>
+      <EmptyStateCard
+        icon={<Bell className="size-7" />}
+        title={emptyLabel}
+        subtitle="You're all caught up."
+      />
     );
   }
 

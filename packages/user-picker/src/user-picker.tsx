@@ -78,6 +78,21 @@ function UserRow({
   );
 }
 
+function SingleUserValue({
+  user,
+  fallbackName,
+}: {
+  readonly user: UserPickerOption;
+  readonly fallbackName?: string;
+}): React.ReactElement {
+  return (
+    <span className="flex min-w-0 items-center gap-2">
+      <UserAvatar user={user} fallbackName={fallbackName} />
+      <span className="min-w-0 truncate">{formatUserDisplayName(user, fallbackName)}</span>
+    </span>
+  );
+}
+
 function MultipleUserValue({ selectedUsers, placeholder, copy }: {
   readonly selectedUsers: readonly UserPickerOption[];
   readonly placeholder: string;
@@ -162,14 +177,18 @@ export function UserPicker(props: UserPickerProps): React.ReactElement {
             variant="outline"
             disabled={disabled}
             className={cn(
-              'h-9 w-full justify-between gap-2 px-2 text-left font-normal',
+              'h-9 w-full justify-between gap-2 overflow-hidden px-2 text-left font-normal',
               selectedValues.length === 0 && 'text-muted-foreground',
               triggerClassName,
             )}
           >
             <span className="min-w-0 flex-1">
               {props.mode === 'single' ? (
-                selectedUser ? <UserRow user={selectedUser} fallbackName={copy.fallbackName} /> : <span>{placeholder}</span>
+                selectedUser ? (
+                  <SingleUserValue user={selectedUser} fallbackName={copy.fallbackName} />
+                ) : (
+                  <span className="truncate">{placeholder}</span>
+                )
               ) : (
                 <MultipleUserValue selectedUsers={selectedUsers} placeholder={placeholder} copy={copy} />
               )}
