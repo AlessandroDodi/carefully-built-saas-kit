@@ -8,7 +8,11 @@ import {
   mergeAssociationOptions,
 } from './associationPicker.options';
 import type { AssociationEntityType } from './associationTypeMeta';
-import type { AssociationPickerCreateConfig, AssociationPickerOption } from './types';
+import type {
+  AssociationPickerCreateConfig,
+  AssociationPickerLabels,
+  AssociationPickerOption,
+} from './types';
 
 interface UseAssociationPickerModelArgs {
   readonly activeType: 'all' | AssociationEntityType;
@@ -16,6 +20,7 @@ interface UseAssociationPickerModelArgs {
   readonly createConfig?: AssociationPickerCreateConfig;
   readonly createdOptions: readonly AssociationPickerOption[];
   readonly excludedEntityTypeSet: ReadonlySet<string>;
+  readonly labels: AssociationPickerLabels;
   readonly options: readonly AssociationPickerOption[];
   readonly search: string;
   readonly value: readonly string[];
@@ -28,6 +33,7 @@ export function useAssociationPickerModel(args: UseAssociationPickerModelArgs) {
     createConfig,
     createdOptions,
     excludedEntityTypeSet,
+    labels,
     options,
     search,
     value,
@@ -40,7 +46,7 @@ export function useAssociationPickerModel(args: UseAssociationPickerModelArgs) {
       excludedEntityTypeSet,
       allowedEntityTypeSet,
     );
-    const availableTypeOptions = getAvailableTypeOptions(visibleOptions);
+    const availableTypeOptions = getAvailableTypeOptions(visibleOptions, labels);
     const filteredOptions = getFilteredAssociationOptions(visibleOptions, activeType, search);
     const createableTypes = getCreateableAssociationTypes(
       createConfig,
@@ -64,6 +70,7 @@ export function useAssociationPickerModel(args: UseAssociationPickerModelArgs) {
     createdOptions,
     excludedEntityTypeSet,
     options,
+    labels,
     search,
     value,
   ]);

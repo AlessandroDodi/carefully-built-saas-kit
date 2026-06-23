@@ -5,7 +5,7 @@ import { SegmentedToggle } from '@carefully-built/ui';
 import { AssociationPickerOptionsList } from './AssociationPickerOptionsList';
 import { AssociationPickerSearchRow } from './AssociationPickerSearchRow';
 import type { AssociationEntityType } from './associationTypeMeta';
-import type { AssociationFilterType, AssociationPickerOption } from './types';
+import type { AssociationFilterType, AssociationPickerLabels, AssociationPickerOption } from './types';
 
 interface AssociationPickerPopoverProps {
   readonly activeType: AssociationFilterType;
@@ -17,6 +17,7 @@ interface AssociationPickerPopoverProps {
   readonly filteredOptions: readonly AssociationPickerOption[];
   readonly highlightedOptionIndex: number;
   readonly isCreateMenuOpen: boolean;
+  readonly labels: AssociationPickerLabels;
   readonly optionRefs: MutableRefObject<(HTMLButtonElement | null)[]>;
   readonly search: string;
   readonly searchInputRef: MutableRefObject<HTMLInputElement | null>;
@@ -35,7 +36,7 @@ interface AssociationPickerPopoverProps {
 }
 
 export function AssociationPickerPopover(props: AssociationPickerPopoverProps): React.ReactElement {
-  const { activeType, availableTypeOptions, canCreate, createButtonLabel, createableTypes, emptyMessage, filteredOptions, highlightedOptionIndex, isCreateMenuOpen, optionRefs, search, searchInputRef, searchPlaceholder, singleCreateType, value, moveHighlightedOption, openCreateFlow, selectHighlightedOption, setActiveType, setHighlightedOptionIndex, setIsCreateMenuOpen, setIsOpen, setSearch, toggleValue } = props;
+  const { activeType, availableTypeOptions, canCreate, createButtonLabel, createableTypes, emptyMessage, filteredOptions, highlightedOptionIndex, isCreateMenuOpen, labels, optionRefs, search, searchInputRef, searchPlaceholder, singleCreateType, value, moveHighlightedOption, openCreateFlow, selectHighlightedOption, setActiveType, setHighlightedOptionIndex, setIsCreateMenuOpen, setIsOpen, setSearch, toggleValue } = props;
 
   return (
     <div className="bg-popover text-popover-foreground absolute left-0 right-0 top-[calc(100%+8px)] z-20 rounded-xl border p-2 shadow-lg">
@@ -44,6 +45,7 @@ export function AssociationPickerPopover(props: AssociationPickerPopoverProps): 
         createButtonLabel={createButtonLabel}
         createableTypes={createableTypes}
         isCreateMenuOpen={isCreateMenuOpen}
+        labels={labels}
         search={search}
         searchPlaceholder={searchPlaceholder}
         searchInputRef={searchInputRef}
@@ -64,6 +66,7 @@ export function AssociationPickerPopover(props: AssociationPickerPopoverProps): 
           filteredOptions={filteredOptions}
           highlightedOptionIndex={highlightedOptionIndex}
           isCreateMenuOpen={isCreateMenuOpen}
+          labels={labels}
           optionRefs={optionRefs}
           singleCreateType={singleCreateType}
           value={value}

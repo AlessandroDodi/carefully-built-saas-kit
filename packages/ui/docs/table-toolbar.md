@@ -12,6 +12,7 @@ import { TableToolbar, type FilterConfig } from '@carefully-built/ui';
 
 - `search`: `{ value, onChange, placeholder }`.
 - `filters`: select filters backed by `FilterConfig`.
+- `filters[].allOptionLabel`: optional localized label for the synthetic `all` option.
 - `textFilters`: simple text filters.
 - `rangeFilters`: min/max or date range filters.
 - `customFilters`: app-rendered filters that still join the clear/apply flow.
@@ -40,6 +41,7 @@ const STATUS_FILTER = {
       config: STATUS_FILTER,
       value: status,
       onChange: setStatus,
+      allOptionLabel: 'All: Status',
     },
   ]}
   onClearAll={clearAll}

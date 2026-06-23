@@ -8,6 +8,7 @@ import type { AssociationEntityType } from './associationTypeMeta';
 import type {
   AssociationFilterType,
   AssociationPickerCreateConfig,
+  AssociationPickerLabels,
   AssociationPickerOption,
 } from './types';
 
@@ -26,6 +27,7 @@ interface AssociationPickerViewProps {
   readonly highlightedOptionIndex: number;
   readonly isCreateMenuOpen: boolean;
   readonly isOpen: boolean;
+  readonly labels: AssociationPickerLabels;
   readonly moveHighlightedOption: (direction: 'up' | 'down') => void;
   readonly onToggleOpen: () => void;
   readonly openCreateFlow: (entityType: AssociationEntityType) => void;
@@ -48,12 +50,12 @@ interface AssociationPickerViewProps {
 }
 
 export function AssociationPickerView(props: AssociationPickerViewProps): React.ReactElement {
-  const { activeType, availableTypeOptions, className, containerRef, createConfig, createableTypes, creatingType, disabled, emptyMessage, filteredOptions, handleCreated, highlightedOptionIndex, isCreateMenuOpen, isOpen, moveHighlightedOption, onToggleOpen, openCreateFlow, optionRefs, placeholder, search, searchInputRef, searchPlaceholder, selectedOptions, selectHighlightedOption, setActiveType, setCreatingType, setHighlightedOptionIndex, setIsCreateMenuOpen, setIsOpen, setSearch, singleCreateType, toggleValue, value } = props;
+  const { activeType, availableTypeOptions, className, containerRef, createConfig, createableTypes, creatingType, disabled, emptyMessage, filteredOptions, handleCreated, highlightedOptionIndex, isCreateMenuOpen, isOpen, labels, moveHighlightedOption, onToggleOpen, openCreateFlow, optionRefs, placeholder, search, searchInputRef, searchPlaceholder, selectedOptions, selectHighlightedOption, setActiveType, setCreatingType, setHighlightedOptionIndex, setIsCreateMenuOpen, setIsOpen, setSearch, singleCreateType, toggleValue, value } = props;
 
   return (
     <div ref={containerRef} data-association-picker="true" data-association-picker-open={isOpen ? 'true' : 'false'} className={cn('relative', className)}>
       <AssociationPickerTrigger disabled={disabled} isOpen={isOpen} placeholder={placeholder} selectedOptions={selectedOptions} toggleValue={toggleValue} onToggleOpen={onToggleOpen} />
-      {!isOpen ? null : <AssociationPickerPopover activeType={activeType} availableTypeOptions={availableTypeOptions} canCreate={createableTypes.length > 0} createButtonLabel={getCreateButtonLabel(singleCreateType)} createableTypes={createableTypes} emptyMessage={emptyMessage} filteredOptions={filteredOptions} highlightedOptionIndex={highlightedOptionIndex} isCreateMenuOpen={isCreateMenuOpen} optionRefs={optionRefs} search={search} searchInputRef={searchInputRef} searchPlaceholder={searchPlaceholder} singleCreateType={singleCreateType} value={value} moveHighlightedOption={moveHighlightedOption} openCreateFlow={openCreateFlow} selectHighlightedOption={selectHighlightedOption} setActiveType={setActiveType} setHighlightedOptionIndex={setHighlightedOptionIndex} setIsCreateMenuOpen={setIsCreateMenuOpen} setIsOpen={setIsOpen} setSearch={setSearch} toggleValue={toggleValue} />}
+      {!isOpen ? null : <AssociationPickerPopover activeType={activeType} availableTypeOptions={availableTypeOptions} canCreate={createableTypes.length > 0} createButtonLabel={getCreateButtonLabel(singleCreateType, labels)} createableTypes={createableTypes} emptyMessage={emptyMessage} filteredOptions={filteredOptions} highlightedOptionIndex={highlightedOptionIndex} isCreateMenuOpen={isCreateMenuOpen} labels={labels} optionRefs={optionRefs} search={search} searchInputRef={searchInputRef} searchPlaceholder={searchPlaceholder} singleCreateType={singleCreateType} value={value} moveHighlightedOption={moveHighlightedOption} openCreateFlow={openCreateFlow} selectHighlightedOption={selectHighlightedOption} setActiveType={setActiveType} setHighlightedOptionIndex={setHighlightedOptionIndex} setIsCreateMenuOpen={setIsCreateMenuOpen} setIsOpen={setIsOpen} setSearch={setSearch} toggleValue={toggleValue} />}
       <AssociationPickerCreateSheet createConfig={createConfig} creatingType={creatingType} handleCreated={handleCreated} setCreatingType={setCreatingType} />
     </div>
   );

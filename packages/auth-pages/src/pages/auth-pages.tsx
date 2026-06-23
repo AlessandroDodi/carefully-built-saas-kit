@@ -111,7 +111,7 @@ export interface AuthLoginPageProps extends AuthPageBranding {
 
 export function AuthLoginPage({
   providers,
-  title = "Accedi",
+  title = "Sign in",
   emailHref = "/login/email",
   emailLabel,
   children,
@@ -138,6 +138,8 @@ export function AuthLoginPage({
 export interface AuthEmailLoginPageProps extends AuthPageBranding {
   readonly signIn: (formData: FormData) => Promise<AuthActionResult>;
   readonly title?: string;
+  readonly signupPromptText?: string;
+  readonly signupLinkText?: string;
   readonly signupHref?: string;
   readonly successHref?: string;
   readonly children?: ReactNode;
@@ -145,7 +147,9 @@ export interface AuthEmailLoginPageProps extends AuthPageBranding {
 
 export function AuthEmailLoginPage({
   signIn,
-  title = "Accedi con email",
+  title = "Sign in with email",
+  signupPromptText = "Do not have an account?",
+  signupLinkText = "Sign up",
   signupHref = "/signup/email",
   successHref = "/dashboard",
   children,
@@ -164,8 +168,8 @@ export function AuthEmailLoginPage({
         <>
           <AuthBottomNav
             linkPath={withInvitationToken(signupHref, invitationToken)}
-            linkText="Registrati"
-            text="Non hai ancora un account?"
+            linkText={signupLinkText}
+            text={signupPromptText}
           />
           <LoginEmailForm {...state} />
         </>
@@ -177,6 +181,8 @@ export function AuthEmailLoginPage({
 export interface AuthSignupPageProps extends AuthPageBranding {
   readonly signUp: (formData: FormData) => Promise<AuthActionResult>;
   readonly title?: string;
+  readonly loginPromptText?: string;
+  readonly loginLinkText?: string;
   readonly loginHref?: string;
   readonly successHref?: string;
   readonly children?: ReactNode;
@@ -184,7 +190,9 @@ export interface AuthSignupPageProps extends AuthPageBranding {
 
 export function AuthSignupPage({
   signUp,
-  title = "Registrati con email",
+  title = "Sign up with email",
+  loginPromptText = "Already have an account?",
+  loginLinkText = "Sign in",
   loginHref = "/login/email",
   successHref = "/dashboard",
   children,
@@ -203,8 +211,8 @@ export function AuthSignupPage({
         <>
           <AuthBottomNav
             linkPath={withInvitationToken(loginHref, invitationToken)}
-            linkText="Accedi"
-            text="Hai gia un account?"
+            linkText={loginLinkText}
+            text={loginPromptText}
           />
           <SignupEmailForm {...state} />
         </>

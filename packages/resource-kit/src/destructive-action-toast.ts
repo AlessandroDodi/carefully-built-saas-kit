@@ -16,7 +16,7 @@ interface ShowDestructiveActionToastArgs {
 
 export function showDestructiveActionToast({
   message,
-  confirmLabel = 'Conferma',
+  confirmLabel = 'Confirm',
   onConfirm,
   showToast = toast.error,
 }: ShowDestructiveActionToastArgs): void {

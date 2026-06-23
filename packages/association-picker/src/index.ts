@@ -3,7 +3,9 @@ export {
 } from './AssociationPicker';
 export {
   getAvailableTypeOptions,
+  getAssociationEntityTypeLabel,
   getFilteredAssociationOptions,
+  getResolvedAssociationPickerLabels,
   getVisibleAssociationOptions,
   mergeAssociationOptions,
 } from './associationPicker.options';
@@ -18,6 +20,8 @@ export type {
   AssociationPickerCreateRendererProps,
   AssociationPickerCreateResult,
   AssociationFilterType,
+  AssociationPickerLabels,
+  AssociationPickerLabelsInput,
   AssociationPickerOption,
   AssociationPickerProps,
 } from './types';

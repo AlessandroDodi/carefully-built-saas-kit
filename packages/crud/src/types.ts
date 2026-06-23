@@ -9,6 +9,7 @@ export interface CrudFilterDefinition<TItem> {
   readonly key: Extract<keyof TItem, string>;
   readonly config: FilterConfig;
   readonly allowAll?: boolean;
+  readonly allOptionLabel?: string;
   readonly clearable?: boolean;
 }
 

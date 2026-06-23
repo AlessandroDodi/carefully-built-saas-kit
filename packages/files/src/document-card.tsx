@@ -44,26 +44,65 @@ export interface DocumentCardItem<TId = string> {
   readonly updatedAt?: number;
 }
 
+export interface DocumentCardLabels {
+  readonly pendingTitle: string;
+  readonly pendingDescription: string;
+  readonly activePublicLinkLabel: string;
+  readonly uploadedFileLabel: (fileCount: number) => string;
+  readonly documentFallbackLabel: string;
+  readonly linkSourceLabel: string;
+  readonly editActionLabel: string;
+  readonly copyLinkActionLabel: string;
+  readonly downloadActionLabel: string;
+  readonly deleteActionLabel: string;
+  readonly locale: string;
+}
+
+export type DocumentCardLabelsInput = Partial<DocumentCardLabels>;
+
+function resolveDocumentCardLabels(labels: DocumentCardLabelsInput = {}): DocumentCardLabels {
+  return {
+    pendingTitle: labels.pendingTitle ?? 'Waiting for upload',
+    pendingDescription:
+      labels.pendingDescription ??
+      'The document will appear here after someone uses the public link.',
+    activePublicLinkLabel: labels.activePublicLinkLabel ?? 'Active public link',
+    uploadedFileLabel:
+      labels.uploadedFileLabel ??
+      ((fileCount: number) => `${fileCount} ${fileCount === 1 ? 'uploaded file' : 'uploaded files'}`),
+    documentFallbackLabel: labels.documentFallbackLabel ?? 'Document',
+    linkSourceLabel: labels.linkSourceLabel ?? 'Link',
+    editActionLabel: labels.editActionLabel ?? 'Edit',
+    copyLinkActionLabel: labels.copyLinkActionLabel ?? 'Copy link',
+    downloadActionLabel: labels.downloadActionLabel ?? 'Download file',
+    deleteActionLabel: labels.deleteActionLabel ?? 'Delete',
+    locale: labels.locale ?? 'en-US',
+  };
+}
+
 interface DocumentCardProps<TId = string, TDocument extends DocumentCardItem<TId> = DocumentCardItem<TId>> {
   readonly document: TDocument;
   readonly onDelete: (id: TId) => void;
   readonly onCopyLink: (url: string) => void;
   readonly onEdit: (document: TDocument) => void;
+  readonly labels?: DocumentCardLabelsInput;
 }
 
 function DocumentPreview({
   document,
+  labels,
 }: {
   readonly document: DocumentCardItem<unknown>;
+  readonly labels: DocumentCardLabels;
 }): React.ReactElement {
   if (document.sourceType === 'external_link' && document.fileCount === 0) {
     return (
       <div className="bg-muted flex size-full flex-col items-center justify-center gap-2 text-center">
         <Clock3 className="text-primary size-7" />
         <div className="space-y-1 px-6">
-          <p className="text-sm font-medium">In attesa di caricamento</p>
+          <p className="text-sm font-medium">{labels.pendingTitle}</p>
           <p className="text-muted-foreground text-xs">
-            Il documento apparira qui quando qualcuno usera il link pubblico.
+            {labels.pendingDescription}
           </p>
         </div>
       </div>
@@ -98,12 +137,12 @@ function DocumentPreview({
   );
 }
 
-function formatDocumentDate(value: number | undefined): string {
+function formatDocumentDate(value: number | undefined, locale: string): string {
   if (typeof value !== 'number') {
     return '';
   }
 
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat(locale, {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
@@ -134,7 +173,9 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
   onDelete,
   onCopyLink,
   onEdit,
+  labels,
 }: DocumentCardProps<TId, TDocument>): React.ReactElement {
+  const resolvedLabels = resolveDocumentCardLabels(labels);
   const associationSummary = buildDocumentAssociationSummary(document);
   const associations = document.associations ?? [];
   const collectionFileCount = document.collectionFileCount ?? document.fileCount;
@@ -174,7 +215,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
               : 'relative size-full overflow-hidden bg-muted'
           }
         >
-          <DocumentPreview document={document} />
+          <DocumentPreview document={document} labels={resolvedLabels} />
         </div>
       </div>
 
@@ -187,12 +228,12 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
             <div className="flex min-w-0 items-center gap-2">
               <p className="text-muted-foreground min-w-0 truncate text-xs">
                 {document.isPending
-                  ? 'Active public link'
+                  ? resolvedLabels.activePublicLinkLabel
                   : document.sourceType === 'external_link'
-                    ? `${document.fileCount} ${document.fileCount === 1 ? 'uploaded file' : 'uploaded files'}`
+                    ? resolvedLabels.uploadedFileLabel(document.fileCount)
                     : document.fileSize
                       ? formatFileSize(document.fileSize)
-                      : 'Document'}
+                      : resolvedLabels.documentFallbackLabel}
               </p>
               {document.sourceType === 'external_link' ? (
                 <Chip
@@ -200,7 +241,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                   className="border-border/70 bg-muted/60 text-muted-foreground border"
                   leading={<Link2 className="size-3" />}
                 >
-                  Link
+                  {resolvedLabels.linkSourceLabel}
                 </Chip>
               ) : null}
             </div>
@@ -222,12 +263,12 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onEdit(document)}>
                 <Pencil className="mr-2 size-4" />
-                Edit
+                {resolvedLabels.editActionLabel}
               </DropdownMenuItem>
               {publicUploadUrl ? (
                 <DropdownMenuItem onClick={() => onCopyLink(publicUploadUrl)}>
                   <Copy className="mr-2 size-4" />
-                  Copy link
+                  {resolvedLabels.copyLinkActionLabel}
                 </DropdownMenuItem>
               ) : null}
               {document.previewUrl ? (
@@ -239,7 +280,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                     rel="noopener noreferrer"
                   >
                     <Download className="mr-2 size-4" />
-                    Download file
+                    {resolvedLabels.downloadActionLabel}
                   </a>
                 </DropdownMenuItem>
               ) : null}
@@ -248,7 +289,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                 onClick={() => onDelete(document._id)}
               >
                 <Trash2 className="mr-2 size-4" />
-                Delete
+                {resolvedLabels.deleteActionLabel}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -262,7 +303,9 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
           ) : (
             <span className="text-muted-foreground truncate">{associationSummary}</span>
           )}
-          <span className="text-muted-foreground shrink-0">{formatDocumentDate(document.updatedAt)}</span>
+          <span className="text-muted-foreground shrink-0">
+            {formatDocumentDate(document.updatedAt, resolvedLabels.locale)}
+          </span>
         </div>
       </CardFooter>
     </Card>

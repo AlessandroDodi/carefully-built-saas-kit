@@ -15,6 +15,9 @@ interface CustomDateFormFieldProps<TValues extends FieldValues> {
   readonly label?: string;
   readonly labelIcon?: LucideIcon;
   readonly placeholder?: string;
+  readonly locale?: React.ComponentProps<typeof CustomDateField>['locale'];
+  readonly displayLocale?: string;
+  readonly clearLabel?: string;
   readonly disabled?: boolean;
   readonly className?: string;
 }
@@ -24,6 +27,9 @@ export function CustomDateFormField<TValues extends FieldValues>({
   label,
   labelIcon,
   placeholder,
+  locale,
+  displayLocale,
+  clearLabel,
   disabled = false,
   className,
 }: CustomDateFormFieldProps<TValues>): React.ReactElement {
@@ -45,6 +51,9 @@ export function CustomDateFormField<TValues extends FieldValues>({
               field.onChange(nextValue ?? '');
             }}
             placeholder={placeholder}
+            locale={locale}
+            displayLocale={displayLocale}
+            clearLabel={clearLabel}
             hasError={Boolean(error)}
             disabled={disabled}
           />

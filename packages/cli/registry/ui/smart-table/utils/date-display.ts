@@ -1,5 +1,22 @@
 export type DateDisplayValue = Date | number | string;
 
+export interface DateDisplayLabels {
+  readonly today: string;
+  readonly yesterday: string;
+  readonly daysAgo: (dayCount: number) => string;
+}
+
+export interface DateDisplayFormatOptions {
+  readonly locale?: string;
+  readonly labels?: Partial<DateDisplayLabels>;
+}
+
+const DEFAULT_DATE_DISPLAY_LABELS: DateDisplayLabels = {
+  today: 'Today',
+  yesterday: 'Yesterday',
+  daysAgo: (dayCount) => `${String(dayCount)} days ago`,
+};
+
 function getDate(value: DateDisplayValue): Date {
   return value instanceof Date ? value : new Date(value);
 }
@@ -27,13 +44,16 @@ function capitalizeMonthLabel(value: string): string {
     .join(' ');
 }
 
-export function formatAbsoluteDate(value: DateDisplayValue): string {
+export function formatAbsoluteDate(
+  value: DateDisplayValue,
+  options: DateDisplayFormatOptions = {},
+): string {
   const date = getDate(value);
   const currentYear = new Date().getFullYear();
   const includesYear = date.getFullYear() !== currentYear;
 
   return capitalizeMonthLabel(
-    new Intl.DateTimeFormat('it-IT', {
+    new Intl.DateTimeFormat(options.locale ?? 'en-US', {
       day: 'numeric',
       month: 'short',
       ...(includesYear ? { year: 'numeric' } : {}),
@@ -41,21 +61,28 @@ export function formatAbsoluteDate(value: DateDisplayValue): string {
   );
 }
 
-export function formatDisplayDate(value: DateDisplayValue): string {
+export function formatDisplayDate(
+  value: DateDisplayValue,
+  options: DateDisplayFormatOptions = {},
+): string {
   const date = getDate(value);
   const dayDifference = getDayDifference(date, new Date());
+  const labels = {
+    ...DEFAULT_DATE_DISPLAY_LABELS,
+    ...options.labels,
+  };
 
   if (dayDifference === 0) {
-    return 'Oggi';
+    return labels.today;
   }
 
   if (dayDifference === 1) {
-    return 'Ieri';
+    return labels.yesterday;
   }
 
   if (dayDifference >= 2 && dayDifference <= 10) {
-    return `${String(dayDifference)} giorni fa`;
+    return labels.daysAgo(dayDifference);
   }
 
-  return formatAbsoluteDate(date);
+  return formatAbsoluteDate(date, options);
 }

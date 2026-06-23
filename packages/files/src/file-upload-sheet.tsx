@@ -8,6 +8,9 @@ import { Upload } from 'lucide-react';
 interface FileUploadSheetProps {
   readonly accept?: string;
   readonly confirmLabel?: string;
+  readonly browseLabel?: string;
+  readonly dropzoneTitle?: string;
+  readonly previewAlt?: string;
   readonly helperText?: string;
   readonly associationField?: React.ReactNode;
   readonly onOpenChange: (open: boolean) => void;
@@ -19,11 +22,14 @@ interface FileUploadSheetProps {
 export function FileUploadSheet({
   accept = '.pdf,image/*',
   associationField,
+  browseLabel = 'Browse',
   confirmLabel = 'Upload',
+  dropzoneTitle = 'Drop a file here or browse',
   helperText = 'PDF, JPG, PNG',
   onOpenChange,
   onUpload,
   open,
+  previewAlt,
   title = 'Upload file',
 }: FileUploadSheetProps): React.ReactElement {
   const [file, setFile] = useState<File | null>(null);
@@ -80,13 +86,13 @@ export function FileUploadSheet({
       <div className="space-y-2 pb-4">
         <FileDropzone
           accept={accept}
-          browseLabel="Browse"
+          browseLabel={browseLabel}
           currentPreviewUrl={file?.type.startsWith('image/') ? previewUrl : null}
           emptyIcon={<Upload className="size-6" />}
           helperText={helperText}
           onFileSelect={setFile}
-          previewAlt={file?.name ?? 'File preview'}
-          title="Drop a file here or browse"
+          previewAlt={file?.name ?? previewAlt ?? 'File preview'}
+          title={dropzoneTitle}
         />
         {associationField ? <div className="pt-3">{associationField}</div> : null}
       </div>

@@ -44,6 +44,7 @@ interface UseNotesPageStateOptions {
   readonly createNote: (data: NoteMutationData) => Promise<void>;
   readonly updateNote: (id: string, data: NoteMutationData) => Promise<void>;
   readonly archiveNote: (id: string) => Promise<void>;
+  readonly archiveConfirmLabel?: string;
 }
 
 interface NoteMutationData {
@@ -249,7 +250,7 @@ export function useNotesPageState(options: UseNotesPageStateOptions) {
     window.setTimeout(() => {
       toast.error(`Archive "${noteToArchive.title}"?`, {
         action: {
-          label: 'Conferma',
+          label: options.archiveConfirmLabel ?? 'Confirm',
           onClick: () => {
             void (async () => {
               try {

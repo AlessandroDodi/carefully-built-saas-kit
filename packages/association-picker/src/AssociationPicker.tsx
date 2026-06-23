@@ -1,6 +1,7 @@
 'use client';
 
 import { AssociationPickerView } from './AssociationPickerView';
+import { getResolvedAssociationPickerLabels } from './associationPicker.options';
 import { useAssociationPickerActions } from './useAssociationPickerActions';
 import { useAssociationPickerEffects } from './useAssociationPickerEffects';
 import { useAssociationPickerModel } from './useAssociationPickerModel';
@@ -20,10 +21,12 @@ export function AssociationPicker({
   placeholder = 'Select associations',
   searchPlaceholder = 'Search associations...',
   emptyMessage = 'No associations found',
+  labels,
   disabled = false,
   className,
   createConfig,
 }: AssociationPickerProps): React.ReactElement {
+  const resolvedLabels = getResolvedAssociationPickerLabels(labels);
   const state = useAssociationPickerState({
     allowedEntityTypes,
     excludedEntityTypes,
@@ -34,6 +37,7 @@ export function AssociationPicker({
     createConfig,
     createdOptions: state.createdOptions,
     excludedEntityTypeSet: state.excludedEntityTypeSet,
+    labels: resolvedLabels,
     options,
     search: state.search,
     value,
@@ -84,6 +88,7 @@ export function AssociationPicker({
       highlightedOptionIndex={state.highlightedOptionIndex}
       isCreateMenuOpen={state.isCreateMenuOpen}
       isOpen={state.isOpen}
+      labels={resolvedLabels}
       moveHighlightedOption={actions.moveHighlightedOption}
       onToggleOpen={() => {
         state.setIsOpen(!state.isOpen);

@@ -54,8 +54,8 @@ export interface SuperAdminRole {
   slug: string;
 }
 
-export function formatShortDate(value: string): string {
-  return new Intl.DateTimeFormat('it-IT', {
+export function formatShortDate(value: string, locale = 'en-US'): string {
+  return new Intl.DateTimeFormat(locale, {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

@@ -28,6 +28,11 @@ interface FilterDropdownProps<T extends string> {
   readonly className?: string;
   readonly icon?: LucideIcon;
   readonly allowAll?: boolean;
+  readonly allOptionLabel?: string;
+}
+
+export function buildAllFilterOptionLabel(label: string, allOptionLabel?: string): string {
+  return allOptionLabel ?? `All: ${label}`;
 }
 
 export function FilterDropdown<T extends string>({
@@ -37,6 +42,7 @@ export function FilterDropdown<T extends string>({
   onChange,
   className,
   allowAll = true,
+  allOptionLabel,
 }: FilterDropdownProps<T>): React.ReactElement {
   return (
     <SearchableSelect
@@ -47,7 +53,12 @@ export function FilterDropdown<T extends string>({
       placeholder={label}
       className={className ?? 'w-full sm:w-[140px]'}
       searchPlaceholder={`Search ${label.toLocaleLowerCase()}...`}
-      options={[...(allowAll ? [{ value: 'all', label: `Tutti: ${label}` }] : []), ...options]}
+      options={[
+        ...(allowAll
+          ? [{ value: 'all', label: buildAllFilterOptionLabel(label, allOptionLabel) }]
+          : []),
+        ...options,
+      ]}
     />
   );
 }
@@ -99,11 +110,46 @@ export interface FilterConfig<T extends string = string> {
   readonly options: readonly FilterOption<T>[];
 }
 
+export interface TableToolbarLabels {
+  readonly filtersButtonLabel: string;
+  readonly filtersTitle: ReactNode;
+  readonly filtersDescription?: ReactNode;
+  readonly clearFiltersLabel: ReactNode;
+  readonly showResultsLabel: (resultCount?: number) => ReactNode;
+  readonly rangeMinPlaceholder: string;
+  readonly rangeMaxPlaceholder: string;
+}
+
+export type TableToolbarLabelsInput = Partial<TableToolbarLabels>;
+
+export function resolveTableToolbarLabels(
+  labels: TableToolbarLabelsInput = {},
+): TableToolbarLabels {
+  return {
+    filtersButtonLabel: labels.filtersButtonLabel ?? 'Filters',
+    filtersTitle: labels.filtersTitle ?? 'Filters',
+    filtersDescription:
+      labels.filtersDescription ?? 'Narrow the list using the available criteria.',
+    clearFiltersLabel: labels.clearFiltersLabel ?? 'Clear',
+    showResultsLabel:
+      labels.showResultsLabel ??
+      ((resultCount?: number) =>
+        typeof resultCount === 'number'
+          ? `Show ${resultCount.toLocaleString('en-US')} ${
+              resultCount === 1 ? 'result' : 'results'
+            }`
+          : 'Show results'),
+    rangeMinPlaceholder: labels.rangeMinPlaceholder ?? 'Min',
+    rangeMaxPlaceholder: labels.rangeMaxPlaceholder ?? 'Max',
+  };
+}
+
 interface SelectFilter {
   readonly config: FilterConfig;
   readonly value: string;
   readonly onChange: (value: string) => void;
   readonly allowAll?: boolean;
+  readonly allOptionLabel?: string;
   readonly clearable?: boolean;
 }
 
@@ -164,6 +210,7 @@ export interface TableToolbarProps {
   readonly inlineControls?: ReactNode;
   readonly onClearAll?: () => void;
   readonly getDraftResultCount?: (draftValues: Record<string, string>) => number | undefined;
+  readonly labels?: TableToolbarLabelsInput;
   readonly children?: ReactNode;
 }
 
@@ -177,8 +224,10 @@ export function TableToolbar({
   inlineControls,
   onClearAll,
   getDraftResultCount,
+  labels,
   children,
 }: TableToolbarProps): React.ReactElement {
+  const resolvedLabels = resolveTableToolbarLabels(labels);
   const isMobile = useIsMobile();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [draftFilterValues, setDraftFilterValues] = useState<Record<string, string>>({});
@@ -238,12 +287,7 @@ export function TableToolbar({
     () => (filtersOpen ? getDraftResultCount?.(draftFilterValues) : undefined),
     [draftFilterValues, filtersOpen, getDraftResultCount],
   );
-  const applyButtonLabel =
-    typeof draftResultCount === 'number'
-      ? `Show ${draftResultCount.toLocaleString('en-US')} ${
-          draftResultCount === 1 ? 'result' : 'results'
-        }`
-      : 'Show results';
+  const applyButtonLabel = resolvedLabels.showResultsLabel(draftResultCount);
 
   function openFiltersSheet(): void {
     setDraftFilterValues(filterValues);
@@ -360,7 +404,7 @@ export function TableToolbar({
         {hasFilters ? (
           <Button variant="outline" className="relative gap-2" onClick={openFiltersSheet}>
             <Filter className="size-4" />
-            Filters
+            {resolvedLabels.filtersButtonLabel}
             {activeFilterTotal > 0 ? (
               <span className="bg-primary text-primary-foreground absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full text-[10px]">
                 {activeFilterTotal}
@@ -378,8 +422,8 @@ export function TableToolbar({
         <ResponsiveSheet
           open={filtersOpen}
           onOpenChange={setFiltersOpen}
-          title="Filters"
-          description="Restringi l'elenco con i criteri disponibili."
+          title={resolvedLabels.filtersTitle}
+          description={resolvedLabels.filtersDescription}
           onConfirm={applyDraftFilters}
           footer={
             <div className="flex w-full gap-2">
@@ -392,7 +436,7 @@ export function TableToolbar({
                   className="min-w-0 flex-1"
                 >
                   <X className="mr-1 size-4" />
-                  Azzera
+                  {resolvedLabels.clearFiltersLabel}
                 </Button>
               ) : null}
               <Button
@@ -437,6 +481,7 @@ export function TableToolbar({
                     }}
                     className="w-full"
                     allowAll={filter.allowAll}
+                    allOptionLabel={filter.allOptionLabel}
                   />
                 </div>
               );
@@ -506,7 +551,7 @@ export function TableToolbar({
                           onChange: (value) => {
                             updateDraftFilterValue(minKey, value);
                           },
-                          placeholder: filter.minPlaceholder ?? 'Da',
+                          placeholder: filter.minPlaceholder ?? resolvedLabels.rangeMinPlaceholder,
                         })}
                         {renderRangeInput({
                           filter,
@@ -515,7 +560,7 @@ export function TableToolbar({
                           onChange: (value) => {
                             updateDraftFilterValue(maxKey, value);
                           },
-                          placeholder: filter.maxPlaceholder ?? 'A',
+                          placeholder: filter.maxPlaceholder ?? resolvedLabels.rangeMaxPlaceholder,
                         })}
                       </>
                     ) : (

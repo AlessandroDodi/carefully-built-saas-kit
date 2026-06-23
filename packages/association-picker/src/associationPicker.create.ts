@@ -1,12 +1,16 @@
 import { ORDERED_ASSOCIATION_ENTITY_TYPES } from './constants';
 import {
-  getAssociationTypeChipMeta,
   type AssociationEntityType,
 } from './associationTypeMeta';
 import type {
   AssociationFilterType,
   AssociationPickerCreateConfig,
+  AssociationPickerLabels,
 } from './types';
+import {
+  getAssociationEntityTypeLabel,
+  getResolvedAssociationPickerLabels,
+} from './associationPicker.options';
 
 export function getCreateableAssociationTypes(
   createConfig: AssociationPickerCreateConfig | undefined,
@@ -28,10 +32,13 @@ export function getCreateableAssociationTypes(
   });
 }
 
-export function getCreateButtonLabel(entityType: AssociationEntityType | null): string {
+export function getCreateButtonLabel(
+  entityType: AssociationEntityType | null,
+  labels = getResolvedAssociationPickerLabels(),
+): string {
   if (!entityType) {
-    return 'Create';
+    return labels.createLabel;
   }
 
-  return `Create ${getAssociationTypeChipMeta(entityType).label.toLowerCase()}`;
+  return labels.createEntityLabel(getAssociationEntityTypeLabel(entityType, labels).toLowerCase());
 }

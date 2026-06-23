@@ -18,6 +18,9 @@ interface CountryVatInputProps {
   readonly onVatNumberChange: (value: string) => void;
   readonly label?: string;
   readonly className?: string;
+  readonly countryLocale?: string;
+  readonly countryPlaceholder?: string;
+  readonly countrySearchPlaceholder?: string;
   readonly vatNumberId?: string;
   readonly placeholder?: string;
 }
@@ -28,7 +31,7 @@ interface VatCountryOption {
   readonly searchText: string;
 }
 
-function getVatCountryOptions(locale = 'it-IT'): VatCountryOption[] {
+function getVatCountryOptions(locale = 'en-US'): VatCountryOption[] {
   const displayNames = typeof Intl.DisplayNames !== 'undefined'
     ? new Intl.DisplayNames([locale], { type: 'region' })
     : null;
@@ -51,12 +54,15 @@ export function CountryVatInput({
   vatNumber,
   onCountryCodeChange,
   onVatNumberChange,
-  label = 'Partita IVA',
+  label = 'VAT number',
   className,
+  countryLocale = 'en-US',
+  countryPlaceholder = 'Country',
+  countrySearchPlaceholder = 'Search country...',
   vatNumberId,
   placeholder = '04013210355',
 }: CountryVatInputProps): React.ReactElement {
-  const countryOptions = useMemo(() => getVatCountryOptions('it-IT'), []);
+  const countryOptions = useMemo(() => getVatCountryOptions(countryLocale), [countryLocale]);
 
   return (
     <div className={cn('space-y-2', className)}>
@@ -65,9 +71,9 @@ export function CountryVatInput({
         <SearchableSelect
           value={countryCode || 'IT'}
           onValueChange={onCountryCodeChange}
-          placeholder="Italia"
+          placeholder={countryPlaceholder}
           className="w-full"
-          searchPlaceholder="Search country..."
+          searchPlaceholder={countrySearchPlaceholder}
           options={countryOptions}
           renderValue={(selectedCountry) => (
             <span className="flex items-center gap-2">

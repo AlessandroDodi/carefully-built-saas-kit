@@ -43,7 +43,7 @@ function getFileTypeLabel(file: File): string {
 
 export function FileDropzone({
   accept,
-  browseLabel = 'Esplora',
+  browseLabel = 'Browse',
   browseButtonClassName,
   className,
   currentPreviewUrl = null,
@@ -57,7 +57,7 @@ export function FileDropzone({
   onFilesSelect,
   onRemove,
   previewAlt,
-  title = 'Lascia qui o esplora file',
+  title = 'Drop a file here or browse',
 }: FileDropzoneProps): React.ReactElement {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);

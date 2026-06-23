@@ -14,6 +14,12 @@ import { AuthError } from "./auth-error";
 interface LoginEmailFormProps<
   TValues extends FieldValues,
 > extends AuthFormState<TValues> {
+  readonly emailLabel?: string;
+  readonly emailPlaceholder?: string;
+  readonly passwordLabel?: string;
+  readonly forgotPasswordLabel?: string;
+  readonly submitLabel?: string;
+  readonly loadingLabel?: string;
   readonly forgotPasswordHref?: string;
   readonly className?: string;
   readonly forgotPasswordClassName?: string;
@@ -26,6 +32,12 @@ export function LoginEmailForm<TValues extends FieldValues>({
   onSubmit,
   loading = false,
   error,
+  emailLabel = "Email",
+  emailPlaceholder = "you@example.com",
+  passwordLabel = "Password",
+  forgotPasswordLabel = "Forgot password?",
+  submitLabel = "Sign in",
+  loadingLabel = "Signing in...",
   forgotPasswordHref = "/forgot-password",
   className,
   forgotPasswordClassName,
@@ -42,8 +54,8 @@ export function LoginEmailForm<TValues extends FieldValues>({
       >
         <CustomInputField<TValues>
           name={"email" as Path<TValues>}
-          label="Email"
-          placeholder="tuaemail@gmail.com"
+          label={emailLabel}
+          placeholder={emailPlaceholder}
           type="email"
           disabled={loading}
         />
@@ -51,7 +63,7 @@ export function LoginEmailForm<TValues extends FieldValues>({
         <div className="space-y-2">
           <CustomPasswordField<TValues>
             name={"password" as Path<TValues>}
-            label="Password"
+            label={passwordLabel}
             autoComplete="current-password"
             disabled={loading}
           />
@@ -63,7 +75,7 @@ export function LoginEmailForm<TValues extends FieldValues>({
               )}
               href={forgotPasswordHref}
             >
-              Hai dimenticato la password?
+              {forgotPasswordLabel}
             </a>
           </div>
         </div>
@@ -71,7 +83,7 @@ export function LoginEmailForm<TValues extends FieldValues>({
         <AuthError error={error} className={errorClassName} />
 
         <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
-          {loading ? "Accesso in corso..." : "Accedi"}
+          {loading ? loadingLabel : submitLabel}
         </Button>
       </form>
     </FormProvider>

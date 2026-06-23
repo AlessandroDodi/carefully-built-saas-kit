@@ -42,6 +42,7 @@ export function CrudTableView<TItem extends object>({
               state.setFilter(filter.key, value);
             },
             allowAll: filter.allowAll,
+            allOptionLabel: filter.allOptionLabel,
             clearable: filter.clearable,
           }))}
           onClearAll={state.clearAll}

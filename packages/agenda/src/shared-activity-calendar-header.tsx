@@ -9,6 +9,8 @@ interface SharedActivityCalendarHeaderProps {
   readonly today: Date;
   readonly onPreviousDay: () => void;
   readonly onNextDay: () => void;
+  readonly previousDayAriaLabel?: string;
+  readonly nextDayAriaLabel?: string;
 }
 
 function formatHeaderMonth(date: Date): string {
@@ -30,6 +32,8 @@ export function SharedActivityCalendarHeader({
   today,
   onPreviousDay,
   onNextDay,
+  previousDayAriaLabel = 'Previous day',
+  nextDayAriaLabel = 'Next day',
 }: SharedActivityCalendarHeaderProps): React.ReactElement {
   return (
     <div className="flex items-start justify-between gap-3">
@@ -52,7 +56,7 @@ export function SharedActivityCalendarHeader({
           variant="outline"
           size="icon-xs"
           className="rounded-full"
-          aria-label="Giorno precedente"
+          aria-label={previousDayAriaLabel}
           onClick={onPreviousDay}
         >
           <ChevronLeft className="size-3.5" />
@@ -62,7 +66,7 @@ export function SharedActivityCalendarHeader({
           variant="outline"
           size="icon-xs"
           className="rounded-full"
-          aria-label="Giorno successivo"
+          aria-label={nextDayAriaLabel}
           onClick={onNextDay}
         >
           <ChevronRight className="size-3.5" />

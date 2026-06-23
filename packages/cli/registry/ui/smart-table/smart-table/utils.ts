@@ -39,7 +39,7 @@ function formatValue(value: unknown): ReactNode {
   }
 
   if (typeof value === 'boolean') {
-    return value ? 'Si' : 'No';
+    return value ? 'Yes' : 'No';
   }
 
   if (value instanceof Date) {
@@ -82,7 +82,7 @@ function formatValueAsText(value: unknown): string | null {
   }
 
   if (typeof value === 'boolean') {
-    return value ? 'Si' : 'No';
+    return value ? 'Yes' : 'No';
   }
 
   if (value instanceof Date) {

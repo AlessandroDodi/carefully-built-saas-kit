@@ -20,6 +20,38 @@ const modeOptions = [
   { value: 'link', label: 'Upload link' },
 ] as const;
 
+export interface DocumentFormShellLabels {
+  readonly manualModeLabel: string;
+  readonly linkModeLabel: string;
+  readonly titleLabel: string;
+  readonly titlePlaceholder: string;
+  readonly dropzoneTitle: string;
+  readonly dropzoneHelperText: string;
+  readonly browseLabel: string;
+  readonly documentPreviewAlt: string;
+  readonly linkInfo: React.ReactNode;
+}
+
+export type DocumentFormShellLabelsInput = Partial<DocumentFormShellLabels>;
+
+function resolveDocumentFormShellLabels(
+  labels: DocumentFormShellLabelsInput = {},
+): DocumentFormShellLabels {
+  return {
+    manualModeLabel: labels.manualModeLabel ?? 'Manual upload',
+    linkModeLabel: labels.linkModeLabel ?? 'Upload link',
+    titleLabel: labels.titleLabel ?? 'Document name',
+    titlePlaceholder: labels.titlePlaceholder ?? 'Document name',
+    dropzoneTitle: labels.dropzoneTitle ?? 'Drop a file here or browse',
+    dropzoneHelperText: labels.dropzoneHelperText ?? 'Formats: PDF, JPG, PNG',
+    browseLabel: labels.browseLabel ?? 'Browse',
+    documentPreviewAlt: labels.documentPreviewAlt ?? 'Document preview',
+    linkInfo:
+      labels.linkInfo ??
+      'The link becomes active after you click Add. It will be copied automatically and will open the public dropzone page.',
+  };
+}
+
 interface DocumentFormShellProps {
   readonly defaultValues?: Partial<DocumentFormValues>;
   readonly selectedFile: File | null;
@@ -29,6 +61,7 @@ interface DocumentFormShellProps {
   readonly formId?: string;
   readonly renderAssociationField: () => React.ReactNode;
   readonly renderTagField: () => React.ReactNode;
+  readonly labels?: DocumentFormShellLabelsInput;
   readonly onFileSelect: (file: File) => void;
   readonly onSubmit: (data: DocumentFormValues) => void;
   readonly onCopyLinkPreview: () => void;
@@ -43,10 +76,12 @@ export function DocumentFormShell({
   formId = 'document-form',
   renderAssociationField,
   renderTagField,
+  labels,
   onFileSelect,
   onSubmit,
   onCopyLinkPreview,
 }: DocumentFormShellProps): React.ReactElement {
+  const resolvedLabels = resolveDocumentFormShellLabels(labels);
   const initialValues: DocumentFormValues = {
     mode: defaultValues?.mode ?? 'manual',
     title: defaultValues?.title ?? '',
@@ -72,6 +107,10 @@ export function DocumentFormShell({
               <div className="flex flex-wrap gap-2">
                 {modeOptions.map((option) => {
                   const isActive = mode === option.value;
+                  const optionLabel =
+                    option.value === 'manual'
+                      ? resolvedLabels.manualModeLabel
+                      : resolvedLabels.linkModeLabel;
                   return (
                     <Button
                       key={option.value}
@@ -85,7 +124,7 @@ export function DocumentFormShell({
                         methods.setValue('mode', option.value);
                       }}
                     >
-                      {option.label}
+                      {optionLabel}
                     </Button>
                   );
                 })}
@@ -94,8 +133,8 @@ export function DocumentFormShell({
 
             <CustomInputField<DocumentFormValues>
               name="title"
-              label="Document name"
-              placeholder="Document name"
+              label={resolvedLabels.titleLabel}
+              placeholder={resolvedLabels.titlePlaceholder}
             />
 
             {renderAssociationField()}
@@ -105,14 +144,14 @@ export function DocumentFormShell({
               <div className="space-y-2">
                 <FileDropzone
                   accept=".pdf,image/*"
-                  title="Drop a file here or browse"
-                  helperText="Formats: PDF, JPG, PNG"
-                  browseLabel="Browse"
+                  title={resolvedLabels.dropzoneTitle}
+                  helperText={resolvedLabels.dropzoneHelperText}
+                  browseLabel={resolvedLabels.browseLabel}
                   currentPreviewUrl={
                     selectedFile?.type.startsWith('image/') ? filePreviewUrl : null
                   }
                   emptyIcon={<Upload className="size-6" />}
-                  previewAlt={selectedFile?.name ?? 'Document preview'}
+                  previewAlt={selectedFile?.name ?? resolvedLabels.documentPreviewAlt}
                   onFileSelect={onFileSelect}
                 />
               </div>
@@ -135,8 +174,7 @@ export function DocumentFormShell({
                 <div className="flex items-start gap-2 rounded-lg bg-primary/10 px-3 py-2 text-xs text-primary">
                   <Link2 className="mt-0.5 size-4 shrink-0" />
                   <p>
-                    The link becomes active after you click Add. It will be copied
-                    automatically and will open the public dropzone page.
+                    {resolvedLabels.linkInfo}
                   </p>
                 </div>
               </div>

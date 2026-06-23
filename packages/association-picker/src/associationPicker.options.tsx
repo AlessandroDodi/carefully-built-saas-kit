@@ -4,11 +4,33 @@ import { ORDERED_ASSOCIATION_ENTITY_TYPES } from './constants';
 import {
   getAssociationTypeChipMeta,
   normalizeAssociationEntityType,
+  type AssociationEntityType,
 } from './associationTypeMeta';
 import type {
   AssociationFilterType,
+  AssociationPickerLabels,
+  AssociationPickerLabelsInput,
   AssociationPickerOption,
 } from './types';
+
+export function getResolvedAssociationPickerLabels(
+  labels: AssociationPickerLabelsInput = {},
+): AssociationPickerLabels {
+  return {
+    allTypesLabel: labels.allTypesLabel ?? 'All',
+    createLabel: labels.createLabel ?? 'Create',
+    createEntityLabel:
+      labels.createEntityLabel ?? ((entityTypeLabel: string) => `Create ${entityTypeLabel}`),
+    entityTypeLabels: labels.entityTypeLabels ?? {},
+  };
+}
+
+export function getAssociationEntityTypeLabel(
+  entityType: AssociationEntityType,
+  labels: AssociationPickerLabels,
+): string {
+  return labels.entityTypeLabels[entityType] ?? getAssociationTypeChipMeta(entityType).label;
+}
 
 export function mergeAssociationOptions(
   options: readonly AssociationPickerOption[],
@@ -40,7 +62,10 @@ export function getVisibleAssociationOptions(
   );
 }
 
-export function getAvailableTypeOptions(options: readonly AssociationPickerOption[]) {
+export function getAvailableTypeOptions(
+  options: readonly AssociationPickerOption[],
+  labels = getResolvedAssociationPickerLabels(),
+) {
   const matchedTypes = ORDERED_ASSOCIATION_ENTITY_TYPES.filter((entityType) =>
     options.some(
       (option) => normalizeAssociationEntityType(option.entityType) === entityType,
@@ -52,19 +77,19 @@ export function getAvailableTypeOptions(options: readonly AssociationPickerOptio
       const Icon = getAssociationTypeChipMeta(entityType).icon;
       return {
         value: entityType,
-        label: getAssociationTypeChipMeta(entityType).label,
+        label: getAssociationEntityTypeLabel(entityType, labels),
         icon: <Icon className="size-4" />,
       };
     });
   }
 
   return [
-    { value: 'all' as const, label: 'Tutti' },
+    { value: 'all' as const, label: labels.allTypesLabel },
     ...matchedTypes.map((entityType) => {
       const Icon = getAssociationTypeChipMeta(entityType).icon;
       return {
         value: entityType,
-        label: getAssociationTypeChipMeta(entityType).label,
+        label: getAssociationEntityTypeLabel(entityType, labels),
         icon: <Icon className="size-4" />,
       };
     }),

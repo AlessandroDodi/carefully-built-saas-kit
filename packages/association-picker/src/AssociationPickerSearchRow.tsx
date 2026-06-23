@@ -4,12 +4,14 @@ import type { KeyboardEvent, MutableRefObject } from 'react';
 import { Input } from '@carefully-built/ui';
 import type { AssociationEntityType } from './associationTypeMeta';
 import { AssociationPickerCreateAction } from './AssociationPickerCreateAction';
+import type { AssociationPickerLabels } from './types';
 
 interface AssociationPickerSearchRowProps {
   readonly canCreate: boolean;
   readonly createButtonLabel: string;
   readonly createableTypes: readonly AssociationEntityType[];
   readonly isCreateMenuOpen: boolean;
+  readonly labels: AssociationPickerLabels;
   readonly search: string;
   readonly searchPlaceholder: string;
   readonly searchInputRef: MutableRefObject<HTMLInputElement | null>;
@@ -25,7 +27,7 @@ interface AssociationPickerSearchRowProps {
 
 export function AssociationPickerSearchRow(props: AssociationPickerSearchRowProps): React.ReactElement {
   const {
-    canCreate, createButtonLabel, createableTypes, isCreateMenuOpen, search, searchPlaceholder,
+    canCreate, createButtonLabel, createableTypes, isCreateMenuOpen, labels, search, searchPlaceholder,
     searchInputRef, selectHighlightedOption, moveHighlightedOption, setHighlightedOptionIndex,
     setIsCreateMenuOpen, setIsOpen, setSearch, singleCreateType, openCreateFlow,
   } = props;
@@ -48,6 +50,7 @@ export function AssociationPickerSearchRow(props: AssociationPickerSearchRowProp
           createableTypes={createableTypes}
           isMenuOpen={isCreateMenuOpen}
           label={createButtonLabel}
+          labels={labels}
           openCreateFlow={openCreateFlow}
           setIsMenuOpen={setIsCreateMenuOpen}
           singleCreateType={singleCreateType}

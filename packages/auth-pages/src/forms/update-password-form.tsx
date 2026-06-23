@@ -16,6 +16,12 @@ interface UpdatePasswordFormProps<
 > extends AuthFormState<TValues> {
   readonly token?: string | null;
   readonly missingTokenMessage?: string;
+  readonly passwordLabel?: string;
+  readonly passwordPlaceholder?: string;
+  readonly confirmPasswordLabel?: string;
+  readonly confirmPasswordPlaceholder?: string;
+  readonly submitLabel?: string;
+  readonly loadingLabel?: string;
   readonly className?: string;
   readonly errorClassName?: string;
   readonly missingTokenClassName?: string;
@@ -29,6 +35,12 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   error,
   token,
   missingTokenMessage = "Invalid or missing reset token. Request a new password reset link.",
+  passwordLabel = "New password",
+  passwordPlaceholder = "At least 8 characters",
+  confirmPasswordLabel = "Confirm password",
+  confirmPasswordPlaceholder = "Enter the password again",
+  submitLabel = "Update password",
+  loadingLabel = "Updating...",
   className,
   errorClassName,
   missingTokenClassName,
@@ -57,16 +69,16 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
       >
         <CustomPasswordField<TValues>
           name={"password" as Path<TValues>}
-          label="Nuova password"
-          placeholder="Almeno 8 caratteri"
+          label={passwordLabel}
+          placeholder={passwordPlaceholder}
           autoComplete="new-password"
           disabled={loading}
         />
 
         <CustomPasswordField<TValues>
           name={"confirmPassword" as Path<TValues>}
-          label="Conferma password"
-          placeholder="Reinserisci la password"
+          label={confirmPasswordLabel}
+          placeholder={confirmPasswordPlaceholder}
           autoComplete="new-password"
           disabled={loading}
         />
@@ -74,7 +86,7 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
         <AuthError error={error} className={errorClassName} />
 
         <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
-          {loading ? "Aggiornamento..." : "Aggiorna password"}
+          {loading ? loadingLabel : submitLabel}
         </Button>
       </form>
     </FormProvider>

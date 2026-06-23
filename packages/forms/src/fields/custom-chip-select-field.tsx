@@ -22,6 +22,7 @@ interface CustomChipSelectFieldProps<TValues extends FieldValues> {
   readonly options: readonly ChipOption[];
   readonly disabled?: boolean;
   readonly allowDeselect?: boolean;
+  readonly allLabel?: string;
   readonly multiple?: boolean;
   readonly className?: string;
   readonly getOptionStyle?: (args: { value: string; index: number }) => React.CSSProperties;
@@ -52,6 +53,7 @@ export function CustomChipSelectField<TValues extends FieldValues>({
   options,
   disabled = false,
   allowDeselect = true,
+  allLabel = 'All',
   multiple = false,
   className,
   getOptionStyle,
@@ -89,7 +91,7 @@ export function CustomChipSelectField<TValues extends FieldValues>({
                     error && !hasAllOptionsSelected && 'shadow-[inset_0_0_0_1px_theme(colors.destructive)]'
                   )}
                 >
-                  Tutti
+                  {allLabel}
                 </ChipButton>
               ) : null}
 

@@ -1,7 +1,9 @@
 import { AssociationPickerCreateAction } from './AssociationPickerCreateAction';
+import { getAssociationEntityTypeLabel } from './associationPicker.options';
 import { getAssociationTypeChipMeta, type AssociationEntityType } from './associationTypeMeta';
 
 import type { AssociationPickerOption } from './types';
+import type { AssociationPickerLabels } from './types';
 import type { RefObject } from 'react';
 
 import { Chip } from '@carefully-built/ui';
@@ -13,6 +15,7 @@ interface AssociationPickerOptionsListProps {
   readonly filteredOptions: readonly AssociationPickerOption[];
   readonly highlightedOptionIndex: number;
   readonly isCreateMenuOpen: boolean;
+  readonly labels: AssociationPickerLabels;
   readonly optionRefs: RefObject<(HTMLButtonElement | null)[]>;
   readonly createableTypes: readonly AssociationEntityType[];
   readonly singleCreateType: AssociationEntityType | null;
@@ -26,7 +29,7 @@ interface AssociationPickerOptionsListProps {
 export function AssociationPickerOptionsList(props: AssociationPickerOptionsListProps): React.ReactElement {
   const {
     createableTypes, emptyMessage, filteredOptions, highlightedOptionIndex, isCreateMenuOpen, optionRefs,
-    singleCreateType, value, setHighlightedOptionIndex, setIsCreateMenuOpen, openCreateFlow, toggleValue,
+    labels, singleCreateType, value, setHighlightedOptionIndex, setIsCreateMenuOpen, openCreateFlow, toggleValue,
   } = props;
 
   if (filteredOptions.length === 0) {
@@ -38,7 +41,8 @@ export function AssociationPickerOptionsList(props: AssociationPickerOptionsList
             className="mt-2"
             createableTypes={createableTypes}
             isMenuOpen={isCreateMenuOpen}
-            label={singleCreateType ? `Create ${getAssociationTypeChipMeta(singleCreateType).label.toLowerCase()}` : 'Create'}
+            label={singleCreateType ? labels.createEntityLabel(getAssociationEntityTypeLabel(singleCreateType, labels).toLowerCase()) : labels.createLabel}
+            labels={labels}
             openCreateFlow={openCreateFlow}
             setIsMenuOpen={setIsCreateMenuOpen}
             singleCreateType={singleCreateType}
@@ -101,7 +105,7 @@ function AssociationPickerOptionRow({
         </p>
       </div>
       <Chip size="compact" className={chipMeta.className} leading={<ChipIcon className="size-2.5" />}>
-        {chipMeta.label}
+        {option.typeLabel}
       </Chip>
     </Button>
   );

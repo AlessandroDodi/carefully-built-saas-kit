@@ -32,6 +32,19 @@ export interface AssociationPickerCreateConfig {
   readonly handlers: Partial<Record<AssociationEntityType, AssociationPickerCreateHandler>>;
 }
 
+export interface AssociationPickerLabels {
+  readonly allTypesLabel: string;
+  readonly createLabel: string;
+  readonly createEntityLabel: (entityTypeLabel: string) => string;
+  readonly entityTypeLabels: Partial<Record<AssociationEntityType, string>>;
+}
+
+export type AssociationPickerLabelsInput = Partial<
+  Omit<AssociationPickerLabels, 'entityTypeLabels'>
+> & {
+  readonly entityTypeLabels?: Partial<Record<AssociationEntityType, string>>;
+};
+
 export interface AssociationPickerProps {
   readonly options: AssociationPickerOption[];
   readonly value: string[];
@@ -42,6 +55,7 @@ export interface AssociationPickerProps {
   readonly placeholder?: string;
   readonly searchPlaceholder?: string;
   readonly emptyMessage?: string;
+  readonly labels?: AssociationPickerLabelsInput;
   readonly disabled?: boolean;
   readonly className?: string;
   readonly createConfig?: AssociationPickerCreateConfig;

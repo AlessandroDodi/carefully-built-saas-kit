@@ -151,12 +151,13 @@ function buildUserOrganizations(
 
 export function buildWeeklyUserRegistrations(
   users: readonly SuperAdminUser[],
+  locale = 'en-US',
 ): { label: string; rangeLabel: string; value: number }[] {
-  const shortFormatter = new Intl.DateTimeFormat('it-IT', {
+  const shortFormatter = new Intl.DateTimeFormat(locale, {
     day: '2-digit',
     month: 'short',
   });
-  const longFormatter = new Intl.DateTimeFormat('it-IT', {
+  const longFormatter = new Intl.DateTimeFormat(locale, {
     day: '2-digit',
     month: 'short',
     year: 'numeric',

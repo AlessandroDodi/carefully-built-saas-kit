@@ -41,7 +41,8 @@ export function formatDatePickerValue(date: Date): string {
 
 export function formatDatePickerDisplayValue(
   value: string | undefined,
-  placeholder: string
+  placeholder: string,
+  locale = 'en-US',
 ): string {
   const date = parseDatePickerValue(value);
 
@@ -49,7 +50,7 @@ export function formatDatePickerDisplayValue(
     return placeholder;
   }
 
-  return new Intl.DateTimeFormat('it-IT', {
+  return new Intl.DateTimeFormat(locale, {
     day: '2-digit',
     month: 'long',
     year: 'numeric',

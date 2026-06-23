@@ -5,15 +5,12 @@ import { CustomChipSelectField } from './custom-chip-select-field';
 import type { LucideIcon } from 'lucide-react';
 import type { FieldValues, Path } from 'react-hook-form';
 
-const BOOLEAN_CHIP_OPTIONS = [
-  { value: 'yes', label: 'Si' },
-  { value: 'no', label: 'No' },
-] as const;
-
 interface CustomBooleanChipFieldProps<TValues extends FieldValues> {
   readonly name: Path<TValues>;
   readonly label?: string;
   readonly labelIcon?: LucideIcon;
+  readonly yesLabel?: string;
+  readonly noLabel?: string;
   readonly disabled?: boolean;
   readonly className?: string;
 }
@@ -22,6 +19,8 @@ export function CustomBooleanChipField<TValues extends FieldValues>({
   name,
   label,
   labelIcon,
+  yesLabel = 'Yes',
+  noLabel = 'No',
   disabled = false,
   className,
 }: CustomBooleanChipFieldProps<TValues>): React.ReactElement {
@@ -32,7 +31,10 @@ export function CustomBooleanChipField<TValues extends FieldValues>({
       labelIcon={labelIcon}
       disabled={disabled}
       className={className}
-      options={BOOLEAN_CHIP_OPTIONS}
+      options={[
+        { value: 'yes', label: yesLabel },
+        { value: 'no', label: noLabel },
+      ]}
     />
   );
 }

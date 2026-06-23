@@ -34,8 +34,10 @@ const statusOptions = [
   { value: 'sospeso', label: 'Suspended' },
 ] as const;
 
+const DEFAULT_SEARCH_LOCALE = 'en-US';
+
 function normalizeSearch(value: string): string {
-  return value.trim().toLocaleLowerCase('it-IT');
+  return value.trim().toLocaleLowerCase(DEFAULT_SEARCH_LOCALE);
 }
 
 function includesSearch(
@@ -50,7 +52,7 @@ function includesSearch(
 
   return searchableText
     .filter((value) => value !== null && value !== undefined)
-    .some((value) => String(value).toLocaleLowerCase('it-IT').includes(normalizedSearch));
+    .some((value) => String(value).toLocaleLowerCase(DEFAULT_SEARCH_LOCALE).includes(normalizedSearch));
 }
 
 function MobileMetaRow({
