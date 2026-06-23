@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/ui",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Reusable React UI primitives and data-display components for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
