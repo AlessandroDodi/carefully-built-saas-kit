@@ -49,9 +49,9 @@ export function SettingsTabs({
     <Tabs
       value={selectedTab}
       onValueChange={handleValueChange}
-      className="w-full"
+      className="w-full flex-col"
     >
-      <TabsScrollArea className="pb-1">
+      <TabsScrollArea className="max-w-full pb-1">
         <TabsList className="min-w-max touch-pan-x">
           {tabs.map((tab) => (
             <TabsTrigger key={tab.value} value={tab.value} className="gap-1.5">
@@ -63,7 +63,7 @@ export function SettingsTabs({
       </TabsScrollArea>
 
       {tabs.map((tab) => (
-        <TabsContent key={tab.value} value={tab.value} className="mt-6">
+        <TabsContent key={tab.value} value={tab.value} className="mt-6 w-full">
           {tab.content}
         </TabsContent>
       ))}

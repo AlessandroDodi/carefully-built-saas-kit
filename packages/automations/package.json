@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/automations",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Reusable automation builder primitives, canvas, options, and draft validation for SaaS apps.",
   "type": "module",
   "license": "MIT",

@@ -31,7 +31,7 @@ describe('association picker labels', () => {
 
   test('uses localized all and entity type labels', () => {
     const labels = getResolvedAssociationPickerLabels({
-      allTypesLabel: 'Tutti',
+      allTypesLabel: 'Everything',
       entityTypeLabels: {
         contact: 'Contatti',
         document: 'Documenti',
@@ -39,7 +39,7 @@ describe('association picker labels', () => {
     });
 
     expect(getAvailableTypeOptions(options, labels).map((option) => option.label)).toEqual([
-      'Tutti',
+      'Everything',
       'Contatti',
       'Documenti',
     ]);

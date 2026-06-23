@@ -4,7 +4,7 @@ import { SmartTableActions } from '@/components/ui/smart-table/SmartTableActions
 import { TruncatedContent } from '@/components/ui/smart-table/TruncatedContent';
 import { getColumnTooltipText, renderColumnValue } from '@/components/ui/smart-table/utils';
 
-import type { ActionHandlers, ActionType, Column, PaginationConfig } from '@/components/ui/smart-table/types';
+import type { ActionHandlers, ActionLabels, ActionType, Column, PaginationConfig } from '@/components/ui/smart-table/types';
 import type { ReactNode } from 'react';
 
 import { Pagination } from '@/components/ui/pagination';
@@ -18,6 +18,7 @@ interface MobileViewProps<T> {
   isLoading: boolean;
   skeletonRows: number;
   actions?: ActionType[];
+  actionLabels?: ActionLabels;
   actionHandlers?: ActionHandlers<T>;
   renderActions?: (item: T) => ReactNode;
   noDataMessage: string;
@@ -35,6 +36,7 @@ export function MobileView<T>({
   isLoading,
   skeletonRows,
   actions,
+  actionLabels,
   actionHandlers,
   renderActions,
   noDataMessage,
@@ -153,6 +155,7 @@ export function MobileView<T>({
                       <SmartTableActions
                         item={item}
                         actions={actions}
+                        actionLabels={actionLabels}
                         actionHandlers={actionHandlers}
                         renderActions={renderActions}
                       />

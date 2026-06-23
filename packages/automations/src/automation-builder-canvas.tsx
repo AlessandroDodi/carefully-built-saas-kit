@@ -37,6 +37,7 @@ interface AutomationBuilderCanvasProps {
   readonly onSelectStep: (stepId: string) => void;
   readonly onDeleteStep: (stepId: string) => void;
   readonly getEntityLabel?: (entityType: string) => string;
+  readonly labels?: AutomationBuilderCanvasLabelsInput;
 }
 
 interface BuilderNodeData extends Record<string, unknown> {
@@ -51,9 +52,86 @@ interface BuilderNodeData extends Record<string, unknown> {
   readonly onSelect?: () => void;
   readonly onDelete?: () => void;
   readonly onAddStep?: () => void;
+  readonly labels: AutomationBuilderCanvasLabels;
 }
 
 type BuilderNode = Node<BuilderNodeData>;
+
+export interface AutomationBuilderCanvasLabels {
+  readonly unknownEntityLabel: string;
+  readonly emptyValueLabel: string;
+  readonly filledValueLabel: string;
+  readonly missingValueLabel: string;
+  readonly configureStepLabel: string;
+  readonly waitDescription: (amount: number, unitLabel: string) => string;
+  readonly daySingularLabel: string;
+  readonly dayPluralLabel: string;
+  readonly hourSingularLabel: string;
+  readonly hourPluralLabel: string;
+  readonly minutesLabel: string;
+  readonly filterDescription: (entityLabel: string, groupCount: number, conditionCount: number) => string;
+  readonly pathDescription: (pathCount: number, configuredPathCount: number) => string;
+  readonly templateLabel: (templateId: string) => string;
+  readonly chooseTemplateLabel: string;
+  readonly tagSelectedLabel: string;
+  readonly chooseTagLabel: string;
+  readonly chooseFieldLabel: string;
+  readonly triggerEyebrow: string;
+  readonly delayEyebrow: string;
+  readonly filterEyebrow: string;
+  readonly pathEyebrow: string;
+  readonly actionEyebrow: string;
+  readonly pathConditionsLabel: string;
+  readonly addStepLabel: string;
+  readonly editLabel: string;
+  readonly deleteLabel: string;
+  readonly incompleteLabel: string;
+  readonly automationEndLabel: string;
+  readonly startTitle: string;
+  readonly chooseTriggerLabel: string;
+}
+
+export type AutomationBuilderCanvasLabelsInput = Partial<AutomationBuilderCanvasLabels>;
+
+const defaultAutomationBuilderCanvasLabels: AutomationBuilderCanvasLabels = {
+  unknownEntityLabel: 'entity',
+  emptyValueLabel: 'empty',
+  filledValueLabel: 'filled',
+  missingValueLabel: 'to choose',
+  configureStepLabel: 'Configure the step',
+  waitDescription: (amount, unitLabel) => `Wait ${amount} ${unitLabel}`,
+  daySingularLabel: 'day',
+  dayPluralLabel: 'days',
+  hourSingularLabel: 'hour',
+  hourPluralLabel: 'hours',
+  minutesLabel: 'minutes',
+  filterDescription: (entityLabel, groupCount, conditionCount) => `${entityLabel} · ${groupCount} groups, ${conditionCount} conditions`,
+  pathDescription: (pathCount, configuredPathCount) => `${pathCount} paths · ${configuredPathCount} with conditions`,
+  templateLabel: (templateId) => `Template: ${templateId}`,
+  chooseTemplateLabel: 'Choose a template',
+  tagSelectedLabel: 'Tag selected',
+  chooseTagLabel: 'Choose a tag',
+  chooseFieldLabel: 'Choose a field',
+  triggerEyebrow: 'Trigger',
+  delayEyebrow: 'Delay',
+  filterEyebrow: 'Filter',
+  pathEyebrow: 'Path',
+  actionEyebrow: 'Action',
+  pathConditionsLabel: 'Path conditions',
+  addStepLabel: 'Add step',
+  editLabel: 'Edit',
+  deleteLabel: 'Delete',
+  incompleteLabel: 'To configure',
+  automationEndLabel: 'Automation end',
+  startTitle: 'Start building your automation',
+  chooseTriggerLabel: 'Choose trigger',
+};
+
+function resolveAutomationBuilderCanvasLabels(
+  labels: AutomationBuilderCanvasLabelsInput = {},
+): AutomationBuilderCanvasLabels {
+  return { ...defaultAutomationBuilderCanvasLabels, ...labels };
+}
 
 const FIELD_LABELS: Record<string, string> = {
   activityType: 'Activity type',
@@ -89,37 +167,39 @@ const DEFAULT_ENTITY_LABELS: Record<string, string> = {
 function formatEntityLabel(
   entityType: string | undefined,
   getEntityLabel?: (entityType: string) => string,
+  labels: AutomationBuilderCanvasLabels = defaultAutomationBuilderCanvasLabels,
 ): string {
   if (!entityType) {
-    return 'entita';
+    return labels.unknownEntityLabel;
   }
 
   return getEntityLabel?.(entityType) ?? DEFAULT_ENTITY_LABELS[entityType] ?? entityType;
 }
 
-function formatAutomationValue(value: string): string {
+function formatAutomationValue(value: string, labels: AutomationBuilderCanvasLabels): string {
   if (value === 'empty') {
-    return 'empty';
+    return labels.emptyValueLabel;
   }
 
   if (value === 'filled') {
-    return 'filled';
+    return labels.filledValueLabel;
   }
 
-  return value || 'to choose';
+  return value || labels.missingValueLabel;
 }
 
 function formatFieldTrigger(
   trigger: AutomationTriggerDraft,
   getEntityLabel?: (entityType: string) => string,
+  labels: AutomationBuilderCanvasLabels = defaultAutomationBuilderCanvasLabels,
 ): string | undefined {
   if (trigger.type !== 'field_changed') {
     return undefined;
   }
 
-  return `${formatEntityLabel(trigger.entityType, getEntityLabel)} · ${FIELD_LABELS[trigger.field] ?? trigger.field}: ${
-    formatAutomationValue(trigger.from)
-  } -> ${formatAutomationValue(trigger.to)}`;
+  return `${formatEntityLabel(trigger.entityType, getEntityLabel, labels)} · ${FIELD_LABELS[trigger.field] ?? trigger.field}: ${
+    formatAutomationValue(trigger.from, labels)
+  } -> ${formatAutomationValue(trigger.to, labels)}`;
 }
 
 function countConditions(
@@ -131,41 +211,46 @@ function countConditions(
 function formatStepDescription(
   step: AutomationStepInput,
   getEntityLabel?: (entityType: string) => string,
+  labels: AutomationBuilderCanvasLabels = defaultAutomationBuilderCanvasLabels,
 ): string {
   if (!step.config) {
-    return 'Configure the step';
+    return labels.configureStepLabel;
   }
 
   if (step.config.type === 'delay') {
     const unitLabel = step.config.unit === 'days'
-      ? step.config.amount === 1 ? 'day' : 'days'
+      ? step.config.amount === 1 ? labels.daySingularLabel : labels.dayPluralLabel
       : step.config.unit === 'hours'
-        ? step.config.amount === 1 ? 'hour' : 'hours'
-        : 'minutes';
-    return `Wait ${step.config.amount} ${unitLabel}`;
+        ? step.config.amount === 1 ? labels.hourSingularLabel : labels.hourPluralLabel
+        : labels.minutesLabel;
+    return labels.waitDescription(step.config.amount, unitLabel);
   }
 
   if (step.config.type === 'filter') {
     const conditionsCount = countConditions(step.config.filterGroups);
-    return `${formatEntityLabel(step.config.entityType, getEntityLabel)} · ${step.config.filterGroups.length} groups, ${conditionsCount} conditions`;
+    return labels.filterDescription(
+      formatEntityLabel(step.config.entityType, getEntityLabel, labels),
+      step.config.filterGroups.length,
+      conditionsCount,
+    );
   }
 
   if (step.config.type === 'path') {
     const configuredBranches = step.config.branches.filter((branch) => countConditions(branch.filterGroups) > 0);
-    return `${step.config.branches.length} paths · ${configuredBranches.length} with conditions`;
+    return labels.pathDescription(step.config.branches.length, configuredBranches.length);
   }
 
   if (step.config.type === 'send_email' || step.config.type === 'send_whatsapp') {
-    return step.config.templateId ? `Template: ${step.config.templateId}` : 'Choose a template';
+    return step.config.templateId ? labels.templateLabel(step.config.templateId) : labels.chooseTemplateLabel;
   }
 
   if (step.config.type === 'add_tag') {
-    return step.config.tagId ? 'Tag selected' : 'Choose a tag';
+    return step.config.tagId ? labels.tagSelectedLabel : labels.chooseTagLabel;
   }
 
   if (step.config.type === 'update_field') {
-    return `${FIELD_LABELS[step.config.field] ?? (step.config.field || 'Choose a field')} -> ${
-      formatAutomationValue(step.config.value)
+    return `${FIELD_LABELS[step.config.field] ?? (step.config.field || labels.chooseFieldLabel)} -> ${
+      formatAutomationValue(step.config.value, labels)
     }`;
   }
 
@@ -190,7 +275,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
           }}
         >
           <Plus className="size-3.5" />
-          Add step
+          {data.labels.addStepLabel}
         </Button>
         <Handle type="source" position={Position.Bottom} className="opacity-0" />
       </div>
@@ -244,7 +329,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
                 }}
               >
                 <Pencil className="size-4" />
-                Edit
+                {data.labels.editLabel}
               </DropdownMenuItem>
               <DropdownMenuItem
                 variant="destructive"
@@ -254,7 +339,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
                 }}
               >
                 <Trash2 className="size-4" />
-                Delete
+                {data.labels.deleteLabel}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -272,7 +357,7 @@ function FlowCardNode({ data }: NodeProps<BuilderNode>): React.ReactElement {
           </span>
           {data.isIncomplete ? (
             <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-[11px] font-medium text-amber-800">
-              Da configurare
+              {data.labels.incompleteLabel}
             </span>
           ) : null}
         </div>
@@ -299,6 +384,7 @@ function buildNodes(
   onSelectStep: (stepId: string) => void,
   onDeleteStep: (stepId: string) => void,
   getEntityLabel?: (entityType: string) => string,
+  labels: AutomationBuilderCanvasLabels = defaultAutomationBuilderCanvasLabels,
 ): BuilderNode[] {
   if (!trigger) {
     return [];
@@ -312,15 +398,16 @@ function buildNodes(
       position: { x: 0, y: 0 },
       data: {
         kind: 'trigger',
-        eyebrow: 'Trigger',
+        eyebrow: labels.triggerEyebrow,
         label: triggerOption.label,
         description: trigger.type === 'entity_created'
-          ? formatEntityLabel(trigger.entityType, getEntityLabel)
-          : formatFieldTrigger(trigger, getEntityLabel),
+          ? formatEntityLabel(trigger.entityType, getEntityLabel, labels)
+          : formatFieldTrigger(trigger, getEntityLabel, labels),
         tone: triggerOption.badgeTone,
         badgeTone: triggerOption.tone,
         icon: triggerOption.icon,
         onSelect: onSelectTrigger,
+        labels,
       },
     },
   ];
@@ -336,14 +423,14 @@ function buildNodes(
         kind: 'step',
         eyebrow:
           step.type === 'delay'
-            ? 'Delay'
+            ? labels.delayEyebrow
             : step.type === 'filter'
-              ? 'Filter'
+              ? labels.filterEyebrow
               : step.type === 'path'
-                ? 'Path'
-                : 'Action',
+                ? labels.pathEyebrow
+                : labels.actionEyebrow,
         label: step.name || stepOption.label,
-        description: formatStepDescription(step, getEntityLabel),
+        description: formatStepDescription(step, getEntityLabel, labels),
         tone: stepOption.badgeTone,
         badgeTone: stepOption.tone,
         icon: stepOption.icon,
@@ -354,6 +441,7 @@ function buildNodes(
         onDelete: () => {
           onDeleteStep(step.id);
         },
+        labels,
       },
     });
 
@@ -366,9 +454,9 @@ function buildNodes(
           position: { x: branchStartX + branchIndex * 260, y: y + 150 },
           data: {
             kind: 'step',
-            eyebrow: 'Path',
+            eyebrow: labels.pathEyebrow,
             label: branch.name,
-            description: 'Path conditions',
+            description: labels.pathConditionsLabel,
             tone: stepOption.badgeTone,
             badgeTone: stepOption.tone,
             icon: stepOption.icon,
@@ -378,6 +466,7 @@ function buildNodes(
             onDelete: () => {
               onDeleteStep(step.id);
             },
+            labels,
           },
           draggable: false,
         });
@@ -396,8 +485,9 @@ function buildNodes(
       position: { x: 36, y },
       data: {
         kind: 'add',
-        label: 'Add step',
+        label: labels.addStepLabel,
         onAddStep,
+        labels,
       },
       draggable: false,
     },
@@ -407,8 +497,9 @@ function buildNodes(
       position: { x: 0, y: y + 130 },
       data: {
         kind: 'end',
-        eyebrow: 'Automation end',
-        label: 'Automation end',
+        eyebrow: labels.automationEndLabel,
+        label: labels.automationEndLabel,
+        labels,
       },
       draggable: false,
     }
@@ -503,10 +594,12 @@ export function AutomationBuilderCanvas({
   onSelectStep,
   onDeleteStep,
   getEntityLabel,
+  labels,
 }: AutomationBuilderCanvasProps): React.ReactElement {
+  const resolvedLabels = useMemo(() => resolveAutomationBuilderCanvasLabels(labels), [labels]);
   const nodes = useMemo(
-    () => buildNodes(trigger, steps, onSelectTrigger, onAddStep, onSelectStep, onDeleteStep, getEntityLabel),
-    [getEntityLabel, onAddStep, onDeleteStep, onSelectStep, onSelectTrigger, steps, trigger]
+    () => buildNodes(trigger, steps, onSelectTrigger, onAddStep, onSelectStep, onDeleteStep, getEntityLabel, resolvedLabels),
+    [getEntityLabel, onAddStep, onDeleteStep, onSelectStep, onSelectTrigger, resolvedLabels, steps, trigger]
   );
   const edges = useMemo(() => buildEdges(nodes), [nodes]);
 
@@ -517,9 +610,9 @@ export function AutomationBuilderCanvas({
           <div className="flex size-12 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Target className="size-7" />
           </div>
-          <p className="text-lg font-medium text-foreground">Start building your automation</p>
+          <p className="text-lg font-medium text-foreground">{resolvedLabels.startTitle}</p>
           <Button type="button" className="mt-2" onClick={onChooseTrigger}>
-            Choose trigger
+            {resolvedLabels.chooseTriggerLabel}
           </Button>
         </div>
       </div>

@@ -14,20 +14,44 @@ interface CreateOrganizationProps {
   readonly createOrganization?: (name: string) => Promise<string>;
   readonly onCreated?: (orgId: string) => void;
   readonly uploadLogo?: (args: { file: File; organizationId: string }) => Promise<void>;
+  readonly labels?: CreateOrganizationLabelsInput;
 }
 
 interface CreateOrganizationSheetProps {
   readonly dialog: ReturnType<typeof useCreateOrganizationDialog>;
+  readonly labels: CreateOrganizationLabels;
 }
 
 interface CreateOrganizationTriggerProps {
   readonly children?: React.ReactNode;
   readonly onOpen: () => void;
+  readonly labels: CreateOrganizationLabels;
+}
+
+export interface CreateOrganizationLabels {
+  readonly triggerLabel: string;
+  readonly title: string;
+  readonly description: string;
+  readonly confirmLabel: string;
+}
+
+export type CreateOrganizationLabelsInput = Partial<CreateOrganizationLabels>;
+
+function resolveCreateOrganizationLabels(
+  labels: CreateOrganizationLabelsInput = {},
+): CreateOrganizationLabels {
+  return {
+    triggerLabel: labels.triggerLabel ?? 'Create organization',
+    title: labels.title ?? 'Create organization',
+    description: labels.description ?? 'Create a new organization to invite your team and collaborate.',
+    confirmLabel: labels.confirmLabel ?? 'Create',
+  };
 }
 
 function CreateOrganizationTrigger({
   children,
   onOpen,
+  labels,
 }: CreateOrganizationTriggerProps): React.ReactElement {
   return (
     children ? (
@@ -36,13 +60,13 @@ function CreateOrganizationTrigger({
       </Slot>
     ) : (
       <Button variant="outline" onClick={onOpen}>
-        Create organization
+        {labels.triggerLabel}
       </Button>
     )
   );
 }
 
-function CreateOrganizationSheet({ dialog }: CreateOrganizationSheetProps): React.ReactElement {
+function CreateOrganizationSheet({ dialog, labels }: CreateOrganizationSheetProps): React.ReactElement {
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleClose = (): void => {
@@ -61,9 +85,9 @@ function CreateOrganizationSheet({ dialog }: CreateOrganizationSheetProps): Reac
 
         handleClose();
       }}
-      title="Create organization"
-      description="Create a new organization to invite your team and collaborate."
-      confirmLabel="Create"
+      title={labels.title}
+      description={labels.description}
+      confirmLabel={labels.confirmLabel}
       onCancel={handleClose}
       onConfirm={(): void => {
         formRef.current?.requestSubmit();
@@ -98,18 +122,21 @@ export function CreateOrganization({
   createOrganization,
   onCreated,
   uploadLogo,
+  labels,
 }: CreateOrganizationProps): React.ReactElement {
   const dialog = useCreateOrganizationDialog({ createOrganization, onCreated, uploadLogo });
+  const resolvedLabels = resolveCreateOrganizationLabels(labels);
 
   return (
     <>
       <CreateOrganizationTrigger
         children={children}
+        labels={resolvedLabels}
         onOpen={() => {
           dialog.setOpen(true);
         }}
       />
-      <CreateOrganizationSheet dialog={dialog} />
+      <CreateOrganizationSheet dialog={dialog} labels={resolvedLabels} />
     </>
   );
 }

@@ -9,6 +9,7 @@ import { getColumnTooltipText, renderColumnValue } from '@/components/ui/smart-t
 
 import type {
   ActionHandlers,
+  ActionLabels,
   ActionType,
   Column,
   PaginationConfig,
@@ -35,6 +36,7 @@ interface DesktopViewProps<T> {
   isLoading: boolean;
   skeletonRows: number;
   actions?: ActionType[];
+  actionLabels?: ActionLabels;
   actionHandlers?: ActionHandlers<T>;
   renderActions?: (item: T) => ReactNode;
   noDataMessage: string;
@@ -109,6 +111,7 @@ export function DesktopView<T>({
   isLoading,
   skeletonRows,
   actions,
+  actionLabels,
   actionHandlers,
   renderActions,
   noDataMessage,
@@ -317,6 +320,7 @@ export function DesktopView<T>({
                     <SmartTableActions
                       item={item}
                       actions={actions}
+                      actionLabels={actionLabels}
                       actionHandlers={actionHandlers}
                       renderActions={renderActions}
                     />

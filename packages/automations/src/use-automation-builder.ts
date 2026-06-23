@@ -9,6 +9,7 @@ import {
   type AutomationActionTargetEntity,
   type AutomationConditionDraft,
   type AutomationDraft,
+  type AutomationDraftLabelsInput,
   type AutomationDraftValidation,
   type AutomationStepConfig,
   type AutomationStepInput,
@@ -48,6 +49,17 @@ interface AutomationBuilderState {
   readonly deleteStep: (stepId: string) => void;
   readonly openStepTypes: () => void;
   readonly sidebarMode: SidebarMode;
+}
+
+export interface UseAutomationBuilderLabels {
+  readonly draft?: AutomationDraftLabelsInput;
+  readonly stepNames?: Partial<Record<AutomationStepType, string>>;
+  readonly pathBranchLabel?: (index: number) => string;
+  readonly chooseTriggerError?: string;
+}
+
+export interface UseAutomationBuilderOptions {
+  readonly labels?: UseAutomationBuilderLabels;
 }
 
 const defaultFieldTrigger: FieldChangedTriggerDraft = {
@@ -114,7 +126,15 @@ function getTriggerEntityType(trigger: AutomationTriggerDraft | null): string {
   return trigger && 'entityType' in trigger ? trigger.entityType : 'contact';
 }
 
-function getDefaultStepName(type: AutomationStepType): string {
+function getDefaultStepName(
+  type: AutomationStepType,
+  labels: UseAutomationBuilderLabels = {},
+): string {
+  const customLabel = labels.stepNames?.[type];
+  if (customLabel) {
+    return customLabel;
+  }
+
   switch (type) {
     case 'send_whatsapp':
       return 'Send WhatsApp message';
@@ -136,6 +156,7 @@ function getDefaultStepName(type: AutomationStepType): string {
 function buildDefaultStepConfig(
   type: AutomationStepType,
   trigger: AutomationTriggerDraft | null,
+  labels: UseAutomationBuilderLabels = {},
 ): AutomationStepConfig {
   const triggerEntityType = getTriggerEntityType(trigger);
 
@@ -161,9 +182,9 @@ function buildDefaultStepConfig(
   }
 
   if (type === 'path') {
-    const createPathBranch = (name: string) => ({
+    const createPathBranch = (index: number) => ({
       id: `branch-${crypto.randomUUID()}`,
-      name,
+      name: labels.pathBranchLabel?.(index) ?? `Path ${String.fromCharCode(64 + index)}`,
       filterGroups: [
         {
           id: `group-${crypto.randomUUID()}`,
@@ -174,15 +195,16 @@ function buildDefaultStepConfig(
 
     return {
       type,
-      branches: [createPathBranch('Path A'), createPathBranch('Path B')],
+      branches: [createPathBranch(1), createPathBranch(2)],
     };
   }
 
   return buildDefaultActionConfig(type, trigger);
 }
 
-export function useAutomationBuilder(): AutomationBuilderState {
-  const [name, setName] = useState('New automation');
+export function useAutomationBuilder(options: UseAutomationBuilderOptions = {}): AutomationBuilderState {
+  const { labels = {} } = options;
+  const [name, setName] = useState(labels.draft?.defaultName ?? 'New automation');
   const [trigger, setTrigger] = useState<AutomationTriggerDraft | null>(null);
   const [pendingTriggerType, setPendingTriggerType] = useState<AutomationTriggerType | null>(null);
   const [steps, setSteps] = useState<readonly AutomationStepInput[]>([]);
@@ -194,18 +216,18 @@ export function useAutomationBuilder(): AutomationBuilderState {
       return null;
     }
 
-    return buildAutomationDraft({ name, trigger, steps });
-  }, [name, steps, trigger]);
+    return buildAutomationDraft({ name, trigger, steps }, labels.draft);
+  }, [labels.draft, name, steps, trigger]);
   const validation = useMemo(() => {
     if (!trigger) {
       return {
         isValid: false,
-        errors: ['Choose a trigger.'],
+        errors: [labels.chooseTriggerError ?? 'Choose a trigger.'],
       };
     }
 
-    return validateAutomationDraftInput({ name, trigger, steps });
-  }, [name, steps, trigger]);
+    return validateAutomationDraftInput({ name, trigger, steps }, labels.draft);
+  }, [labels.chooseTriggerError, labels.draft, name, steps, trigger]);
   const selectedStep = steps.find((step) => step.id === selectedStepId) ?? null;
 
   const selectTriggerType = (type: AutomationTriggerType): AutomationTriggerDraft => {
@@ -237,9 +259,9 @@ export function useAutomationBuilder(): AutomationBuilderState {
     const stepId = `step-${crypto.randomUUID()}`;
     const step = {
       id: stepId,
-      name: getDefaultStepName(type),
+      name: getDefaultStepName(type, labels),
       type,
-      config: buildDefaultStepConfig(type, trigger),
+      config: buildDefaultStepConfig(type, trigger, labels),
     };
 
     setSelectedStepId(stepId);

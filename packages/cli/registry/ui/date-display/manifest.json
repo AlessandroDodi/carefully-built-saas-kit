@@ -3,6 +3,8 @@
   "description": "Editable source registry entry for date-display.",
   "importPath": "@carefully-built/ui",
   "exports": [
+    "DateDisplayFormatOptions",
+    "DateDisplayLabels",
     "DateDisplayValue",
     "formatAbsoluteDate",
     "formatDisplayDate"

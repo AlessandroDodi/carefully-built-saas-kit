@@ -85,6 +85,43 @@ export interface DocumentSheetBaseProps<TUserId, TDocumentId = string, TTagId = 
     readonly file: File;
     readonly generateUploadUrl: () => Promise<string>;
   }) => Promise<string>;
+  readonly labels?: DocumentSheetLabelsInput;
+}
+
+export interface DocumentSheetLabels {
+  readonly addTitle: string;
+  readonly editTitle: string;
+  readonly addConfirmLabel: string;
+  readonly editConfirmLabel: string;
+  readonly organizationUnavailableError: string;
+  readonly documentUnavailableError: string;
+  readonly documentUpdatedSuccess: string;
+  readonly selectFileError: string;
+  readonly documentAddedSuccess: string;
+  readonly linkCreatedSuccess: string;
+  readonly saveError: string;
+  readonly linkCopiedSuccess: string;
+  readonly linkCopyError: string;
+}
+
+export type DocumentSheetLabelsInput = Partial<DocumentSheetLabels>;
+
+function resolveDocumentSheetLabels(labels: DocumentSheetLabelsInput = {}): DocumentSheetLabels {
+  return {
+    addTitle: labels.addTitle ?? 'Add document',
+    editTitle: labels.editTitle ?? 'Edit document',
+    addConfirmLabel: labels.addConfirmLabel ?? 'Add',
+    editConfirmLabel: labels.editConfirmLabel ?? 'Save',
+    organizationUnavailableError: labels.organizationUnavailableError ?? 'Organization context is not available',
+    documentUnavailableError: labels.documentUnavailableError ?? 'Document is not available',
+    documentUpdatedSuccess: labels.documentUpdatedSuccess ?? 'Document updated',
+    selectFileError: labels.selectFileError ?? 'Select a file before continuing',
+    documentAddedSuccess: labels.documentAddedSuccess ?? 'Document added',
+    linkCreatedSuccess: labels.linkCreatedSuccess ?? 'Link created and copied',
+    saveError: labels.saveError ?? 'Something went wrong while saving.',
+    linkCopiedSuccess: labels.linkCopiedSuccess ?? 'Link copied. Save the document to activate it.',
+    linkCopyError: labels.linkCopyError ?? 'Could not copy the link.',
+  };
 }
 
 function buildDefaultClientToken(): string {
@@ -120,7 +157,9 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
   renderTagField,
   updateDocument,
   uploadFileToStorage,
+  labels,
 }: DocumentSheetBaseProps<TUserId, TDocumentId, TTagId>): React.ReactElement {
+  const resolvedLabels = resolveDocumentSheetLabels(labels);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -173,7 +212,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
 
   async function handleSubmit(values: DocumentFormValues): Promise<void> {
     if (!organizationId || !currentUserId) {
-      toast.error('Organization context is not available');
+      toast.error(resolvedLabels.organizationUnavailableError);
       return;
     }
 
@@ -191,7 +230,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
     try {
       if (isEditMode) {
         if (!document) {
-          toast.error('Document is not available');
+          toast.error(resolvedLabels.documentUnavailableError);
           return;
         }
 
@@ -207,10 +246,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
           tagIds: values.tagIds as TTagId[],
         });
 
-        toast.success('Document updated');
+        toast.success(resolvedLabels.documentUpdatedSuccess);
       } else if (values.mode === 'manual') {
         if (!selectedFile) {
-          toast.error('Select a file before continuing');
+          toast.error(resolvedLabels.selectFileError);
           return;
         }
 
@@ -231,7 +270,7 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
           tagIds: values.tagIds as TTagId[],
         });
 
-        toast.success('Document added');
+        toast.success(resolvedLabels.documentAddedSuccess);
       } else {
         await createPublicRequest({
           currentUserId,
@@ -247,14 +286,14 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
         });
 
         await navigator.clipboard.writeText(publicUploadUrl);
-        toast.success('Link created and copied');
+        toast.success(resolvedLabels.linkCreatedSuccess);
       }
 
       onOpenChange(false);
       setSelectedFile(null);
     } catch (error) {
       console.error(error);
-      toast.error('Something went wrong while saving.');
+      toast.error(resolvedLabels.saveError);
     } finally {
       setIsSubmitting(false);
     }
@@ -263,10 +302,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
   async function handleCopyLinkPreview(): Promise<void> {
     try {
       await navigator.clipboard.writeText(publicUploadUrl);
-      toast.success('Link copied. Save the document to activate it.');
+      toast.success(resolvedLabels.linkCopiedSuccess);
     } catch (error) {
       console.error(error);
-      toast.error('Could not copy the link.');
+      toast.error(resolvedLabels.linkCopyError);
     }
   }
 
@@ -274,10 +313,10 @@ export function DocumentSheetBase<TUserId, TDocumentId = string, TTagId = string
     <ResponsiveSheet
       open={open}
       onOpenChange={onOpenChange}
-      title={isEditMode ? 'Edit document' : 'Add document'}
+      title={isEditMode ? resolvedLabels.editTitle : resolvedLabels.addTitle}
       onCancel={() => onOpenChange(false)}
       onConfirm={submitDocumentForm}
-      confirmLabel={isEditMode ? 'Save' : 'Add'}
+      confirmLabel={isEditMode ? resolvedLabels.editConfirmLabel : resolvedLabels.addConfirmLabel}
       confirmDisabled={!organizationId || !currentUserId || isSubmitting}
       confirmLoading={isSubmitting}
     >

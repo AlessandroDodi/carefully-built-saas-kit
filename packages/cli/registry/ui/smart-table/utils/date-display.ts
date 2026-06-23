@@ -51,9 +51,10 @@ export function formatAbsoluteDate(
   const date = getDate(value);
   const currentYear = new Date().getFullYear();
   const includesYear = date.getFullYear() !== currentYear;
+  const locale = options.locale ?? 'en-US';
 
   return capitalizeMonthLabel(
-    new Intl.DateTimeFormat(options.locale ?? 'en-US', {
+    new Intl.DateTimeFormat(locale, {
       day: 'numeric',
       month: 'short',
       ...(includesYear ? { year: 'numeric' } : {}),

@@ -13,7 +13,7 @@ import {
   resolveCollectionEmptyState,
 } from '@carefully-built/ui';
 
-import { NotesGrid } from './notes-grid';
+import { NotesGrid, type NotesGridLabelsInput } from './notes-grid';
 import { filterNotes, type NoteListItem } from './note-helpers';
 
 export interface NoteCrudValues {
@@ -37,6 +37,45 @@ interface NotesCrudPageProps<TNote extends NoteListItem> {
   readonly onDelete: (note: TNote) => Promise<void> | void;
   readonly onUpdate: (note: TNote, values: NoteCrudValues) => Promise<void> | void;
   readonly title?: string;
+  readonly labels?: NotesCrudPageLabelsInput;
+}
+
+export interface NotesCrudPageLabels {
+  readonly addNoteLabel: string;
+  readonly searchPlaceholder: string;
+  readonly addSheetTitle: string;
+  readonly editSheetTitle: string;
+  readonly addConfirmLabel: string;
+  readonly saveConfirmLabel: string;
+  readonly deleteLabel: string;
+  readonly titleFieldLabel: string;
+  readonly titlePlaceholder: string;
+  readonly bodyFieldLabel: string;
+  readonly bodyPlaceholder: string;
+  readonly grid: NotesGridLabelsInput;
+}
+
+export type NotesCrudPageLabelsInput = Partial<
+  Omit<NotesCrudPageLabels, 'grid'>
+> & {
+  readonly grid?: NotesGridLabelsInput;
+};
+
+function resolveNotesCrudPageLabels(labels: NotesCrudPageLabelsInput = {}): NotesCrudPageLabels {
+  return {
+    addNoteLabel: labels.addNoteLabel ?? 'Add note',
+    searchPlaceholder: labels.searchPlaceholder ?? 'Search notes...',
+    addSheetTitle: labels.addSheetTitle ?? 'Add note',
+    editSheetTitle: labels.editSheetTitle ?? 'Edit note',
+    addConfirmLabel: labels.addConfirmLabel ?? 'Add note',
+    saveConfirmLabel: labels.saveConfirmLabel ?? 'Save changes',
+    deleteLabel: labels.deleteLabel ?? 'Delete',
+    titleFieldLabel: labels.titleFieldLabel ?? 'Title',
+    titlePlaceholder: labels.titlePlaceholder ?? 'Note title',
+    bodyFieldLabel: labels.bodyFieldLabel ?? 'Body',
+    bodyPlaceholder: labels.bodyPlaceholder ?? 'Write the note...',
+    grid: labels.grid ?? {},
+  };
 }
 
 const emptyDraft: NoteCrudValues = {
@@ -54,7 +93,9 @@ export function NotesCrudPage<TNote extends NoteListItem>({
   onDelete,
   onUpdate,
   title = 'Notes',
+  labels,
 }: NotesCrudPageProps<TNote>): React.ReactElement {
+  const resolvedLabels = resolveNotesCrudPageLabels(labels);
   const [draft, setDraft] = useState<NoteCrudValues>(emptyDraft);
   const [editingNote, setEditingNote] = useState<TNote | null>(null);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -124,14 +165,14 @@ export function NotesCrudPage<TNote extends NoteListItem>({
         <h1 className="truncate text-xl font-semibold tracking-tight">{title}</h1>
         <Button size="sm" onClick={openCreateSheet}>
           <Plus className="size-4" />
-          Add note
+          {resolvedLabels.addNoteLabel}
         </Button>
       </div>
 
       <SearchInput
         value={search}
         onChange={setSearch}
-        placeholder="Search notes..."
+        placeholder={resolvedLabels.searchPlaceholder}
         className="max-w-sm"
       />
 
@@ -141,11 +182,12 @@ export function NotesCrudPage<TNote extends NoteListItem>({
         notes={filteredNotes}
         onCreate={openCreateSheet}
         onEdit={openEditSheet}
+        labels={resolvedLabels.grid}
       />
 
       <ResponsiveSheet
         confirmDisabled={!draft.title.trim() || !draft.body.trim() || isSubmitting}
-        confirmLabel={editingNote ? 'Save changes' : 'Add note'}
+        confirmLabel={editingNote ? resolvedLabels.saveConfirmLabel : resolvedLabels.addConfirmLabel}
         confirmLoading={isSubmitting}
         footer={
           editingNote ? (
@@ -158,7 +200,7 @@ export function NotesCrudPage<TNote extends NoteListItem>({
                 }}
               >
                 <Trash2 className="size-4" />
-                Delete
+                {resolvedLabels.deleteLabel}
               </Button>
               <Button
                 type="button"
@@ -167,7 +209,7 @@ export function NotesCrudPage<TNote extends NoteListItem>({
                   void submitNote();
                 }}
               >
-                Save changes
+                {resolvedLabels.saveConfirmLabel}
               </Button>
             </div>
           ) : undefined
@@ -178,18 +220,18 @@ export function NotesCrudPage<TNote extends NoteListItem>({
         }}
         onOpenChange={setIsSheetOpen}
         open={isSheetOpen}
-        title={editingNote ? 'Edit note' : 'Add note'}
+        title={editingNote ? resolvedLabels.editSheetTitle : resolvedLabels.addSheetTitle}
       >
         <div className="space-y-5 pb-4">
           <div className="space-y-2">
-            <Label htmlFor="note-title">Title</Label>
+            <Label htmlFor="note-title">{resolvedLabels.titleFieldLabel}</Label>
             <Input
               id="note-title"
               value={draft.title}
               onChange={(event) => {
                 setDraft((current) => ({ ...current, title: event.target.value }));
               }}
-              placeholder="Note title"
+              placeholder={resolvedLabels.titlePlaceholder}
             />
           </div>
           {bodyField?.({
@@ -199,14 +241,14 @@ export function NotesCrudPage<TNote extends NoteListItem>({
             },
           }) ?? (
             <div className="space-y-2">
-              <Label htmlFor="note-body">Body</Label>
+              <Label htmlFor="note-body">{resolvedLabels.bodyFieldLabel}</Label>
               <Textarea
                 id="note-body"
                 value={draft.body}
                 onChange={(event) => {
                   setDraft((current) => ({ ...current, body: event.target.value }));
                 }}
-                placeholder="Write the note..."
+                placeholder={resolvedLabels.bodyPlaceholder}
                 className="min-h-40"
               />
             </div>

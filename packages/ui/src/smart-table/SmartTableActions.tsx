@@ -2,7 +2,7 @@
 
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 
-import type { ActionHandlers, ActionType } from './types';
+import type { ActionHandlers, ActionLabels, ActionType } from './types';
 import type { ReactNode } from 'react';
 
 import { Button } from '../primitives/button';
@@ -12,6 +12,7 @@ const SMART_TABLE_ACTIONS_CONTAINER_CLASS = 'flex w-full items-center justify-en
 interface SmartTableActionsProps<T> {
   item: T;
   actions?: ActionType[];
+  actionLabels?: ActionLabels;
   actionHandlers?: ActionHandlers<T>;
   renderActions?: (item: T) => ReactNode;
 }
@@ -22,8 +23,8 @@ const actionIcons: Record<ActionType, typeof Eye> = {
   delete: Trash2,
 };
 
-const actionLabels: Record<ActionType, string> = {
-  view: 'Visualizza',
+const defaultActionLabels: Record<ActionType, string> = {
+  view: 'View',
   edit: 'Edit',
   delete: 'Delete',
 };
@@ -31,6 +32,7 @@ const actionLabels: Record<ActionType, string> = {
 export function SmartTableActions<T>({
   item,
   actions,
+  actionLabels,
   actionHandlers,
   renderActions,
 }: SmartTableActionsProps<T>): React.ReactElement | null {
@@ -56,7 +58,7 @@ export function SmartTableActions<T>({
             variant="ghost"
             size="icon"
             className="size-8"
-            aria-label={actionLabels[action]}
+            aria-label={actionLabels?.[action] ?? defaultActionLabels[action]}
             onClick={(event) => {
               event.stopPropagation();
               (handler as ((value: T) => void) | undefined)?.(item);

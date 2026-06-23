@@ -14,6 +14,7 @@ export function SmartTable<T>({
   isLoading,
   skeletonRows = 5,
   actions,
+  actionLabels,
   actionHandlers,
   renderActions,
   noDataMessage = 'No data available',
@@ -45,6 +46,7 @@ export function SmartTable<T>({
           isLoading={isLoading}
           skeletonRows={skeletonRows}
           actions={actions}
+          actionLabels={actionLabels}
           actionHandlers={actionHandlers}
           renderActions={renderActions}
           noDataMessage={noDataMessage}
@@ -67,6 +69,7 @@ export function SmartTable<T>({
         isLoading={isLoading}
         skeletonRows={skeletonRows}
         actions={actions}
+        actionLabels={actionLabels}
         actionHandlers={actionHandlers}
         renderActions={renderActions}
         noDataMessage={noDataMessage}

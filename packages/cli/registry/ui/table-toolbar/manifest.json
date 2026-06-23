@@ -9,7 +9,10 @@
     "FilterOption",
     "SearchInput",
     "TableToolbar",
-    "TableToolbarProps"
+    "TableToolbarLabels",
+    "TableToolbarLabelsInput",
+    "TableToolbarProps",
+    "buildAllFilterOptionLabel"
   ],
   "dependencies": [
     "class-variance-authority",

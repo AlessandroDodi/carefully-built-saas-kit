@@ -99,7 +99,7 @@ export default async function SelectOrganizationPage(): Promise<React.ReactEleme
     <OrganizationSelectionPage
       organizations={await loadOrganizationsWithLogos(pending.organizations)}
       title="Benvenuto su My SaaS"
-      description="Seleziona l'organizzazione con cui vuoi continuare."
+      description="Select the organization you want to continue with."
     />
   );
 }

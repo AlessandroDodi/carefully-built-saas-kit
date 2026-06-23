@@ -132,35 +132,73 @@ export interface AutomationDraftValidation {
   readonly errors: readonly string[];
 }
 
-function getStepConfigError(step: AutomationStepInput): string | null {
+export interface AutomationDraftLabels {
+  readonly defaultName: string;
+  readonly defaultStepName: (order: number) => string;
+  readonly configureEveryStepError: string;
+  readonly chooseTagError: string;
+  readonly chooseEmailTemplateError: string;
+  readonly chooseWhatsAppTemplateError: string;
+  readonly chooseFieldError: string;
+  readonly enterFieldValueError: string;
+  readonly invalidDelayError: string;
+  readonly addFilterConditionError: string;
+  readonly configureTwoPathsError: string;
+  readonly configureEveryPathError: string;
+  readonly stepTypeMismatchError: string;
+}
+
+export type AutomationDraftLabelsInput = Partial<AutomationDraftLabels>;
+
+const defaultAutomationDraftLabels: AutomationDraftLabels = {
+  defaultName: 'New automation',
+  defaultStepName: (order) => `Step ${String(order)}`,
+  configureEveryStepError: 'Configure every step before saving.',
+  chooseTagError: 'Choose the tag to add.',
+  chooseEmailTemplateError: 'Choose the email template.',
+  chooseWhatsAppTemplateError: 'Choose the WhatsApp template.',
+  chooseFieldError: 'Choose the field to edit.',
+  enterFieldValueError: 'Enter the new field value.',
+  invalidDelayError: 'Set a valid delay duration.',
+  addFilterConditionError: 'Add at least one condition to the filter.',
+  configureTwoPathsError: 'Configure at least two paths.',
+  configureEveryPathError: 'Configure the conditions for every path.',
+  stepTypeMismatchError: 'The step configuration does not match the action type.',
+};
+
+function resolveAutomationDraftLabels(labels: AutomationDraftLabelsInput = {}): AutomationDraftLabels {
+  return { ...defaultAutomationDraftLabels, ...labels };
+}
+
+function getStepConfigError(step: AutomationStepInput, labels: AutomationDraftLabels): string | null {
   if (!step.config) {
-    return 'Configure every step before saving.';
+    return labels.configureEveryStepError;
   }
 
   if (step.type === 'add_tag' && step.config.type === 'add_tag' && !step.config.tagId.trim()) {
-    return 'Choose the tag to add.';
+    return labels.chooseTagError;
   }
 
   if (step.type === 'send_email' && step.config.type === 'send_email' && !step.config.templateId.trim()) {
-    return 'Choose the email template.';
+    return labels.chooseEmailTemplateError;
   }
 
   if (step.type === 'send_whatsapp' && step.config.type === 'send_whatsapp' && !step.config.templateId.trim()) {
-    return 'Choose the WhatsApp template.';
+    return labels.chooseWhatsAppTemplateError;
   }
 
   if (step.type === 'update_field' && step.config.type === 'update_field') {
     if (!step.config.field.trim()) {
-      return 'Choose the field to edit.';
+      return labels.chooseFieldError;
     }
 
     if (!step.config.value.trim()) {
-      return 'Enter the new field value.';
+      return labels.enterFieldValueError;
     }
   }
 
   if (step.type === 'delay' && step.config.type === 'delay' && step.config.amount <= 0) {
-    return 'Set a valid delay duration.';
+    return labels.invalidDelayError;
   }
 
   if (
@@ -168,29 +206,33 @@ function getStepConfigError(step: AutomationStepInput): string | null {
     && step.config.type === 'filter'
     && step.config.filterGroups.every((group) => group.conditions.length === 0)
   ) {
-    return 'Add at least one condition to the filter.';
+    return labels.addFilterConditionError;
   }
 
   if (step.type === 'path' && step.config.type === 'path') {
     if (step.config.branches.length < 2) {
-      return 'Configure at least two paths.';
+      return labels.configureTwoPathsError;
     }
 
     if (step.config.branches.some((branch) => branch.filterGroups.every((group) => group.conditions.length === 0))) {
-      return 'Configure the conditions for every path.';
+      return labels.configureEveryPathError;
     }
   }
 
   if (step.type !== step.config.type) {
-    return 'The step configuration does not match the action type.';
+    return labels.stepTypeMismatchError;
   }
 
   return null;
 }
 
-export function validateAutomationDraftInput(input: AutomationDraftInput): AutomationDraftValidation {
+export function validateAutomationDraftInput(
+  input: AutomationDraftInput,
+  labelsInput?: AutomationDraftLabelsInput,
+): AutomationDraftValidation {
+  const labels = resolveAutomationDraftLabels(labelsInput);
   const errors = input.steps
-    .map(getStepConfigError)
+    .map((step) => getStepConfigError(step, labels))
     .filter((error): error is string => Boolean(error));
 
   return {
@@ -199,13 +241,18 @@ export function validateAutomationDraftInput(input: AutomationDraftInput): Autom
   };
 }
 
-export function buildAutomationDraft(input: AutomationDraftInput): AutomationDraft {
+export function buildAutomationDraft(
+  input: AutomationDraftInput,
+  labelsInput?: AutomationDraftLabelsInput,
+): AutomationDraft {
+  const labels = resolveAutomationDraftLabels(labelsInput);
+
   return {
-    name: input.name.trim() || 'New automation',
+    name: input.name.trim() || labels.defaultName,
     trigger: input.trigger,
     steps: input.steps.map((step, index) => ({
       order: index + 1,
-      name: step.name.trim() || `Step ${String(index + 1)}`,
+      name: step.name.trim() || labels.defaultStepName(index + 1),
       type: step.type,
       config: step.config,
     })),

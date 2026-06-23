@@ -31,6 +31,7 @@ export interface Column<T> {
 }
 
 export type ActionType = 'view' | 'edit' | 'delete';
+export type ActionLabels = Partial<Record<ActionType, string>>;
 
 export interface ActionHandlers<T> {
   onView?: (item: T) => void;
@@ -66,6 +67,8 @@ export interface SmartTableProps<T> {
   skeletonRows?: number;
   /** Actions to show (will render action buttons) */
   actions?: ActionType[];
+  /** Accessible labels for default action buttons */
+  actionLabels?: ActionLabels;
   /** Action handlers */
   actionHandlers?: ActionHandlers<T>;
   /** Custom actions renderer (overrides actions prop) */

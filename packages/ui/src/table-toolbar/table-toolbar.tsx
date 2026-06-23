@@ -572,7 +572,7 @@ export function TableToolbar({
                           onChange={(event) => {
                             updateDraftFilterValue(minKey, event.target.value);
                           }}
-                          placeholder={filter.minPlaceholder ?? 'Min'}
+                          placeholder={filter.minPlaceholder ?? resolvedLabels.rangeMinPlaceholder}
                         />
                         <Input
                           type={filter.inputType ?? 'text'}
@@ -581,7 +581,7 @@ export function TableToolbar({
                           onChange={(event) => {
                             updateDraftFilterValue(maxKey, event.target.value);
                           }}
-                          placeholder={filter.maxPlaceholder ?? 'Max'}
+                          placeholder={filter.maxPlaceholder ?? resolvedLabels.rangeMaxPlaceholder}
                         />
                       </>
                     )}

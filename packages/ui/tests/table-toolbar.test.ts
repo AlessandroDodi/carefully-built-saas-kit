@@ -11,16 +11,16 @@ describe('buildAllFilterOptionLabel', () => {
   });
 
   test('uses an app-provided localized all-filter label', () => {
-    expect(buildAllFilterOptionLabel('Contatto', 'Tutti: Contatto')).toBe('Tutti: Contatto');
+    expect(buildAllFilterOptionLabel('Contact', 'Everything: Contact')).toBe('Everything: Contact');
   });
 
   test('resolves localized toolbar labels without losing defaults', () => {
     const labels = resolveTableToolbarLabels({
-      clearFiltersLabel: 'Azzera',
+      clearFiltersLabel: 'Reset',
       filtersButtonLabel: 'Filtri',
     });
 
-    expect(labels.clearFiltersLabel).toBe('Azzera');
+    expect(labels.clearFiltersLabel).toBe('Reset');
     expect(labels.filtersButtonLabel).toBe('Filtri');
     expect(labels.showResultsLabel(2)).toBe('Show 2 results');
   });

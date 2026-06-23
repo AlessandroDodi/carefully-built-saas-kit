@@ -143,7 +143,7 @@
     },
     "packages/automations": {
       "name": "@carefully-built/automations",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@types/react": "^19.2.0",
@@ -190,7 +190,7 @@
     },
     "packages/cli": {
       "name": "@carefully-built/cli",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "bin": {
         "carefully-built": "./dist/index.mjs",
       },
@@ -274,7 +274,7 @@
     },
     "packages/files": {
       "name": "@carefully-built/files",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "devDependencies": {
         "@carefully-built/convex-crud": "workspace:*",
         "@carefully-built/forms": "workspace:*",
@@ -438,7 +438,7 @@
     },
     "packages/notes": {
       "name": "@carefully-built/notes",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "devDependencies": {
         "@carefully-built/crud": "workspace:*",
         "@carefully-built/resource-kit": "workspace:*",
@@ -562,7 +562,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "dependencies": {
         "@carefully-built/agenda": "0.1.6",
         "@carefully-built/app-shell": "0.1.3",
@@ -723,7 +723,7 @@
     },
     "packages/ui": {
       "name": "@carefully-built/ui",
-      "version": "0.1.16",
+      "version": "0.1.17",
       "devDependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -787,7 +787,7 @@
     },
     "packages/workos": {
       "name": "@carefully-built/workos",
-      "version": "0.1.3",
+      "version": "0.1.4",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@radix-ui/react-slot": "^1.2.4",

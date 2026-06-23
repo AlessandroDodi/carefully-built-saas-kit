@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Add Carefully Built SaaS components to apps as editable source, with package imports when you want managed upgrades.",
   "type": "module",
   "license": "MIT",

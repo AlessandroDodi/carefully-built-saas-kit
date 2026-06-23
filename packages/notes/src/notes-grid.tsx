@@ -14,6 +14,27 @@ interface NotesGridProps<TNote extends NoteListItem> {
   readonly onCreate: () => void;
   readonly onEdit: (note: TNote) => void;
   readonly getAssociationHref?: (association: NoteAssociation) => string | null;
+  readonly labels?: NotesGridLabelsInput;
+}
+
+export interface NotesGridLabels {
+  readonly noResultsTitle: string;
+  readonly noResultsSubtitle: string;
+  readonly emptyTitle: string;
+  readonly emptySubtitle: string;
+  readonly addNoteLabel: string;
+}
+
+export type NotesGridLabelsInput = Partial<NotesGridLabels>;
+
+function resolveNotesGridLabels(labels: NotesGridLabelsInput = {}): NotesGridLabels {
+  return {
+    noResultsTitle: labels.noResultsTitle ?? "No notes found",
+    noResultsSubtitle: labels.noResultsSubtitle ?? "Try changing your search or filters.",
+    emptyTitle: labels.emptyTitle ?? "No notes yet",
+    emptySubtitle: labels.emptySubtitle ?? "Add a note to start collecting useful context.",
+    addNoteLabel: labels.addNoteLabel ?? "Add note",
+  };
 }
 
 export function NotesGrid<TNote extends NoteListItem>({
@@ -23,7 +44,10 @@ export function NotesGrid<TNote extends NoteListItem>({
   onCreate,
   onEdit,
   getAssociationHref,
+  labels,
 }: NotesGridProps<TNote>): React.ReactElement {
+  const resolvedLabels = resolveNotesGridLabels(labels);
+
   if (isLoading) {
     return (
       <div className="flex-1 overflow-y-auto px-px pb-1">
@@ -41,15 +65,15 @@ export function NotesGrid<TNote extends NoteListItem>({
       <div className="w-full">
         {emptyState === "no-results" ? (
           <NoResultsState
-            title="No notes found"
-            subtitle="Try changing your search or filters."
+            title={resolvedLabels.noResultsTitle}
+            subtitle={resolvedLabels.noResultsSubtitle}
           />
         ) : (
           <EmptyStateCard
             icon={<FileText className="size-7" />}
-            title="No notes yet"
-            subtitle="Add a note to start collecting useful context."
-            actionLabel="Add note"
+            title={resolvedLabels.emptyTitle}
+            subtitle={resolvedLabels.emptySubtitle}
+            actionLabel={resolvedLabels.addNoteLabel}
             actionIcon={<Plus className="size-4" />}
             onAction={onCreate}
           />
