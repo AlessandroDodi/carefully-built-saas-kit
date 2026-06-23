@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/auth-pages",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps.",
   "type": "module",
   "license": "MIT",
@@ -80,8 +80,8 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@carefully-built/forms": ">=0.1.0",
-    "@carefully-built/ui": ">=0.1.4",
+    "@carefully-built/forms": ">=0.1.9",
+    "@carefully-built/ui": ">=0.1.15",
     "@hookform/resolvers": ">=5.0.0",
     "react": ">=18.2.0 || >=19.0.0",
     "react-dom": ">=18.2.0 || >=19.0.0",

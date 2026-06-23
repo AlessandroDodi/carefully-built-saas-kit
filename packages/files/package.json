@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/files",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable file and document UI primitives, previews, filters, and association helpers for SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -36,9 +36,9 @@
   },
   "peerDependencies": {
     "@carefully-built/convex-crud": ">=0.1.8",
-    "@carefully-built/forms": ">=0.1.1",
+    "@carefully-built/forms": ">=0.1.9",
     "@carefully-built/search": ">=0.1.1",
-    "@carefully-built/ui": ">=0.1.12",
+    "@carefully-built/ui": ">=0.1.15",
     "lucide-react": "^0.475.0 || ^1.0.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0",

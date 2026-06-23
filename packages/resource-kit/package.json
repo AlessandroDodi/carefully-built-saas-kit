@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/resource-kit",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Reusable resource-page state helpers for CRUD SaaS surfaces.",
   "type": "module",
   "license": "MIT",
@@ -31,8 +31,8 @@
   },
   "peerDependencies": {
     "@carefully-built/app-shell": ">=0.1.0",
-    "@carefully-built/association-picker": ">=0.1.0",
-    "@carefully-built/ui": ">=0.1.0",
+    "@carefully-built/association-picker": ">=0.1.2",
+    "@carefully-built/ui": ">=0.1.15",
     "@carefully-built/widgets": ">=0.1.0",
     "convex": ">=1.0.0",
     "lucide-react": ">=0.400.0 || >=1.0.0",

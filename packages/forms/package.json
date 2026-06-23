@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/forms",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -45,9 +45,9 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@carefully-built/user-picker": ">=0.1.0",
-    "@carefully-built/association-picker": ">=0.1.1",
-    "@carefully-built/ui": ">=0.1.14",
+    "@carefully-built/user-picker": ">=0.1.1",
+    "@carefully-built/association-picker": ">=0.1.2",
+    "@carefully-built/ui": ">=0.1.15",
     "@hookform/resolvers": ">=5.0.0",
     "lucide-react": ">=0.400.0 || >=1.0.0",
     "react": ">=18.2.0 || >=19.0.0",

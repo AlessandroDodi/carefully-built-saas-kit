@@ -7,7 +7,6 @@ import type { UseCrudTableStateOptions, CrudTableState } from "./types";
 import { useTableSorting } from "@carefully-built/ui";
 
 import { buildCrudSearchText, matchesCrudSearch } from "./search";
-import { getValidPage, paginateCrudData } from "./pagination";
 import { useUrlPagination } from "./use-url-pagination";
 import { useUrlStringFilters, type UrlStringFilterDefinition } from "./use-url-string-filters";
 
@@ -72,7 +71,6 @@ export function useCrudTableState<TItem extends object>({
     [filterDefinitions],
   );
   const urlFilters = useUrlStringFilters(urlFilterDefinitions);
-  const { page: currentPage, setPage: setCurrentPage } = useUrlPagination("page");
   const search = urlFilters.values.search ?? "";
   const filters = useMemo(
     () => ({
@@ -88,19 +86,20 @@ export function useCrudTableState<TItem extends object>({
     () => filterCrudData(data, search, filters, searchFields),
     [data, filters, search, searchFields],
   );
+  const pagination = useUrlPagination({
+    totalItems: filteredData.length,
+    pageSize,
+  });
+  const setCurrentPage = pagination.onPageChange;
   const { sortedData, sortState, setSortState } = useTableSorting({
     data: filteredData,
     columns,
     initialSortState,
   });
 
-  const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
-  const validCurrentPage = getValidPage(currentPage, totalPages);
-  const startIndex = (validCurrentPage - 1) * pageSize;
-  const endIndex = Math.min(startIndex + pageSize, filteredData.length);
   const paginatedData = useMemo(
-    () => paginateCrudData(sortedData, validCurrentPage, pageSize),
-    [pageSize, sortedData, validCurrentPage],
+    () => pagination.paginate(sortedData),
+    [pagination, sortedData],
   );
 
   const setFilter = useCallback((key: string, value: string) => {
@@ -152,14 +151,6 @@ export function useCrudTableState<TItem extends object>({
     emptyState: hasSearch || hasFilters ? "no-results" : "initial",
     sortState,
     setSortState,
-    pagination: {
-      currentPage: validCurrentPage,
-      totalPages,
-      totalItems: filteredData.length,
-      pageSize,
-      startIndex,
-      endIndex,
-      onPageChange: setCurrentPage,
-    },
+    pagination,
   };
 }
