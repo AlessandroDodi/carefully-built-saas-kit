@@ -127,9 +127,9 @@ function getDefaultStepName(type: AutomationStepType): string {
     case 'delay':
       return 'Wait';
     case 'filter':
-      return 'Filtro';
+      return 'Filter';
     case 'path':
-      return 'Percorso';
+      return 'Path';
   }
 }
 
@@ -174,7 +174,7 @@ function buildDefaultStepConfig(
 
     return {
       type,
-      branches: [createPathBranch('Percorso A'), createPathBranch('Percorso B')],
+      branches: [createPathBranch('Path A'), createPathBranch('Path B')],
     };
   }
 
@@ -182,7 +182,7 @@ function buildDefaultStepConfig(
 }
 
 export function useAutomationBuilder(): AutomationBuilderState {
-  const [name, setName] = useState('Nuova Automazione');
+  const [name, setName] = useState('New automation');
   const [trigger, setTrigger] = useState<AutomationTriggerDraft | null>(null);
   const [pendingTriggerType, setPendingTriggerType] = useState<AutomationTriggerType | null>(null);
   const [steps, setSteps] = useState<readonly AutomationStepInput[]>([]);
@@ -200,7 +200,7 @@ export function useAutomationBuilder(): AutomationBuilderState {
     if (!trigger) {
       return {
         isValid: false,
-        errors: ['Scegli un trigger.'],
+        errors: ['Choose a trigger.'],
       };
     }
 

@@ -99,14 +99,14 @@ function formatEntityLabel(
 
 function formatAutomationValue(value: string): string {
   if (value === 'empty') {
-    return 'vuoto';
+    return 'empty';
   }
 
   if (value === 'filled') {
-    return 'pieno';
+    return 'filled';
   }
 
-  return value || 'da scegliere';
+  return value || 'to choose';
 }
 
 function formatFieldTrigger(
@@ -133,38 +133,38 @@ function formatStepDescription(
   getEntityLabel?: (entityType: string) => string,
 ): string {
   if (!step.config) {
-    return 'Configura lo step';
+    return 'Configure the step';
   }
 
   if (step.config.type === 'delay') {
     const unitLabel = step.config.unit === 'days'
-      ? step.config.amount === 1 ? 'giorno' : 'giorni'
+      ? step.config.amount === 1 ? 'day' : 'days'
       : step.config.unit === 'hours'
-        ? step.config.amount === 1 ? 'ora' : 'ore'
-        : 'minuti';
-    return `Attendi ${step.config.amount} ${unitLabel}`;
+        ? step.config.amount === 1 ? 'hour' : 'hours'
+        : 'minutes';
+    return `Wait ${step.config.amount} ${unitLabel}`;
   }
 
   if (step.config.type === 'filter') {
     const conditionsCount = countConditions(step.config.filterGroups);
-    return `${formatEntityLabel(step.config.entityType, getEntityLabel)} · ${step.config.filterGroups.length} gruppi, ${conditionsCount} condizioni`;
+    return `${formatEntityLabel(step.config.entityType, getEntityLabel)} · ${step.config.filterGroups.length} groups, ${conditionsCount} conditions`;
   }
 
   if (step.config.type === 'path') {
     const configuredBranches = step.config.branches.filter((branch) => countConditions(branch.filterGroups) > 0);
-    return `${step.config.branches.length} percorsi · ${configuredBranches.length} con condizioni`;
+    return `${step.config.branches.length} paths · ${configuredBranches.length} with conditions`;
   }
 
   if (step.config.type === 'send_email' || step.config.type === 'send_whatsapp') {
-    return step.config.templateId ? `Template: ${step.config.templateId}` : 'Template da scegliere';
+    return step.config.templateId ? `Template: ${step.config.templateId}` : 'Choose a template';
   }
 
   if (step.config.type === 'add_tag') {
-    return step.config.tagId ? 'Tag selezionato' : 'Tag da scegliere';
+    return step.config.tagId ? 'Tag selected' : 'Choose a tag';
   }
 
   if (step.config.type === 'update_field') {
-    return `${FIELD_LABELS[step.config.field] ?? (step.config.field || 'Campo da scegliere')} -> ${
+    return `${FIELD_LABELS[step.config.field] ?? (step.config.field || 'Choose a field')} -> ${
       formatAutomationValue(step.config.value)
     }`;
   }
@@ -336,12 +336,12 @@ function buildNodes(
         kind: 'step',
         eyebrow:
           step.type === 'delay'
-            ? 'Ritardo'
+            ? 'Delay'
             : step.type === 'filter'
-              ? 'Filtro'
+              ? 'Filter'
               : step.type === 'path'
-                ? 'Percorso'
-                : 'Azione',
+                ? 'Path'
+                : 'Action',
         label: step.name || stepOption.label,
         description: formatStepDescription(step, getEntityLabel),
         tone: stepOption.badgeTone,
@@ -366,9 +366,9 @@ function buildNodes(
           position: { x: branchStartX + branchIndex * 260, y: y + 150 },
           data: {
             kind: 'step',
-            eyebrow: 'Percorso',
+            eyebrow: 'Path',
             label: branch.name,
-            description: 'Condizioni del percorso',
+            description: 'Path conditions',
             tone: stepOption.badgeTone,
             badgeTone: stepOption.tone,
             icon: stepOption.icon,
@@ -407,8 +407,8 @@ function buildNodes(
       position: { x: 0, y: y + 130 },
       data: {
         kind: 'end',
-        eyebrow: 'Fine automazione',
-        label: 'Fine automazione',
+        eyebrow: 'Automation end',
+        label: 'Automation end',
       },
       draggable: false,
     }
@@ -517,9 +517,9 @@ export function AutomationBuilderCanvas({
           <div className="flex size-12 items-center justify-center rounded-md bg-primary/10 text-primary">
             <Target className="size-7" />
           </div>
-          <p className="text-lg font-medium text-foreground">Inizia a costruire la tua automazione</p>
+          <p className="text-lg font-medium text-foreground">Start building your automation</p>
           <Button type="button" className="mt-2" onClick={onChooseTrigger}>
-            Scegli trigger
+            Choose trigger
           </Button>
         </div>
       </div>

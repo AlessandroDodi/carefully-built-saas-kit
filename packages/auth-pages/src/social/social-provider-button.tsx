@@ -13,6 +13,7 @@ export interface SocialProvider {
 interface SocialProviderButtonProps {
   readonly invitationToken?: string | null;
   readonly provider: SocialProvider;
+  readonly label?: string;
   readonly className?: string;
   readonly iconClassName?: string;
 }
@@ -20,6 +21,7 @@ interface SocialProviderButtonProps {
 export function SocialProviderButton({
   invitationToken,
   provider,
+  label = `Continue with ${provider.name}`,
   className,
   iconClassName,
 }: SocialProviderButtonProps): React.ReactElement {
@@ -48,7 +50,7 @@ export function SocialProviderButton({
         aria-hidden
         className={iconClassName}
       />
-      Continua con {provider.name}
+      {label}
     </Button>
   );
 }

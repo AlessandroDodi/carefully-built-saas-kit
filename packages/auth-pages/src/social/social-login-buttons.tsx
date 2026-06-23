@@ -12,6 +12,7 @@ interface SocialLoginButtonsProps {
   readonly invitationToken?: string | null;
   readonly emailHref: string;
   readonly emailLabel?: string;
+  readonly getProviderLabel?: (provider: SocialProvider) => string;
   readonly className?: string;
   readonly providerButtonClassName?: string;
   readonly emailLinkClassName?: string;
@@ -22,7 +23,8 @@ export function SocialLoginButtons({
   providers,
   invitationToken,
   emailHref,
-  emailLabel = "Continua con email",
+  emailLabel = "Continue with email",
+  getProviderLabel,
   className,
   providerButtonClassName,
   emailLinkClassName,
@@ -35,6 +37,7 @@ export function SocialLoginButtons({
           invitationToken={invitationToken}
           key={provider.name}
           provider={provider}
+          label={getProviderLabel?.(provider)}
           className={providerButtonClassName}
         />
       ))}

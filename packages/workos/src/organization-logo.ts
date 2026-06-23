@@ -1,17 +1,17 @@
 export const ORGANIZATION_LOGO_MAX_SIZE = 2 * 1024 * 1024;
 export const ORGANIZATION_LOGO_ACCEPT = 'image/png,image/jpeg,image/jpg';
-export const ORGANIZATION_LOGO_HELPER_TEXT = 'Formati: .jpeg, .png';
-export const ORGANIZATION_LOGO_CAPTION = 'PNG, JPG fino a 2MB';
+export const ORGANIZATION_LOGO_HELPER_TEXT = 'Formats: .jpeg, .png';
+export const ORGANIZATION_LOGO_CAPTION = 'PNG, JPG up to 2MB';
 
 export function validateOrganizationLogo(file: File): string | null {
   const isSupportedType = ['image/jpeg', 'image/png'].includes(file.type);
 
   if (!isSupportedType) {
-    return 'Carica un file PNG o JPG';
+    return 'Upload a PNG or JPG file';
   }
 
   if (file.size > ORGANIZATION_LOGO_MAX_SIZE) {
-    return 'Il logo deve essere inferiore a 2MB';
+    return 'The logo must be smaller than 2MB';
   }
 
   return null;

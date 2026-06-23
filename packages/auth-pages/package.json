@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/auth-pages",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps.",
   "type": "module",
   "license": "MIT",

@@ -115,7 +115,7 @@
     },
     "packages/auth-pages": {
       "name": "@carefully-built/auth-pages",
-      "version": "0.1.8",
+      "version": "0.1.9",
       "devDependencies": {
         "@carefully-built/forms": "workspace:*",
         "@carefully-built/ui": "workspace:*",
@@ -143,7 +143,7 @@
     },
     "packages/automations": {
       "name": "@carefully-built/automations",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@types/react": "^19.2.0",
@@ -562,7 +562,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "dependencies": {
         "@carefully-built/agenda": "0.1.6",
         "@carefully-built/app-shell": "0.1.2",
@@ -787,7 +787,7 @@
     },
     "packages/workos": {
       "name": "@carefully-built/workos",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@radix-ui/react-slot": "^1.2.4",

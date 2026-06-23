@@ -134,19 +134,19 @@ export interface AutomationDraftValidation {
 
 function getStepConfigError(step: AutomationStepInput): string | null {
   if (!step.config) {
-    return 'Configura tutti gli step prima di salvare.';
+    return 'Configure every step before saving.';
   }
 
   if (step.type === 'add_tag' && step.config.type === 'add_tag' && !step.config.tagId.trim()) {
-    return 'Scegli il tag da aggiungere.';
+    return 'Choose the tag to add.';
   }
 
   if (step.type === 'send_email' && step.config.type === 'send_email' && !step.config.templateId.trim()) {
-    return 'Scegli il template email.';
+    return 'Choose the email template.';
   }
 
   if (step.type === 'send_whatsapp' && step.config.type === 'send_whatsapp' && !step.config.templateId.trim()) {
-    return 'Scegli il template WhatsApp.';
+    return 'Choose the WhatsApp template.';
   }
 
   if (step.type === 'update_field' && step.config.type === 'update_field') {
@@ -173,16 +173,16 @@ function getStepConfigError(step: AutomationStepInput): string | null {
 
   if (step.type === 'path' && step.config.type === 'path') {
     if (step.config.branches.length < 2) {
-      return 'Configura almeno due percorsi.';
+      return 'Configure at least two paths.';
     }
 
     if (step.config.branches.some((branch) => branch.filterGroups.every((group) => group.conditions.length === 0))) {
-      return 'Configura le condizioni di ogni percorso.';
+      return 'Configure the conditions for every path.';
     }
   }
 
   if (step.type !== step.config.type) {
-    return 'La configurazione dello step non corrisponde al tipo di azione.';
+    return 'The step configuration does not match the action type.';
   }
 
   return null;
@@ -201,7 +201,7 @@ export function validateAutomationDraftInput(input: AutomationDraftInput): Autom
 
 export function buildAutomationDraft(input: AutomationDraftInput): AutomationDraft {
   return {
-    name: input.name.trim() || 'Nuova Automazione',
+    name: input.name.trim() || 'New automation',
     trigger: input.trigger,
     steps: input.steps.map((step, index) => ({
       order: index + 1,
