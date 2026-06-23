@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/saas-kit",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components.",
   "type": "module",
   "license": "MIT",
