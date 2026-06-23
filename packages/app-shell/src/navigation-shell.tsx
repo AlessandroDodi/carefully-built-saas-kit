@@ -451,7 +451,7 @@ export function AppNavigationShell({
   logo,
   logoHref = '/',
   mobileNavigation,
-  moreLabel = 'Altro',
+  moreLabel = 'More',
   navItems,
   renderFooter,
   renderSearch,
