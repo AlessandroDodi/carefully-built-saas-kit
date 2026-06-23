@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/rich-text",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable rich text editor, renderer, AI action affordances, and serialization helpers for SaaS apps.",
   "type": "module",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/convex-crud",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Reusable Convex CRUD audit, archive, and organization-record helpers.",
   "type": "module",
   "license": "MIT",

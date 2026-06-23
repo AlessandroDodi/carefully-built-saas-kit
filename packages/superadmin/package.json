@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/superadmin",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Reusable superadmin UI for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",

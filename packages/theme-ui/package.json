@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/theme-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable SaaS theme, map theme, color, and shape selectors for Carefully Built apps.",
   "type": "module",
   "license": "MIT",

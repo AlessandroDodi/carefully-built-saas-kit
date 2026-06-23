@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/notifications",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable notification center UI for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",

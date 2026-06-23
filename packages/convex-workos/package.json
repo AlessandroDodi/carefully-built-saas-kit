@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/convex-workos",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Reusable Convex helpers for syncing WorkOS users across base and organization-scoped records.",
   "type": "module",
   "license": "MIT",
