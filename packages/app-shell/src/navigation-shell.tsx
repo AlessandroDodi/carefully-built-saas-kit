@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, ChevronRight, Ellipsis, X } from 'lucide-react';
+import { ChevronDown, ChevronLeft, ChevronRight, Ellipsis, X } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 
 import type { ComponentType, ReactNode, SVGProps } from 'react';
@@ -32,6 +32,14 @@ export interface NavigationItem {
   readonly activePaths?: readonly string[];
 }
 
+export interface NavigationGroup {
+  readonly key: string;
+  readonly label: ReactNode;
+  readonly items: readonly NavigationItem[];
+  readonly collapsible?: boolean;
+  readonly defaultOpen?: boolean;
+}
+
 export interface NavigationFooterRenderOptions {
   readonly isCollapsed: boolean;
   readonly isMobile: boolean;
@@ -51,6 +59,7 @@ export interface AppNavigationShellProps {
   readonly darkLogo?: ReactNode;
   readonly logoHref?: string;
   readonly navItems: readonly NavigationItem[];
+  readonly navGroups?: readonly NavigationGroup[];
   readonly bottomNavItems?: readonly NavigationItem[];
   readonly mobileNavigation?: DashboardMobileNavigationConfig;
   readonly sidebarWidth?: number;
@@ -218,6 +227,177 @@ function MobileBottomNavLink({
   );
 }
 
+function isNavigationGroupActive(pathname: string, group: NavigationGroup): boolean {
+  return group.items.some((item) => isNavigationItemActive(pathname, item));
+}
+
+function getDefaultGroupOpenState(pathname: string, group: NavigationGroup): boolean {
+  return group.defaultOpen ?? isNavigationGroupActive(pathname, group);
+}
+
+function DesktopNavigationGroup({
+  group,
+  pathname,
+  onNavClick,
+}: {
+  readonly group: NavigationGroup;
+  readonly pathname: string;
+  readonly onNavClick: () => void;
+}): React.ReactElement {
+  const [isOpen, setIsOpen] = useState(() => getDefaultGroupOpenState(pathname, group));
+  const isActive = isNavigationGroupActive(pathname, group);
+  const resolvedOpen = group.collapsible ? isOpen || isActive : true;
+
+  if (group.items.length === 0) {
+    return <></>;
+  }
+
+  return (
+    <section className="space-y-0.5">
+      {group.collapsible ? (
+        <button
+          type="button"
+          className="flex w-full items-center justify-between rounded-md px-2 py-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55 transition-colors hover:text-sidebar-foreground"
+          aria-expanded={resolvedOpen}
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <span className="truncate">{group.label}</span>
+          <ChevronDown
+            className={cn(
+              'size-3.5 shrink-0 transition-transform',
+              resolvedOpen && 'rotate-180',
+            )}
+          />
+        </button>
+      ) : (
+        <p className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
+          {group.label}
+        </p>
+      )}
+      {resolvedOpen ? (
+        <div className="space-y-0.5">
+          {group.items.map((item) => (
+            <DesktopNavLink
+              key={item.key}
+              item={item}
+              isCollapsed={false}
+              pathname={pathname}
+              onNavClick={onNavClick}
+            />
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function MobileNavigationGroup({
+  group,
+  pathname,
+  onNavClick,
+}: {
+  readonly group: NavigationGroup;
+  readonly pathname: string;
+  readonly onNavClick: () => void;
+}): React.ReactElement {
+  const [isOpen, setIsOpen] = useState(() => getDefaultGroupOpenState(pathname, group));
+  const isActive = isNavigationGroupActive(pathname, group);
+  const resolvedOpen = group.collapsible ? isOpen || isActive : true;
+
+  if (group.items.length === 0) {
+    return <></>;
+  }
+
+  return (
+    <section className="space-y-0.5">
+      {group.collapsible ? (
+        <button
+          type="button"
+          className="flex w-full items-center justify-between rounded-md px-2 py-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55 transition-colors hover:text-sidebar-foreground"
+          aria-expanded={resolvedOpen}
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <span className="truncate">{group.label}</span>
+          <ChevronDown
+            className={cn(
+              'size-3.5 shrink-0 transition-transform',
+              resolvedOpen && 'rotate-180',
+            )}
+          />
+        </button>
+      ) : (
+        <p className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
+          {group.label}
+        </p>
+      )}
+      {resolvedOpen ? (
+        <div className="space-y-0.5">
+          {group.items.map((item) => (
+            <MobileNavLink
+              key={item.key}
+              item={item}
+              pathname={pathname}
+              onNavClick={onNavClick}
+            />
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
+function GroupedNavigationList({
+  groups,
+  isCollapsed,
+  isMobile,
+  pathname,
+  onNavClick,
+}: {
+  readonly groups: readonly NavigationGroup[];
+  readonly isCollapsed: boolean;
+  readonly isMobile: boolean;
+  readonly pathname: string;
+  readonly onNavClick: () => void;
+}): React.ReactElement {
+  if (isCollapsed && !isMobile) {
+    return (
+      <>
+        {groups.flatMap((group) => group.items).map((item) => (
+          <DesktopNavLink
+            key={item.key}
+            item={item}
+            isCollapsed
+            pathname={pathname}
+            onNavClick={onNavClick}
+          />
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      {groups.map((group) => (
+        isMobile ? (
+          <MobileNavigationGroup
+            key={group.key}
+            group={group}
+            pathname={pathname}
+            onNavClick={onNavClick}
+          />
+        ) : (
+          <DesktopNavigationGroup
+            key={group.key}
+            group={group}
+            pathname={pathname}
+            onNavClick={onNavClick}
+          />
+        )
+      ))}
+    </div>
+  );
+}
+
 function SidebarContent({
   bottomNavItems,
   closeLabel,
@@ -227,6 +407,7 @@ function SidebarContent({
   logo,
   logoHref,
   navItems,
+  navGroups,
   onNavClick,
   pathname,
   renderFooter,
@@ -242,6 +423,7 @@ function SidebarContent({
   readonly logo: ReactNode;
   readonly logoHref: string;
   readonly navItems: readonly NavigationItem[];
+  readonly navGroups?: readonly NavigationGroup[];
   readonly onNavClick: () => void;
   readonly pathname: string;
   readonly renderFooter?: (options: NavigationFooterRenderOptions) => ReactNode;
@@ -312,19 +494,31 @@ function SidebarContent({
         </div>
       ) : null}
 
-      <nav className="flex-1 space-y-0.5 overflow-y-auto px-2">
-        {navItems.map((item) =>
-          isMobile ? (
-            <MobileNavLink key={item.key} item={item} pathname={pathname} onNavClick={onNavClick} />
-          ) : (
-            <DesktopNavLink
-              key={item.key}
-              item={item}
-              isCollapsed={isCollapsed}
-              pathname={pathname}
-              onNavClick={onNavClick}
-            />
-          ),
+      <nav className="flex-1 overflow-y-auto px-2">
+        {navGroups && navGroups.length > 0 ? (
+          <GroupedNavigationList
+            groups={navGroups}
+            isCollapsed={isCollapsed}
+            isMobile={isMobile}
+            pathname={pathname}
+            onNavClick={onNavClick}
+          />
+        ) : (
+          <div className="space-y-0.5">
+            {navItems.map((item) =>
+              isMobile ? (
+                <MobileNavLink key={item.key} item={item} pathname={pathname} onNavClick={onNavClick} />
+              ) : (
+                <DesktopNavLink
+                  key={item.key}
+                  item={item}
+                  isCollapsed={isCollapsed}
+                  pathname={pathname}
+                  onNavClick={onNavClick}
+                />
+              ),
+            )}
+          </div>
         )}
       </nav>
 
@@ -453,6 +647,7 @@ export function AppNavigationShell({
   mobileNavigation,
   moreLabel = 'More',
   navItems,
+  navGroups,
   renderFooter,
   renderSearch,
   sidebarWidth = 220,
@@ -487,6 +682,7 @@ export function AppNavigationShell({
               logo={logo}
               logoHref={logoHref}
               navItems={navItems}
+              navGroups={navGroups}
               onNavClick={handleNavClick}
               pathname={currentPath}
               renderFooter={renderFooter}
@@ -510,6 +706,7 @@ export function AppNavigationShell({
           logo={logo}
           logoHref={logoHref}
           navItems={navItems}
+          navGroups={navGroups}
           onNavClick={handleNavClick}
           pathname={currentPath}
           renderFooter={renderFooter}

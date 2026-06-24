@@ -19,6 +19,7 @@ export {
   isNavigationItemActive,
   type AppNavigationShellProps,
   type NavigationFooterRenderOptions,
+  type NavigationGroup,
   type NavigationIcon,
   type NavigationItem,
   type NavigationSearchRenderOptions,
