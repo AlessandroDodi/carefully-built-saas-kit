@@ -32,7 +32,7 @@ export function SettingsSectionCard({
             {subtitle ? <CardDescription>{subtitle}</CardDescription> : null}
           </div>
           {action ? (
-            <div className="shrink-0 [&_[data-slot=button]]:h-7 [&_[data-slot=button]]:gap-1 [&_[data-slot=button]]:rounded-[min(var(--radius-md),12px)] [&_[data-slot=button]]:px-2.5 [&_[data-slot=button]]:text-[0.8rem] [&_[data-slot=button]_svg]:size-3.5">
+            <div className="shrink-0 [&_[data-slot=button]]:h-7 [&_[data-slot=button]]:gap-1 [&_[data-slot=button]]:px-2.5 [&_[data-slot=button]]:text-[0.8rem] [&_[data-slot=button]_svg]:size-3.5">
               {action}
             </div>
           ) : null}

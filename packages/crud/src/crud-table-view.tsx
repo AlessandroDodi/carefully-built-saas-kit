@@ -9,8 +9,10 @@ export function CrudTableView<TItem extends object>({
   columns,
   isLoading,
   searchPlaceholder = "Search...",
+  toolbarLabels,
   filters = [],
   actions,
+  actionLabels,
   actionHandlers,
   renderActions,
   noDataMessage,
@@ -47,6 +49,7 @@ export function CrudTableView<TItem extends object>({
           }))}
           onClearAll={state.clearAll}
           getDraftResultCount={state.getDraftFilterResultCount}
+          labels={toolbarLabels}
         />
       </div>
 
@@ -55,6 +58,7 @@ export function CrudTableView<TItem extends object>({
         columns={[...columns]}
         isLoading={isLoading}
         actions={actions ? [...actions] : undefined}
+        actionLabels={actionLabels}
         actionHandlers={actionHandlers}
         renderActions={renderActions}
         noDataMessage={noDataMessage}

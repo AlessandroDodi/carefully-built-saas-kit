@@ -1,4 +1,11 @@
-import type { ActionHandlers, ActionType, Column, FilterConfig, SortState } from "@carefully-built/ui";
+import type {
+  ActionHandlers,
+  ActionType,
+  Column,
+  FilterConfig,
+  SortState,
+  TableToolbarLabelsInput,
+} from "@carefully-built/ui";
 import type { ReactNode } from "react";
 
 import type { CrudPaginationState } from "./pagination";
@@ -47,8 +54,10 @@ export interface CrudTableViewProps<TItem> {
   readonly columns: readonly Column<TItem>[];
   readonly isLoading: boolean;
   readonly searchPlaceholder?: string;
+  readonly toolbarLabels?: TableToolbarLabelsInput;
   readonly filters?: readonly CrudFilterDefinition<TItem>[];
   readonly actions?: readonly ActionType[];
+  readonly actionLabels?: Partial<Record<ActionType, string>>;
   readonly actionHandlers?: ActionHandlers<TItem>;
   readonly renderActions?: (item: TItem) => ReactNode;
   readonly noDataMessage?: string;
@@ -67,6 +76,7 @@ export interface CrudDataTableProps<TItem> {
   readonly columns: readonly Column<TItem>[];
   readonly isLoading: boolean;
   readonly actions?: readonly ActionType[];
+  readonly actionLabels?: Partial<Record<ActionType, string>>;
   readonly actionHandlers?: ActionHandlers<TItem>;
   readonly renderActions?: (item: TItem) => ReactNode;
   readonly noDataMessage?: string;

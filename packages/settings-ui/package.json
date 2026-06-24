@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/settings-ui",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Reusable SaaS settings tabs, section cards, and settings metrics for Carefully Built apps.",
   "type": "module",
   "license": "MIT",
@@ -50,7 +50,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@carefully-built/ui": ">=0.1.12",
+    "@carefully-built/ui": ">=0.1.19",
     "lucide-react": ">=0.400.0 || >=1.0.0",
     "nuqs": ">=2.0.0",
     "react": ">=18.2.0 || >=19.0.0",
