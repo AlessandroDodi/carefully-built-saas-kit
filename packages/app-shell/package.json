@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/app-shell",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable dashboard shell primitives for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",

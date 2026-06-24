@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/saas-kit",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components.",
   "type": "module",
   "license": "MIT",
@@ -260,7 +260,7 @@
   },
   "dependencies": {
     "@carefully-built/agenda": "0.1.6",
-    "@carefully-built/app-shell": "0.1.4",
+    "@carefully-built/app-shell": "0.1.5",
     "@carefully-built/association-picker": "0.1.2",
     "@carefully-built/auth-pages": "0.1.9",
     "@carefully-built/automations": "0.1.3",

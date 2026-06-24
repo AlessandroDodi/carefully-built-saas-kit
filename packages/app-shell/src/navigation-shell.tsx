@@ -245,8 +245,7 @@ function DesktopNavigationGroup({
   readonly onNavClick: () => void;
 }): React.ReactElement {
   const [isOpen, setIsOpen] = useState(() => getDefaultGroupOpenState(pathname, group));
-  const isActive = isNavigationGroupActive(pathname, group);
-  const resolvedOpen = group.collapsible ? isOpen || isActive : true;
+  const resolvedOpen = group.collapsible ? isOpen : true;
 
   if (group.items.length === 0) {
     return <></>;
@@ -301,8 +300,7 @@ function MobileNavigationGroup({
   readonly onNavClick: () => void;
 }): React.ReactElement {
   const [isOpen, setIsOpen] = useState(() => getDefaultGroupOpenState(pathname, group));
-  const isActive = isNavigationGroupActive(pathname, group);
-  const resolvedOpen = group.collapsible ? isOpen || isActive : true;
+  const resolvedOpen = group.collapsible ? isOpen : true;
 
   if (group.items.length === 0) {
     return <></>;
