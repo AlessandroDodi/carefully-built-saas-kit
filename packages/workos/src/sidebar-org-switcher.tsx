@@ -71,7 +71,7 @@ function cx(...classes: Array<string | false | null | undefined>): string {
   return classes.filter(Boolean).join(" ");
 }
 
-function getCurrentOrganization<TOrganization extends WorkOSOrganization>(
+export function getCurrentOrganization<TOrganization extends WorkOSOrganization>(
   organizations: readonly TOrganization[],
   activeOrganizationId: string | null | undefined,
 ): TOrganization | null {
@@ -80,15 +80,13 @@ function getCurrentOrganization<TOrganization extends WorkOSOrganization>(
   }
 
   if (!activeOrganizationId) {
-    return organizations[0] ?? null;
+    return organizations.length === 1 ? organizations[0] ?? null : null;
   }
 
   return (
     organizations.find(
       (organization) => organization.id === activeOrganizationId,
-    ) ??
-    organizations[0] ??
-    null
+    ) ?? null
   );
 }
 

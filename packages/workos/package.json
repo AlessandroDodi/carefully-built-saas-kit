@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/workos",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Reusable WorkOS organization creation and organization logo primitives for SaaS apps.",
   "type": "module",
   "license": "MIT",
