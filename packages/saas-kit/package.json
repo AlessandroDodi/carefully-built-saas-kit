@@ -137,6 +137,11 @@
       "import": "./dist/notifications.mjs",
       "default": "./dist/notifications.mjs"
     },
+    "./organizations": {
+      "types": "./dist/organizations.d.mts",
+      "import": "./dist/organizations.mjs",
+      "default": "./dist/organizations.mjs"
+    },
     "./resource-kit": {
       "types": "./dist/resource-kit.d.mts",
       "import": "./dist/resource-kit.mjs",
@@ -251,7 +256,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsdown src/index.ts src/agenda.ts src/app-shell.ts src/association-picker.ts src/auth-pages.ts src/automations.ts src/charts.ts src/convex-crud.ts src/convex-multitenant.ts src/convex-platform.ts src/convex-workos.ts src/crud.ts src/custom-fields.ts src/files.ts src/forms.ts src/import-export.ts src/kanban.ts src/legal-ui.ts src/maps-ui.ts src/notes.ts src/notifications.ts src/resource-kit.ts src/rich-text.ts src/search.ts src/settings-ui.ts src/superadmin.ts src/theme-ui.ts src/ui.ts src/user-picker.ts src/widgets.ts src/workos.ts src/server.ts src/next.ts src/auth-pages/forms.ts src/auth-pages/controllers.ts src/auth-pages/config.ts src/auth-pages/organizations.ts src/auth-pages/pages.ts src/auth-pages/social.ts src/auth-pages/workos.ts src/files/convex.ts src/search/command-palette.ts src/settings/client.ts --format esm --dts --unbundle && mkdir -p dist/agenda && cp src/agenda/styles.css dist/agenda/styles.css",
+    "build": "tsdown src/index.ts src/agenda.ts src/app-shell.ts src/association-picker.ts src/auth-pages.ts src/automations.ts src/charts.ts src/convex-crud.ts src/convex-multitenant.ts src/convex-platform.ts src/convex-workos.ts src/crud.ts src/custom-fields.ts src/files.ts src/forms.ts src/import-export.ts src/kanban.ts src/legal-ui.ts src/maps-ui.ts src/notes.ts src/notifications.ts src/organizations.ts src/resource-kit.ts src/rich-text.ts src/search.ts src/settings-ui.ts src/superadmin.ts src/theme-ui.ts src/ui.ts src/user-picker.ts src/widgets.ts src/workos.ts src/server.ts src/next.ts src/auth-pages/forms.ts src/auth-pages/controllers.ts src/auth-pages/config.ts src/auth-pages/organizations.ts src/auth-pages/pages.ts src/auth-pages/social.ts src/auth-pages/workos.ts src/files/convex.ts src/search/command-palette.ts src/settings/client.ts --format esm --dts --unbundle && mkdir -p dist/agenda && cp src/agenda/styles.css dist/agenda/styles.css",
     "prepublishOnly": "bun run typecheck && bun run build",
     "typecheck": "tsc --noEmit"
   },
@@ -279,6 +284,7 @@
     "@carefully-built/maps-ui": "0.1.4",
     "@carefully-built/notes": "0.1.4",
     "@carefully-built/notifications": "0.1.1",
+    "@carefully-built/organizations": "0.1.0",
     "@carefully-built/resource-kit": "0.1.3",
     "@carefully-built/rich-text": "0.1.1",
     "@carefully-built/search": "0.1.2",
