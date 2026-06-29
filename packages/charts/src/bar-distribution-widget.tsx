@@ -48,7 +48,13 @@ export function BarDistributionWidget({
       }}
     >
       {!isEmpty ? (
-        <div className="h-full min-h-[264px] w-full pt-2">
+        // DEFINITE height (not h-full/min-h): recharts' ResponsiveContainer
+        // height="100%" needs a parent with a resolved height. In a min-height-
+        // only flex column (e.g. a single-column MOBILE layout) h-full is
+        // indeterminate, so the container measure→grow→re-measure loops and the
+        // chart scrolls infinitely tall. A fixed 264px wrapper bounds it on every
+        // viewport. (Mobile infinite-height bug, 2026-06-29.)
+        <div className="h-[264px] w-full pt-2">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={[...data]} margin={{ top: 8, right: 8, left: -24, bottom: 8 }}>
               <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />
