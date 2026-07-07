@@ -84,6 +84,22 @@ interface ActivityCalendarViewProps {
     end?: Date | null,
   ) => Promise<void>;
   readonly onEdit: (activity: ActivityListItem) => void;
+  /**
+   * Renders the calendar in read-only mode: disables drag-to-create selection and
+   * event dragging. Useful for surfaces that only display a schedule (e.g. an
+   * employee's shift calendar). Defaults to `false` (interactive).
+   */
+  readonly readOnly?: boolean;
+  /**
+   * FullCalendar locale code (e.g. `"it"`) used for built-in date/time strings.
+   * Defaults to FullCalendar's locale. `firstDay` stays Monday regardless.
+   */
+  readonly locale?: string;
+  /**
+   * Time-grid slot duration, FullCalendar `HH:MM:SS` (e.g. `"00:30:00"` for 30-min
+   * slots). Defaults to FullCalendar's default.
+   */
+  readonly slotDuration?: string;
 }
 
 function getScheduledDate(activity: ActivityListItem): Date | null {
@@ -607,6 +623,9 @@ export function ActivityCalendarView({
   onDateClick,
   onMoveActivity,
   onEdit,
+  readOnly = false,
+  locale,
+  slotDuration,
 }: ActivityCalendarViewProps): React.ReactElement {
   const calendarRef = useRef<FullCalendar | null>(null);
   const anchorDateRef = useRef(anchorDate);
@@ -974,15 +993,17 @@ export function ActivityCalendarView({
           today: 'today',
         }}
         firstDay={1}
+        {...(locale ? { locale } : {})}
+        {...(slotDuration ? { slotDuration } : {})}
         allDaySlot
         nowIndicator
         height="100%"
         expandRows
         dayMaxEvents
         slotEventOverlap={false}
-        selectable
-        selectMirror
-        editable
+        selectable={!readOnly}
+        selectMirror={!readOnly}
+        editable={!readOnly}
         slotMinTime="06:00:00"
         slotMaxTime="22:00:00"
         scrollTime={scrollTime}

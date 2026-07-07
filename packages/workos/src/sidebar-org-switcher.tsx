@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDown, Plus, ShieldCheck } from "lucide-react";
+import { ChevronDown, LogOut, Plus, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -56,6 +56,17 @@ export interface SidebarOrgSwitcherBaseProps<
   readonly mobileSheet?: boolean;
   readonly onContextOrganizationChange?: (orgId: string) => void;
   readonly onSwitch?: (orgId: string) => void;
+  /**
+   * Optional sign-out server action. When provided, the switcher renders a
+   * "Log out" control in its account area (dropdown footer on desktop /
+   * collapsed, and the mobile sheet). The action is invoked via a native
+   * `<form action={signOutAction}>` submit — pass a WorkOS `signOutAction`
+   * server action (deletes the session + redirects). Omit to hide sign-out
+   * (backward compatible: existing callers render exactly as before).
+   */
+  readonly signOutAction?: () => void | Promise<void>;
+  /** Label for the sign-out control. Defaults to "Log out". */
+  readonly signOutLabel?: string;
   readonly renderLogo?: (props: {
     readonly org: Pick<TOrganization, "id" | "logoUrl" | "name">;
     readonly size: "sm" | "md";
@@ -159,6 +170,8 @@ export function SidebarOrgSwitcherBase<
   onContextOrganizationChange,
   onSwitch,
   renderLogo,
+  signOutAction,
+  signOutLabel = "Log out",
   switchOrganization,
   superAdminHref = "/super-admin/dashboard",
 }: SidebarOrgSwitcherBaseProps<TOrganization>): React.ReactElement {
@@ -321,6 +334,19 @@ export function SidebarOrgSwitcherBase<
           Create organization
         </DropdownMenuItem>
       </CreateOrganization>
+      {signOutAction ? (
+        <>
+          <DropdownMenuSeparator />
+          <form action={signOutAction}>
+            <DropdownMenuItem asChild>
+              <button type="submit" className="w-full cursor-pointer">
+                <LogOut className="mr-2 size-4" />
+                {signOutLabel}
+              </button>
+            </DropdownMenuItem>
+          </form>
+        </>
+      ) : null}
     </DropdownMenuContent>
   );
 
@@ -410,6 +436,18 @@ export function SidebarOrgSwitcherBase<
                 Create organization
               </Button>
             </CreateOrganization>
+            {signOutAction ? (
+              <form action={signOutAction}>
+                <Button
+                  className="w-full justify-start gap-2"
+                  type="submit"
+                  variant="ghost"
+                >
+                  <LogOut className="size-4" />
+                  {signOutLabel}
+                </Button>
+              </form>
+            ) : null}
           </div>
         </DrawerContent>
       </Drawer>
