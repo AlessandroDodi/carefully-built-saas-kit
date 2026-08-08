@@ -1,6 +1,10 @@
 "use client";
 
 export {
+  OrganizationMembersPanel,
+  type OrganizationMembersPanelProps,
+} from "./organization-members-panel";
+export {
   ProgressMetricCard,
   type ProgressMetricCardProps,
 } from "./progress-metric-card";
