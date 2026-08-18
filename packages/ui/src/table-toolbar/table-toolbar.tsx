@@ -68,6 +68,8 @@ interface SearchInputProps {
   readonly onChange: (value: string) => void;
   readonly placeholder?: string;
   readonly className?: string;
+  /** Accessible name for the icon-only clear control. */
+  readonly clearLabel?: string;
 }
 
 export function SearchInput({
@@ -75,6 +77,7 @@ export function SearchInput({
   onChange,
   placeholder = 'Search...',
   className,
+  clearLabel = 'Clear search',
 }: SearchInputProps): React.ReactElement {
   return (
     <div className={cn('relative', className)}>
@@ -91,12 +94,13 @@ export function SearchInput({
       {value ? (
         <button
           type="button"
+          aria-label={clearLabel}
           onClick={() => {
             onChange('');
           }}
           className="text-muted-foreground hover:text-foreground absolute top-1/2 right-2.5 -translate-y-1/2"
         >
-          <X className="size-4" />
+          <X aria-hidden="true" className="size-4" />
         </button>
       ) : null}
     </div>
@@ -115,6 +119,8 @@ export interface TableToolbarLabels {
   readonly filtersTitle: ReactNode;
   readonly filtersDescription?: ReactNode;
   readonly clearFiltersLabel: ReactNode;
+  /** Accessible name for the search field's icon-only clear control. */
+  readonly clearSearchLabel: string;
   readonly showResultsLabel: (resultCount?: number) => ReactNode;
   readonly rangeMinPlaceholder: string;
   readonly rangeMaxPlaceholder: string;
@@ -131,6 +137,7 @@ export function resolveTableToolbarLabels(
     filtersDescription:
       labels.filtersDescription ?? 'Narrow the list using the available criteria.',
     clearFiltersLabel: labels.clearFiltersLabel ?? 'Clear',
+    clearSearchLabel: labels.clearSearchLabel ?? 'Clear search',
     showResultsLabel:
       labels.showResultsLabel ??
       ((resultCount?: number) =>
@@ -395,6 +402,7 @@ export function TableToolbar({
             value={search.value}
             onChange={search.onChange}
             placeholder={search.placeholder}
+            clearLabel={resolvedLabels.clearSearchLabel}
             className="min-w-0 flex-1 sm:w-64 sm:flex-initial"
           />
         ) : null}
