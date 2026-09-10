@@ -53,7 +53,7 @@ export function GoogleMapsPhotoAttribution({
         Google Maps
       </span>
       {validAttributions.length > 0 ? <span aria-hidden="true">·</span> : null}
-      {validAttributions.length > 0 ? <span>Foto di</span> : null}
+      {validAttributions.length > 0 ? <span>Photo by</span> : null}
       {validAttributions.map((attribution, index) => {
         const name = attribution.displayName.trim();
         const key = `${name}-${attribution.uri ?? index}`;

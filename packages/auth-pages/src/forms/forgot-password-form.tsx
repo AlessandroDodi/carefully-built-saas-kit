@@ -51,7 +51,7 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
           ) : null}
         </p>
         <a className={cn("text-sm underline", linkClassName)} href={loginHref}>
-          Torna al login
+          Back to login
         </a>
       </div>
     );
