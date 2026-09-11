@@ -71,6 +71,11 @@ export interface CommandPaletteProps<TItem, TType extends string> {
   readonly placeholder?: string;
   readonly noResultsLabel?: string;
   readonly loadingLabel?: string;
+  // Footer keyboard-hint labels (English defaults); pass translated copy to
+  // localise the palette.
+  readonly navigateHintLabel?: string;
+  readonly openHintLabel?: string;
+  readonly closeHintLabel?: string;
   readonly triggerLabel?: string;
   readonly triggerTooltip?: string;
   readonly triggerVariant?: 'sidebar' | 'bottom-nav';
@@ -175,6 +180,9 @@ export function CommandPalette<TItem, TType extends string>({
   items,
   loadingLabel = 'Loading...',
   noResultsLabel = 'No results found',
+  navigateHintLabel = 'to navigate',
+  openHintLabel = 'to open',
+  closeHintLabel = 'to close',
   onSelect,
   placeholder = 'Search...',
   title = 'Search',
@@ -389,6 +397,9 @@ export function CommandPalette<TItem, TType extends string>({
         itemRefs={itemRefs}
         loadingLabel={loadingLabel}
         noResultsLabel={noResultsLabel}
+        navigateHintLabel={navigateHintLabel}
+        openHintLabel={openHintLabel}
+        closeHintLabel={closeHintLabel}
         onKeyDown={handlePanelKeyDown}
         onOpenChange={setIsOpen}
         onSelect={selectItem}
@@ -423,6 +434,11 @@ interface CommandPaletteSurfaceProps<TItem, TType extends string> {
   readonly itemRefs: RefObject<(HTMLButtonElement | null)[]>;
   readonly loadingLabel: string;
   readonly noResultsLabel: string;
+  // Keyboard-hint labels in the footer. Optional with English defaults so the
+  // consuming app can localise them (e.g. "para navegar" / "para abrir").
+  readonly navigateHintLabel?: string;
+  readonly openHintLabel?: string;
+  readonly closeHintLabel?: string;
   readonly onKeyDown: (event: ReactKeyboardEvent) => void;
   readonly onOpenChange: (open: boolean) => void;
   readonly onSelect: (item: TItem) => void;
@@ -494,6 +510,9 @@ function CommandPaletteContent<TItem, TType extends string>({
   itemRefs,
   loadingLabel,
   noResultsLabel,
+  navigateHintLabel = 'to navigate',
+  openHintLabel = 'to open',
+  closeHintLabel = 'to close',
   onKeyDown,
   onSelect,
   placeholder,
@@ -646,17 +665,17 @@ function CommandPaletteContent<TItem, TType extends string>({
         <span className="inline-flex items-center gap-1">
           <KeyboardKeycap className={keycapClassName}>↑</KeyboardKeycap>
           <KeyboardKeycap className={keycapClassName}>↓</KeyboardKeycap>
-          <span>per navigare</span>
+          <span>{navigateHintLabel}</span>
         </span>
         <span className="inline-flex items-center gap-1">
           <KeyboardKeycap className={keycapClassName}>
             <CornerDownLeft className="size-3" />
           </KeyboardKeycap>
-          per aprire
+          {openHintLabel}
         </span>
         <span className="inline-flex items-center gap-1">
           <KeyboardKeycap className={keycapClassName}>Esc</KeyboardKeycap>
-          <span>per chiudere</span>
+          <span>{closeHintLabel}</span>
         </span>
       </div>
     </div>
