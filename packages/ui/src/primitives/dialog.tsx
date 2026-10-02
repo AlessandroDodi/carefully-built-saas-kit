@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
+import { resolveOverlayCloseLabel } from "../overlays/responsive-sheet.labels"
 import { cn } from "../utils/cn"
 import { Button } from "./button"
 import { X } from "lucide-react"
@@ -42,9 +43,11 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  closeLabel,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
+  closeLabel?: React.ReactNode
 }) {
   return (
     <DialogPortal>
@@ -62,7 +65,7 @@ function DialogContent({
           <DialogPrimitive.Close data-slot="dialog-close" asChild>
             <Button variant="ghost" className="absolute top-2 right-2" size="icon-sm">
               <X />
-              <span className="sr-only">Close</span>
+              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel)}</span>
             </Button>
           </DialogPrimitive.Close>
         )}
@@ -84,10 +87,12 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 function DialogFooter({
   className,
   showCloseButton = false,
+  closeLabel,
   children,
   ...props
 }: React.ComponentProps<"div"> & {
   showCloseButton?: boolean
+  closeLabel?: React.ReactNode
 }) {
   return (
     <div
@@ -101,7 +106,7 @@ function DialogFooter({
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close asChild>
-          <Button variant="outline">Close</Button>
+          <Button variant="outline">{resolveOverlayCloseLabel(closeLabel)}</Button>
         </DialogPrimitive.Close>
       )}
     </div>

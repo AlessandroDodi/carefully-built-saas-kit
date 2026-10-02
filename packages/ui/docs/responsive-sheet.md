@@ -28,6 +28,13 @@ import { ResponsiveSheet } from '@carefully-built/ui';
 - Form content.
 - Save/cancel mutation behavior.
 - Domain copy and validation.
+- **Every visible string.** The kit has no i18n, so each label is a prop with an
+  English default: `cancelLabel` ("Cancel"), `confirmLabel` ("Save"),
+  `confirmLoadingLabel` ("Saving...") and `closeLabel` ("Close", the accessible
+  name of the X button). Omit one and English ships. `resolveResponsiveSheetLabels`
+  is exported if you want to merge your copy over the defaults yourself; the same
+  `closeLabel` prop exists on `DialogContent`, `DialogFooter`, `SheetContent` and
+  `HelpInfoButton`.
 
 ## Open Decisions
 

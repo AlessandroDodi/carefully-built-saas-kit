@@ -6,6 +6,7 @@ import { Dialog as SheetPrimitive } from 'radix-ui';
 
 import { Button } from './button';
 import { cn } from '../utils/cn';
+import { resolveOverlayCloseLabel } from '../overlays/responsive-sheet.labels';
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
@@ -36,10 +37,12 @@ function SheetContent({
   children,
   side = 'right',
   showCloseButton = true,
+  closeLabel,
   ...props
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left';
   showCloseButton?: boolean;
+  closeLabel?: React.ReactNode;
 }) {
   return (
     <SheetPortal>
@@ -58,7 +61,7 @@ function SheetContent({
           <SheetPrimitive.Close data-slot="sheet-close" asChild>
             <Button variant="ghost" className="absolute top-3 right-3" size="icon-sm">
               <X className="size-4" />
-              <span className="sr-only">Close</span>
+              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel)}</span>
             </Button>
           </SheetPrimitive.Close>
         ) : null}

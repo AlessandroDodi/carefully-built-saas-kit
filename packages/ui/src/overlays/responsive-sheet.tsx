@@ -3,6 +3,7 @@
 import type { ReactNode } from 'react';
 
 import { SheetActionFooter } from './responsive-sheet.footer';
+import { resolveResponsiveSheetLabels } from './responsive-sheet.labels';
 import { DesktopSheetLayout, MobileSheetLayout } from './responsive-sheet.layouts';
 import {
   useDesktopConfirmShortcut,
@@ -38,6 +39,8 @@ export interface ResponsiveSheetProps {
   readonly confirmLabel?: ReactNode;
   readonly confirmDisabled?: boolean;
   readonly confirmLoading?: boolean;
+  readonly confirmLoadingLabel?: ReactNode;
+  readonly closeLabel?: ReactNode;
   readonly width?: number;
   readonly modal?: boolean;
   readonly outsideInteractionGuard?: SheetOutsideInteractionGuard;
@@ -57,11 +60,13 @@ export function ResponsiveSheet({
   children,
   footer,
   onCancel,
-  cancelLabel = 'Cancel',
+  cancelLabel,
   onConfirm,
-  confirmLabel = 'Save',
+  confirmLabel,
   confirmDisabled = false,
   confirmLoading = false,
+  confirmLoadingLabel,
+  closeLabel,
   width = 550,
   modal = true,
   outsideInteractionGuard,
@@ -72,6 +77,12 @@ export function ResponsiveSheet({
   footerClassName,
   classes,
 }: ResponsiveSheetProps): React.ReactElement {
+  const labels = resolveResponsiveSheetLabels({
+    cancelLabel,
+    confirmLabel,
+    confirmLoadingLabel,
+    closeLabel,
+  });
   const isMobile = useIsMobile();
   const desktopConfirmShortcutEnabled =
     !isMobile && enableDesktopConfirmShortcut && Boolean(onConfirm);
@@ -93,11 +104,12 @@ export function ResponsiveSheet({
     <SheetActionFooter
       footer={footer}
       onCancel={onCancel}
-      cancelLabel={cancelLabel}
+      cancelLabel={labels.cancelLabel}
       onConfirm={onConfirm}
-      confirmLabel={confirmLabel}
+      confirmLabel={labels.confirmLabel}
       confirmDisabled={confirmDisabled}
       confirmLoading={confirmLoading}
+      confirmLoadingLabel={labels.confirmLoadingLabel}
       desktopConfirmShortcutEnabled={desktopConfirmShortcutEnabled}
       desktopModifierLabel={desktopModifierLabel}
     />
@@ -113,6 +125,7 @@ export function ResponsiveSheet({
     title,
     description,
     footer: hasFooter ? resolvedFooter : null,
+    closeLabel: labels.closeLabel,
     children,
     contentClassName,
     footerClassName,

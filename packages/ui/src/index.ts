@@ -32,6 +32,7 @@ export * from './primitives/user-picker';
 export * from './primitives/user-picker-utils';
 export * from './overlays/responsive-sheet';
 export * from './overlays/responsive-sheet.footer';
+export * from './overlays/responsive-sheet.labels';
 export * from './overlays/responsive-sheet.shortcuts';
 export * from './empty-state';
 export * from './search/searchable-select';

@@ -76,6 +76,8 @@ export interface CommandPaletteProps<TItem, TType extends string> {
   readonly navigateHintLabel?: string;
   readonly openHintLabel?: string;
   readonly closeHintLabel?: string;
+  // Accessible name of the backdrop button that dismisses the palette.
+  readonly closeLabel?: string;
   readonly triggerLabel?: string;
   readonly triggerTooltip?: string;
   readonly triggerVariant?: 'sidebar' | 'bottom-nav';
@@ -174,6 +176,7 @@ export function CommandPalette<TItem, TType extends string>({
   getItemMeta,
   getItemSearchText,
   getItemType,
+  closeLabel = 'Close search',
   isCollapsed = false,
   isLoading = false,
   isMobile = false,
@@ -380,6 +383,7 @@ export function CommandPalette<TItem, TType extends string>({
       )}
       <CommandPaletteSurface
         activeType={activeType}
+        closeLabel={closeLabel}
         completedSearchLabel={completedSearchLabel}
         completedType={completedType?.value ?? null}
         completedTypeFlash={completedTypeFlash}
@@ -417,6 +421,7 @@ export function CommandPalette<TItem, TType extends string>({
 
 interface CommandPaletteSurfaceProps<TItem, TType extends string> {
   readonly activeType: TType;
+  readonly closeLabel: string;
   readonly completedSearchLabel: ReactNode | null;
   readonly completedType: TType | null;
   readonly completedTypeFlash: TType | null;
@@ -457,6 +462,7 @@ function CommandPaletteSurface<TItem, TType extends string>({
   onOpenChange,
   title,
   description,
+  closeLabel,
   ...contentProps
 }: CommandPaletteSurfaceProps<TItem, TType>): React.ReactElement {
   if (isMobile) {
@@ -482,7 +488,7 @@ function CommandPaletteSurface<TItem, TType extends string>({
       <button
         type="button"
         className="absolute inset-0"
-        aria-label="Close search"
+        aria-label={closeLabel}
         onClick={() => onOpenChange(false)}
       />
       <div className="bg-background relative h-[min(640px,calc(100vh-4rem))] w-full max-w-2xl overflow-hidden rounded-lg border shadow-xl">
@@ -521,7 +527,10 @@ function CommandPaletteContent<TItem, TType extends string>({
   setHighlightedIndex,
   setSearch,
   typeOptions,
-}: Omit<CommandPaletteSurfaceProps<TItem, TType>, 'description' | 'isMobile' | 'isOpen' | 'onOpenChange'>): React.ReactElement {
+}: Omit<
+  CommandPaletteSurfaceProps<TItem, TType>,
+  'closeLabel' | 'description' | 'isMobile' | 'isOpen' | 'onOpenChange'
+>): React.ReactElement {
   const typeScrollerRef = useRef<HTMLDivElement | null>(null);
   const typeScrollerDragRef = useRef({
     hasDragged: false,
