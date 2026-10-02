@@ -242,7 +242,7 @@
     },
     "packages/crud": {
       "name": "@carefully-built/crud",
-      "version": "0.1.4",
+      "version": "0.1.6",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "nuqs": "^2.8.8",
@@ -654,7 +654,7 @@
     },
     "packages/settings-ui": {
       "name": "@carefully-built/settings-ui",
-      "version": "0.1.6",
+      "version": "0.1.8",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",
@@ -723,7 +723,7 @@
     },
     "packages/ui": {
       "name": "@carefully-built/ui",
-      "version": "0.1.20",
+      "version": "0.1.21",
       "devDependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -1700,7 +1700,11 @@
 
     "@carefully-built/resource-kit/next": ["next@16.1.6", "", { "dependencies": { "@next/env": "16.1.6", "@swc/helpers": "0.5.15", "baseline-browser-mapping": "^2.8.3", "caniuse-lite": "^1.0.30001579", "postcss": "8.4.31", "styled-jsx": "5.1.6" }, "optionalDependencies": { "@next/swc-darwin-arm64": "16.1.6", "@next/swc-darwin-x64": "16.1.6", "@next/swc-linux-arm64-gnu": "16.1.6", "@next/swc-linux-arm64-musl": "16.1.6", "@next/swc-linux-x64-gnu": "16.1.6", "@next/swc-linux-x64-musl": "16.1.6", "@next/swc-win32-arm64-msvc": "16.1.6", "@next/swc-win32-x64-msvc": "16.1.6", "sharp": "^0.34.4" }, "peerDependencies": { "@opentelemetry/api": "^1.1.0", "@playwright/test": "^1.51.1", "babel-plugin-react-compiler": "*", "react": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react-dom": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "sass": "^1.3.0" }, "optionalPeers": ["@opentelemetry/api", "@playwright/test", "babel-plugin-react-compiler", "sass"], "bin": { "next": "dist/bin/next" } }, "sha512-hkyRkcu5x/41KoqnROkfTm2pZVbKxvbZRuNvKXLRXxs3VfyO0WhY50TQS40EuKO9SW3rBj/sF3WbVwDACeMZyw=="],
 
+    "@carefully-built/saas-kit/@carefully-built/crud": ["@carefully-built/crud@0.1.4", "", { "peerDependencies": { "@carefully-built/ui": ">=0.1.15", "nuqs": ">=2.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0" }, "optionalPeers": ["@carefully-built/ui", "nuqs"] }, "sha512-MBM3Q+wLh8ifTEAdwC3vJj+8QPD6ShPyqNPUVY0rM+1nthp6w88qDVZykTdYNt+Vh5BncR8JZONQu3A1bMGDBw=="],
+
     "@carefully-built/saas-kit/@carefully-built/search": ["@carefully-built/search@0.1.2", "", { "peerDependencies": { "@carefully-built/ui": ">=0.1.4", "lucide-react": ">=0.400.0 || >=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0" }, "optionalPeers": ["@carefully-built/ui"] }, "sha512-fYZO00W8fBOdKs8Ha7gLYzPrdzeLQb20J87Nk5HMF+lMfyqgDnYGb2LhhqiUhfd5tPEhq+YdQarPdZ4BcxmTXA=="],
+
+    "@carefully-built/saas-kit/@carefully-built/settings-ui": ["@carefully-built/settings-ui@0.1.6", "", { "peerDependencies": { "@carefully-built/ui": ">=0.1.19", "lucide-react": ">=0.400.0 || >=1.0.0", "nuqs": ">=2.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0" }, "optionalPeers": ["@carefully-built/ui"] }, "sha512-6v7uuuGrlwN7Xf+GPkCHDfzF5NIi/IVX0CBhCKBQbFmqkQUeGgDUyifiE6ROlRYny226kmcCWcmJw6rAFv/b/w=="],
 
     "@carefully-built/saas-kit/@carefully-built/ui": ["@carefully-built/ui@0.1.19", "", { "peerDependencies": { "class-variance-authority": ">=0.7.0", "clsx": ">=2.0.0", "lucide-react": ">=0.400.0 || >=1.0.0", "radix-ui": ">=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-day-picker": ">=9.0.0", "react-dom": ">=18.2.0 || >=19.0.0", "tailwind-merge": ">=2.0.0 || >=3.0.0", "vaul": ">=1.0.0" } }, "sha512-kJnzLP92sdvrODAP3ltBX3e/lXAHdo6a95WWu6dIZ1DTzMZgHPvP0G77CXxIt5NSY84gtuYkEqwab15jhhfcgw=="],
 

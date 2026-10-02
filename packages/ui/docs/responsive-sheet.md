@@ -36,8 +36,32 @@ import { ResponsiveSheet } from '@carefully-built/ui';
   `closeLabel` prop exists on `DialogContent`, `DialogFooter`, `SheetContent` and
   `HelpInfoButton`.
 
+## Unsaved Changes Guard
+
+Pass `confirmCloseWhenDirty` and a close attempt — Escape, an outside click, the
+X, or Cancel — is held back and turned into a confirmation instead:
+
+```tsx
+<ResponsiveSheet
+  confirmCloseWhenDirty={{
+    dirty: form.formState.isDirty,
+    title: 'Modifiche non salvate',
+    description: 'Se chiudi ora perderai le modifiche non salvate.',
+    discardLabel: 'Chiudi senza salvare',
+    stayLabel: 'Rimani',
+  }}
+/>
+```
+
+`confirmCloseWhenDirty={true}` guards with the default English copy. Every line
+is overridable, as above. The same prop is forwarded by
+`SettingsFormSheet` (`@carefully-built/settings-ui`) and `CrudResourceSheet`
+(`@carefully-built/crud`).
+
+For guarding a *route* exit rather than a sheet close, `useUnsavedRouteExitGuard`
++ `UnsavedChangesDialog` are exported for the same purpose.
+
 ## Open Decisions
 
-- Add built-in dirty-state confirmation.
 - Add nested sheet rules.
 - Add standardized async submit footer.

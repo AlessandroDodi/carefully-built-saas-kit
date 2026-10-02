@@ -2,8 +2,12 @@
 
 import type { ReactNode } from 'react';
 
+import type { ConfirmCloseWhenDirty } from './unsaved-changes';
+
 import { SheetActionFooter } from './responsive-sheet.footer';
 import { resolveResponsiveSheetLabels } from './responsive-sheet.labels';
+import { UnsavedChangesDialog } from './unsaved-changes-dialog';
+import { useUnsavedCloseGuard } from './use-unsaved-close-guard';
 import { DesktopSheetLayout, MobileSheetLayout } from './responsive-sheet.layouts';
 import {
   useDesktopConfirmShortcut,
@@ -41,6 +45,7 @@ export interface ResponsiveSheetProps {
   readonly confirmLoading?: boolean;
   readonly confirmLoadingLabel?: ReactNode;
   readonly closeLabel?: ReactNode;
+  readonly confirmCloseWhenDirty?: ConfirmCloseWhenDirty;
   readonly width?: number;
   readonly modal?: boolean;
   readonly outsideInteractionGuard?: SheetOutsideInteractionGuard;
@@ -67,6 +72,7 @@ export function ResponsiveSheet({
   confirmLoading = false,
   confirmLoadingLabel,
   closeLabel,
+  confirmCloseWhenDirty,
   width = 550,
   modal = true,
   outsideInteractionGuard,
@@ -82,6 +88,11 @@ export function ResponsiveSheet({
     confirmLabel,
     confirmLoadingLabel,
     closeLabel,
+  });
+  const closeGuard = useUnsavedCloseGuard({
+    confirmCloseWhenDirty,
+    onCancel,
+    onOpenChange,
   });
   const isMobile = useIsMobile();
   const desktopConfirmShortcutEnabled =
@@ -103,7 +114,7 @@ export function ResponsiveSheet({
   const resolvedFooter = (
     <SheetActionFooter
       footer={footer}
-      onCancel={onCancel}
+      onCancel={closeGuard.requestClose}
       cancelLabel={labels.cancelLabel}
       onConfirm={onConfirm}
       confirmLabel={labels.confirmLabel}
@@ -119,7 +130,7 @@ export function ResponsiveSheet({
   );
   const sharedLayoutProps = {
     open,
-    onOpenChange,
+    onOpenChange: closeGuard.handleOpenChange,
     modal,
     outsideInteractionGuard,
     title,
@@ -137,9 +148,19 @@ export function ResponsiveSheet({
     },
   };
 
-  return isMobile ? (
-    <MobileSheetLayout {...sharedLayoutProps} />
-  ) : (
-    <DesktopSheetLayout {...sharedLayoutProps} width={width} />
+  return (
+    <>
+      {isMobile ? (
+        <MobileSheetLayout {...sharedLayoutProps} />
+      ) : (
+        <DesktopSheetLayout {...sharedLayoutProps} width={width} />
+      )}
+      <UnsavedChangesDialog
+        open={closeGuard.isDialogOpen}
+        onOpenChange={closeGuard.setIsDialogOpen}
+        onDiscard={closeGuard.discardChanges}
+        copy={closeGuard.copy}
+      />
+    </>
   );
 }

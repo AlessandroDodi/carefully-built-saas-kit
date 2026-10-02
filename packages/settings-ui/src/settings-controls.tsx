@@ -13,6 +13,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@carefully-built/ui";
+import type { ConfirmCloseWhenDirty } from "@carefully-built/ui";
 
 interface SettingsHelpTitleProps {
   readonly children: ReactNode;
@@ -98,9 +99,13 @@ export function SettingsEditDeleteActions({
 }
 
 export function SettingsFormSheet({
+  cancelLabel,
   children,
+  closeLabel,
+  confirmCloseWhenDirty,
   confirmDisabled,
   confirmLabel = "Save changes",
+  confirmLoadingLabel,
   description,
   loading,
   onOpenChange,
@@ -109,9 +114,13 @@ export function SettingsFormSheet({
   title,
   width,
 }: {
+  readonly cancelLabel?: ReactNode;
   readonly children: ReactNode;
+  readonly closeLabel?: ReactNode;
+  readonly confirmCloseWhenDirty?: ConfirmCloseWhenDirty;
   readonly confirmDisabled: boolean;
-  readonly confirmLabel?: string;
+  readonly confirmLabel?: ReactNode;
+  readonly confirmLoadingLabel?: ReactNode;
   readonly description?: string;
   readonly loading: boolean;
   readonly onOpenChange: (open: boolean) => void;
@@ -127,10 +136,14 @@ export function SettingsFormSheet({
       title={title}
       description={description}
       onCancel={() => onOpenChange(false)}
+      cancelLabel={cancelLabel}
       onConfirm={onSave}
       confirmLabel={confirmLabel}
+      confirmLoadingLabel={confirmLoadingLabel}
       confirmDisabled={confirmDisabled}
       confirmLoading={loading}
+      confirmCloseWhenDirty={confirmCloseWhenDirty}
+      closeLabel={closeLabel}
       width={width}
     >
       {children}
