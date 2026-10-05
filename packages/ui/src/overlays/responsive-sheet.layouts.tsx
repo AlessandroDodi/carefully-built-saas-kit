@@ -51,6 +51,7 @@ interface SharedSheetLayoutProps {
   readonly description?: ReactNode;
   readonly children: ReactNode;
   readonly footer: ReactNode;
+  readonly closeLabel?: ReactNode;
   readonly mobileDrawerContentClassName?: string;
   readonly contentClassName?: string;
   readonly footerClassName?: string;
@@ -155,6 +156,7 @@ export function DesktopSheetLayout({
   description,
   children,
   footer,
+  closeLabel,
   width,
   contentClassName,
   footerClassName,
@@ -163,6 +165,7 @@ export function DesktopSheetLayout({
   return (
     <Sheet open={open} onOpenChange={onOpenChange} modal={modal}>
       <SheetContent
+        closeLabel={closeLabel}
         aria-describedby={description ? undefined : 'responsive-sheet-description-empty'}
         style={{ width: `${String(width)}px`, maxWidth: '85vw' }}
         className={cn('flex flex-col gap-0 p-0', classes?.desktopContent)}

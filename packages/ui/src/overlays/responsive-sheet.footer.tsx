@@ -32,6 +32,7 @@ interface SheetActionFooterProps {
   readonly confirmLabel: ReactNode;
   readonly confirmDisabled: boolean;
   readonly confirmLoading: boolean;
+  readonly confirmLoadingLabel?: ReactNode;
   readonly desktopConfirmShortcutEnabled?: boolean;
   readonly desktopModifierLabel?: string | null;
 }
@@ -44,6 +45,7 @@ export function SheetActionFooter({
   confirmLabel,
   confirmDisabled,
   confirmLoading,
+  confirmLoadingLabel = 'Saving...',
   desktopConfirmShortcutEnabled = false,
   desktopModifierLabel = null,
 }: SheetActionFooterProps): React.ReactNode {
@@ -74,7 +76,7 @@ export function SheetActionFooter({
           className={`${footerButtonClassName} relative`}
         >
           <span className="inline-flex w-full items-center justify-center">
-            <span>{confirmLoading ? 'Saving...' : confirmLabel}</span>
+            <span>{confirmLoading ? confirmLoadingLabel : confirmLabel}</span>
             {desktopConfirmShortcutEnabled && desktopModifierLabel ? (
               <span className="absolute top-1/2 right-2 -translate-y-1/2">
                 <DesktopConfirmShortcutHint desktopModifierLabel={desktopModifierLabel} />
