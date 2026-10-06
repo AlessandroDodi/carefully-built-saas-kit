@@ -16,8 +16,12 @@ import {
 } from '@carefully-built/ui';
 
 export interface DocumentCardAssociationItem {
+  readonly entityId: string;
+  readonly entityType: string;
   readonly icon?: React.ReactNode;
+  readonly imageUrl?: string | null;
   readonly label: string;
+  readonly typeLabel?: string;
   readonly value: string;
 }
 
@@ -86,6 +90,13 @@ interface DocumentCardProps<TId = string, TDocument extends DocumentCardItem<TId
   readonly onCopyLink: (url: string) => void;
   readonly onEdit: (document: TDocument) => void;
   readonly labels?: DocumentCardLabelsInput;
+  /**
+   * Replaces the built-in chips. Hosts that can resolve an entity URL render
+   * links here; without it the card falls back to plain, inert chips.
+   */
+  readonly renderAssociations?: (
+    associations: readonly DocumentCardAssociationItem[],
+  ) => React.ReactNode;
 }
 
 function DocumentPreview({
@@ -174,6 +185,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
   onCopyLink,
   onEdit,
   labels,
+  renderAssociations,
 }: DocumentCardProps<TId, TDocument>): React.ReactElement {
   const resolvedLabels = resolveDocumentCardLabels(labels);
   const associationSummary = buildDocumentAssociationSummary(document);
@@ -299,7 +311,11 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
       <CardFooter className="bg-transparent px-3 py-2">
         <div className="flex w-full items-center justify-between gap-3 text-xs">
           {associations.length > 0 ? (
-            <AssociationInlineList associations={associations} />
+            renderAssociations ? (
+              renderAssociations(associations)
+            ) : (
+              <AssociationInlineList associations={associations} />
+            )
           ) : (
             <span className="text-muted-foreground truncate">{associationSummary}</span>
           )}

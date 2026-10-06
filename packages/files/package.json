@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/files",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Reusable file and document UI primitives, previews, filters, and association helpers for SaaS apps.",
   "type": "module",
   "license": "MIT",

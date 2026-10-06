@@ -66,6 +66,7 @@ export interface AppNavigationShellProps {
   readonly collapsedWidth?: number;
   readonly moreLabel?: string;
   readonly closeLabel?: string;
+  readonly openLabel?: string;
   readonly renderFooter?: (options: NavigationFooterRenderOptions) => ReactNode;
   readonly renderSearch?: (options: NavigationSearchRenderOptions) => ReactNode;
   /**
@@ -424,6 +425,7 @@ function GroupedNavigationList({
 function SidebarContent({
   bottomNavItems,
   closeLabel,
+  openLabel,
   darkLogo,
   isCollapsed,
   isMobile = false,
@@ -440,6 +442,7 @@ function SidebarContent({
 }: {
   readonly bottomNavItems: readonly NavigationItem[];
   readonly closeLabel: string;
+  readonly openLabel: string;
   readonly darkLogo?: ReactNode;
   readonly isCollapsed: boolean;
   readonly isMobile?: boolean;
@@ -469,6 +472,7 @@ function SidebarContent({
             variant="ghost"
             size="icon"
             className="size-7"
+            aria-label={openLabel}
             onClick={() => setIsCollapsed(false)}
           >
             <ChevronRight className="size-4" />
@@ -497,6 +501,7 @@ function SidebarContent({
                 variant="ghost"
                 size="icon"
                 className="size-7 shrink-0"
+                aria-label={closeLabel}
                 onClick={() => setIsCollapsed(true)}
               >
                 <ChevronLeft className="size-4" />
@@ -662,6 +667,7 @@ function MobileBottomNav({
 export function AppNavigationShell({
   bottomNavItems = [],
   closeLabel = 'Close sidebar',
+  openLabel = 'Open sidebar',
   collapsedWidth = 56,
   currentPath,
   darkLogo,
@@ -700,6 +706,7 @@ export function AppNavigationShell({
             <SidebarContent
               bottomNavItems={bottomNavItems}
               closeLabel={closeLabel}
+              openLabel={openLabel}
               darkLogo={darkLogo}
               isCollapsed={isCollapsed}
               isMobile
@@ -725,6 +732,7 @@ export function AppNavigationShell({
         <SidebarContent
           bottomNavItems={bottomNavItems}
           closeLabel={closeLabel}
+          openLabel={openLabel}
           darkLogo={darkLogo}
           isCollapsed={isCollapsed}
           logo={logo}
