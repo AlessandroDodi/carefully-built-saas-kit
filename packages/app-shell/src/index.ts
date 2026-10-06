@@ -41,3 +41,5 @@ export {
   type ResponsivePageAction,
   type ResponsivePageActionsProps,
 } from './responsive-page-actions';
+export { DefaultNavigationLink } from './navigation-shell';
+export type { NavigationLinkComponent, NavigationLinkProps } from './navigation-shell';

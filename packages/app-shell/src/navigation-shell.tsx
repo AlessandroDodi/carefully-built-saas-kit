@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronDown, ChevronLeft, ChevronRight, Ellipsis, X } from 'lucide-react';
-import { useCallback, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 import type { ComponentType, ReactNode, SVGProps } from 'react';
 
@@ -68,7 +68,41 @@ export interface AppNavigationShellProps {
   readonly closeLabel?: string;
   readonly renderFooter?: (options: NavigationFooterRenderOptions) => ReactNode;
   readonly renderSearch?: (options: NavigationSearchRenderOptions) => ReactNode;
+  /**
+   * Component used for every navigation link the shell renders (nav items,
+   * bottom nav, the logo link). Defaults to a plain `<a>`, which is a full
+   * page load on every click. Pass your router's link — `next/link` in a Next
+   * app — so navigation stays client-side and in-memory state (contexts,
+   * stores, unsaved drafts) survives it. `@carefully-built/saas-kit/app-shell`
+   * already defaults this to `next/link`.
+   */
+  readonly linkComponent?: NavigationLinkComponent;
 }
+
+export interface NavigationLinkProps {
+  readonly children: ReactNode;
+  readonly className?: string;
+  readonly href: string;
+  readonly onClick?: () => void;
+}
+
+export type NavigationLinkComponent = ComponentType<NavigationLinkProps>;
+
+/** The shell's built-in link: a plain anchor (full page navigation). */
+export function DefaultNavigationLink({
+  children,
+  className,
+  href,
+  onClick,
+}: NavigationLinkProps): React.ReactElement {
+  return (
+    <a href={href} onClick={onClick} className={className}>
+      {children}
+    </a>
+  );
+}
+
+const NavigationLinkContext = createContext<NavigationLinkComponent>(DefaultNavigationLink);
 
 export function isNavigationItemActive(pathname: string, item: NavigationItem): boolean {
   if (item.activePaths?.some((path) => pathname === path || pathname.startsWith(`${path}/`))) {
@@ -82,21 +116,12 @@ export function isNavigationItemActive(pathname: string, item: NavigationItem): 
   return item.activeMatch === 'prefix' && pathname.startsWith(`${item.href}/`);
 }
 
-function NavigationAnchor({
-  children,
-  className,
-  href,
-  onClick,
-}: {
-  readonly children: ReactNode;
-  readonly className?: string;
-  readonly href: string;
-  readonly onClick?: () => void;
-}): React.ReactElement {
+function NavigationAnchor({ children, className, href, onClick }: NavigationLinkProps): React.ReactElement {
+  const Link = useContext(NavigationLinkContext);
   return (
-    <a href={href} onClick={onClick} className={className}>
+    <Link href={href} onClick={onClick} className={className}>
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -640,6 +665,7 @@ export function AppNavigationShell({
   collapsedWidth = 56,
   currentPath,
   darkLogo,
+  linkComponent = DefaultNavigationLink,
   logo,
   logoHref = '/',
   mobileNavigation,
@@ -661,7 +687,7 @@ export function AppNavigationShell({
   const shouldUseMobileBottomNav = mobileBottomNavigation.enabled;
 
   return (
-    <>
+    <NavigationLinkContext.Provider value={linkComponent}>
       {!shouldUseMobileBottomNav && isMobileOpen ? (
         <>
           <button
@@ -725,6 +751,6 @@ export function AppNavigationShell({
           renderSearch={renderSearch}
         />
       ) : null}
-    </>
+    </NavigationLinkContext.Provider>
   );
 }

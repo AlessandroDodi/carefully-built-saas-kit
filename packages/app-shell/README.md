@@ -49,4 +49,25 @@ import { AppNavigationShell, SidebarInset, SidebarProvider } from '@carefully-bu
 
 Pass `darkLogo` when a product needs a separate mark for dark sidebars or dark mode. If omitted, the shell uses `logo` in every theme.
 
+### Client-side navigation (`linkComponent`)
+
+Every link the shell renders — nav items, the mobile bottom nav, the logo link — uses a plain `<a>` by default, so each click is a full page load and any state the app keeps in memory (React contexts, client stores, unsaved drafts) is lost. Pass your router's link component to keep navigation client-side:
+
+```tsx
+import Link from 'next/link';
+import type { NavigationLinkProps } from '@carefully-built/app-shell';
+
+function NavLink({ href, className, onClick, children }: NavigationLinkProps) {
+  return (
+    <Link href={href} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
+
+<AppNavigationShell linkComponent={NavLink} {...props} />;
+```
+
+`@carefully-built/saas-kit/app-shell` already does this: its `AppNavigationShell` defaults `linkComponent` to `next/link` (exported as `NextNavigationLink`), so Next.js apps get client-side navigation with no extra wiring.
+
 Keep app-specific nav items, org switchers, logos, search data, and route loading inside the consuming app. This package owns the repeated shell mechanics and responsive navigation behavior.
