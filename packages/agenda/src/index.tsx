@@ -11,6 +11,7 @@ export * from './activity-list-view';
 export * from './activity-page-state';
 export * from './activity-types';
 export * from './activity-view-mode-toggle';
+export * from './shift-timeline';
 export * from './shared-activity-calendar-day-picker';
 export * from './shared-activity-calendar-events';
 export * from './shared-activity-calendar-header';

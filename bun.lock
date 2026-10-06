@@ -787,7 +787,7 @@
     },
     "packages/workos": {
       "name": "@carefully-built/workos",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "devDependencies": {
         "@carefully-built/settings-ui": "workspace:*",
         "@carefully-built/ui": "workspace:*",

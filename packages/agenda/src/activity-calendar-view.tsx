@@ -85,6 +85,12 @@ interface ActivityCalendarViewProps {
     end?: Date | null,
   ) => Promise<void>;
   readonly onEdit: (activity: ActivityListItem) => void;
+  /**
+   * Renders the calendar in read-only mode: disables drag-to-create selection and
+   * event dragging. Useful for surfaces that only display a schedule (e.g. an
+   * employee's shift calendar). Defaults to `false` (interactive).
+   */
+  readonly readOnly?: boolean;
   // Localization (all optional; omitting them preserves the prior en-US /
   // Monday-first behaviour). `locale` is a FullCalendar LocaleInput (e.g. the
   // default export of `@fullcalendar/core/locales/it`) driving the grid day
@@ -633,6 +639,7 @@ export function ActivityCalendarView({
   onDateClick,
   onMoveActivity,
   onEdit,
+  readOnly = false,
   locale,
   localeCode = 'en-US',
   firstDay = 1,
@@ -1020,9 +1027,9 @@ export function ActivityCalendarView({
         expandRows
         dayMaxEvents
         slotEventOverlap={false}
-        selectable
-        selectMirror
-        editable
+        selectable={!readOnly}
+        selectMirror={!readOnly}
+        editable={!readOnly}
         slotMinTime="06:00:00"
         slotMaxTime="22:00:00"
         scrollTime={scrollTime}
