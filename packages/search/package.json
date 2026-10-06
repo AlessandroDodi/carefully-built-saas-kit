@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/search",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Reusable fuzzy search and ranking helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
