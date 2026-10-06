@@ -213,3 +213,77 @@ export function EntityDetailShell<TValue extends string>({
     </div>
   );
 }
+
+/**
+ * Variante di `EntityDetailShell` che gestisce da sola i tre stati di una
+ * pagina di dettaglio: caricamento, risorsa assente, risorsa presente.
+ * Recuperata dal pacchetto pubblicato, dove era finita senza passare da qui.
+ */
+export interface EntityDetailResourceShellProps<
+  TResource,
+  TValue extends string,
+> extends Omit<
+  EntityDetailShellProps<TValue>,
+  "title" | "sidebar" | "children"
+> {
+  readonly resource: TResource | null | undefined;
+  readonly isLoading: boolean;
+  readonly title: ReactNode | ((resource: TResource) => ReactNode);
+  readonly loadingTitle: ReactNode;
+  readonly loadingSidebar?: ReactNode;
+  readonly loadingChildren?: ReactNode;
+  readonly emptyContent: ReactNode;
+  readonly sidebar?: ReactNode | ((resource: TResource) => ReactNode);
+  readonly children: (resource: TResource) => ReactNode;
+  readonly afterContent?: (resource: TResource) => ReactNode;
+}
+
+function resolveResourceNode<TResource>(
+  value: ReactNode | ((resource: TResource) => ReactNode) | undefined,
+  resource: TResource,
+): ReactNode {
+  return typeof value === "function" ? value(resource) : value;
+}
+
+export function EntityDetailResourceShell<TResource, TValue extends string>({
+  resource,
+  isLoading,
+  title,
+  loadingTitle,
+  loadingSidebar,
+  loadingChildren,
+  emptyContent,
+  sidebar,
+  children,
+  afterContent,
+  ...shellProps
+}: EntityDetailResourceShellProps<TResource, TValue>): React.ReactElement {
+  if (isLoading) {
+    return (
+      <EntityDetailShell
+        {...shellProps}
+        title={loadingTitle}
+        sidebar={loadingSidebar}
+      >
+        {loadingChildren}
+      </EntityDetailShell>
+    );
+  }
+
+  if (!resource) {
+    return <>{emptyContent}</>;
+  }
+
+  return (
+    <>
+      <EntityDetailShell
+        {...shellProps}
+        title={resolveResourceNode(title, resource)}
+        sidebar={resolveResourceNode(sidebar, resource)}
+      >
+        {children(resource)}
+      </EntityDetailShell>
+      {afterContent?.(resource)}
+    </>
+  );
+}
