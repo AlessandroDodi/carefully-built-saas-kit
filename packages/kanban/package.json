@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/kanban",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Reusable Kanban board and card primitives for SaaS pipelines.",
   "type": "module",
   "license": "MIT",
