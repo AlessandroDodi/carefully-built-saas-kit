@@ -35,6 +35,7 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@carefully-built/association-picker": ">=0.1.1",
     "@carefully-built/convex-crud": ">=0.1.8",
     "@carefully-built/forms": ">=0.1.9",
     "@carefully-built/search": ">=0.1.1",
@@ -46,6 +47,9 @@
     "zod": ">=3.0.0 || >=4.0.0"
   },
   "peerDependenciesMeta": {
+    "@carefully-built/association-picker": {
+      "optional": true
+    },
     "@carefully-built/convex-crud": {
       "optional": true
     },
@@ -60,6 +64,7 @@
     }
   },
   "devDependencies": {
+    "@carefully-built/association-picker": "workspace:*",
     "@carefully-built/convex-crud": "workspace:*",
     "@carefully-built/forms": "workspace:*",
     "@carefully-built/search": "workspace:*",

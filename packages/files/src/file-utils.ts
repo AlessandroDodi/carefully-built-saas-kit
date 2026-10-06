@@ -9,3 +9,12 @@ export function formatFileSize(bytes: number): string {
 export function isPreviewable(mimeType: string): boolean {
   return mimeType.startsWith('image/') || mimeType === 'application/pdf';
 }
+
+/**
+ * Stable identity for a picked `File`, used to drop duplicates when the user
+ * selects the same file twice. Recuperata dal pacchetto pubblicato: era sparita
+ * dal repo ma `public-document-upload-shell` la usa ancora.
+ */
+export function buildFileKey(file: File): string {
+  return `${file.name}-${String(file.size)}-${String(file.lastModified)}`;
+}

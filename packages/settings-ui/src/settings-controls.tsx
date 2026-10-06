@@ -41,14 +41,17 @@ export function SettingsHelpTitle({
 }
 
 export function SettingsAddButton({
+  label = 'Add',
   onClick,
 }: {
+  /** English default, like every other label in the kit: pass translated copy. */
+  readonly label?: ReactNode;
   readonly onClick: () => void;
 }): React.ReactElement {
   return (
     <Button type="button" onClick={onClick}>
       <Plus className="size-4" />
-      Add
+      {label}
     </Button>
   );
 }

@@ -879,3 +879,116 @@ export function createCustomFieldMutationSet(factory: CustomFieldMutationFactory
     }),
   };
 }
+
+
+// Recuperati dal pacchetto pubblicato: helper generici che l'app usa e che qui
+// erano andati persi. Nessuno di questi conosce il dominio dell'app.
+//
+// Hanno bisogno di `db.query` e di `updatedAt`, che i tipi condivisi di questo
+// pacchetto non espongono: li dichiarano qui sotto per conto loro, invece di
+// allargare `ConvexCrudCtx` e `OrganizationRecord` per tutti.
+
+/** `ConvexCrudCtx` piu' la query, usata solo dai lister qui sotto. */
+export interface ConvexCrudQueryCtx extends ConvexCrudCtx {
+  readonly db: ConvexCrudCtx['db'] & {
+    readonly query: (...args: readonly any[]) => any;
+  };
+}
+
+/** Un record d'organizzazione che porta anche il timestamp di modifica. */
+export interface TimestampedOrganizationRecord extends OrganizationRecord {
+  readonly updatedAt?: number | null;
+}
+export interface AssignedUsersInput<TUserId = unknown> {
+  readonly agentIds?: readonly TUserId[];
+  readonly assignedUserId?: TUserId;
+}
+
+export async function listOrgRecords<TRecord extends TimestampedOrganizationRecord>(
+  ctx: ConvexCrudQueryCtx,
+  args: {
+    readonly tableName: string;
+    readonly organizationId: string;
+    readonly indexName?: string;
+  },
+): Promise<TRecord[]> {
+  if (!ctx.db.query) {
+    throw new Error("Convex query context is required");
+  }
+
+  const collection = await ctx.db
+    .query(args.tableName)
+    .withIndex(
+      args.indexName ?? "by_organization",
+      (query: { readonly eq: (fieldName: string, value: string) => unknown }) =>
+        query.eq("organizationId", args.organizationId),
+    )
+    .collect();
+
+  return collection.filter(isOrganizationRecord) as TRecord[];
+}
+
+export async function listActiveOrgRecords<TRecord extends TimestampedOrganizationRecord>(
+  ctx: ConvexCrudQueryCtx,
+  args: {
+    readonly tableName: string;
+    readonly organizationId: string;
+    readonly indexName?: string;
+    readonly where?: (record: TRecord) => boolean;
+    readonly compare?: (left: TRecord, right: TRecord) => number;
+  },
+): Promise<TRecord[]> {
+  const records = await listOrgRecords<TRecord>(ctx, args);
+
+  return records
+    .filter((record) => !record.archivedAt)
+    .filter((record) => (args.where ? args.where(record) : true))
+    .sort(
+      args.compare ??
+        ((left, right) => {
+          const leftUpdatedAt =
+            typeof left.updatedAt === "number" ? left.updatedAt : 0;
+          const rightUpdatedAt =
+            typeof right.updatedAt === "number" ? right.updatedAt : 0;
+          return rightUpdatedAt - leftUpdatedAt;
+        }),
+    );
+}
+
+export function hasAssignedUsersOverride(input: AssignedUsersInput): boolean {
+  return input.agentIds !== undefined || input.assignedUserId !== undefined;
+}
+
+export function resolveAssignedUserIds<TUserId>(
+  input: AssignedUsersInput<TUserId>,
+  fallback: readonly TUserId[] = [],
+): TUserId[] {
+  if (input.agentIds !== undefined) {
+    return [...input.agentIds];
+  }
+
+  if (input.assignedUserId !== undefined) {
+    return [input.assignedUserId];
+  }
+
+  return [...fallback];
+}
+
+export async function requireAssignedUsersInOrganization<TCtx, TUserId>(
+  ctx: TCtx,
+  args: {
+    readonly userIds: readonly TUserId[];
+    readonly organizationId: string;
+    readonly requireUserInOrganization: (
+      ctx: TCtx,
+      userId: TUserId,
+      organizationId: string,
+    ) => Promise<unknown>;
+  },
+): Promise<void> {
+  await Promise.all(
+    Array.from(new Set(args.userIds)).map((userId) =>
+      args.requireUserInOrganization(ctx, userId, args.organizationId),
+    ),
+  );
+}

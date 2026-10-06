@@ -4,8 +4,8 @@ export type {
   UseResourceSheetStateOptions,
 } from './use-resource-sheet-state';
 export { useResourceSheetState } from './use-resource-sheet-state';
-export { EntityDetailShell } from './entity-detail-shell';
-export type { EntityDetailTabOption } from './entity-detail-shell';
+export { EntityDetailShell, EntityDetailResourceShell } from './entity-detail-shell';
+export type { EntityDetailTabOption, EntityDetailResourceShellProps } from './entity-detail-shell';
 export { EntityDetailLoadingSidebar } from './entity-detail-loading-sidebar';
 export type { EntityDetailLoadingField } from './entity-detail-loading-sidebar';
 export { EntityAssociatedTabPanel } from './entity-associated-tab-panel';
@@ -52,3 +52,6 @@ export {
   type ErrorSeverity,
 } from './error-handling';
 export { showDestructiveActionToast } from './destructive-action-toast';
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './entity-associated-resource-panel';

@@ -375,3 +375,6 @@ export function formatCustomFieldDisplayValue(
 
   return textValue;
 }
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './custom-field-sections';
