@@ -18,7 +18,7 @@ For local development in an app inside the same parent workspace, use the packed
 ## Component Usage
 
 ```tsx
-import { ProgressMetricCard } from '@carefully-built/settings-ui';
+import { OrganizationMembersPanel } from '@carefully-built/settings-ui';
 
 // Check the API catalog below for the component source and prop types.
 // Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
@@ -26,6 +26,7 @@ import { ProgressMetricCard } from '@carefully-built/settings-ui';
 
 Components in this package:
 
+- `OrganizationMembersPanel`: import from `@carefully-built/settings-ui`.
 - `ProgressMetricCard`: import from `@carefully-built/settings-ui`.
 - `SettingsAddButton`: import from `@carefully-built/settings-ui`.
 - `SettingsEditDeleteActions`: import from `@carefully-built/settings-ui`.
@@ -39,12 +40,25 @@ Components in this package:
 ## Helper Usage
 
 ```ts
-import { ProgressMetricCard } from '@carefully-built/settings-ui';
+import { countUnreconciledMembers } from '@carefully-built/settings-ui';
 ```
 
 Helpers in this package:
 
+- `countUnreconciledMembers`
+- `countUnreconciledMembers`
+- `DEFAULT_ORGANIZATION_MEMBERS_PANEL_LABELS`
+- `DEFAULT_ORGANIZATION_MEMBERS_PANEL_LABELS`
+- `DEFAULT_ORGANIZATION_MEMBERS_PANEL_TEST_IDS`
+- `DEFAULT_ORGANIZATION_MEMBERS_PANEL_TEST_IDS`
+- `memberDisplayName`
+- `memberDisplayName`
+- `OrganizationMembersPanel`
 - `ProgressMetricCard`
+- `resolveOrganizationMembersPanelLabels`
+- `resolveOrganizationMembersPanelLabels`
+- `resolveOrganizationMembersPanelTestIds`
+- `resolveOrganizationMembersPanelTestIds`
 - `resolveSettingsTab`
 - `resolveSettingsTab`
 - `SettingsAddButton`
@@ -58,6 +72,12 @@ Helpers in this package:
 
 ## Types And Schemas
 
+- `memberSortValue`
+- `memberSortValue`
+- `OrganizationMember`
+- `OrganizationMembersPanelLabels`
+- `OrganizationMembersPanelProps`
+- `OrganizationMembersPanelTestIds`
 - `ProgressMetricCardProps`
 - `SettingsSectionCardProps`
 - `SettingsTab`
@@ -70,6 +90,7 @@ Helpers in this package:
 
 | Export | Kind | Source |
 |---|---|---|
+| `OrganizationMembersPanel` | Component | `packages/settings-ui/src/organization-members-panel.tsx` |
 | `ProgressMetricCard` | Component | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `SettingsAddButton` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsEditDeleteActions` | Component | `packages/settings-ui/src/settings-controls.tsx` |
@@ -79,7 +100,20 @@ Helpers in this package:
 | `SettingsSectionCard` | Component | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsSwitchRow` | Component | `packages/settings-ui/src/settings-controls.tsx` |
 | `SettingsTabs` | Component | `packages/settings-ui/src/settings-tabs.tsx` |
+| `countUnreconciledMembers` | Helper | `packages/settings-ui/src/index.ts` |
+| `countUnreconciledMembers` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `DEFAULT_ORGANIZATION_MEMBERS_PANEL_LABELS` | Helper | `packages/settings-ui/src/index.ts` |
+| `DEFAULT_ORGANIZATION_MEMBERS_PANEL_LABELS` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `DEFAULT_ORGANIZATION_MEMBERS_PANEL_TEST_IDS` | Helper | `packages/settings-ui/src/index.ts` |
+| `DEFAULT_ORGANIZATION_MEMBERS_PANEL_TEST_IDS` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `memberDisplayName` | Helper | `packages/settings-ui/src/index.ts` |
+| `memberDisplayName` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `OrganizationMembersPanel` | Helper | `packages/settings-ui/src/client.ts` |
 | `ProgressMetricCard` | Helper | `packages/settings-ui/src/client.ts` |
+| `resolveOrganizationMembersPanelLabels` | Helper | `packages/settings-ui/src/index.ts` |
+| `resolveOrganizationMembersPanelLabels` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `resolveOrganizationMembersPanelTestIds` | Helper | `packages/settings-ui/src/index.ts` |
+| `resolveOrganizationMembersPanelTestIds` | Helper | `packages/settings-ui/src/organization-members-panel.model.ts` |
 | `resolveSettingsTab` | Helper | `packages/settings-ui/src/index.ts` |
 | `resolveSettingsTab` | Helper | `packages/settings-ui/src/settings-tabs.model.ts` |
 | `SettingsAddButton` | Helper | `packages/settings-ui/src/client.ts` |
@@ -90,6 +124,12 @@ Helpers in this package:
 | `SettingsSectionCard` | Helper | `packages/settings-ui/src/index.ts` |
 | `SettingsSwitchRow` | Helper | `packages/settings-ui/src/client.ts` |
 | `SettingsTabs` | Helper | `packages/settings-ui/src/client.ts` |
+| `memberSortValue` | Type | `packages/settings-ui/src/index.ts` |
+| `memberSortValue` | Type | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `OrganizationMember` | Type | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `OrganizationMembersPanelLabels` | Type | `packages/settings-ui/src/organization-members-panel.model.ts` |
+| `OrganizationMembersPanelProps` | Type | `packages/settings-ui/src/organization-members-panel.tsx` |
+| `OrganizationMembersPanelTestIds` | Type | `packages/settings-ui/src/organization-members-panel.model.ts` |
 | `ProgressMetricCardProps` | Type | `packages/settings-ui/src/progress-metric-card.tsx` |
 | `SettingsSectionCardProps` | Type | `packages/settings-ui/src/settings-section-card.tsx` |
 | `SettingsTab` | Type | `packages/settings-ui/src/settings-tabs.model.ts` |
