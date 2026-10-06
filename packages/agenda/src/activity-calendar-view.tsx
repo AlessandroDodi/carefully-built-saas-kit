@@ -1,5 +1,6 @@
 'use client';
 
+import type { LocaleInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import type {
   DateSelectArg,
@@ -84,6 +85,16 @@ interface ActivityCalendarViewProps {
     end?: Date | null,
   ) => Promise<void>;
   readonly onEdit: (activity: ActivityListItem) => void;
+  // Localization (all optional; omitting them preserves the prior en-US /
+  // Monday-first behaviour). `locale` is a FullCalendar LocaleInput (e.g. the
+  // default export of `@fullcalendar/core/locales/it`) driving the grid day
+  // headers + hour axis; `localeCode` (BCP-47) drives the custom toolbar's
+  // Intl date labels; `firstDay` sets the first weekday (0=Sun…1=Mon); and
+  // `slotDuration` the time-grid slot size (e.g. '00:30:00').
+  readonly locale?: LocaleInput;
+  readonly localeCode?: string;
+  readonly firstDay?: number;
+  readonly slotDuration?: string;
 }
 
 function getScheduledDate(activity: ActivityListItem): Date | null {
@@ -218,10 +229,10 @@ function findMatchingGoogleCalendarEvent(args: {
   return undefined;
 }
 
-function getWeekOptions(anchorDate: Date): PickerOption[] {
+function getWeekOptions(anchorDate: Date, localeCode: string): PickerOption[] {
   const startYear = anchorDate.getFullYear() - 2;
   const endYear = anchorDate.getFullYear() + 2;
-  const formatter = new Intl.DateTimeFormat('en-US', {
+  const formatter = new Intl.DateTimeFormat(localeCode, {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -239,17 +250,17 @@ function getWeekOptions(anchorDate: Date): PickerOption[] {
       value: `${weekStart.getFullYear()}-${String(weekStart.getMonth() + 1).padStart(2, '0')}-${String(weekStart.getDate()).padStart(2, '0')}`,
       label: `${formatter.format(weekStart)} - ${formatter.format(weekEnd)}`,
       date: weekStart,
-      searchText: `${weekStart.toLocaleDateString('en-US')} ${weekEnd.toLocaleDateString('en-US')}`,
+      searchText: `${weekStart.toLocaleDateString(localeCode)} ${weekEnd.toLocaleDateString(localeCode)}`,
     });
   }
 
   return options;
 }
 
-function getMonthOptions(anchorDate: Date): PickerOption[] {
+function getMonthOptions(anchorDate: Date, localeCode: string): PickerOption[] {
   const startYear = anchorDate.getFullYear() - 2;
   const endYear = anchorDate.getFullYear() + 2;
-  const formatter = new Intl.DateTimeFormat('en-US', {
+  const formatter = new Intl.DateTimeFormat(localeCode, {
     month: 'long',
     year: 'numeric',
   });
@@ -271,16 +282,20 @@ function getMonthOptions(anchorDate: Date): PickerOption[] {
   return options;
 }
 
-function formatTitleLabel(scope: ActivityCalendarScope, anchorDate: Date): string {
+function formatTitleLabel(
+  scope: ActivityCalendarScope,
+  anchorDate: Date,
+  localeCode: string,
+): string {
   if (scope === 'month') {
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(localeCode, {
       month: 'long',
       year: 'numeric',
     }).format(anchorDate);
   }
 
   if (scope === 'day') {
-    return new Intl.DateTimeFormat('en-US', {
+    return new Intl.DateTimeFormat(localeCode, {
       weekday: 'long',
       day: 'numeric',
       month: 'long',
@@ -289,7 +304,7 @@ function formatTitleLabel(scope: ActivityCalendarScope, anchorDate: Date): strin
   }
 
   const rangeEnd = addDays(anchorDate, 6);
-  const formatter = new Intl.DateTimeFormat('en-US', {
+  const formatter = new Intl.DateTimeFormat(localeCode, {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -335,13 +350,18 @@ function isPastActivity(activity: ActivityListItem): boolean {
   return typeof referenceTimestamp === 'number' ? referenceTimestamp < Date.now() : false;
 }
 
-function formatTooltipDateRange(startAt?: number, endAt?: number, allDay = false): string | null {
+function formatTooltipDateRange(
+  startAt: number | undefined,
+  endAt: number | undefined,
+  allDay: boolean,
+  localeCode: string,
+): string | null {
   if (!startAt) {
     return null;
   }
 
   if (allDay) {
-    const formatter = new Intl.DateTimeFormat('en-US', {
+    const formatter = new Intl.DateTimeFormat(localeCode, {
       weekday: 'short',
       day: 'numeric',
       month: 'long',
@@ -356,13 +376,13 @@ function formatTooltipDateRange(startAt?: number, endAt?: number, allDay = false
     return `${formatter.format(new Date(startAt))} - ${formatter.format(new Date(inclusiveEndAt))}`;
   }
 
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  const dateFormatter = new Intl.DateTimeFormat(localeCode, {
     weekday: 'short',
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
-  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  const timeFormatter = new Intl.DateTimeFormat(localeCode, {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -449,7 +469,8 @@ function CalendarEventTooltip({
   googleCalendarEvent,
   badges,
   currentUserId,
-}: CalendarTooltipSource): React.ReactNode {
+  localeCode,
+}: CalendarTooltipSource & { readonly localeCode: string }): React.ReactNode {
   const activityDisplay =
     activity && currentUserId
       ? buildActivityDisplayModel(activity, {
@@ -464,11 +485,13 @@ function CalendarEventTooltip({
         activity.startAt ?? activity.dueAt,
         activity.endAt,
         isAllDayActivityRange(activity.startAt, activity.endAt),
+        localeCode,
       )
     : formatTooltipDateRange(
         googleCalendarEvent?.startAt,
         googleCalendarEvent?.endAt,
         googleCalendarEvent?.allDay ?? false,
+        localeCode,
       );
   const description = activityDisplay?.description ?? googleCalendarEvent?.description ?? null;
   const participants = activity?.participantUserNames.filter(Boolean) ?? [];
@@ -513,6 +536,7 @@ function renderEventContent(arg: EventContentArg): React.ReactNode {
     | undefined;
   const badges = arg.event.extendedProps.badges as CalendarEventBadges | undefined;
   const currentUserId = arg.event.extendedProps.currentUserId as string | undefined;
+  const localeCode = (arg.event.extendedProps.localeCode as string | undefined) ?? 'en-US';
   const timeText = arg.timeText?.trim();
 
   if (googleCalendarEvent) {
@@ -541,6 +565,7 @@ function renderEventContent(arg: EventContentArg): React.ReactNode {
             googleCalendarEvent={googleCalendarEvent}
             badges={effectiveBadges}
             currentUserId={currentUserId}
+            localeCode={localeCode}
           />
         </TooltipContent>
       </Tooltip>
@@ -589,6 +614,7 @@ function renderEventContent(arg: EventContentArg): React.ReactNode {
           googleCalendarEvent={googleCalendarEvent}
           badges={effectiveBadges}
           currentUserId={currentUserId}
+          localeCode={localeCode}
         />
       </TooltipContent>
     </Tooltip>
@@ -607,6 +633,10 @@ export function ActivityCalendarView({
   onDateClick,
   onMoveActivity,
   onEdit,
+  locale,
+  localeCode = 'en-US',
+  firstDay = 1,
+  slotDuration,
 }: ActivityCalendarViewProps): React.ReactElement {
   const calendarRef = useRef<FullCalendar | null>(null);
   const anchorDateRef = useRef(anchorDate);
@@ -663,6 +693,7 @@ export function ActivityCalendarView({
           extendedProps: {
             activity,
             currentUserId,
+            localeCode,
             googleCalendarEvent: linkedGoogleEvent,
             badges: {
               hasApp: true,
@@ -690,6 +721,7 @@ export function ActivityCalendarView({
             textColor: '#1f2937',
             classNames: ['agenda-calendar-event', 'agenda-calendar-event--google'],
             extendedProps: {
+              localeCode,
               googleCalendarEvent: event,
               badges: {
                 hasApp: false,
@@ -700,14 +732,20 @@ export function ActivityCalendarView({
       : [];
 
     return [...activityEvents, ...standaloneGoogleEvents];
-  }, [activities, calendarSourceFilter, currentUserId, googleCalendarEvents]);
+  }, [activities, calendarSourceFilter, currentUserId, googleCalendarEvents, localeCode]);
 
   const titleLabel = useMemo(
-    () => formatTitleLabel(effectiveScope, anchorDate),
-    [anchorDate, effectiveScope],
+    () => formatTitleLabel(effectiveScope, anchorDate, localeCode),
+    [anchorDate, effectiveScope, localeCode],
   );
-  const weekOptions = useMemo(() => getWeekOptions(anchorDate), [anchorDate]);
-  const monthOptions = useMemo(() => getMonthOptions(anchorDate), [anchorDate]);
+  const weekOptions = useMemo(
+    () => getWeekOptions(anchorDate, localeCode),
+    [anchorDate, localeCode],
+  );
+  const monthOptions = useMemo(
+    () => getMonthOptions(anchorDate, localeCode),
+    [anchorDate, localeCode],
+  );
   const scrollTime = useMemo(
     () => getInitialScrollTime(anchorDate, effectiveScope),
     [anchorDate, effectiveScope],
@@ -973,7 +1011,9 @@ export function ActivityCalendarView({
           dayGridMonth: 'month',
           today: 'today',
         }}
-        firstDay={1}
+        locale={locale}
+        firstDay={firstDay}
+        slotDuration={slotDuration}
         allDaySlot
         nowIndicator
         height="100%"
