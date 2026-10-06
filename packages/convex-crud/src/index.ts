@@ -1,8 +1,12 @@
 export interface ConvexCrudCtx {
   readonly db: {
     readonly get: (...args: readonly any[]) => Promise<unknown>;
-    readonly insert: (...args: readonly any[]) => Promise<unknown>;
-    readonly patch: (...args: readonly any[]) => Promise<void>;
+    // Opzionali perche' un vero `GenericQueryCtx` di Convex non combacia con
+    // firme piu' strette: con `readonly` obbligatorie il contesto dell'app non
+    // era assegnabile. E' la forma del pacchetto pubblicato.
+    readonly insert?: (...args: readonly any[]) => Promise<unknown>;
+    readonly patch?: (...args: readonly any[]) => Promise<void>;
+    readonly query?: (...args: readonly any[]) => any;
   };
 }
 
@@ -229,6 +233,27 @@ export type AssociatedEntityMutationFactoryArgs = {
     id: unknown,
     organizationId: string,
   ) => Promise<unknown>;
+  /** Eseguito dopo l'update, con il record com'era prima. */
+  readonly afterUpdate?: (
+    ctx: any,
+    args: {
+      readonly id: unknown;
+      readonly currentUserId: unknown;
+      readonly organizationId: string;
+      readonly data: any;
+      readonly existing: unknown;
+    },
+  ) => Promise<void>;
+  /** Eseguito dopo l'insert, con l'id appena creato. */
+  readonly afterCreate?: (
+    ctx: any,
+    args: {
+      readonly id: unknown;
+      readonly currentUserId: unknown;
+      readonly organizationId: string;
+      readonly data: any;
+    },
+  ) => Promise<void>;
   readonly beforeCreate?: (
     ctx: any,
     args: { readonly currentUserId: unknown; readonly organizationId: string; readonly data: any },
@@ -317,6 +342,13 @@ export function createAssociatedEntityMutationSet(factory: AssociatedEntityMutat
           });
         }
 
+        await factory.afterCreate?.(ctx, {
+          id,
+          currentUserId: args.currentUserId,
+          organizationId: args.organizationId,
+          data: args.data,
+        });
+
         return id;
       },
     }),
@@ -356,6 +388,8 @@ export function createAssociatedEntityMutationSet(factory: AssociatedEntityMutat
             associations,
           });
         }
+
+        await factory.afterUpdate?.(ctx, { ...args, existing });
 
         return await ctx.db.get(args.id);
       },
@@ -888,13 +922,6 @@ export function createCustomFieldMutationSet(factory: CustomFieldMutationFactory
 // pacchetto non espongono: li dichiarano qui sotto per conto loro, invece di
 // allargare `ConvexCrudCtx` e `OrganizationRecord` per tutti.
 
-/** `ConvexCrudCtx` piu' la query, usata solo dai lister qui sotto. */
-export interface ConvexCrudQueryCtx extends ConvexCrudCtx {
-  readonly db: ConvexCrudCtx['db'] & {
-    readonly query: (...args: readonly any[]) => any;
-  };
-}
-
 /** Un record d'organizzazione che porta anche il timestamp di modifica. */
 export interface TimestampedOrganizationRecord extends OrganizationRecord {
   readonly updatedAt?: number | null;
@@ -905,7 +932,7 @@ export interface AssignedUsersInput<TUserId = unknown> {
 }
 
 export async function listOrgRecords<TRecord extends TimestampedOrganizationRecord>(
-  ctx: ConvexCrudQueryCtx,
+  ctx: ConvexCrudCtx,
   args: {
     readonly tableName: string;
     readonly organizationId: string;
@@ -929,7 +956,7 @@ export async function listOrgRecords<TRecord extends TimestampedOrganizationReco
 }
 
 export async function listActiveOrgRecords<TRecord extends TimestampedOrganizationRecord>(
-  ctx: ConvexCrudQueryCtx,
+  ctx: ConvexCrudCtx,
   args: {
     readonly tableName: string;
     readonly organizationId: string;
