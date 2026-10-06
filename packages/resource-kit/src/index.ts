@@ -52,3 +52,6 @@ export {
   type ErrorSeverity,
 } from './error-handling';
 export { showDestructiveActionToast } from './destructive-action-toast';
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './entity-associated-resource-panel';

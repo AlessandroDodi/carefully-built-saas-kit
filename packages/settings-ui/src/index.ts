@@ -19,3 +19,9 @@ export {
   type SettingsTab,
   type SettingsTabDefinition,
 } from "./settings-tabs.model";
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './integration-panels';
+export * from './settings-list-section';
+export * from './settings-reorderable-list';
+export * from './settings-details';

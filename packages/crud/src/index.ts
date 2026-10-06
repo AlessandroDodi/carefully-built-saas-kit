@@ -22,3 +22,9 @@ export type {
   UrlStringFiltersState,
 } from "./use-url-string-filters";
 export type { UseUrlPaginationOptions, UrlPaginationState } from "./use-url-pagination";
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './use-crud-data-table-controller';
+export * from './use-crud-form-dirty';
+export * from './crud-table-toolbar';
+export * from './use-crud-url-list-state';

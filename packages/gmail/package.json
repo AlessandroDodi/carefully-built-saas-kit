@@ -1,0 +1,48 @@
+{
+  "name": "@carefully-built/gmail",
+  "version": "0.1.1",
+  "description": "Reusable Gmail API client and message preview helpers for SaaS apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "sideEffects": false,
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./routes": {
+      "types": "./dist/routes.d.mts",
+      "import": "./dist/routes.mjs",
+      "default": "./dist/routes.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "tsdown src/index.ts src/routes.ts --format esm --dts",
+    "prepublishOnly": "bun run typecheck && bun run build",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "next": ">=15.0.0 || >=16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "next": "^16.0.7"
+  }
+}

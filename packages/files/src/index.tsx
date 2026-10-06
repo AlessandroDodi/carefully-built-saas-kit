@@ -8,3 +8,7 @@ export * from './document-sheet';
 export * from './file-upload-sheet';
 export * from './file-card-skeleton';
 export * from './file-utils';
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './document-toolbar';
+export * from './public-document-upload-shell';

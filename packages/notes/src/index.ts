@@ -18,3 +18,7 @@ export {
   type NoteAssociationOption,
   type NoteFormValuesLike,
 } from './use-notes-page-state';
+
+// Recuperati dal pacchetto pubblicato: esistevano solo dentro il tarball.
+export * from './note-form-shell';
+export * from './notes-toolbar';
