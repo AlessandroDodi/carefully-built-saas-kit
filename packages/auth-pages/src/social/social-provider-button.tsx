@@ -7,7 +7,25 @@ import { Button, cn } from "@carefully-built/ui";
 export interface SocialProvider {
   readonly name: string;
   readonly icon: string;
-  readonly action: (invitationToken?: string) => Promise<string>;
+  /**
+   * Starts the provider's OAuth flow. Two shapes are supported:
+   *
+   * 1. **Server-side redirect (recommended, Safari-safe).** The action calls
+   *    the framework's `redirect(authUrl)` (e.g. Next.js `redirect()`) and
+   *    resolves to `void`. The navigation is performed by the framework, so it
+   *    is unaffected by browser transient-activation rules and works on every
+   *    browser, including Safari/WebKit.
+   *
+   * 2. **Return the authorization URL (legacy).** The action resolves to the
+   *    URL string and the button navigates with `window.location.assign(url)`.
+   *
+   *    ⚠️ Safari/WebKit caveat: this path is unreliable. The `await` before the
+   *    client-side navigation consumes the transient user activation, so WebKit
+   *    silently blocks `window.location.assign` and the button appears to do
+   *    nothing. Chromium/Gecko are permissive and navigate fine. Prefer shape
+   *    (1) whenever Safari support matters.
+   */
+  readonly action: (invitationToken?: string) => Promise<string | void>;
 }
 
 interface SocialProviderButtonProps {
@@ -30,7 +48,15 @@ export function SocialProviderButton({
   const handleClick = (): void => {
     startTransition(async () => {
       const authUrl = await provider.action(invitationToken ?? undefined);
-      window.location.assign(authUrl);
+
+      // Shape (1): the action performed a server-side redirect and resolved to
+      // nothing — the framework handles navigation, so there is nothing to do.
+      // Shape (2): the action returned a URL to navigate to on the client.
+      // NOTE: this client-side assign is unreliable on Safari/WebKit because
+      // the await above consumes the user activation — see SocialProvider.action.
+      if (typeof authUrl === "string" && authUrl.length > 0) {
+        window.location.assign(authUrl);
+      }
     });
   };
 
