@@ -42,11 +42,19 @@ function cx(...classes: Array<string | false | undefined>): string {
   return classes.filter(Boolean).join(' ');
 }
 
+/**
+ * `process.env.NEXT_PUBLIC_*` must appear verbatim: bundlers substitute that
+ * exact expression at build time. Reading it off `globalThis` instead is a
+ * runtime lookup the bundler cannot see, and in the browser there is no
+ * `process` — the key comes back empty and Maps never loads.
+ */
 function getDefaultGoogleMapsApiKey(): string {
-  return (
-    (globalThis as { readonly process?: { readonly env?: Record<string, string | undefined> } })
-      .process?.env?.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ''
-  );
+  try {
+    return process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? '';
+  } catch {
+    // No `process` binding at all (plain browser bundle, Deno): no default key.
+    return '';
+  }
 }
 
 export function GooglePlacesFormField<TValues extends FieldValues>({
