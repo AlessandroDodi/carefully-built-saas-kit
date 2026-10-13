@@ -23,7 +23,11 @@ import {
   type ActivityCalendarSourceFilter,
   type ActivityListItem,
 } from './activity-helpers';
-import { buildAvailableActivityTypes, type AvailableActivityType } from './activity-types';
+import {
+  buildAvailableActivityTypes,
+  type AvailableActivityType,
+  type FallbackActivityType,
+} from './activity-types';
 
 export interface AgendaUserLike {
   readonly _id: string;
@@ -129,6 +133,15 @@ export interface UseAgendaPageStateOptions {
   readonly organizationId: string | null | undefined;
   readonly associationOptions: readonly AgendaAssociationOption[] | undefined;
   readonly integrationPreferences: AgendaIntegrationPreferences;
+  /**
+   * Tipologie di partenza per un'organizzazione che non ne ha. Sono confrontate
+   * con quelle vere per etichetta: un host con i dati in un'altra lingua deve
+   * passare le sue, altrimenti i default inglesi compaiono tutti come righe in
+   * piu' e non cancellabili. Default: il set inglese.
+   */
+  readonly fallbackTypes?: readonly FallbackActivityType[];
+  /** Segnaposto che l'host usa per un tipo sparito. Default: quello inglese. */
+  readonly missingTypeLabel?: string;
   readonly icons: {
     readonly activityType: LucideIcon;
     readonly operator: LucideIcon;
@@ -441,8 +454,17 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
       localTypes: localActivityTypes,
       activities: mergedActivities,
       archivedIds: archivedActivityTypeIds,
+      fallbackTypes: options.fallbackTypes,
+      missingTypeLabel: options.missingTypeLabel,
     });
-  }, [archivedActivityTypeIds, localActivityTypes, mergedActivities, serverActivityTypes]);
+  }, [
+    archivedActivityTypeIds,
+    localActivityTypes,
+    mergedActivities,
+    options.fallbackTypes,
+    options.missingTypeLabel,
+    serverActivityTypes,
+  ]);
   const orgUsers = useMemo(() => {
     const activeUsers = (options.organizationUsers ?? []).filter((orgUser) => !orgUser.archivedAt);
 

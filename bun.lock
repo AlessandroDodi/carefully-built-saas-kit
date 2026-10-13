@@ -14,7 +14,7 @@
     },
     "packages/agenda": {
       "name": "@carefully-built/agenda",
-      "version": "0.1.6",
+      "version": "0.1.9",
       "devDependencies": {
         "@carefully-built/association-picker": "workspace:*",
         "@carefully-built/crud": "workspace:*",
