@@ -445,7 +445,7 @@
     },
     "packages/maps-ui": {
       "name": "@carefully-built/maps-ui",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "devDependencies": {
         "@carefully-built/forms": "workspace:*",
         "@carefully-built/theme-ui": "workspace:*",
