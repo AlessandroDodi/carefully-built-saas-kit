@@ -68,7 +68,24 @@ export async function listDocumentFiles(ctx: any, document: any): Promise<any[]>
   return allFiles.sort((left: any, right: any) => left.createdAt - right.createdAt);
 }
 
-export async function listPublicDocumentFiles(ctx: any, document: any): Promise<any[]> {
+/**
+ * `ctx` e `document` restano generici perche il kit non conosce lo schema
+ * dell'host, ma la forma di ritorno la costruisce questa funzione: dichiararla
+ * evita che l'`any` si propaghi fino alle route del consumatore.
+ */
+export interface PublicDocumentFile {
+  readonly _id: string;
+  readonly name: string;
+  readonly mimeType?: string | null;
+  readonly size?: number | null;
+  readonly createdAt: number;
+  readonly downloadUrl: string | null;
+}
+
+export async function listPublicDocumentFiles(
+  ctx: any,
+  document: any,
+): Promise<PublicDocumentFile[]> {
   const files = await listDocumentFiles(ctx, document);
   return await Promise.all(
     files.map(async (file: any) => ({
@@ -82,6 +99,10 @@ export async function listPublicDocumentFiles(ctx: any, document: any): Promise<
   );
 }
 
+// Il tipo di ritorno resta `any[]`: questa funzione propaga il documento
+// dell'host con lo spread, e dichiararne la forma significherebbe ripensare
+// come il kit tratta i documenti. Il valore che serviva davvero al consumatore
+// (`uploadedFiles`) e tipato alla fonte, in `listPublicDocumentFiles`.
 export async function buildDocumentListItems(
   ctx: any,
   document: any,

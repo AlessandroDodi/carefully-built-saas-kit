@@ -292,7 +292,7 @@
     },
     "packages/files": {
       "name": "@carefully-built/files",
-      "version": "0.1.9",
+      "version": "0.1.13",
       "devDependencies": {
         "@carefully-built/association-picker": "workspace:*",
         "@carefully-built/convex-crud": "workspace:*",
