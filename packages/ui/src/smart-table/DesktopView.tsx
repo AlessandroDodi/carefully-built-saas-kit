@@ -37,6 +37,7 @@ interface DesktopViewProps<T> {
   skeletonRows: number;
   actions?: ActionType[];
   actionLabels?: ActionLabels;
+  sortByLabel?: (header: string) => string;
   actionHandlers?: ActionHandlers<T>;
   renderActions?: (item: T) => ReactNode;
   noDataMessage: string;
@@ -74,7 +75,9 @@ function SortableHeaderContent<T>({
   column,
   sortState,
   onSortChange,
+  sortByLabel,
 }: {
+  readonly sortByLabel?: (header: string) => string;
   readonly column: Column<T>;
   readonly sortState?: SortState;
   readonly onSortChange?: (state: SortState) => void;
@@ -94,7 +97,7 @@ function SortableHeaderContent<T>({
         column.align === 'right' && 'ml-auto',
         column.align === 'center' && 'mx-auto',
       )}
-      aria-label={`Sort by ${column.header}`}
+      aria-label={sortByLabel ? sortByLabel(column.header) : `Sort by ${column.header}`}
       onClick={() => {
         onSortChange(getNextSortState(sortState ?? null, sortKey));
       }}
@@ -112,6 +115,7 @@ export function DesktopView<T>({
   skeletonRows,
   actions,
   actionLabels,
+  sortByLabel,
   actionHandlers,
   renderActions,
   noDataMessage,
@@ -176,7 +180,12 @@ export function DesktopView<T>({
               col.align === 'right' ? 'text-right' : col.align === 'center' ? 'text-center' : ''
             }
           >
-            <SortableHeaderContent column={col} sortState={sortState} onSortChange={onSortChange} />
+            <SortableHeaderContent
+              column={col}
+              sortState={sortState}
+              onSortChange={onSortChange}
+              sortByLabel={sortByLabel}
+            />
           </TableHead>
         ))}
         {hasActions ? (

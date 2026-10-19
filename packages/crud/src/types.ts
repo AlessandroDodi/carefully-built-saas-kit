@@ -58,6 +58,7 @@ export interface CrudTableViewProps<TItem> {
   readonly filters?: readonly CrudFilterDefinition<TItem>[];
   readonly actions?: readonly ActionType[];
   readonly actionLabels?: Partial<Record<ActionType, string>>;
+  readonly sortByLabel?: (header: string) => string;
   readonly actionHandlers?: ActionHandlers<TItem>;
   readonly renderActions?: (item: TItem) => ReactNode;
   readonly noDataMessage?: string;
@@ -77,6 +78,7 @@ export interface CrudDataTableProps<TItem> {
   readonly isLoading: boolean;
   readonly actions?: readonly ActionType[];
   readonly actionLabels?: Partial<Record<ActionType, string>>;
+  readonly sortByLabel?: (header: string) => string;
   readonly actionHandlers?: ActionHandlers<TItem>;
   readonly renderActions?: (item: TItem) => ReactNode;
   readonly noDataMessage?: string;

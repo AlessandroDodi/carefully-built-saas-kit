@@ -15,6 +15,7 @@ export function SmartTable<T>({
   skeletonRows = 5,
   actions,
   actionLabels,
+  sortByLabel,
   actionHandlers,
   renderActions,
   noDataMessage = 'No data available',
@@ -70,6 +71,7 @@ export function SmartTable<T>({
         skeletonRows={skeletonRows}
         actions={actions}
         actionLabels={actionLabels}
+        sortByLabel={sortByLabel}
         actionHandlers={actionHandlers}
         renderActions={renderActions}
         noDataMessage={noDataMessage}

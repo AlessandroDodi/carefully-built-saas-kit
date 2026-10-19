@@ -121,6 +121,8 @@ export interface TableToolbarLabels {
   readonly clearFiltersLabel: ReactNode;
   /** Accessible name for the search field's icon-only clear control. */
   readonly clearSearchLabel: string;
+  /** Accessible name of the filter sheet's close button. */
+  readonly closeFiltersLabel: string;
   readonly showResultsLabel: (resultCount?: number) => ReactNode;
   readonly rangeMinPlaceholder: string;
   readonly rangeMaxPlaceholder: string;
@@ -138,6 +140,7 @@ export function resolveTableToolbarLabels(
       labels.filtersDescription ?? 'Narrow the list using the available criteria.',
     clearFiltersLabel: labels.clearFiltersLabel ?? 'Clear',
     clearSearchLabel: labels.clearSearchLabel ?? 'Clear search',
+    closeFiltersLabel: labels.closeFiltersLabel ?? 'Close',
     showResultsLabel:
       labels.showResultsLabel ??
       ((resultCount?: number) =>
@@ -432,6 +435,7 @@ export function TableToolbar({
           onOpenChange={setFiltersOpen}
           title={resolvedLabels.filtersTitle}
           description={resolvedLabels.filtersDescription}
+          closeLabel={resolvedLabels.closeFiltersLabel}
           onConfirm={applyDraftFilters}
           footer={
             <div className="flex w-full gap-2">

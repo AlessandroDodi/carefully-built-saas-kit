@@ -9,6 +9,7 @@ import type {
 export function CrudDataTable<TItem extends object>({
   actions,
   actionLabels,
+  sortByLabel,
   actionHandlers,
   columns,
   data,
@@ -33,6 +34,7 @@ export function CrudDataTable<TItem extends object>({
       isLoading={isLoading}
       actions={actions ? [...actions] : undefined}
       actionLabels={actionLabels}
+      sortByLabel={sortByLabel}
       actionHandlers={actionHandlers}
       renderActions={renderActions}
       noDataMessage={noDataMessage}

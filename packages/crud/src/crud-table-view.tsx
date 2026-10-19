@@ -13,6 +13,7 @@ export function CrudTableView<TItem extends object>({
   filters = [],
   actions,
   actionLabels,
+  sortByLabel,
   actionHandlers,
   renderActions,
   noDataMessage,
@@ -59,6 +60,7 @@ export function CrudTableView<TItem extends object>({
         isLoading={isLoading}
         actions={actions ? [...actions] : undefined}
         actionLabels={actionLabels}
+        sortByLabel={sortByLabel}
         actionHandlers={actionHandlers}
         renderActions={renderActions}
         noDataMessage={noDataMessage}

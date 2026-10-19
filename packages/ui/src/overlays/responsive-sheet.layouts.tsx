@@ -118,7 +118,7 @@ export function MobileSheetLayout({
             <DrawerDescription className={classes?.description}>{description}</DrawerDescription>
           ) : (
             <DrawerDescription id="responsive-sheet-description-empty" className="sr-only">
-              Dialog
+              {title}
             </DrawerDescription>
           )}
         </DrawerHeader>
@@ -185,7 +185,7 @@ export function DesktopSheetLayout({
         </SheetHeader>
         {description ? null : (
           <SheetDescription id="responsive-sheet-description-empty" className="sr-only">
-            Dialog
+            {title}
           </SheetDescription>
         )}
         <div className="flex min-h-0 flex-1 flex-col">

@@ -30,6 +30,9 @@ const defaultLocaleConfig: Required<Omit<NotificationLocaleConfig, "locale">> = 
   emptyAllLabel: "No notifications",
   emptyFilteredLabel: "No notifications in this category",
   emptySubtitle: "You're all caught up.",
+  openNotificationItemLabel: "Open {title}",
+  markSeenItemLabel: "Segna come vista: {title}",
+  closeLabel: "Close",
   markAllSeenLabel: "Mark all read",
   openNotificationsLabel: "Open notifications",
   tooltipLabel: "Notifications",
@@ -81,6 +84,7 @@ export function NotificationCenterSheet<TNotification extends NotificationRecord
       onOpenChange={onOpenChange}
       title={labels.title}
       description={labels.description}
+      closeLabel={labels.closeLabel}
       width={width}
       enableDesktopConfirmShortcut={false}
       mobileDrawerContentClassName="data-[vaul-drawer-direction=bottom]:border-t-0 [&>div:first-child]:hidden"
@@ -114,6 +118,8 @@ export function NotificationCenterSheet<TNotification extends NotificationRecord
             notifications={visibleNotifications}
             emptyLabel={selectedTab === labels.allTabValue ? labels.emptyAllLabel : labels.emptyFilteredLabel}
             emptySubtitle={labels.emptySubtitle}
+            openItemLabel={labels.openNotificationItemLabel}
+            markSeenItemLabel={labels.markSeenItemLabel}
             typeMeta={typeMeta}
             sourceMeta={sourceMeta}
             locale={localeConfig?.locale}

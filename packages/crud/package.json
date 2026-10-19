@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/crud",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Config-driven CRUD table and form helpers for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",

@@ -11,6 +11,8 @@ interface GoogleMapsPhotoAttributionProps {
   readonly interactive?: boolean;
   readonly compact?: boolean;
   readonly variant?: 'full' | 'badge';
+  /** Text before the photographers' names. */
+  readonly photoByLabel?: string;
 }
 
 export function GoogleMapsPhotoAttribution({
@@ -19,6 +21,7 @@ export function GoogleMapsPhotoAttribution({
   interactive = false,
   compact = false,
   variant = 'full',
+  photoByLabel = 'Photo by',
 }: GoogleMapsPhotoAttributionProps): React.ReactElement {
   const validAttributions = attributions.filter(
     (attribution) => attribution.displayName.trim().length > 0
@@ -53,7 +56,7 @@ export function GoogleMapsPhotoAttribution({
         Google Maps
       </span>
       {validAttributions.length > 0 ? <span aria-hidden="true">·</span> : null}
-      {validAttributions.length > 0 ? <span>Photo by</span> : null}
+      {validAttributions.length > 0 ? <span>{photoByLabel}</span> : null}
       {validAttributions.map((attribution, index) => {
         const name = attribution.displayName.trim();
         const key = `${name}-${attribution.uri ?? index}`;

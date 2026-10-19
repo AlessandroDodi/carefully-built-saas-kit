@@ -23,14 +23,22 @@ export interface NotificationListItemProps<TNotification extends NotificationRec
   readonly onOpen?: (notification: TNotification) => void;
   readonly onMarkSeen?: (notification: TNotification) => void;
   readonly className?: string;
+  /** `{title}` is replaced with the notification title. */
+  readonly openLabel?: string;
+  readonly markSeenLabel?: string;
 }
 
-function getNotificationActionLabel(notification: NotificationRecord, isSeen: boolean): string {
+function getNotificationActionLabel(
+  notification: NotificationRecord,
+  isSeen: boolean,
+  openLabel: string,
+  markSeenLabel: string,
+): string {
   if (notification.href) {
-    return `Open ${notification.title}`;
+    return openLabel.replace("{title}", notification.title);
   }
 
-  return isSeen ? notification.title : `Segna come vista: ${notification.title}`;
+  return isSeen ? notification.title : markSeenLabel.replace("{title}", notification.title);
 }
 
 export function NotificationListItem<TNotification extends NotificationRecord>({
@@ -41,6 +49,8 @@ export function NotificationListItem<TNotification extends NotificationRecord>({
   onOpen,
   onMarkSeen,
   className,
+  openLabel = "Open {title}",
+  markSeenLabel = "Segna come vista: {title}",
 }: NotificationListItemProps<TNotification>): React.ReactElement {
   const resolvedTypeMeta = typeMeta?.[notification.type] ?? {
     icon: Bell,
@@ -61,7 +71,7 @@ export function NotificationListItem<TNotification extends NotificationRecord>({
   return (
     <button
       type="button"
-      aria-label={getNotificationActionLabel(notification, isSeen)}
+      aria-label={getNotificationActionLabel(notification, isSeen, openLabel, markSeenLabel)}
       onClick={handleOpen}
       className={[
         "group focus-visible:ring-ring grid w-full grid-cols-[40px_minmax(0,1fr)] gap-x-2.5 rounded-lg border p-2.5 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none",

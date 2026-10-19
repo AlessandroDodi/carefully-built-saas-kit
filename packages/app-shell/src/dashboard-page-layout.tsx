@@ -10,6 +10,8 @@ export interface DashboardPageHeaderProps {
   readonly actions?: ReactNode;
   readonly backHref?: string;
   readonly onBack?: () => void;
+  /** Accessible name of the back button. */
+  readonly backLabel?: string;
 }
 
 export interface DashboardPageLayoutProps {
@@ -19,6 +21,7 @@ export interface DashboardPageLayoutProps {
   readonly header?: ReactNode;
   readonly backHref?: string;
   readonly onBack?: () => void;
+  readonly backLabel?: string;
   readonly fillViewport?: boolean;
   readonly className?: string;
 }
@@ -28,15 +31,16 @@ export function DashboardPageHeader({
   actions,
   backHref,
   onBack,
+  backLabel = "Back",
 }: DashboardPageHeaderProps): React.ReactElement {
   const backButton = backHref ? (
     <Button variant="ghost" size="icon-sm" asChild>
-      <a href={backHref} aria-label="Back">
+      <a href={backHref} aria-label={backLabel}>
         <ArrowLeft className="size-4" />
       </a>
     </Button>
   ) : onBack ? (
-    <Button variant="ghost" size="icon-sm" aria-label="Back" onClick={onBack}>
+    <Button variant="ghost" size="icon-sm" aria-label={backLabel} onClick={onBack}>
       <ArrowLeft className="size-4" />
     </Button>
   ) : null;
@@ -59,11 +63,18 @@ export function DashboardPageLayout({
   header,
   backHref,
   onBack,
+  backLabel,
   fillViewport = true,
   className,
 }: DashboardPageLayoutProps): React.ReactElement {
   const defaultHeader = title ? (
-    <DashboardPageHeader title={title} actions={actions} backHref={backHref} onBack={onBack} />
+    <DashboardPageHeader
+      title={title}
+      actions={actions}
+      backHref={backHref}
+      onBack={onBack}
+      backLabel={backLabel}
+    />
   ) : null;
   const resolvedHeader = header ?? defaultHeader;
 
