@@ -21,6 +21,7 @@ interface CountryVatInputProps {
   readonly countryLocale?: string;
   readonly countryPlaceholder?: string;
   readonly countrySearchPlaceholder?: string;
+  readonly countryEmptyMessage?: string;
   readonly vatNumberId?: string;
   readonly placeholder?: string;
 }
@@ -59,6 +60,7 @@ export function CountryVatInput({
   countryLocale = 'en-US',
   countryPlaceholder = 'Country',
   countrySearchPlaceholder = 'Search country...',
+  countryEmptyMessage = 'No results found',
   vatNumberId,
   placeholder = '04013210355',
 }: CountryVatInputProps): React.ReactElement {
@@ -74,6 +76,7 @@ export function CountryVatInput({
           placeholder={countryPlaceholder}
           className="w-full"
           searchPlaceholder={countrySearchPlaceholder}
+          emptyMessage={countryEmptyMessage}
           options={countryOptions}
           renderValue={(selectedCountry) => (
             <span className="flex items-center gap-2">
