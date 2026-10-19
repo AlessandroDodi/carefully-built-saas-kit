@@ -125,6 +125,60 @@ export interface EditableActivity extends ActivityListItem {
   readonly updatedAt?: number;
 }
 
+/**
+ * Every string the hook shows (toasts, filter labels, user fallback). The kit has
+ * no i18n: an host in another language passes its own copy, missing keys fall
+ * back to English.
+ */
+export interface AgendaPageMessages {
+  readonly activityTypeFilterLabel: string;
+  readonly operatorFilterLabel: string;
+  readonly unnamedUser: string;
+  readonly activityTypeNotFound: string;
+  readonly activityTypeCreateFailed: string;
+  readonly currentUserNotFound: string;
+  readonly activityAdded: string;
+  readonly activityUpdated: string;
+  readonly activitySaveFailed: string;
+  readonly activityCalendarSyncFailed: string;
+  readonly activityMoved: string;
+  readonly activityMoveFailed: string;
+  readonly activityArchived: string;
+  readonly activityArchiveFailed: string;
+  readonly activityCalendarDeleteFailed: string;
+  readonly activityTypeAdded: string;
+  readonly activityTypeAddFailed: string;
+  readonly activityTypeUpdated: string;
+  readonly activityTypeUpdateFailed: string;
+  readonly activityTypeArchived: string;
+  readonly activityTypeArchiveFailed: string;
+}
+
+export const DEFAULT_AGENDA_PAGE_MESSAGES: AgendaPageMessages = {
+  activityTypeFilterLabel: 'Activity type',
+  operatorFilterLabel: 'Operator',
+  unnamedUser: 'User',
+  activityTypeNotFound: 'Activity type not found.',
+  activityTypeCreateFailed: 'Unable to create the selected activity type.',
+  currentUserNotFound: 'Current user not found.',
+  activityAdded: 'Activity added',
+  activityUpdated: 'Activity updated',
+  activitySaveFailed: 'An error occurred while saving the activity.',
+  activityCalendarSyncFailed: 'Activity saved, but it could not be synced with Google Calendar.',
+  activityMoved: 'Activity moved',
+  activityMoveFailed: 'Unable to move the activity.',
+  activityArchived: 'Activity archived',
+  activityArchiveFailed: 'Unable to archive the activity.',
+  activityCalendarDeleteFailed:
+    'Activity archived in the app, but it could not be deleted from Google Calendar.',
+  activityTypeAdded: 'Activity type added',
+  activityTypeAddFailed: 'Unable to create the activity type.',
+  activityTypeUpdated: 'Activity type updated',
+  activityTypeUpdateFailed: 'Unable to update the activity type.',
+  activityTypeArchived: 'Activity type archived',
+  activityTypeArchiveFailed: 'Unable to archive the activity type.',
+};
+
 export interface UseAgendaPageStateOptions {
   readonly activities: readonly ActivityListItem[] | undefined;
   readonly activityTypes: readonly { readonly _id: string; readonly label: string; readonly color: string }[] | undefined;
@@ -142,6 +196,8 @@ export interface UseAgendaPageStateOptions {
   readonly fallbackTypes?: readonly FallbackActivityType[];
   /** Segnaposto che l'host usa per un tipo sparito. Default: quello inglese. */
   readonly missingTypeLabel?: string;
+  /** Copy of toasts and filter labels. Default: English, see `DEFAULT_AGENDA_PAGE_MESSAGES`. */
+  readonly messages?: Partial<AgendaPageMessages>;
   readonly icons: {
     readonly activityType: LucideIcon;
     readonly operator: LucideIcon;
@@ -179,10 +235,11 @@ const ACTIVITY_URL_FILTERS = [
 function buildActivityTypeFilterConfig(
   activityTypes: readonly AvailableActivityType[],
   icon: LucideIcon,
+  label: string,
 ): AgendaFilterConfig {
   return {
     key: 'activityType',
-    label: 'Activity type',
+    label,
     icon,
     options: activityTypes.map((activityType) => ({
       value: formatActivityTypeOptionValue(activityType._id),
@@ -194,14 +251,16 @@ function buildActivityTypeFilterConfig(
 function buildOperatorFilterConfig(
   users: readonly AgendaUserLike[],
   icon: LucideIcon,
+  label: string,
+  unnamedUser: string,
 ): AgendaFilterConfig {
   return {
     key: 'operator',
-    label: 'Operator',
+    label,
     icon,
     options: users.map((user) => ({
       value: String(user._id),
-      label: user.name ?? 'User',
+      label: user.name ?? unnamedUser,
     })),
   };
 }
@@ -336,6 +395,7 @@ function buildOptimisticActivity(args: {
   readonly associationOptions: readonly AgendaAssociationOption[];
   readonly participantLabelMap: ReadonlyMap<string, string>;
   readonly googleCalendarEventId?: string | null;
+  readonly unnamedUser: string;
 }): EditableActivity {
   const associationOptionMap = new Map(args.associationOptions.map((option) => [option.value, option]));
 
@@ -347,10 +407,10 @@ function buildOptimisticActivity(args: {
     activityTypeLabel: args.activityType.label,
     activityTypeColor: args.activityType.color,
     assignedUserId: String(args.currentUser._id),
-    assignedUserName: args.currentUser.name ?? args.currentUser.email ?? 'User',
+    assignedUserName: args.currentUser.name ?? args.currentUser.email ?? args.unnamedUser,
     participantUserIds: [...args.values.participantUserIds],
     participantUserNames: args.values.participantUserIds.map(
-      (participantId) => args.participantLabelMap.get(participantId) ?? 'User',
+      (participantId) => args.participantLabelMap.get(participantId) ?? args.unnamedUser,
     ),
     visibility: args.values.visibility,
     associations: args.values.associations.flatMap((value) => {
@@ -379,6 +439,7 @@ function buildOptimisticActivity(args: {
 }
 
 export function useAgendaPageState(options: UseAgendaPageStateOptions) {
+  const messages = { ...DEFAULT_AGENDA_PAGE_MESSAGES, ...options.messages };
   const [isTypeDialogOpen, setIsTypeDialogOpen] = useState(false);
   const [createDraftPreset, setCreateDraftPreset] = useState<ActivityDraftPreset>(() => ({
     date: formatDateInputValue(new Date().getTime()),
@@ -534,23 +595,34 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
     [mergedActivities],
   );
   const activityTypeFilterConfig = useMemo(
-    () => buildActivityTypeFilterConfig(activityTypes, options.icons.activityType),
-    [activityTypes, options.icons.activityType],
+    () =>
+      buildActivityTypeFilterConfig(
+        activityTypes,
+        options.icons.activityType,
+        messages.activityTypeFilterLabel,
+      ),
+    [activityTypes, options.icons.activityType, messages.activityTypeFilterLabel],
   );
   const operatorFilterConfig = useMemo(
-    () => buildOperatorFilterConfig(orgUsers, options.icons.operator),
-    [options.icons.operator, orgUsers],
+    () =>
+      buildOperatorFilterConfig(
+        orgUsers,
+        options.icons.operator,
+        messages.operatorFilterLabel,
+        messages.unnamedUser,
+      ),
+    [messages.operatorFilterLabel, messages.unnamedUser, options.icons.operator, orgUsers],
   );
   const participantOptions = useMemo(
     () =>
       orgUsers.map((orgUser) => ({
         value: String(orgUser._id),
-        label: orgUser.name ?? orgUser.email ?? 'User',
+        label: orgUser.name ?? orgUser.email ?? messages.unnamedUser,
         email: orgUser.email,
         imageUrl: orgUser.imageUrl,
         archived: Boolean(orgUser.archivedAt),
       })),
-    [orgUsers],
+    [messages.unnamedUser, orgUsers],
   );
 
   useEffect(() => {
@@ -647,7 +719,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
     if (resolvedActivityTypeId.startsWith('default:')) {
       const fallbackType = resolvedActivityType;
       if (!fallbackType) {
-        toast.error('Activity type not found.');
+        toast.error(messages.activityTypeNotFound);
         return;
       }
 
@@ -668,13 +740,13 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         ]);
       } catch (error) {
         console.error(error);
-        toast.error('Unable to create the selected activity type.');
+        toast.error(messages.activityTypeCreateFailed);
         return;
       }
     }
 
     if (!resolvedActivityType) {
-      toast.error('Activity type not found.');
+      toast.error(messages.activityTypeNotFound);
       return;
     }
 
@@ -685,7 +757,10 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
       activityTypeId: resolvedActivityTypeId,
     });
     const participantLabelMap = new Map(
-      orgUsers.map((orgUser) => [String(orgUser._id), orgUser.name ?? orgUser.email ?? 'User']),
+      orgUsers.map((orgUser) => [
+        String(orgUser._id),
+        orgUser.name ?? orgUser.email ?? messages.unnamedUser,
+      ]),
     );
 
     try {
@@ -703,13 +778,14 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
               currentUser,
               associationOptions: options.associationOptions ?? [],
               participantLabelMap,
+              unnamedUser: messages.unnamedUser,
             }),
           ]),
         );
         setArchivedActivityIds((currentIds) =>
           currentIds.filter((id) => id !== editingActivity._id),
         );
-        toast.success('Activity updated');
+        toast.success(messages.activityUpdated);
       } else {
         const createdId = await options.createActivity(payload);
         const optimisticActivity = buildOptimisticActivity({
@@ -720,6 +796,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
           currentUser,
           associationOptions: options.associationOptions ?? [],
           participantLabelMap,
+              unnamedUser: messages.unnamedUser,
         });
         setLocalActivities((currentActivities) =>
           sortActivitiesByDate([
@@ -728,7 +805,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
           ]),
         );
         setArchivedActivityIds((currentIds) => currentIds.filter((id) => id !== String(createdId)));
-        toast.success('Activity added');
+        toast.success(messages.activityAdded);
         closeSheet();
 
         if (options.integrationPreferences.syncDashboardEvents && payload.startAt && options.syncCreatedActivity) {
@@ -756,9 +833,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
             );
           }).catch((error: unknown) => {
             console.error(error);
-            toast.warning(
-              'Activity saved, but it could not be synced with Google Calendar.',
-            );
+            toast.warning(messages.activityCalendarSyncFailed);
           });
         }
 
@@ -768,7 +843,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
       closeSheet();
     } catch (error) {
       console.error(error);
-      toast.error('An error occurred while saving the activity.');
+      toast.error(messages.activitySaveFailed);
     }
   }
 
@@ -778,7 +853,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
     end?: Date | null,
   ): Promise<void> {
     if (!currentUser?._id) {
-      toast.error('Current user not found.');
+      toast.error(messages.currentUserNotFound);
       return;
     }
 
@@ -807,10 +882,10 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         ]),
       );
       setArchivedActivityIds((currentIds) => currentIds.filter((id) => id !== activity._id));
-      toast.success('Activity moved');
+      toast.success(messages.activityMoved);
     } catch (error) {
       console.error(error);
-      toast.error('Unable to move the activity.');
+      toast.error(messages.activityMoveFailed);
     }
   }
 
@@ -837,16 +912,14 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         ...currentIds.filter((id) => id !== editingActivity._id),
         editingActivity._id,
       ]);
-      toast.success('Activity archived');
+      toast.success(messages.activityArchived);
       if (googleCalendarDeleteFailed) {
-        toast.error(
-          'Activity archived in the app, but it could not be deleted from Google Calendar.',
-        );
+        toast.error(messages.activityCalendarDeleteFailed);
       }
       closeSheet();
     } catch (error) {
       console.error(error);
-      toast.error('Unable to archive the activity.');
+      toast.error(messages.activityArchiveFailed);
     }
   }
 
@@ -866,10 +939,10 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
       setArchivedActivityTypeIds((currentIds) =>
         currentIds.filter((id) => id !== String(createdId)),
       );
-      toast.success('Activity type added');
+      toast.success(messages.activityTypeAdded);
     } catch (error) {
       console.error(error);
-      toast.error('Unable to create the activity type.');
+      toast.error(messages.activityTypeAddFailed);
     }
   }
 
@@ -890,7 +963,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         setArchivedActivityTypeIds((currentIds) =>
           currentIds.filter((currentId) => currentId !== String(createdId)),
         );
-        toast.success('Activity type added');
+        toast.success(messages.activityTypeAdded);
         return;
       }
 
@@ -899,10 +972,10 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         const nextTypes = currentTypes.filter((activityType) => activityType._id !== id);
         return [...nextTypes, { _id: id, label: normalizedData.label, color: normalizedData.color }];
       });
-      toast.success('Activity type updated');
+      toast.success(messages.activityTypeUpdated);
     } catch (error) {
       console.error(error);
-      toast.error('Unable to update the activity type.');
+      toast.error(messages.activityTypeUpdateFailed);
     }
   }
 
@@ -920,10 +993,10 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
         ...currentIds.filter((currentId) => currentId !== id),
         id,
       ]);
-      toast.success('Activity type archived');
+      toast.success(messages.activityTypeArchived);
     } catch (error) {
       console.error(error);
-      toast.error('Unable to archive the activity type.');
+      toast.error(messages.activityTypeArchiveFailed);
     }
   }
 

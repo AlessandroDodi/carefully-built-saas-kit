@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/agenda",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps.",
   "type": "module",
   "license": "MIT",
