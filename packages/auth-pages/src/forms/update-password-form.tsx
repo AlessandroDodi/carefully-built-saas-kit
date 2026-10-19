@@ -22,6 +22,8 @@ interface UpdatePasswordFormProps<
   readonly confirmPasswordPlaceholder?: string;
   readonly submitLabel?: string;
   readonly loadingLabel?: string;
+  readonly showPasswordLabel?: string;
+  readonly hidePasswordLabel?: string;
   readonly className?: string;
   readonly errorClassName?: string;
   readonly missingTokenClassName?: string;
@@ -41,6 +43,8 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   confirmPasswordPlaceholder = "Enter the password again",
   submitLabel = "Update password",
   loadingLabel = "Updating...",
+  showPasswordLabel,
+  hidePasswordLabel,
   className,
   errorClassName,
   missingTokenClassName,
@@ -68,6 +72,8 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
         }}
       >
         <CustomPasswordField<TValues>
+          showPasswordLabel={showPasswordLabel}
+          hidePasswordLabel={hidePasswordLabel}
           name={"password" as Path<TValues>}
           label={passwordLabel}
           placeholder={passwordPlaceholder}
@@ -76,6 +82,8 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
         />
 
         <CustomPasswordField<TValues>
+          showPasswordLabel={showPasswordLabel}
+          hidePasswordLabel={hidePasswordLabel}
           name={"confirmPassword" as Path<TValues>}
           label={confirmPasswordLabel}
           placeholder={confirmPasswordPlaceholder}

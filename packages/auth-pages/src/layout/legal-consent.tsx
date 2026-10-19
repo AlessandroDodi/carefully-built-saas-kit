@@ -6,6 +6,10 @@ export function LegalConsent({
   privacyHref = "/privacy",
   cookieHref,
   consentText = "By continuing, you agree to our",
+  termsLabel = "Terms of Service",
+  privacyLabel = "Privacy Policy",
+  cookieLabel = "Cookie policy",
+  conjunctionText = "and",
   className,
   linkClassName,
 }: LegalLinkConfig): React.ReactElement {
@@ -18,28 +22,28 @@ export function LegalConsent({
         rel="noopener noreferrer"
         target="_blank"
       >
-        Terms of Service
+        {termsLabel}
       </a>{" "}
-      and{" "}
+      {conjunctionText}{" "}
       <a
         className={cn("underline", linkClassName)}
         href={privacyHref}
         rel="noopener noreferrer"
         target="_blank"
       >
-        Privacy Policy
+        {privacyLabel}
       </a>
       {cookieHref ? (
         <>
           {" "}
-          and{" "}
+          {conjunctionText}{" "}
           <a
             className={cn("underline", linkClassName)}
             href={cookieHref}
             rel="noopener noreferrer"
             target="_blank"
           >
-            Cookie policy
+            {cookieLabel}
           </a>
         </>
       ) : null}

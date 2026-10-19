@@ -29,6 +29,7 @@ const defaultLocaleConfig: Required<Omit<NotificationLocaleConfig, "locale">> = 
   description: "Recent updates from your workspace.",
   emptyAllLabel: "No notifications",
   emptyFilteredLabel: "No notifications in this category",
+  emptySubtitle: "You're all caught up.",
   markAllSeenLabel: "Mark all read",
   openNotificationsLabel: "Open notifications",
   tooltipLabel: "Notifications",
@@ -112,6 +113,7 @@ export function NotificationCenterSheet<TNotification extends NotificationRecord
           <NotificationList
             notifications={visibleNotifications}
             emptyLabel={selectedTab === labels.allTabValue ? labels.emptyAllLabel : labels.emptyFilteredLabel}
+            emptySubtitle={labels.emptySubtitle}
             typeMeta={typeMeta}
             sourceMeta={sourceMeta}
             locale={localeConfig?.locale}

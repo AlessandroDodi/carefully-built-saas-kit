@@ -20,6 +20,11 @@ export interface LegalLinkConfig {
   readonly privacyHref?: string;
   readonly cookieHref?: string;
   readonly consentText?: string;
+  readonly termsLabel?: string;
+  readonly privacyLabel?: string;
+  readonly cookieLabel?: string;
+  /** Word between the links ("and"). */
+  readonly conjunctionText?: string;
   readonly className?: string;
   readonly linkClassName?: string;
 }

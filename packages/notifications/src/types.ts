@@ -37,6 +37,7 @@ export interface NotificationLocaleConfig {
   readonly description?: string;
   readonly emptyAllLabel?: string;
   readonly emptyFilteredLabel?: string;
+  readonly emptySubtitle?: string;
   readonly markAllSeenLabel?: string;
   readonly openNotificationsLabel?: string;
   readonly tooltipLabel?: string;

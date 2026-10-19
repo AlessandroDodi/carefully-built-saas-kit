@@ -19,6 +19,8 @@ interface SignupEmailFormProps<TValues extends FieldValues>
   readonly passwordPlaceholder?: string;
   readonly submitLabel?: string;
   readonly loadingLabel?: string;
+  readonly showPasswordLabel?: string;
+  readonly hidePasswordLabel?: string;
   readonly className?: string;
   readonly errorClassName?: string;
   readonly buttonClassName?: string;
@@ -35,6 +37,8 @@ export function SignupEmailForm<TValues extends FieldValues>({
   passwordPlaceholder = "At least 8 characters",
   submitLabel = "Sign up",
   loadingLabel = "Creating account...",
+  showPasswordLabel,
+  hidePasswordLabel,
   className,
   errorClassName,
   buttonClassName,
@@ -56,6 +60,8 @@ export function SignupEmailForm<TValues extends FieldValues>({
         />
 
         <CustomPasswordField<TValues>
+          showPasswordLabel={showPasswordLabel}
+          hidePasswordLabel={hidePasswordLabel}
           name={"password" as Path<TValues>}
           label={passwordLabel}
           placeholder={passwordPlaceholder}
