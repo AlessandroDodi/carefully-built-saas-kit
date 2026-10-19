@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, ChevronDown, Search } from 'lucide-react';
+import { Check, ChevronDown, Plus, Search } from 'lucide-react';
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -37,7 +37,43 @@ export interface SearchableSelectProps<TOption extends SearchableSelectOption> {
   readonly size?: 'sm' | 'default';
   readonly renderOption?: (option: TOption) => React.ReactNode;
   readonly renderValue?: (option: TOption) => React.ReactNode;
+  /**
+   * Controlled search query. Pair with `onSearchChange` to drive a server-side
+   * search (e.g. a bounded prefix query) from the typed text.
+   */
+  readonly searchValue?: string;
+  readonly onSearchChange?: (search: string) => void;
+  /**
+   * When `false`, options are rendered as given (already filtered by the
+   * caller, typically server-side). Defaults to `true` (client-side ranking).
+   */
+  readonly filterOptions?: boolean;
+  /**
+   * Enables a create row: when the typed text matches no option label, a last
+   * row offers to use/create it. Called with the trimmed typed text.
+   */
+  readonly onCreate?: (typed: string) => void;
+  /** Text of the create row for the typed string. Defaults to `Create "<typed>"`. */
+  readonly createLabel?: (typed: string) => string;
 }
+
+/**
+ * Whether the create row should be offered for `search` against `options`:
+ * the trimmed query is non-empty and matches no option label (case-insensitive).
+ */
+export function shouldOfferSearchableSelectCreate(
+  search: string,
+  options: readonly SearchableSelectOption[],
+): boolean {
+  const typed = search.trim();
+  if (typed === '') {
+    return false;
+  }
+  const needle = typed.toLocaleLowerCase();
+  return !options.some((option) => option.label.trim().toLocaleLowerCase() === needle);
+}
+
+const defaultCreateLabel = (typed: string): string => `Create "${typed}"`;
 
 interface SearchableSelectBoundaryElement {
   contains(target: EventTarget | null): boolean;
@@ -85,11 +121,23 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
   size = 'default',
   renderOption,
   renderValue,
+  searchValue,
+  onSearchChange,
+  filterOptions = true,
+  onCreate,
+  createLabel = defaultCreateLabel,
 }: SearchableSelectProps<TOption>): React.ReactElement {
   const selectId = useId();
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [search, setSearch] = useState('');
+  const [uncontrolledSearch, setUncontrolledSearch] = useState('');
+  const search = searchValue ?? uncontrolledSearch;
+  const setSearch = (next: string): void => {
+    if (searchValue === undefined) {
+      setUncontrolledSearch(next);
+    }
+    onSearchChange?.(next);
+  };
   const [highlightedOptionIndex, setHighlightedOptionIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -104,7 +152,8 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
     maxHeight: number;
   } | null>(null);
   const selectedOption = options.find((option) => option.value === value);
-  const showSearchInput = options.length > searchThreshold;
+  const showSearchInput =
+    onCreate !== undefined || searchValue !== undefined || options.length > searchThreshold;
 
   useEffect(() => {
     setIsMounted(true);
@@ -134,7 +183,9 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
 
   useEffect(() => {
     if (!showSearchInput || !isOpen) {
-      setSearch('');
+      if (searchValue === undefined) {
+        setUncontrolledSearch('');
+      }
       return;
     }
 
@@ -164,9 +215,14 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
 
   const filteredOptions = useMemo(
     () =>
-      rankBySearch(options, search, (option) => buildSearchText(option.label, option.searchText)),
-    [options, search],
+      filterOptions
+        ? rankBySearch(options, search, (option) => buildSearchText(option.label, option.searchText))
+        : options,
+    [filterOptions, options, search],
   );
+  const createOffered = onCreate !== undefined && shouldOfferSearchableSelectCreate(search, options);
+  /** Highlightable rows: the options, then the create row when offered. */
+  const rowCount = filteredOptions.length + (createOffered ? 1 : 0);
 
   useEffect(() => {
     if (!isOpen) {
@@ -183,23 +239,23 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
   }, [filteredOptions, isOpen, value]);
 
   useEffect(() => {
-    optionRefs.current = optionRefs.current.slice(0, filteredOptions.length);
+    optionRefs.current = optionRefs.current.slice(0, rowCount);
 
-    if (filteredOptions.length === 0) {
+    if (rowCount === 0) {
       setHighlightedOptionIndex(0);
       return;
     }
 
-    setHighlightedOptionIndex((currentValue) => Math.min(currentValue, filteredOptions.length - 1));
-  }, [filteredOptions]);
+    setHighlightedOptionIndex((currentValue) => Math.min(currentValue, rowCount - 1));
+  }, [rowCount]);
 
   useEffect(() => {
-    if (!isOpen || filteredOptions.length === 0) {
+    if (!isOpen || rowCount === 0) {
       return;
     }
 
     optionRefs.current[highlightedOptionIndex]?.scrollIntoView({ block: 'nearest' });
-  }, [filteredOptions.length, highlightedOptionIndex, isOpen]);
+  }, [rowCount, highlightedOptionIndex, isOpen]);
 
   useLayoutEffect(() => {
     if (!isOpen) {
@@ -258,7 +314,22 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
     };
   }, [filteredOptions.length, isOpen, search, showSearchInput]);
 
+  function createFromSearch(): void {
+    const typed = search.trim();
+    if (onCreate === undefined || typed === '') {
+      return;
+    }
+
+    onCreate(typed);
+    setIsOpen(false);
+  }
+
   function selectHighlightedOption(): void {
+    if (createOffered && highlightedOptionIndex === filteredOptions.length) {
+      createFromSearch();
+      return;
+    }
+
     const highlightedOption = filteredOptions[highlightedOptionIndex];
 
     if (!highlightedOption) {
@@ -275,16 +346,16 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
   }
 
   function moveHighlightedOption(direction: 'up' | 'down'): void {
-    if (filteredOptions.length === 0) {
+    if (rowCount === 0) {
       return;
     }
 
     setHighlightedOptionIndex((currentValue) => {
       if (direction === 'down') {
-        return (currentValue + 1) % filteredOptions.length;
+        return (currentValue + 1) % rowCount;
       }
 
-      return (currentValue - 1 + filteredOptions.length) % filteredOptions.length;
+      return (currentValue - 1 + rowCount) % rowCount;
     });
   }
 
@@ -418,7 +489,36 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
                   );
                 })}
 
-                {filteredOptions.length === 0 ? (
+                {createOffered ? (
+                  <button
+                    ref={(element) => {
+                      optionRefs.current[filteredOptions.length] = element;
+                    }}
+                    type="button"
+                    data-searchable-select-create=""
+                    className={cn(
+                      'hover:bg-accent hover:text-accent-foreground flex h-auto w-full items-center gap-2 rounded-md px-2 py-1.5 text-left text-sm transition-colors',
+                      highlightedOptionIndex === filteredOptions.length &&
+                        'bg-accent text-accent-foreground',
+                    )}
+                    onMouseEnter={() => setHighlightedOptionIndex(filteredOptions.length)}
+                    onPointerDown={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      createFromSearch();
+                    }}
+                    onClick={(event) => {
+                      if (event.detail === 0) {
+                        createFromSearch();
+                      }
+                    }}
+                  >
+                    <Plus className="size-4 shrink-0" />
+                    <span className="min-w-0 flex-1 truncate">{createLabel(search.trim())}</span>
+                  </button>
+                ) : null}
+
+                {rowCount === 0 ? (
                   <p className="text-muted-foreground px-2 py-4 text-sm">{emptyMessage}</p>
                 ) : null}
               </div>
