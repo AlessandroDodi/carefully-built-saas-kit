@@ -244,7 +244,7 @@ export function DocumentCard<TId = string, TDocument extends DocumentCardItem<TI
                   : document.sourceType === 'external_link'
                     ? resolvedLabels.uploadedFileLabel(document.fileCount)
                     : document.fileSize
-                      ? formatFileSize(document.fileSize)
+                      ? formatFileSize(document.fileSize, resolvedLabels.locale)
                       : resolvedLabels.documentFallbackLabel}
               </p>
               {document.sourceType === 'external_link' ? (

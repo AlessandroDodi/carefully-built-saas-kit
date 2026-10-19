@@ -5,31 +5,57 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-export const forgotPasswordSchema = z.object({
-  email: z.email("Enter a valid email address"),
-});
+/** Validation copy. Missing keys fall back to English. */
+export interface AuthValidationMessages {
+  readonly invalidEmail?: string;
+  readonly passwordTooShort?: string;
+  readonly passwordMismatch?: string;
+}
 
-export const loginSchema = z.object({
-  email: z.email("Enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
+function resolveValidationMessages(messages: AuthValidationMessages = {}) {
+  return {
+    invalidEmail: messages.invalidEmail ?? "Enter a valid email address",
+    passwordTooShort: messages.passwordTooShort ?? "Password must be at least 8 characters",
+    passwordMismatch: messages.passwordMismatch ?? "Passwords do not match",
+  };
+}
 
-export const signupSchema = z.object({
-  email: z.email("Enter a valid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-});
-
-export const resetPasswordSchema = z
-  .object({
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z
-      .string()
-      .min(8, "Password must be at least 8 characters"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
+export function buildForgotPasswordSchema(messages?: AuthValidationMessages) {
+  const copy = resolveValidationMessages(messages);
+  return z.object({
+    email: z.email(copy.invalidEmail),
   });
+}
+
+export function buildLoginSchema(messages?: AuthValidationMessages) {
+  const copy = resolveValidationMessages(messages);
+  return z.object({
+    email: z.email(copy.invalidEmail),
+    password: z.string().min(8, copy.passwordTooShort),
+  });
+}
+
+export function buildSignupSchema(messages?: AuthValidationMessages) {
+  return buildLoginSchema(messages);
+}
+
+export function buildResetPasswordSchema(messages?: AuthValidationMessages) {
+  const copy = resolveValidationMessages(messages);
+  return z
+    .object({
+      password: z.string().min(8, copy.passwordTooShort),
+      confirmPassword: z.string().min(8, copy.passwordTooShort),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: copy.passwordMismatch,
+      path: ["confirmPassword"],
+    });
+}
+
+export const forgotPasswordSchema = buildForgotPasswordSchema();
+export const loginSchema = buildLoginSchema();
+export const signupSchema = buildSignupSchema();
+export const resetPasswordSchema = buildResetPasswordSchema();
 
 export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export type LoginFormData = z.infer<typeof loginSchema>;
@@ -41,7 +67,7 @@ export interface AuthActionResult {
   readonly error?: string;
 }
 
-interface AuthControllerMessages {
+interface AuthControllerMessages extends AuthValidationMessages {
   readonly unexpectedError?: string;
 }
 
@@ -87,7 +113,7 @@ export function useLoginForm({
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(buildLoginSchema(messages)),
     defaultValues: {
       email: "",
       password: "",
@@ -149,7 +175,7 @@ export function useSignupForm({
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<SignupFormData>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(buildSignupSchema(messages)),
     defaultValues: {
       email: "",
       password: "",
@@ -214,7 +240,7 @@ export function useForgotPasswordForm({
   const [email, setEmail] = useState("");
 
   const form = useForm<ForgotPasswordFormData>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(buildForgotPasswordSchema(messages)),
     defaultValues: {
       email: "",
     },
@@ -284,7 +310,7 @@ export function useUpdatePasswordForm({
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(buildResetPasswordSchema(messages)),
     defaultValues: {
       password: "",
       confirmPassword: "",

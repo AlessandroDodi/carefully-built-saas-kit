@@ -14,6 +14,9 @@ import type {
 export interface NotificationListProps<TNotification extends NotificationRecord> {
   readonly notifications: readonly TNotification[] | undefined;
   readonly emptyLabel: string;
+  readonly emptySubtitle?: string;
+  readonly openItemLabel?: string;
+  readonly markSeenItemLabel?: string;
   readonly typeMeta?: Record<string, NotificationVisualMeta>;
   readonly sourceMeta?: Record<string, NotificationSourceMeta>;
   readonly locale?: React.ComponentProps<typeof NotificationListItem<TNotification>>["locale"];
@@ -24,6 +27,9 @@ export interface NotificationListProps<TNotification extends NotificationRecord>
 export function NotificationList<TNotification extends NotificationRecord>({
   notifications,
   emptyLabel,
+  emptySubtitle = "You're all caught up.",
+  openItemLabel,
+  markSeenItemLabel,
   typeMeta,
   sourceMeta,
   locale,
@@ -45,7 +51,7 @@ export function NotificationList<TNotification extends NotificationRecord>({
       <EmptyStateCard
         icon={<Bell className="size-7" />}
         title={emptyLabel}
-        subtitle="You're all caught up."
+        subtitle={emptySubtitle}
       />
     );
   }
@@ -59,6 +65,8 @@ export function NotificationList<TNotification extends NotificationRecord>({
           typeMeta={typeMeta}
           sourceMeta={sourceMeta}
           locale={locale}
+          openLabel={openItemLabel}
+          markSeenLabel={markSeenItemLabel}
           onOpen={onOpen}
           onMarkSeen={onMarkSeen}
         />

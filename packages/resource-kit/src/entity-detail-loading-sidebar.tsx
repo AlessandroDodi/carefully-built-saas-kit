@@ -15,6 +15,8 @@ export interface EntityDetailLoadingField {
 interface EntityDetailLoadingSidebarProps {
   readonly icon: LucideIcon;
   readonly title?: string;
+  /** Accessible name of the (disabled) edit button placeholder. */
+  readonly editLabel?: string;
   readonly fields: readonly EntityDetailLoadingField[];
   readonly media?: 'avatar' | 'image';
   readonly labelColumnClassName?: string;
@@ -28,6 +30,7 @@ export function EntityDetailLoadingSidebar({
   media,
   labelColumnClassName,
   titleSkeletonClassName = 'h-4 w-36',
+  editLabel = 'Edit',
 }: EntityDetailLoadingSidebarProps): React.ReactElement {
   return (
     <section className="bg-background h-full">
@@ -36,7 +39,7 @@ export function EntityDetailLoadingSidebar({
           <Icon className="text-muted-foreground size-4" />
           {title ? <span>{title}</span> : <Skeleton className={titleSkeletonClassName} />}
         </div>
-        <Button type="button" variant="ghost" size="icon-sm" disabled aria-label="Edit">
+        <Button type="button" variant="ghost" size="icon-sm" disabled aria-label={editLabel}>
           <Pencil className="size-4" />
         </Button>
       </div>

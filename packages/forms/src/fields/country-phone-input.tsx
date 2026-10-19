@@ -17,6 +17,11 @@ interface CountryPhoneInputProps {
   readonly onCountryCodeChange: (value: string) => void;
   readonly onLocalNumberChange: (value: string) => void;
   readonly label?: string;
+  /** Locale of the country names in the picker. */
+  readonly countryLocale?: string;
+  readonly countryPlaceholder?: string;
+  readonly countrySearchPlaceholder?: string;
+  readonly countryEmptyMessage?: string;
   readonly required?: boolean;
   readonly className?: string;
   readonly localNumberId?: string;
@@ -80,13 +85,17 @@ export function CountryPhoneInput({
   onCountryCodeChange,
   onLocalNumberChange,
   label = 'Phone',
+  countryLocale = 'en-US',
+  countryPlaceholder = 'Country',
+  countrySearchPlaceholder = 'Search country or prefix...',
+  countryEmptyMessage = 'No results found',
   required = false,
   className,
   localNumberId,
   placeholder = '392 0178571',
   error,
 }: CountryPhoneInputProps): React.ReactElement {
-  const countryOptions = useMemo(() => getPhoneCountryOptions('en-US'), []);
+  const countryOptions = useMemo(() => getPhoneCountryOptions(countryLocale), [countryLocale]);
 
   return (
     <div className={cn('space-y-2', className)}>
@@ -95,9 +104,10 @@ export function CountryPhoneInput({
         <SearchableSelect
           value={countryCode || 'IT'}
           onValueChange={onCountryCodeChange}
-          placeholder="Country"
+          placeholder={countryPlaceholder}
           className="w-full"
-          searchPlaceholder="Search country or prefix..."
+          searchPlaceholder={countrySearchPlaceholder}
+          emptyMessage={countryEmptyMessage}
           options={countryOptions}
           renderValue={(selectedCountry) => (
             <span className="flex items-center gap-2">

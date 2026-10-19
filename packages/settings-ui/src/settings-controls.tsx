@@ -21,6 +21,8 @@ interface SettingsHelpTitleProps {
   readonly label: string;
   readonly title: string;
   readonly tooltip: string;
+  /** Label of the help sheet's close button. */
+  readonly closeLabel?: ReactNode;
 }
 
 export function SettingsHelpTitle({
@@ -29,11 +31,18 @@ export function SettingsHelpTitle({
   label,
   title,
   tooltip,
+  closeLabel,
 }: SettingsHelpTitleProps): React.ReactElement {
   return (
     <span className="inline-flex items-center gap-1.5">
       {label}
-      <HelpInfoButton ariaLabel={tooltip} tooltip={tooltip} title={title} description={description}>
+      <HelpInfoButton
+        ariaLabel={tooltip}
+        tooltip={tooltip}
+        title={title}
+        description={description}
+        closeLabel={closeLabel}
+      >
         {children}
       </HelpInfoButton>
     </span>

@@ -21,6 +21,8 @@ interface LoginEmailFormProps<
   readonly submitLabel?: string;
   readonly loadingLabel?: string;
   readonly forgotPasswordHref?: string;
+  readonly showPasswordLabel?: string;
+  readonly hidePasswordLabel?: string;
   readonly className?: string;
   readonly forgotPasswordClassName?: string;
   readonly errorClassName?: string;
@@ -39,6 +41,8 @@ export function LoginEmailForm<TValues extends FieldValues>({
   submitLabel = "Sign in",
   loadingLabel = "Signing in...",
   forgotPasswordHref = "/forgot-password",
+  showPasswordLabel,
+  hidePasswordLabel,
   className,
   forgotPasswordClassName,
   errorClassName,
@@ -62,6 +66,8 @@ export function LoginEmailForm<TValues extends FieldValues>({
 
         <div className="space-y-2">
           <CustomPasswordField<TValues>
+            showPasswordLabel={showPasswordLabel}
+            hidePasswordLabel={hidePasswordLabel}
             name={"password" as Path<TValues>}
             label={passwordLabel}
             autoComplete="current-password"

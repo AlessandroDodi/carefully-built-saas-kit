@@ -8,6 +8,8 @@ import { Button, cn } from "@carefully-built/ui";
 export interface SettingsReorderableListProps<T> {
   readonly items: readonly T[];
   readonly addLabel?: string;
+  /** Accessible name of each row's remove button. */
+  readonly removeLabel?: string;
   readonly draggedIndex: number | null;
   readonly getKey: (item: T, index: number) => string;
   readonly canRemove?: (item: T, index: number) => boolean;
@@ -23,6 +25,7 @@ export interface SettingsReorderableListProps<T> {
 export function SettingsReorderableList<T>({
   items,
   addLabel,
+  removeLabel = "Remove",
   draggedIndex,
   getKey,
   canRemove = () => true,
@@ -74,6 +77,8 @@ export function SettingsReorderableList<T>({
                 type="button"
                 variant="ghost"
                 size="icon-sm"
+                aria-label={removeLabel}
+                title={removeLabel}
                 onClick={() => onRemove(index)}
                 disabled={!canRemove(item, index)}
               >

@@ -37,6 +37,12 @@ export interface NotificationLocaleConfig {
   readonly description?: string;
   readonly emptyAllLabel?: string;
   readonly emptyFilteredLabel?: string;
+  readonly emptySubtitle?: string;
+  /** Accessible name of an item with a link; `{title}` is replaced. */
+  readonly openNotificationItemLabel?: string;
+  /** Accessible name of an unread item without a link; `{title}` is replaced. */
+  readonly markSeenItemLabel?: string;
+  readonly closeLabel?: string;
   readonly markAllSeenLabel?: string;
   readonly openNotificationsLabel?: string;
   readonly tooltipLabel?: string;

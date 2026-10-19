@@ -69,6 +69,8 @@ export interface SmartTableProps<T> {
   actions?: ActionType[];
   /** Accessible labels for default action buttons */
   actionLabels?: ActionLabels;
+  /** Accessible name of a sortable header button. Default: `Sort by ${header}`. */
+  sortByLabel?: (header: string) => string;
   /** Action handlers */
   actionHandlers?: ActionHandlers<T>;
   /** Custom actions renderer (overrides actions prop) */

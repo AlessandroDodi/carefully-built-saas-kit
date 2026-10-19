@@ -17,6 +17,13 @@ interface ForgotPasswordFormProps<
   readonly sent?: boolean;
   readonly email?: string;
   readonly loginHref?: string;
+  readonly emailLabel?: string;
+  readonly emailPlaceholder?: string;
+  readonly submitLabel?: string;
+  readonly loadingLabel?: string;
+  readonly backToLoginLabel?: string;
+  /** Message shown once the link is sent. Default: Italian copy naming the address. */
+  readonly renderSentMessage?: (email: string | undefined) => React.ReactNode;
   readonly className?: string;
   readonly sentClassName?: string;
   readonly linkClassName?: string;
@@ -32,6 +39,12 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
   error,
   email,
   loginHref = "/login/email",
+  emailLabel = "Email",
+  emailPlaceholder = "tuaemail@gmail.com",
+  submitLabel = "Send reset link",
+  loadingLabel = "Sending...",
+  backToLoginLabel = "Back to login",
+  renderSentMessage,
   className,
   sentClassName,
   linkClassName,
@@ -42,16 +55,22 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
     return (
       <div className={cn("space-y-4 text-center", sentClassName)}>
         <p className="text-muted-foreground text-sm">
-          Abbiamo inviato un link per reimpostare la password
-          {email ? (
+          {renderSentMessage ? (
+            renderSentMessage(email)
+          ) : (
             <>
-              {" "}
-              a <strong>{email}</strong>
+              Abbiamo inviato un link per reimpostare la password
+              {email ? (
+                <>
+                  {" "}
+                  a <strong>{email}</strong>
+                </>
+              ) : null}
             </>
-          ) : null}
+          )}
         </p>
         <a className={cn("text-sm underline", linkClassName)} href={loginHref}>
-          Back to login
+          {backToLoginLabel}
         </a>
       </div>
     );
@@ -67,8 +86,8 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
       >
         <CustomInputField<TValues>
           name={"email" as Path<TValues>}
-          label="Email"
-          placeholder="tuaemail@gmail.com"
+          label={emailLabel}
+          placeholder={emailPlaceholder}
           type="email"
           autoFocus
           disabled={loading}
@@ -77,12 +96,12 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
         <AuthError error={error} className={errorClassName} />
 
         <Button className={cn("w-full", buttonClassName)} disabled={loading} type="submit">
-          {loading ? "Sending..." : "Send reset link"}
+          {loading ? loadingLabel : submitLabel}
         </Button>
 
         <p className="text-muted-foreground text-center text-sm">
           <a className={cn("underline", linkClassName)} href={loginHref}>
-            Back to login
+            {backToLoginLabel}
           </a>
         </p>
       </form>

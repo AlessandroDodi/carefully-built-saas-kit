@@ -20,6 +20,8 @@ export interface BarDistributionWidgetProps {
   readonly emptyStateTitle?: string;
   readonly emptyStateDescription?: string;
   readonly isLoading?: boolean;
+  /** Series name shown in the bar tooltip. Default: the data key ("value"). */
+  readonly valueLabel?: string;
 }
 
 export function BarDistributionWidget({
@@ -30,6 +32,7 @@ export function BarDistributionWidget({
   emptyStateTitle = "No data available",
   emptyStateDescription = "When data is available, the distribution will appear here.",
   isLoading = false,
+  valueLabel,
 }: BarDistributionWidgetProps): React.ReactElement {
   const isEmpty = data.length === 0;
 
@@ -74,7 +77,7 @@ export function BarDistributionWidget({
                 cursor={{ fill: "rgba(109,65,255,0.08)" }}
                 contentStyle={{ borderRadius: 12, borderColor: "var(--border)", boxShadow: "none" }}
               />
-              <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+              <Bar dataKey="value" name={valueLabel} radius={[8, 8, 0, 0]}>
                 {data.map((entry, index) => (
                   <Cell key={entry.label} fill={getBarColor(colors, index)} />
                 ))}

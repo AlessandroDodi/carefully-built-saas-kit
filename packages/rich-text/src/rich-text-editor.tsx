@@ -36,7 +36,37 @@ export interface RichTextEditorProps {
   readonly onImproveError?: (error: unknown) => void;
   readonly improveLabel?: string;
   readonly improvingLabel?: string;
+  /** Toolbar copy (tooltips, table buttons, link prompt). Missing keys fall back to English. */
+  readonly toolbarLabels?: Partial<RichTextToolbarLabels>;
 }
+
+export interface RichTextToolbarLabels {
+  readonly bold: string;
+  readonly italic: string;
+  readonly link: string;
+  readonly removeLink: string;
+  readonly bulletList: string;
+  readonly orderedList: string;
+  readonly table: string;
+  readonly addRow: string;
+  readonly addColumn: string;
+  readonly deleteTable: string;
+  readonly linkPrompt: string;
+}
+
+export const DEFAULT_RICH_TEXT_TOOLBAR_LABELS: RichTextToolbarLabels = {
+  bold: 'Bold',
+  italic: 'Italic',
+  link: 'Link',
+  removeLink: 'Remove link',
+  bulletList: 'Bulleted list',
+  orderedList: 'Numbered list',
+  table: 'Table',
+  addRow: 'Row',
+  addColumn: 'Column',
+  deleteTable: 'Delete table',
+  linkPrompt: 'Enter a link',
+};
 
 interface ToolbarButtonProps {
   readonly label: string;
@@ -68,12 +98,12 @@ function ToolbarButton({
   );
 }
 
-function promptForLink(currentUrl: string): string | null {
+function promptForLink(message: string, currentUrl: string): string | null {
   if (typeof window === 'undefined') {
     return null;
   }
 
-  return window.prompt('Enter a link', currentUrl) ?? null;
+  return window.prompt(message, currentUrl) ?? null;
 }
 
 export function RichTextEditor({
@@ -89,7 +119,9 @@ export function RichTextEditor({
   onImproveError,
   improveLabel = 'Improve',
   improvingLabel = 'Improving...',
+  toolbarLabels,
 }: RichTextEditorProps): React.ReactElement {
+  const labels = { ...DEFAULT_RICH_TEXT_TOOLBAR_LABELS, ...toolbarLabels };
   const improveFlashTimeoutRef = useRef<number | null>(null);
   const [isImproving, setIsImproving] = useState(false);
   const [isImproveFlashActive, setIsImproveFlashActive] = useState(false);
@@ -163,7 +195,7 @@ export function RichTextEditor({
     }
 
     const previousUrl = editor.getAttributes('link').href as string | undefined;
-    const nextUrl = promptForLink(previousUrl ?? '');
+    const nextUrl = promptForLink(labels.linkPrompt, previousUrl ?? '');
 
     if (nextUrl === null) {
       return;
@@ -240,7 +272,7 @@ export function RichTextEditor({
           )}
         >
           <ToolbarButton
-            label="Bold"
+            label={labels.bold}
             icon={Bold}
             active={editor?.isActive('bold')}
             disabled={disabled || !editor?.can().chain().focus().toggleBold().run()}
@@ -249,7 +281,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Italic"
+            label={labels.italic}
             icon={Italic}
             active={editor?.isActive('italic')}
             disabled={disabled || !editor?.can().chain().focus().toggleItalic().run()}
@@ -258,14 +290,14 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Link"
+            label={labels.link}
             icon={Link2}
             active={editor?.isActive('link')}
             disabled={disabled || !editor}
             onClick={setLink}
           />
           <ToolbarButton
-            label="Remove link"
+            label={labels.removeLink}
             icon={Unlink}
             disabled={disabled || !editor?.isActive('link')}
             onClick={() => {
@@ -273,7 +305,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Bulleted list"
+            label={labels.bulletList}
             icon={List}
             active={editor?.isActive('bulletList')}
             disabled={disabled || !editor?.can().chain().focus().toggleBulletList().run()}
@@ -282,7 +314,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Numbered list"
+            label={labels.orderedList}
             icon={ListOrdered}
             active={editor?.isActive('orderedList')}
             disabled={disabled || !editor?.can().chain().focus().toggleOrderedList().run()}
@@ -291,7 +323,7 @@ export function RichTextEditor({
             }}
           />
           <ToolbarButton
-            label="Table"
+            label={labels.table}
             icon={Table2}
             active={editor?.isActive('table')}
             disabled={disabled || !editor}
@@ -319,7 +351,7 @@ export function RichTextEditor({
                   editor.chain().focus().addRowAfter().run();
                 }}
               >
-                Row
+                {labels.addRow}
               </Button>
               <Button
                 type="button"
@@ -330,7 +362,7 @@ export function RichTextEditor({
                   editor.chain().focus().addColumnAfter().run();
                 }}
               >
-                Column
+                {labels.addColumn}
               </Button>
               <Button
                 type="button"
@@ -340,8 +372,8 @@ export function RichTextEditor({
                 onClick={() => {
                   editor.chain().focus().deleteTable().run();
                 }}
-                title="Delete table"
-                aria-label="Delete table"
+                title={labels.deleteTable}
+                aria-label={labels.deleteTable}
               >
                 <Trash2 />
               </Button>

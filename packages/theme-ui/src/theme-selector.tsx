@@ -41,6 +41,8 @@ export interface ThemeSelectorProps<TTheme extends string = ThemeMode> {
   readonly options?: readonly ThemeOption[];
   readonly onChange: (value: TTheme) => void;
   readonly className?: string;
+  /** Alt text of each preview image. Default: `${label} theme preview`. */
+  readonly getImageAlt?: (label: string) => string;
 }
 
 export function ThemeSelector<TTheme extends string = ThemeMode>({
@@ -48,6 +50,7 @@ export function ThemeSelector<TTheme extends string = ThemeMode>({
   options = DEFAULT_THEME_OPTIONS,
   onChange,
   className,
+  getImageAlt,
 }: ThemeSelectorProps<TTheme>): React.ReactElement {
   return (
     <div className={cn("grid gap-3 md:grid-cols-3 xl:max-w-[720px]", className)}>
@@ -73,7 +76,7 @@ export function ThemeSelector<TTheme extends string = ThemeMode>({
                 </div>
                 <img
                   src={imageSrc}
-                  alt={`${label} theme preview`}
+                  alt={getImageAlt ? getImageAlt(label) : `${label} theme preview`}
                   width={220}
                   height={102}
                   className="h-auto w-full"

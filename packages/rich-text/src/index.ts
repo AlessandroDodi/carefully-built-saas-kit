@@ -1,5 +1,10 @@
 export { AIActionButton, type AIActionButtonProps } from './ai-action-button';
-export { RichTextEditor, type RichTextEditorProps } from './rich-text-editor';
+export {
+  DEFAULT_RICH_TEXT_TOOLBAR_LABELS,
+  RichTextEditor,
+  type RichTextEditorProps,
+  type RichTextToolbarLabels,
+} from './rich-text-editor';
 export { RichTextRenderer, type RichTextRendererProps } from './rich-text-renderer';
 export {
   createRichTextDocumentFromText,

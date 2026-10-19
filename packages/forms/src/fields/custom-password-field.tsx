@@ -18,6 +18,8 @@ interface CustomPasswordFieldProps<TValues extends FieldValues> {
   readonly autoFocus?: boolean;
   readonly autoComplete?: string;
   readonly className?: string;
+  readonly showPasswordLabel?: string;
+  readonly hidePasswordLabel?: string;
 }
 
 export function CustomPasswordField<TValues extends FieldValues>({
@@ -28,6 +30,8 @@ export function CustomPasswordField<TValues extends FieldValues>({
   autoFocus = false,
   autoComplete = 'current-password',
   className,
+  showPasswordLabel = 'Show password',
+  hidePasswordLabel = 'Hide password',
 }: CustomPasswordFieldProps<TValues>): React.ReactElement {
   const { control } = useFormContext<TValues>();
   const [showPassword, setShowPassword] = useState(false);
@@ -70,7 +74,7 @@ export function CustomPasswordField<TValues extends FieldValues>({
               ) : (
                 <Eye className="text-muted-foreground size-4" />
               )}
-              <span className="sr-only">{showPassword ? 'Hide password' : 'Show password'}</span>
+              <span className="sr-only">{showPassword ? hidePasswordLabel : showPasswordLabel}</span>
             </Button>
           </div>
           <FieldMessage message={error?.message} />
