@@ -1,8 +1,10 @@
 'use client';
 
+import { useKitTexts } from '@carefully-built/ui';
 import { useState } from 'react';
 
 import { useOrganizationLogoInput } from './use-organization-logo-input';
+import { createOrganizationTexts } from './workos-texts';
 
 interface UseCreateOrganizationDialogArgs {
   readonly createOrganization?: (name: string) => Promise<string>;
@@ -24,7 +26,7 @@ interface UseCreateOrganizationDialogResult {
   readonly setOpen: (open: boolean) => void;
 }
 
-async function createOrganizationWithDefaultApi(name: string): Promise<string> {
+async function createOrganizationWithDefaultApi(name: string, fallbackError: string): Promise<string> {
   const response = await fetch('/api/organizations', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -33,7 +35,7 @@ async function createOrganizationWithDefaultApi(name: string): Promise<string> {
 
   if (!response.ok) {
     const data = (await response.json()) as { error?: string };
-    throw new Error(data.error ?? 'Unable to create the organization');
+    throw new Error(data.error ?? fallbackError);
   }
 
   const { organizationId } = (await response.json()) as { organizationId: string };
@@ -41,10 +43,13 @@ async function createOrganizationWithDefaultApi(name: string): Promise<string> {
 }
 
 export function useCreateOrganizationDialog({
-  createOrganization = createOrganizationWithDefaultApi,
+  createOrganization,
   onCreated,
   uploadLogo,
 }: UseCreateOrganizationDialogArgs): UseCreateOrganizationDialogResult {
+  const { createError, genericError } = useKitTexts(createOrganizationTexts);
+  const create =
+    createOrganization ?? ((name: string): Promise<string> => createOrganizationWithDefaultApi(name, createError));
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const { clearLogo, handleLogoSelect, logoFile, logoPreview, resetLogoInput } = useOrganizationLogoInput();
@@ -61,7 +66,7 @@ export function useCreateOrganizationDialog({
     setError(null);
 
     try {
-      const organizationId = await createOrganization(name);
+      const organizationId = await create(name);
 
       if (logoFile && uploadLogo) {
         await uploadLogo({ file: logoFile, organizationId });
@@ -71,7 +76,7 @@ export function useCreateOrganizationDialog({
       resetForm();
       onCreated?.(organizationId);
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : 'An error occurred');
+      setError(submitError instanceof Error ? submitError.message : genericError);
     } finally {
       setLoading(false);
     }

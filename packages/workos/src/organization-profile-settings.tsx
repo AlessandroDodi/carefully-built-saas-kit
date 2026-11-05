@@ -1,13 +1,14 @@
 'use client';
 
 import { SettingsFormSheet } from '@carefully-built/settings-ui/client';
-import { Button, Card, CardContent, Input, Label } from '@carefully-built/ui';
+import { Button, Card, CardContent, Input, Label, useKitTexts } from '@carefully-built/ui';
 import { Building2, Pencil } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { OrganizationLogoDropzone } from './organization-logo-dropzone';
 import { useOrganizationLogoInput } from './use-organization-logo-input';
+import { organizationProfileTexts } from './workos-texts';
 
 export interface OrganizationProfileSettingsOrganization {
   readonly id: string;
@@ -42,19 +43,6 @@ export interface OrganizationProfileSettingsProps {
   readonly onUpdated?: () => void;
   readonly organization: OrganizationProfileSettingsOrganization;
 }
-
-const defaultLabels = {
-  description: 'Update your organization details.',
-  editButton: 'Edit',
-  logoAlt: 'Organization logo',
-  logoLabel: 'Organization logo',
-  nameLabel: 'Organization name',
-  roleFallback: 'Member',
-  saveButton: 'Save changes',
-  saveError: 'Unable to update the organization',
-  saveSuccess: 'Organization updated',
-  title: 'Edit organization',
-} satisfies Required<OrganizationProfileSettingsLabels>;
 
 function getDisplayRole(role: string | null | undefined, fallback: string): string {
   return role?.trim() ? role : fallback;
@@ -144,7 +132,11 @@ export function OrganizationProfileSettings({
   onUpdated,
   organization,
 }: OrganizationProfileSettingsProps): React.ReactElement {
-  const mergedLabels = { ...defaultLabels, ...labels };
+  // Props win; otherwise the kit locale's defaults.
+  const mergedLabels: Required<OrganizationProfileSettingsLabels> = useKitTexts(
+    organizationProfileTexts,
+    labels,
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [name, setName] = useState(organization.name);
