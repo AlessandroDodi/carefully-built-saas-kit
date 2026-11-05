@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
+import { orgSwitcherTexts } from "./workos-texts";
+
 import {
   Button,
   Drawer,
@@ -21,6 +23,7 @@ import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  useKitTexts,
 } from "@carefully-built/ui";
 
 export interface WorkOSOrganization {
@@ -65,7 +68,7 @@ export interface SidebarOrgSwitcherBaseProps<
    * (backward compatible: existing callers render exactly as before).
    */
   readonly signOutAction?: () => void | Promise<void>;
-  /** Label for the sign-out control. Defaults to "Log out". */
+  /** Label for the sign-out control. Defaults to the kit locale ("Log out" / "Esci"). */
   readonly signOutLabel?: string;
   readonly renderLogo?: (props: {
     readonly org: Pick<TOrganization, "id" | "logoUrl" | "name">;
@@ -171,11 +174,13 @@ export function SidebarOrgSwitcherBase<
   onSwitch,
   renderLogo,
   signOutAction,
-  signOutLabel = "Log out",
+  signOutLabel: signOutLabelProp,
   switchOrganization,
   superAdminHref = "/super-admin/dashboard",
 }: SidebarOrgSwitcherBaseProps<TOrganization>): React.ReactElement {
   const router = useRouter();
+  const texts = useKitTexts(orgSwitcherTexts, { signOutLabel: signOutLabelProp });
+  const signOutLabel = texts.signOutLabel;
   const [organizations, setOrganizations] = useState([...initialOrganizations]);
   const [currentOrg, setCurrentOrg] = useState<TOrganization | null>(() =>
     getCurrentOrganization(initialOrganizations, initialOrganizationId),
@@ -295,14 +300,14 @@ export function SidebarOrgSwitcherBase<
       align={collapsed ? "center" : "start"}
       className="w-56"
     >
-      <DropdownMenuLabel>Organizations</DropdownMenuLabel>
+      <DropdownMenuLabel>{texts.organizationsTitle}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       {canAccessSuperAdmin ? (
         <>
           <DropdownMenuItem asChild>
             <Link href={superAdminHref}>
               <ShieldCheck className="mr-2 size-4" />
-              Super admin
+              {texts.superAdmin}
             </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -321,7 +326,7 @@ export function SidebarOrgSwitcherBase<
         </DropdownMenuItem>
       ))}
       {organizations.length === 0 ? (
-        <DropdownMenuItem disabled>No organization</DropdownMenuItem>
+        <DropdownMenuItem disabled>{texts.noOrganization}</DropdownMenuItem>
       ) : null}
       <DropdownMenuSeparator />
       <CreateOrganization onCreated={handleCreated}>
@@ -331,7 +336,7 @@ export function SidebarOrgSwitcherBase<
           }}
         >
           <Plus className="mr-2 size-4" />
-          Create organization
+          {texts.createOrganization}
         </DropdownMenuItem>
       </CreateOrganization>
       {signOutAction ? (
@@ -352,7 +357,7 @@ export function SidebarOrgSwitcherBase<
 
   const showSkeleton = isLoading && currentOrg === null;
   const organizationName =
-    currentOrg?.name ?? (showSkeleton ? null : "Select organization");
+    currentOrg?.name ?? (showSkeleton ? null : texts.selectOrganization);
 
   if (mobileSheet) {
     return (
@@ -371,7 +376,7 @@ export function SidebarOrgSwitcherBase<
               <Skeleton className="size-6 shrink-0 rounded" />
             ) : (
               <OrganizationLogo
-                org={{ id: "fallback", name: "Organization" }}
+                org={{ id: "fallback", name: texts.organizationFallback }}
                 size="sm"
               />
             )}
@@ -385,7 +390,7 @@ export function SidebarOrgSwitcherBase<
         </Button>
         <DrawerContent className="px-4 pb-[calc(env(safe-area-inset-bottom)+20px)]">
           <DrawerHeader className="px-0 pb-4">
-            <DrawerTitle>Organizations</DrawerTitle>
+            <DrawerTitle>{texts.organizationsTitle}</DrawerTitle>
           </DrawerHeader>
           <div className="-mx-1 flex max-h-[70vh] flex-col gap-1 overflow-y-auto px-1 pb-2">
             {canAccessSuperAdmin ? (
@@ -401,7 +406,7 @@ export function SidebarOrgSwitcherBase<
                   }}
                 >
                   <ShieldCheck className="size-4" />
-                  Super admin
+                  {texts.superAdmin}
                 </Link>
               </Button>
             ) : null}
@@ -425,7 +430,7 @@ export function SidebarOrgSwitcherBase<
             ))}
             {organizations.length === 0 ? (
               <div className="text-muted-foreground px-2.5 py-2 text-sm">
-                No organization
+                {texts.noOrganization}
               </div>
             ) : null}
           </div>
@@ -433,7 +438,7 @@ export function SidebarOrgSwitcherBase<
             <CreateOrganization onCreated={handleCreated}>
               <Button className="w-full justify-start gap-2" variant="ghost">
                 <Plus className="size-4" />
-                Create organization
+                {texts.createOrganization}
               </Button>
             </CreateOrganization>
             {signOutAction ? (
@@ -467,7 +472,7 @@ export function SidebarOrgSwitcherBase<
                   <Skeleton className="size-8 rounded-md" />
                 ) : (
                   <OrganizationLogo
-                    org={{ id: "fallback", name: "Organizzazione" }}
+                    org={{ id: "fallback", name: texts.organizationFallback }}
                     size="md"
                   />
                 )}
@@ -475,7 +480,7 @@ export function SidebarOrgSwitcherBase<
             </DropdownMenuTrigger>
           </TooltipTrigger>
           <TooltipContent side="right">
-            {currentOrg?.name ?? "Organizzazione"}
+            {currentOrg?.name ?? texts.organizationFallback}
           </TooltipContent>
         </Tooltip>
         {dropdownContent}
@@ -494,7 +499,7 @@ export function SidebarOrgSwitcherBase<
               <Skeleton className="size-6 shrink-0 rounded" />
             ) : (
               <OrganizationLogo
-                org={{ id: "fallback", name: "Organizzazione" }}
+                org={{ id: "fallback", name: texts.organizationFallback }}
                 size="sm"
               />
             )}

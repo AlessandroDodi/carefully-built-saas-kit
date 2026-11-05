@@ -1,8 +1,9 @@
 'use client';
 
 import { OrganizationLogoDropzone } from './organization-logo-dropzone';
-import { Input } from '@carefully-built/ui';
-import { Label } from '@carefully-built/ui';
+import { Input, Label, useKitTexts } from '@carefully-built/ui';
+
+import { createOrganizationTexts } from './workos-texts';
 
 interface CreateOrganizationFormContentProps {
   readonly error: string | null;
@@ -21,10 +22,12 @@ export function CreateOrganizationFormContent({
   onLogoSelect,
   onNameChange,
 }: CreateOrganizationFormContentProps): React.ReactElement {
+  const texts = useKitTexts(createOrganizationTexts);
+
   return (
     <div className="grid gap-4">
       <div className="grid gap-2">
-        <Label>Organization logo</Label>
+        <Label>{texts.logoLabel}</Label>
         <OrganizationLogoDropzone
           previewUrl={logoPreview}
           onFileSelect={onLogoSelect}
@@ -32,10 +35,10 @@ export function CreateOrganizationFormContent({
         />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="name">Organization name</Label>
+        <Label htmlFor="name">{texts.nameLabel}</Label>
         <Input
           id="name"
-          placeholder="Immobiliare in Cloud"
+          placeholder={texts.namePlaceholder}
           required
           value={name}
           onChange={(event): void => {

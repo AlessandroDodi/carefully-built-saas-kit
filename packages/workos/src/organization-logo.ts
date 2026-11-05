@@ -1,23 +1,29 @@
+import { resolveKitTexts, type KitLocale } from '@carefully-built/ui';
+
+import { organizationLogoTexts } from './workos-texts';
+
 export const ORGANIZATION_LOGO_MAX_SIZE = 2 * 1024 * 1024;
 export const ORGANIZATION_LOGO_ACCEPT = 'image/png,image/jpeg,image/jpg';
 export const ORGANIZATION_LOGO_HELPER_TEXT = 'Formats: .jpeg, .png';
 export const ORGANIZATION_LOGO_CAPTION = 'PNG, JPG up to 2MB';
 
-export function validateOrganizationLogo(file: File): string | null {
+export function validateOrganizationLogo(file: File, locale: KitLocale = 'en'): string | null {
+  const texts = resolveKitTexts(organizationLogoTexts, locale);
   const isSupportedType = ['image/jpeg', 'image/png'].includes(file.type);
 
   if (!isSupportedType) {
-    return 'Upload a PNG or JPG file';
+    return texts.unsupportedType;
   }
 
   if (file.size > ORGANIZATION_LOGO_MAX_SIZE) {
-    return 'The logo must be smaller than 2MB';
+    return texts.tooLarge;
   }
 
   return null;
 }
 
-export async function createFilePreview(file: File): Promise<string> {
+export async function createFilePreview(file: File, locale: KitLocale = 'en'): Promise<string> {
+  const { readError } = resolveKitTexts(organizationLogoTexts, locale);
   return await new Promise((resolve, reject) => {
     const reader = new FileReader();
 
@@ -26,7 +32,7 @@ export async function createFilePreview(file: File): Promise<string> {
     };
 
     reader.onerror = (): void => {
-      reject(new Error('Unable to read the selected file'));
+      reject(new Error(readError));
     };
 
     reader.readAsDataURL(file);
@@ -38,7 +44,9 @@ export async function uploadOrganizationLogo(args: {
   generateUploadUrl: () => Promise<string>;
   saveLogo: (payload: { workosId: string; storageId: string }) => Promise<unknown>;
   workosId: string;
+  locale?: KitLocale;
 }): Promise<void> {
+  const { uploadError } = resolveKitTexts(organizationLogoTexts, args.locale ?? 'en');
   const uploadUrl = await args.generateUploadUrl();
   const response = await fetch(uploadUrl, {
     method: 'POST',
@@ -47,7 +55,7 @@ export async function uploadOrganizationLogo(args: {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to upload the logo');
+    throw new Error(uploadError);
   }
 
   const result = (await response.json()) as { storageId: string };

@@ -8,8 +8,9 @@ export const THEME_VALUES = ["light", "dark", "system"] as const;
 
 export type ThemeMode = (typeof THEME_VALUES)[number];
 
-export interface ThemeOption {
-  readonly value: ThemeMode;
+/** One selectable look; `TValue` lets the selector pick between any set of options. */
+export interface ThemeOption<TValue extends string = ThemeMode> {
+  readonly value: TValue;
   readonly label: string;
   readonly imageSrc: string;
   readonly Icon: LucideIcon;
@@ -53,7 +54,7 @@ const themeSelectorTexts = defineKitTexts({
 
 export interface ThemeSelectorProps<TTheme extends string = ThemeMode> {
   readonly value: TTheme;
-  readonly options?: readonly ThemeOption[];
+  readonly options?: readonly ThemeOption<TTheme>[];
   readonly onChange: (value: TTheme) => void;
   readonly className?: string;
   /** Alt text of each preview image. Default: `${label} theme preview`. */
