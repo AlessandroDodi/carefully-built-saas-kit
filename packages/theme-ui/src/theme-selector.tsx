@@ -2,7 +2,7 @@
 
 import { LaptopMinimal, Moon, SunMedium, type LucideIcon } from "lucide-react";
 
-import { cn } from "@carefully-built/ui";
+import { cn, defineKitTexts, useKitTexts } from "@carefully-built/ui";
 
 export const THEME_VALUES = ["light", "dark", "system"] as const;
 
@@ -36,6 +36,21 @@ export const DEFAULT_THEME_OPTIONS: readonly ThemeOption[] = [
   },
 ] as const;
 
+const themeSelectorTexts = defineKitTexts({
+  en: {
+    light: "Light",
+    dark: "Dark",
+    system: "System",
+    imageAlt: (label: string): string => `${label} theme preview`,
+  },
+  it: {
+    light: "Chiaro",
+    dark: "Scuro",
+    system: "Sistema",
+    imageAlt: (label: string): string => `Anteprima del tema ${label.toLowerCase()}`,
+  },
+});
+
 export interface ThemeSelectorProps<TTheme extends string = ThemeMode> {
   readonly value: TTheme;
   readonly options?: readonly ThemeOption[];
@@ -47,14 +62,19 @@ export interface ThemeSelectorProps<TTheme extends string = ThemeMode> {
 
 export function ThemeSelector<TTheme extends string = ThemeMode>({
   value,
-  options = DEFAULT_THEME_OPTIONS,
+  options,
   onChange,
   className,
   getImageAlt,
 }: ThemeSelectorProps<TTheme>): React.ReactElement {
+  const texts = useKitTexts(themeSelectorTexts, { imageAlt: getImageAlt });
+  // Without custom options the labels follow the kit locale.
+  const resolvedOptions =
+    options ?? DEFAULT_THEME_OPTIONS.map((option) => ({ ...option, label: texts[option.value] }));
+
   return (
     <div className={cn("grid gap-3 md:grid-cols-3 xl:max-w-[720px]", className)}>
-      {options.map(({ value: optionValue, label, imageSrc, Icon }) => {
+      {resolvedOptions.map(({ value: optionValue, label, imageSrc, Icon }) => {
         const isSelected = value === optionValue;
 
         return (
@@ -76,7 +96,7 @@ export function ThemeSelector<TTheme extends string = ThemeMode>({
                 </div>
                 <img
                   src={imageSrc}
-                  alt={getImageAlt ? getImageAlt(label) : `${label} theme preview`}
+                  alt={texts.imageAlt(label)}
                   width={220}
                   height={102}
                   className="h-auto w-full"
