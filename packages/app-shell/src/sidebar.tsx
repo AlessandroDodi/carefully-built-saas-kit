@@ -54,10 +54,18 @@ export function SidebarInset({
   const content = <div className={cn('p-4 lg:p-6', contentClassName)}>{children}</div>;
 
   if (Component === 'main') {
-    return <main className={insetClassName}>{content}</main>;
+    return (
+      <main data-slot="app-main" className={insetClassName}>
+        {content}
+      </main>
+    );
   }
 
-  return <div className={insetClassName}>{content}</div>;
+  return (
+    <div data-slot="app-main" className={insetClassName}>
+      {content}
+    </div>
+  );
 }
 
 interface SidebarProviderProps {

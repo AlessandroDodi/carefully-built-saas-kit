@@ -56,6 +56,7 @@ export function DashboardWidget({
     >
       {value !== undefined ? (
         <div
+          data-slot="widget-value"
           className="text-foreground text-[24px] leading-none font-medium tracking-[-0.02em]"
           aria-busy={isLoading || undefined}
         >

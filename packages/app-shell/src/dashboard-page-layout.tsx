@@ -46,10 +46,12 @@ export function DashboardPageHeader({
   ) : null;
 
   return (
-    <div className="flex shrink-0 items-center justify-between gap-4">
+    <div data-slot="page-header" className="flex shrink-0 items-center justify-between gap-4">
       <div className="flex min-w-0 items-center gap-2">
         {backButton}
-        <h1 className="truncate text-xl font-semibold tracking-tight">{title}</h1>
+        <h1 data-slot="page-title" className="truncate text-xl font-semibold tracking-tight">
+          {title}
+        </h1>
       </div>
       {actions ? <div className="flex min-w-0 items-center gap-2">{actions}</div> : null}
     </div>

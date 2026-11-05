@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/theme",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tailwind v4 design tokens, color presets, and third-party widget styles for Carefully Built apps.",
   "type": "module",
   "license": "MIT",
@@ -32,6 +32,7 @@
     "./base.css": "./dist/base.css",
     "./presets/mono.css": "./dist/presets/mono.css",
     "./presets/teal.css": "./dist/presets/teal.css",
+    "./styles/soft.css": "./dist/styles/soft.css",
     "./workos-widgets.css": "./dist/workos-widgets.css",
     "./package.json": "./package.json"
   },

@@ -33,6 +33,7 @@ export function EntityInfoWidget({
 }: EntityInfoWidgetProps): React.ReactElement {
   return (
     <section
+      data-slot="widget"
       className={cn(
         "border-border flex min-w-0 flex-col gap-3 rounded-[12px] border bg-background p-1.5",
         className,
