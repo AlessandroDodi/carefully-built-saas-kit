@@ -67,3 +67,20 @@ export const vatInputTexts = defineKitTexts({
     countryEmptyMessage: 'Nessun risultato',
   },
 });
+
+export const weeklyHoursFieldTexts = defineKitTexts({
+  en: {
+    weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    closedLabel: 'Not available',
+    addRangeLabel: 'Add a time range',
+    removeRangeLabel: 'Remove this time range',
+    invalidRangeMessage: 'Each range must end after it starts.',
+  },
+  it: {
+    weekdays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+    closedLabel: 'Non disponibile',
+    addRangeLabel: 'Aggiungi una fascia oraria',
+    removeRangeLabel: 'Rimuovi questa fascia oraria',
+    invalidRangeMessage: 'Ogni fascia deve finire dopo l’orario di inizio.',
+  },
+});

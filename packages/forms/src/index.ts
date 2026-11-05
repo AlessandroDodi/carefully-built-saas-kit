@@ -19,6 +19,14 @@ export { CustomSelectField } from './fields/custom-select-field';
 export { CustomSegmentedToggleField } from './fields/custom-segmented-toggle-field';
 export { CustomSingleAssociationPickerField } from './fields/custom-single-association-picker-field';
 export { CustomTextareaField } from './fields/custom-textarea-field';
+export { CustomWeeklyHoursField } from './fields/custom-weekly-hours-field';
+export {
+  WEEKDAYS,
+  defaultWeeklyHours,
+  weeklyHoursSchema,
+  type Weekday,
+  type WeeklyHoursRange,
+} from './fields/weekly-hours';
 export {
   formatCompactCurrencyDisplay,
   formatCompactCurrencyValue,

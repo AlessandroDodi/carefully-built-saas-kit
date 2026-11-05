@@ -65,3 +65,11 @@ Default labels follow the kit locale set with `KitLocaleProvider` from
 ## Keep This Updated
 
 Whenever a field or schema renderer is added, update this README in the same change.
+
+## Orari settimanali
+
+`CustomWeeklyHoursField` gestisce giorni e fasce orarie (disponibilità di un
+operatore, finestre di chiamata, orari di apertura). Il valore è un
+`WeeklyHoursRange[]` piatto (`{ weekday: 1…7, start: 'HH:mm', end: 'HH:mm' }`),
+validabile con `weeklyHoursSchema`; `defaultWeeklyHours()` dà lunedì–venerdì
+9–18. I testi seguono `KitLocaleProvider`.
