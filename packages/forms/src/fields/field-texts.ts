@@ -70,16 +70,16 @@ export const vatInputTexts = defineKitTexts({
 
 export const weeklyHoursFieldTexts = defineKitTexts({
   en: {
-    weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    weekdays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
     closedLabel: 'Not available',
-    addRangeLabel: 'Add a time range',
+    addRangeLabel: 'Add range',
     removeRangeLabel: 'Remove this time range',
     invalidRangeMessage: 'Each range must end after it starts.',
   },
   it: {
-    weekdays: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+    weekdays: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'],
     closedLabel: 'Non disponibile',
-    addRangeLabel: 'Aggiungi una fascia oraria',
+    addRangeLabel: 'Aggiungi fascia',
     removeRangeLabel: 'Rimuovi questa fascia oraria',
     invalidRangeMessage: 'Ogni fascia deve finire dopo l’orario di inizio.',
   },

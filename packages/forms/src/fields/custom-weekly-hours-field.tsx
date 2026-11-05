@@ -44,7 +44,7 @@ export function CustomWeeklyHoursField<TValues extends FieldValues>({
         return (
           <div className={cn('space-y-2', className)}>
             {label ? <FormFieldLabel label={label} icon={labelIcon} hasError={Boolean(error)} /> : null}
-            <div className="space-y-2">
+            <div className="divide-y rounded-xl border px-3">
               {WEEKDAYS.map((weekday) => (
                 <WeeklyHoursDay
                   key={weekday}

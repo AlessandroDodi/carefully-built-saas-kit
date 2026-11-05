@@ -7,3 +7,6 @@ export {
   type CoverageLevel,
 } from "./coverage-grid";
 export { DonutChartWidget, type DonutChartWidgetProps } from "./donut-chart-widget";
+export { TrendAreaChart, type TrendAreaChartProps, type TrendPoint } from "./trend-area-chart";
+export { SparkBars, type SparkBarsProps } from "./spark-bars";
+export { DeltaBadge, type DeltaBadgeProps } from "./delta-badge";
