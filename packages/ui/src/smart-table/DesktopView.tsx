@@ -2,6 +2,7 @@
 
 import { ArrowDown, ArrowUp, ChevronsUpDown } from 'lucide-react';
 
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { SmartTableActions } from './SmartTableActions';
 import { getColumnSortKey, getNextSortState } from './sorting';
 import { TruncatedContent } from './TruncatedContent';
@@ -108,6 +109,11 @@ function SortableHeaderContent<T>({
   );
 }
 
+const desktopViewTexts = defineKitTexts({
+  en: { actionsHeader: 'Actions' },
+  it: { actionsHeader: 'Azioni' },
+});
+
 export function DesktopView<T>({
   data,
   columns,
@@ -129,6 +135,7 @@ export function DesktopView<T>({
   sortState,
   onSortChange,
 }: DesktopViewProps<T>): React.ReactElement {
+  const texts = useKitTexts(desktopViewTexts);
   const resolvedNoDataContent = noDataContent ?? noDataMessage;
   const hasActions = (actions?.length ?? 0) > 0 || renderActions !== undefined;
   const actionColumnWidth = hasActions ? `${String(ACTION_COLUMN_WIDTH_PX)}px` : undefined;
@@ -197,7 +204,7 @@ export function DesktopView<T>({
             }
             className="w-28 min-w-28 overflow-visible text-right whitespace-nowrap"
           >
-            Actions
+            {texts.actionsHeader}
           </TableHead>
         ) : null}
       </TableRow>

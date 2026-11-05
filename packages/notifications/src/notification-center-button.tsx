@@ -9,9 +9,11 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
+  useKitTexts,
 } from "@carefully-built/ui";
 
 import { NotificationCenterSheet } from "./notification-center-sheet";
+import { notificationTexts } from "./notification-texts";
 import type { NotificationCenterSheetProps } from "./notification-center-sheet";
 import type { NotificationRecord } from "./types";
 
@@ -27,8 +29,10 @@ export function NotificationCenterButton<TNotification extends NotificationRecor
   ...sheetProps
 }: NotificationCenterButtonProps<TNotification>): React.ReactElement {
   const [open, setOpen] = useState(false);
-  const openLabel = localeConfig?.openNotificationsLabel ?? "Open notifications";
-  const tooltipLabel = localeConfig?.tooltipLabel ?? "Notifications";
+  const { openNotificationsLabel: openLabel, tooltipLabel } = useKitTexts(
+    notificationTexts,
+    localeConfig,
+  );
 
   return (
     <>
