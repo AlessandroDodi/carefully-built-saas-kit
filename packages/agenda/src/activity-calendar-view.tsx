@@ -1,6 +1,7 @@
 'use client';
 
 import type { LocaleInput } from '@fullcalendar/core';
+import itLocale from '@fullcalendar/core/locales/it';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import type {
   DateSelectArg,
@@ -22,10 +23,11 @@ import type {
   ActivityListItem,
 } from './activity-helpers';
 import { buildActivityDisplayModel, toAlphaColor } from './activity-helpers';
+import { agendaTexts } from './agenda-texts';
 import { getActivityCalendarScopeForViewport } from './activity-calendar-scope';
 import { isAllDayActivityRange } from './activity-form-time';
 
-import { Button } from '@carefully-built/ui';
+import { Button, defineKitTexts, useKitTexts } from '@carefully-built/ui';
 import { Calendar } from '@carefully-built/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@carefully-built/ui';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@carefully-built/ui';
@@ -234,6 +236,46 @@ function findMatchingGoogleCalendarEvent(args: {
 
   return undefined;
 }
+
+// Defaults that follow the kit locale. `locale` / `localeCode` props still win,
+// so an app can pin a language regardless of the provider.
+const calendarViewTexts = defineKitTexts<{
+  readonly fullCalendarLocale: LocaleInput | undefined;
+  readonly localeCode: string;
+  readonly selectWeek: string;
+  readonly selectMonth: string;
+  readonly previousPeriod: string;
+  readonly nextPeriod: string;
+  readonly day: string;
+  readonly week: string;
+  readonly month: string;
+  readonly today: string;
+}>({
+  en: {
+    fullCalendarLocale: undefined,
+    localeCode: 'en-US',
+    selectWeek: 'Select week',
+    selectMonth: 'Select month',
+    previousPeriod: 'Previous period',
+    nextPeriod: 'Next period',
+    day: 'day',
+    week: 'week',
+    month: 'month',
+    today: 'today',
+  },
+  it: {
+    fullCalendarLocale: itLocale,
+    localeCode: 'it-IT',
+    selectWeek: 'Scegli la settimana',
+    selectMonth: 'Scegli il mese',
+    previousPeriod: 'Periodo precedente',
+    nextPeriod: 'Periodo successivo',
+    day: 'giorno',
+    week: 'settimana',
+    month: 'mese',
+    today: 'oggi',
+  },
+});
 
 function getWeekOptions(anchorDate: Date, localeCode: string): PickerOption[] {
   const startYear = anchorDate.getFullYear() - 2;
@@ -477,12 +519,15 @@ function CalendarEventTooltip({
   currentUserId,
   localeCode,
 }: CalendarTooltipSource & { readonly localeCode: string }): React.ReactNode {
+  const { busy } = useKitTexts(agendaTexts);
   const activityDisplay =
     activity && currentUserId
       ? buildActivityDisplayModel(activity, {
           density: 'large',
           scope: 'week',
           viewerUserId: currentUserId,
+          busyLabel: busy,
+          localeCode,
         })
       : null;
   const title = activityDisplay?.title ?? googleCalendarEvent?.title ?? 'Evento';
@@ -640,13 +685,16 @@ export function ActivityCalendarView({
   onMoveActivity,
   onEdit,
   readOnly = false,
-  locale,
-  localeCode = 'en-US',
+  locale: localeProp,
+  localeCode: localeCodeProp,
   firstDay = 1,
   // FullCalendar treats an explicit `undefined` as a value, not as "use the
   // default": the time grid then crashes computing its labels. Default it here.
   slotDuration = '00:30:00',
 }: ActivityCalendarViewProps): React.ReactElement {
+  const texts = useKitTexts(calendarViewTexts);
+  const locale = localeProp ?? texts.fullCalendarLocale;
+  const localeCode = localeCodeProp ?? texts.localeCode;
   const calendarRef = useRef<FullCalendar | null>(null);
   const anchorDateRef = useRef(anchorDate);
   const scopeRef = useRef(scope);
@@ -957,8 +1005,8 @@ export function ActivityCalendarView({
             value={selectedWeekValue}
             onValueChange={handleWeekChange}
             options={weekOptions}
-            ariaLabel="Select week"
-            placeholder="Select week"
+            ariaLabel={texts.selectWeek}
+            placeholder={texts.selectWeek}
             searchPlaceholder="Search week..."
             className="max-w-full min-w-[20rem]"
             triggerClassName="agenda-calendar-searchable-trigger"
@@ -972,8 +1020,8 @@ export function ActivityCalendarView({
             value={selectedMonthValue}
             onValueChange={handleMonthChange}
             options={monthOptions}
-            ariaLabel="Select month"
-            placeholder="Select month"
+            ariaLabel={texts.selectMonth}
+            placeholder={texts.selectMonth}
             searchPlaceholder="Search month..."
             className="max-w-full min-w-[16rem]"
             triggerClassName="agenda-calendar-searchable-trigger"
@@ -991,7 +1039,7 @@ export function ActivityCalendarView({
             onClick={() => {
               handleNavigate('prev');
             }}
-            aria-label="Previous period"
+            aria-label={texts.previousPeriod}
           >
             <ChevronLeft />
           </Button>
@@ -1002,7 +1050,7 @@ export function ActivityCalendarView({
             onClick={() => {
               handleNavigate('next');
             }}
-            aria-label="Next period"
+            aria-label={texts.nextPeriod}
           >
             <ChevronRight />
           </Button>
@@ -1015,10 +1063,10 @@ export function ActivityCalendarView({
         initialDate={anchorDate}
         headerToolbar={false}
         buttonText={{
-          timeGridDay: 'day',
-          timeGridWeek: 'week',
-          dayGridMonth: 'month',
-          today: 'today',
+          timeGridDay: texts.day,
+          timeGridWeek: texts.week,
+          dayGridMonth: texts.month,
+          today: texts.today,
         }}
         locale={locale}
         firstDay={firstDay}

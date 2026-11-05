@@ -4,6 +4,10 @@ import { Clock3 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 
+import { useKitTexts } from '@carefully-built/ui';
+
+import { agendaTexts } from './agenda-texts';
+
 function cn(...classes: readonly (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(' ');
 }
@@ -57,13 +61,13 @@ export interface ShiftTimelineProps {
   readonly slotHeight?: number;
   /** Axis orientation (default `"vertical"`). */
   readonly orientation?: 'vertical' | 'horizontal';
-  /** Locale used to format tick labels (default `"en-US"`). */
+  /** Locale used to format tick labels (default: the kit locale, `"en-US"` without provider). */
   readonly locale?: string;
   /** Invoked with the assignment id when a block is clicked. Makes blocks focusable buttons. */
   readonly onAssignmentClick?: (id: string) => void;
   /** Custom renderer for a block's inner content. Receives the assignment. */
   readonly renderCard?: (assignment: ShiftTimelineAssignment) => ReactNode;
-  /** Message shown when there are no assignments (default `"No shifts scheduled"`). */
+  /** Message shown when there are no assignments (default: the kit locale's copy). */
   readonly emptyLabel?: string;
   readonly className?: string;
 }
@@ -223,12 +227,15 @@ export function ShiftTimeline({
   slotMinutes = 30,
   slotHeight = 56,
   orientation = 'vertical',
-  locale = 'en-US',
+  locale: localeProp,
   onAssignmentClick,
   renderCard,
-  emptyLabel = 'No shifts scheduled',
+  emptyLabel: emptyLabelProp,
   className,
 }: ShiftTimelineProps): React.ReactElement {
+  const texts = useKitTexts(agendaTexts);
+  const locale = localeProp ?? texts.localeCode;
+  const emptyLabel = emptyLabelProp ?? texts.shiftTimeline.empty;
   const isMobile = useIsMobile();
 
   const rangeStart = parseTimeToMinutes(dayStart);
@@ -303,7 +310,7 @@ export function ShiftTimeline({
     <div
       className={cn('rounded-lg border border-border bg-background p-3 md:p-4', className)}
       role="list"
-      aria-label="Shift timeline"
+      aria-label={texts.shiftTimeline.ariaLabel}
     >
       <div
         className={cn('relative', isVertical ? 'flex' : 'flex flex-col')}

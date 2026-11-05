@@ -53,6 +53,10 @@ interface BuildActivityDisplayModelOptions {
   density: ActivityDensity;
   scope: ActivityCalendarScope;
   viewerUserId: string;
+  /** Title shown instead of a private activity of someone else. Default `'Busy'`. */
+  busyLabel?: string;
+  /** BCP-47 tag for the time label. Default `'en-US'`. */
+  localeCode?: string;
 }
 
 export interface ActivityDisplayModel {
@@ -77,16 +81,16 @@ interface FilterActivitiesOptions {
   dateTo?: string;
 }
 
-function formatTimeRange(startAt?: number, endAt?: number): string | null {
+function formatTimeRange(startAt?: number, endAt?: number, localeCode = 'en-US'): string | null {
   if (!startAt) {
     return null;
   }
 
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  const dateFormatter = new Intl.DateTimeFormat(localeCode, {
     day: 'numeric',
     month: 'short',
   });
-  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  const timeFormatter = new Intl.DateTimeFormat(localeCode, {
     hour: '2-digit',
     minute: '2-digit',
   });
@@ -123,8 +127,8 @@ export function buildActivityDisplayModel(
 ): ActivityDisplayModel {
   const masked = isPrivateForViewer(activity, options.viewerUserId);
   const baseModel: ActivityDisplayModel = {
-    title: masked ? 'Busy' : activity.title,
-    timeLabel: formatTimeRange(activity.startAt, activity.endAt),
+    title: masked ? (options.busyLabel ?? 'Busy') : activity.title,
+    timeLabel: formatTimeRange(activity.startAt, activity.endAt, options.localeCode),
     typeLabel: masked ? null : activity.activityTypeLabel,
     assigneeLabel: masked ? null : (activity.assignedUserName ?? null),
     description: masked ? null : (activity.description ?? null),

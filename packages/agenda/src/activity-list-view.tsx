@@ -12,7 +12,9 @@ import {
   toAlphaColor,
 } from './activity-helpers';
 
-import { Button, Card, CardContent, Chip } from '@carefully-built/ui';
+import { Button, Card, CardContent, Chip, useKitTexts } from '@carefully-built/ui';
+
+import { agendaTexts } from './agenda-texts';
 
 interface ActivityListViewProps {
   readonly activities: ActivityListItem[];
@@ -29,6 +31,8 @@ export function ActivityListView({
   onCreate,
   emptyState,
 }: ActivityListViewProps): React.ReactElement {
+  const texts = useKitTexts(agendaTexts);
+
   if (activities.length === 0) {
     return emptyState ? (
       <>{emptyState}</>
@@ -39,14 +43,14 @@ export function ActivityListView({
             <CalendarDays className="size-6" />
           </div>
           <div className="space-y-1.5">
-            <h3 className="text-lg font-medium tracking-tight">No activities found</h3>
+            <h3 className="text-lg font-medium tracking-tight">{texts.list.emptyTitle}</h3>
             <p className="max-w-2xl text-sm text-muted-foreground">
-              Create the first activity or change the filters to see more results.
+              {texts.list.emptyDescription}
             </p>
           </div>
           <Button className="mt-5" onClick={onCreate}>
             <Plus className="mr-2 size-4" />
-            Add activity
+            {texts.list.addActivity}
           </Button>
         </CardContent>
       </Card>
@@ -60,6 +64,8 @@ export function ActivityListView({
           density: 'large',
           scope: 'week',
           viewerUserId: currentUserId,
+          busyLabel: texts.busy,
+          localeCode: texts.localeCode,
         });
         const canEdit = !displayModel.isPrivatePlaceholder;
 

@@ -5,7 +5,10 @@ import { CalendarRange } from 'lucide-react';
 import type { ActivityListItem } from './activity-helpers';
 
 import { formatCalendarWidgetTime, isActivityPast } from './activity-calendar-widget';
+import { useKitTexts } from '@carefully-built/ui';
 import { WidgetEmptyState } from '@carefully-built/widgets';
+
+import { agendaTexts } from './agenda-texts';
 
 function cn(...classes: readonly (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(' ');
@@ -16,12 +19,14 @@ export function SharedActivityCalendarEvents({
 }: {
   readonly activities: readonly ActivityListItem[];
 }): React.ReactElement {
+  const { localeCode, widget } = useKitTexts(agendaTexts);
+
   if (activities.length === 0) {
     return (
       <WidgetEmptyState
         icon={CalendarRange}
-        title="No events"
-        description="There are no appointments for the selected day."
+        title={widget.emptyTitle}
+        description={widget.emptyDescription}
         minHeightClassName="min-h-[180px]"
       />
     );
@@ -40,7 +45,7 @@ export function SharedActivityCalendarEvents({
             />
             <div className="min-w-0 space-y-0.5">
               <p className="text-muted-foreground text-[11px] font-medium">
-                {formatCalendarWidgetTime(activity) ?? 'No time set'}
+                {formatCalendarWidgetTime(activity, localeCode) ?? widget.noTime}
               </p>
               <p
                 className={cn(

@@ -1,6 +1,8 @@
 'use client';
 
-import { cn } from '@carefully-built/ui';
+import { cn, useKitTexts } from '@carefully-built/ui';
+
+import { agendaTexts } from './agenda-texts';
 
 import type { ActivityCalendarScope } from './activity-helpers';
 
@@ -30,11 +32,16 @@ export const defaultActivityViewModeOptions: readonly ActivityViewModeToggleOpti
 export function ActivityViewModeToggle({
   value,
   onChange,
-  options = defaultActivityViewModeOptions,
+  options,
   className = 'w-full sm:w-auto sm:min-w-[280px]',
   disabled = false,
   scrollable = false,
 }: ActivityViewModeToggleProps): React.ReactElement {
+  const { viewModes } = useKitTexts(agendaTexts);
+  // Without custom options the labels follow the kit locale.
+  const resolvedOptions =
+    options ?? defaultActivityViewModeOptions.map((option) => ({ ...option, label: viewModes[option.value] }));
+
   return (
     <div
       role="group"
@@ -45,7 +52,7 @@ export function ActivityViewModeToggle({
         className,
       )}
     >
-      {options.map((option) => {
+      {resolvedOptions.map((option) => {
         const isSelected = option.value === value;
 
         return (

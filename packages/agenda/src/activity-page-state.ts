@@ -5,6 +5,7 @@ import { useResourceSheetState } from '@carefully-built/resource-kit';
 import { parseAsString, useQueryState } from 'nuqs';
 import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
+import { useKitTexts } from '@carefully-built/ui';
 
 import type { LucideIcon } from 'lucide-react';
 
@@ -28,6 +29,7 @@ import {
   type AvailableActivityType,
   type FallbackActivityType,
 } from './activity-types';
+import { agendaTexts } from './agenda-texts';
 
 export interface AgendaUserLike {
   readonly _id: string;
@@ -126,9 +128,8 @@ export interface EditableActivity extends ActivityListItem {
 }
 
 /**
- * Every string the hook shows (toasts, filter labels, user fallback). The kit has
- * no i18n: an host in another language passes its own copy, missing keys fall
- * back to English.
+ * Every string the hook shows (toasts, filter labels, user fallback). Defaults
+ * follow the kit locale (`KitLocaleProvider`); keys passed in `messages` win.
  */
 export interface AgendaPageMessages {
   readonly activityTypeFilterLabel: string;
@@ -154,30 +155,7 @@ export interface AgendaPageMessages {
   readonly activityTypeArchiveFailed: string;
 }
 
-export const DEFAULT_AGENDA_PAGE_MESSAGES: AgendaPageMessages = {
-  activityTypeFilterLabel: 'Activity type',
-  operatorFilterLabel: 'Operator',
-  unnamedUser: 'User',
-  activityTypeNotFound: 'Activity type not found.',
-  activityTypeCreateFailed: 'Unable to create the selected activity type.',
-  currentUserNotFound: 'Current user not found.',
-  activityAdded: 'Activity added',
-  activityUpdated: 'Activity updated',
-  activitySaveFailed: 'An error occurred while saving the activity.',
-  activityCalendarSyncFailed: 'Activity saved, but it could not be synced with Google Calendar.',
-  activityMoved: 'Activity moved',
-  activityMoveFailed: 'Unable to move the activity.',
-  activityArchived: 'Activity archived',
-  activityArchiveFailed: 'Unable to archive the activity.',
-  activityCalendarDeleteFailed:
-    'Activity archived in the app, but it could not be deleted from Google Calendar.',
-  activityTypeAdded: 'Activity type added',
-  activityTypeAddFailed: 'Unable to create the activity type.',
-  activityTypeUpdated: 'Activity type updated',
-  activityTypeUpdateFailed: 'Unable to update the activity type.',
-  activityTypeArchived: 'Activity type archived',
-  activityTypeArchiveFailed: 'Unable to archive the activity type.',
-};
+export const DEFAULT_AGENDA_PAGE_MESSAGES: AgendaPageMessages = agendaTexts.en.pageMessages;
 
 export interface UseAgendaPageStateOptions {
   readonly activities: readonly ActivityListItem[] | undefined;
@@ -190,13 +168,13 @@ export interface UseAgendaPageStateOptions {
   /**
    * Tipologie di partenza per un'organizzazione che non ne ha. Sono confrontate
    * con quelle vere per etichetta: un host con i dati in un'altra lingua deve
-   * passare le sue, altrimenti i default inglesi compaiono tutti come righe in
-   * piu' e non cancellabili. Default: il set inglese.
+   * passare le sue, altrimenti i default compaiono tutti come righe in piu' e
+   * non cancellabili. Default: il set della lingua del kit.
    */
   readonly fallbackTypes?: readonly FallbackActivityType[];
   /** Segnaposto che l'host usa per un tipo sparito. Default: quello inglese. */
   readonly missingTypeLabel?: string;
-  /** Copy of toasts and filter labels. Default: English, see `DEFAULT_AGENDA_PAGE_MESSAGES`. */
+  /** Copy of toasts and filter labels. Default: the kit locale's copy. */
   readonly messages?: Partial<AgendaPageMessages>;
   readonly icons: {
     readonly activityType: LucideIcon;
@@ -439,7 +417,8 @@ function buildOptimisticActivity(args: {
 }
 
 export function useAgendaPageState(options: UseAgendaPageStateOptions) {
-  const messages = { ...DEFAULT_AGENDA_PAGE_MESSAGES, ...options.messages };
+  const texts = useKitTexts(agendaTexts);
+  const messages = { ...texts.pageMessages, ...options.messages };
   const [isTypeDialogOpen, setIsTypeDialogOpen] = useState(false);
   const [createDraftPreset, setCreateDraftPreset] = useState<ActivityDraftPreset>(() => ({
     date: formatDateInputValue(new Date().getTime()),
@@ -515,7 +494,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
       localTypes: localActivityTypes,
       activities: mergedActivities,
       archivedIds: archivedActivityTypeIds,
-      fallbackTypes: options.fallbackTypes,
+      fallbackTypes: options.fallbackTypes ?? texts.defaultActivityTypes,
       missingTypeLabel: options.missingTypeLabel,
     });
   }, [
@@ -525,6 +504,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
     options.fallbackTypes,
     options.missingTypeLabel,
     serverActivityTypes,
+    texts.defaultActivityTypes,
   ]);
   const orgUsers = useMemo(() => {
     const activeUsers = (options.organizationUsers ?? []).filter((orgUser) => !orgUser.archivedAt);
@@ -591,8 +571,8 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
             activity.associations.map((association) => [association.value, association]),
           ),
         ).values(),
-      ].sort((left, right) => left.label.localeCompare(right.label, 'en-US')),
-    [mergedActivities],
+      ].sort((left, right) => left.label.localeCompare(right.label, texts.localeCode)),
+    [mergedActivities, texts.localeCode],
   );
   const activityTypeFilterConfig = useMemo(
     () =>
@@ -707,7 +687,7 @@ export function useAgendaPageState(options: UseAgendaPageStateOptions) {
 
   async function submitActivity(values: AgendaActivityFormValues): Promise<void> {
     if (!currentUser?._id) {
-      throw new Error('Current user not found.');
+      throw new Error(messages.currentUserNotFound);
     }
 
     requireOrganizationId(options.organizationId);

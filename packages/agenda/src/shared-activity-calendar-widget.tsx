@@ -9,7 +9,10 @@ import { SharedActivityCalendarHeader } from './shared-activity-calendar-header'
 
 import type { ActivityListItem } from './activity-helpers';
 
+import { useKitTexts } from '@carefully-built/ui';
 import { DashboardWidget } from '@carefully-built/widgets';
+
+import { agendaTexts } from './agenda-texts';
 import {
   addLocalDays,
   getActivitiesForDay,
@@ -32,6 +35,7 @@ export function SharedActivityCalendarWidget({
   className,
   isLoading = false,
 }: SharedActivityCalendarWidgetProps): React.ReactElement {
+  const { widget } = useKitTexts(agendaTexts);
   const today = useMemo(() => startOfLocalDay(new Date()), []);
   const [selectedDate, setSelectedDate] = useState(today);
   const [windowStart, setWindowStart] = useState(today);
@@ -61,7 +65,7 @@ export function SharedActivityCalendarWidget({
   return (
     <DashboardWidget
       icon={CalendarRange}
-      title="Agenda"
+      title={widget.title}
       className={cn('min-h-[23.5rem]', className)}
       isLoading={isLoading}
       loadingFallback={<div className="bg-muted h-[19rem] w-full animate-pulse rounded-[10px]" />}

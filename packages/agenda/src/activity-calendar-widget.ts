@@ -63,14 +63,17 @@ export function isActivityPast(activity: CalendarWidgetActivity, now: Date): boo
   return referenceTimestamp < now.getTime();
 }
 
-export function formatCalendarWidgetTime(activity: CalendarWidgetActivity): string | null {
+export function formatCalendarWidgetTime(
+  activity: CalendarWidgetActivity,
+  localeCode = 'en-US',
+): string | null {
   const scheduledAt = getScheduledTimestamp(activity);
 
   if (!scheduledAt) {
     return null;
   }
 
-  const timeFormatter = new Intl.DateTimeFormat('en-US', {
+  const timeFormatter = new Intl.DateTimeFormat(localeCode, {
     hour: '2-digit',
     minute: '2-digit',
   });
