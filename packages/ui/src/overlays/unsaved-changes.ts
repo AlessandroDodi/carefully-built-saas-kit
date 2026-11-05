@@ -1,3 +1,6 @@
+import { defineKitTexts, resolveKitTexts } from '../locale/kit-texts';
+
+import type { KitLocale } from '../locale/kit-locale';
 import type { ReactNode } from 'react';
 
 /**
@@ -7,8 +10,8 @@ import type { ReactNode } from 'react';
  * and a close attempt - Escape, an outside click, the X, or Cancel - is held
  * back and turned into a confirmation instead.
  *
- * As everywhere else in the kit, there is no i18n here: the copy below is the
- * English fallback and every line of it is overridable.
+ * Every line of the copy is overridable; when it is not, the default comes
+ * from the active kit locale.
  */
 export interface UnsavedChangesDialogCopy {
   readonly title: ReactNode;
@@ -31,13 +34,26 @@ export interface UnsavedChangesGuard {
 /** `true` guards with the default copy; an object guards and overrides copy. */
 export type ConfirmCloseWhenDirty = boolean | UnsavedChangesGuard;
 
-export const DEFAULT_UNSAVED_CHANGES_DIALOG_COPY: UnsavedChangesDialogCopy = {
-  title: 'Unsaved changes',
-  description: 'If you close now you will lose your unsaved changes.',
-  discardLabel: 'Close without saving',
-  stayLabel: 'Keep editing',
-  closeLabel: 'Close',
-};
+export const unsavedChangesDialogTexts = defineKitTexts<UnsavedChangesDialogCopy>({
+  en: {
+    title: 'Unsaved changes',
+    description: 'If you close now you will lose your unsaved changes.',
+    discardLabel: 'Close without saving',
+    stayLabel: 'Keep editing',
+    closeLabel: 'Close',
+  },
+  it: {
+    title: 'Modifiche non salvate',
+    description: 'Chiudendo ora le modifiche non salvate andranno perse.',
+    discardLabel: 'Chiudi senza salvare',
+    stayLabel: 'Continua a modificare',
+    closeLabel: 'Chiudi',
+  },
+});
+
+/** English copy, kept for apps that imported the constant directly. */
+export const DEFAULT_UNSAVED_CHANGES_DIALOG_COPY: UnsavedChangesDialogCopy =
+  unsavedChangesDialogTexts.en;
 
 export function isUnsavedChangesGuardDirty(
   confirmCloseWhenDirty: ConfirmCloseWhenDirty | undefined,
@@ -51,18 +67,19 @@ export function isUnsavedChangesGuardDirty(
 
 export function resolveUnsavedChangesDialogCopy(
   copy: Partial<UnsavedChangesDialogCopy> | ConfirmCloseWhenDirty | undefined,
+  locale: KitLocale = 'en',
 ): UnsavedChangesDialogCopy {
   if (!copy || typeof copy === 'boolean') {
-    return DEFAULT_UNSAVED_CHANGES_DIALOG_COPY;
+    return unsavedChangesDialogTexts[locale];
   }
 
-  return {
-    title: copy.title ?? DEFAULT_UNSAVED_CHANGES_DIALOG_COPY.title,
-    description: copy.description ?? DEFAULT_UNSAVED_CHANGES_DIALOG_COPY.description,
-    discardLabel: copy.discardLabel ?? DEFAULT_UNSAVED_CHANGES_DIALOG_COPY.discardLabel,
-    stayLabel: copy.stayLabel ?? DEFAULT_UNSAVED_CHANGES_DIALOG_COPY.stayLabel,
-    closeLabel: copy.closeLabel ?? DEFAULT_UNSAVED_CHANGES_DIALOG_COPY.closeLabel,
-  };
+  return resolveKitTexts(unsavedChangesDialogTexts, locale, {
+    title: copy.title,
+    description: copy.description,
+    discardLabel: copy.discardLabel,
+    stayLabel: copy.stayLabel,
+    closeLabel: copy.closeLabel,
+  });
 }
 
 export function shouldConfirmUnsavedChangesClose({

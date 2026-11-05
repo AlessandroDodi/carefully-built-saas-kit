@@ -6,7 +6,13 @@ import { MobileView } from './MobileView';
 import type { SmartTableProps } from './types';
 
 import { cn } from '../utils/cn';
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { useIsMobile } from '../utils/use-media-query';
+
+const smartTableTexts = defineKitTexts({
+  en: { noDataMessage: 'No data available' },
+  it: { noDataMessage: 'Nessun dato disponibile' },
+});
 
 export function SmartTable<T>({
   data,
@@ -18,7 +24,7 @@ export function SmartTable<T>({
   sortByLabel,
   actionHandlers,
   renderActions,
-  noDataMessage = 'No data available',
+  noDataMessage: noDataMessageProp,
   noDataContent,
   getRowKey = (item) => {
     // Default: try _id, id, or index
@@ -36,6 +42,7 @@ export function SmartTable<T>({
   sortState,
   onSortChange,
 }: SmartTableProps<T>): React.ReactElement {
+  const { noDataMessage } = useKitTexts(smartTableTexts, { noDataMessage: noDataMessageProp });
   const isMobile = useIsMobile();
 
   if (isMobile) {

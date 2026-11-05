@@ -6,8 +6,9 @@ import ReactCountryFlag from 'react-country-flag';
 import { getCountries } from 'react-phone-number-input';
 
 import { FormFieldLabel } from './form-field-label';
+import { vatInputTexts } from './field-texts';
 
-import { Input } from '@carefully-built/ui';
+import { Input, useKitTexts } from '@carefully-built/ui';
 import { SearchableSelect } from '@carefully-built/ui';
 import { cn } from '@carefully-built/ui';
 
@@ -55,15 +56,28 @@ export function CountryVatInput({
   vatNumber,
   onCountryCodeChange,
   onVatNumberChange,
-  label = 'VAT number',
+  label: labelProp,
   className,
-  countryLocale = 'en-US',
-  countryPlaceholder = 'Country',
-  countrySearchPlaceholder = 'Search country...',
-  countryEmptyMessage = 'No results found',
+  countryLocale: countryLocaleProp,
+  countryPlaceholder: countryPlaceholderProp,
+  countrySearchPlaceholder: countrySearchPlaceholderProp,
+  countryEmptyMessage: countryEmptyMessageProp,
   vatNumberId,
   placeholder = '04013210355',
 }: CountryVatInputProps): React.ReactElement {
+  const {
+    label,
+    countryLocale,
+    countryPlaceholder,
+    countrySearchPlaceholder,
+    countryEmptyMessage,
+  } = useKitTexts(vatInputTexts, {
+    label: labelProp,
+    countryLocale: countryLocaleProp,
+    countryPlaceholder: countryPlaceholderProp,
+    countrySearchPlaceholder: countrySearchPlaceholderProp,
+    countryEmptyMessage: countryEmptyMessageProp,
+  });
   const countryOptions = useMemo(() => getVatCountryOptions(countryLocale), [countryLocale]);
 
   return (

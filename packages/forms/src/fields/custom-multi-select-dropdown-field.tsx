@@ -4,11 +4,12 @@ import { ChevronDown } from 'lucide-react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { FormFieldLabel } from './form-field-label';
+import { multiSelectDropdownFieldTexts } from './field-texts';
 
 import type { LucideIcon } from 'lucide-react';
 import type { FieldValues, Path } from 'react-hook-form';
 
-import { Button } from '@carefully-built/ui';
+import { Button, useKitTexts } from '@carefully-built/ui';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -57,10 +58,13 @@ export function CustomMultiSelectDropdownField<TValues extends FieldValues>({
   label,
   labelIcon,
   options,
-  placeholder = 'Select options',
+  placeholder: placeholderProp,
   disabled = false,
   className,
 }: CustomMultiSelectDropdownFieldProps<TValues>): React.ReactElement {
+  const { placeholder } = useKitTexts(multiSelectDropdownFieldTexts, {
+    placeholder: placeholderProp,
+  });
   const { control } = useFormContext<TValues>();
 
   return (

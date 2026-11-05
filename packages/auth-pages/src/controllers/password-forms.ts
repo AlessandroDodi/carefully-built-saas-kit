@@ -5,19 +5,24 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-/** Validation copy. Missing keys fall back to English. */
+import { resolveKitTexts, useKitTexts } from "@carefully-built/ui";
+
+import { authMessageTexts } from "../locale/auth-texts";
+
+/**
+ * Validation copy. Missing keys fall back to the active kit locale in the form
+ * hooks, and to English in the standalone schema builders.
+ */
 export interface AuthValidationMessages {
   readonly invalidEmail?: string;
   readonly passwordTooShort?: string;
   readonly passwordMismatch?: string;
 }
 
-function resolveValidationMessages(messages: AuthValidationMessages = {}) {
-  return {
-    invalidEmail: messages.invalidEmail ?? "Enter a valid email address",
-    passwordTooShort: messages.passwordTooShort ?? "Password must be at least 8 characters",
-    passwordMismatch: messages.passwordMismatch ?? "Passwords do not match",
-  };
+function resolveValidationMessages(
+  messages: AuthValidationMessages = {},
+): Required<AuthValidationMessages> {
+  return resolveKitTexts(authMessageTexts, "en", messages);
 }
 
 export function buildForgotPasswordSchema(messages?: AuthValidationMessages) {
@@ -109,11 +114,12 @@ export function useLoginForm({
   onSuccess,
   messages,
 }: UseLoginFormOptions): UseLoginFormResult {
+  const copy = useKitTexts(authMessageTexts, messages);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(buildLoginSchema(messages)),
+    resolver: zodResolver(buildLoginSchema(copy)),
     defaultValues: {
       email: "",
       password: "",
@@ -138,7 +144,7 @@ export function useLoginForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "An unexpected error occurred",
+          : copy.unexpectedError,
       );
       form.setValue("password", "");
     } finally {
@@ -171,11 +177,12 @@ export function useSignupForm({
   onSuccess,
   messages,
 }: UseSignupFormOptions): UseSignupFormResult {
+  const copy = useKitTexts(authMessageTexts, messages);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<SignupFormData>({
-    resolver: zodResolver(buildSignupSchema(messages)),
+    resolver: zodResolver(buildSignupSchema(copy)),
     defaultValues: {
       email: "",
       password: "",
@@ -200,7 +207,7 @@ export function useSignupForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "An unexpected error occurred",
+          : copy.unexpectedError,
       );
       form.setValue("password", "");
     } finally {
@@ -234,13 +241,14 @@ export function useForgotPasswordForm({
   sendPasswordResetEmail,
   messages,
 }: UseForgotPasswordFormOptions): UseForgotPasswordFormResult {
+  const copy = useKitTexts(authMessageTexts, messages);
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [email, setEmail] = useState("");
 
   const form = useForm<ForgotPasswordFormData>({
-    resolver: zodResolver(buildForgotPasswordSchema(messages)),
+    resolver: zodResolver(buildForgotPasswordSchema(copy)),
     defaultValues: {
       email: "",
     },
@@ -263,7 +271,7 @@ export function useForgotPasswordForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "An unexpected error occurred",
+          : copy.unexpectedError,
       );
     } finally {
       setLoading(false);
@@ -306,11 +314,12 @@ export function useUpdatePasswordForm({
   onSuccess,
   messages,
 }: UseUpdatePasswordFormOptions): UseUpdatePasswordFormResult {
+  const copy = useKitTexts(authMessageTexts, messages);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
 
   const form = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(buildResetPasswordSchema(messages)),
+    resolver: zodResolver(buildResetPasswordSchema(copy)),
     defaultValues: {
       password: "",
       confirmPassword: "",
@@ -322,7 +331,7 @@ export function useUpdatePasswordForm({
     setError(undefined);
 
     if (!token) {
-      setError(messages?.invalidToken ?? "Invalid reset token");
+      setError(copy.invalidToken);
       setLoading(false);
       return;
     }
@@ -339,7 +348,7 @@ export function useUpdatePasswordForm({
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : messages?.unexpectedError ?? "An unexpected error occurred",
+          : copy.unexpectedError,
       );
     } finally {
       setLoading(false);

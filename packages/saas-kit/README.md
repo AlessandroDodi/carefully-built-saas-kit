@@ -163,4 +163,12 @@ Use `@carefully-built/cli add` when:
 
 ## Copy And Localization
 
-SaaS kit defaults are English. Italian or other localized apps should pass app-specific copy through the component label/config props. Components with user-facing copy are designed to expose labels or configuration objects so package defaults do not force one language across all apps.
+Every user-facing string is still a label/config prop. Defaults follow the kit locale: English without a provider, Italian with `KitLocaleProvider`:
+
+```tsx
+import { KitLocaleProvider } from '@carefully-built/saas-kit';
+
+<KitLocaleProvider locale="it">{children}</KitLocaleProvider>;
+```
+
+Localized so far: `ui` (overlays, table toolbar, searchable select, empty and error states, file dropzone, user picker), `forms` fields, `auth-pages` (pages, forms, social buttons, organization selection, legal consent, validation) and the `search` command palette. Server-side auth action messages stay in `config.messages`.

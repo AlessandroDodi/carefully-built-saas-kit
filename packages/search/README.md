@@ -46,3 +46,12 @@ import { CommandPalette } from '@carefully-built/search/command-palette';
 ```
 
 The root export stays UI-free so backend code can keep using search helpers without pulling React into the bundle.
+
+## Lingua
+
+Default labels follow the kit locale set with `KitLocaleProvider` from
+`@carefully-built/ui` (English without a provider). Props still win.
+
+```tsx
+<KitLocaleProvider locale="it">{children}</KitLocaleProvider>
+```

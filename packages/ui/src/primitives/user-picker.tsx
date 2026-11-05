@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { Button } from './button';
 import { Input } from './input';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { cn } from '../utils/cn';
 
 interface BaseUserPickerProps {
@@ -108,15 +109,39 @@ function MultipleUserValue({ selectedUsers, placeholder, copy }: {
   );
 }
 
+type UserPickerTexts = Required<Omit<UserPickerCopy, 'formatSelectedCount'>>;
+
+const userPickerTexts = defineKitTexts<UserPickerTexts>({
+  en: {
+    fallbackName: 'User',
+    singlePlaceholder: 'Select person',
+    multiplePlaceholder: 'Select people',
+    searchPlaceholder: 'Search people...',
+    emptyMessage: 'No people available',
+    selectedSingleLabel: 'person',
+    selectedPluralLabel: 'people',
+  },
+  it: {
+    fallbackName: 'Utente',
+    singlePlaceholder: 'Seleziona una persona',
+    multiplePlaceholder: 'Seleziona le persone',
+    searchPlaceholder: 'Cerca persone…',
+    emptyMessage: 'Nessuna persona disponibile',
+    selectedSingleLabel: 'persona',
+    selectedPluralLabel: 'persone',
+  },
+});
+
 export function UserPicker(props: UserPickerProps): React.ReactElement {
+  const texts = useKitTexts(userPickerTexts, props.copy);
+  const copy: UserPickerCopy = { ...texts, formatSelectedCount: props.copy?.formatSelectedCount };
   const {
     options,
-    copy = {},
     placeholder = props.mode === 'single'
-      ? copy.singlePlaceholder ?? 'Select person'
-      : copy.multiplePlaceholder ?? 'Select people',
-    searchPlaceholder = copy.searchPlaceholder ?? 'Search people...',
-    emptyMessage = copy.emptyMessage ?? 'No people available',
+      ? texts.singlePlaceholder
+      : texts.multiplePlaceholder,
+    searchPlaceholder = texts.searchPlaceholder,
+    emptyMessage = texts.emptyMessage,
     disabled = false,
     className,
     triggerClassName,

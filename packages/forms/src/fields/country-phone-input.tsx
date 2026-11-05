@@ -6,8 +6,9 @@ import ReactCountryFlag from 'react-country-flag';
 import { getCountries, getCountryCallingCode } from 'react-phone-number-input';
 
 import { FormFieldLabel } from './form-field-label';
+import { phoneInputTexts } from './field-texts';
 
-import { Input } from '@carefully-built/ui';
+import { Input, useKitTexts } from '@carefully-built/ui';
 import { SearchableSelect } from '@carefully-built/ui';
 import { cn } from '@carefully-built/ui';
 
@@ -84,17 +85,30 @@ export function CountryPhoneInput({
   localNumber,
   onCountryCodeChange,
   onLocalNumberChange,
-  label = 'Phone',
-  countryLocale = 'en-US',
-  countryPlaceholder = 'Country',
-  countrySearchPlaceholder = 'Search country or prefix...',
-  countryEmptyMessage = 'No results found',
+  label: labelProp,
+  countryLocale: countryLocaleProp,
+  countryPlaceholder: countryPlaceholderProp,
+  countrySearchPlaceholder: countrySearchPlaceholderProp,
+  countryEmptyMessage: countryEmptyMessageProp,
   required = false,
   className,
   localNumberId,
   placeholder = '392 0178571',
   error,
 }: CountryPhoneInputProps): React.ReactElement {
+  const {
+    label,
+    countryLocale,
+    countryPlaceholder,
+    countrySearchPlaceholder,
+    countryEmptyMessage,
+  } = useKitTexts(phoneInputTexts, {
+    label: labelProp,
+    countryLocale: countryLocaleProp,
+    countryPlaceholder: countryPlaceholderProp,
+    countrySearchPlaceholder: countrySearchPlaceholderProp,
+    countryEmptyMessage: countryEmptyMessageProp,
+  });
   const countryOptions = useMemo(() => getPhoneCountryOptions(countryLocale), [countryLocale]);
 
   return (

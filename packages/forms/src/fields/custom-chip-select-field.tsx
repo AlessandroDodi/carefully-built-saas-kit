@@ -3,11 +3,12 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { FormFieldLabel } from './form-field-label';
+import { chipSelectFieldTexts } from './field-texts';
 
 import type { LucideIcon } from 'lucide-react';
 import type { FieldValues, Path } from 'react-hook-form';
 
-import { ChipButton } from '@carefully-built/ui';
+import { ChipButton, useKitTexts } from '@carefully-built/ui';
 import { cn } from '@carefully-built/ui';
 
 interface ChipOption {
@@ -53,11 +54,12 @@ export function CustomChipSelectField<TValues extends FieldValues>({
   options,
   disabled = false,
   allowDeselect = true,
-  allLabel = 'All',
+  allLabel: allLabelProp,
   multiple = false,
   className,
   getOptionStyle,
 }: CustomChipSelectFieldProps<TValues>): React.ReactElement {
+  const { allLabel } = useKitTexts(chipSelectFieldTexts, { allLabel: allLabelProp });
   const { control } = useFormContext<TValues>();
 
   return (

@@ -6,6 +6,7 @@ import { Dialog as SheetPrimitive } from 'radix-ui';
 
 import { Button } from './button';
 import { cn } from '../utils/cn';
+import { useKitLocale } from '../locale/kit-locale';
 import { resolveOverlayCloseLabel } from '../overlays/responsive-sheet.labels';
 
 function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
@@ -44,6 +45,8 @@ function SheetContent({
   showCloseButton?: boolean;
   closeLabel?: React.ReactNode;
 }) {
+  const locale = useKitLocale();
+
   return (
     <SheetPortal>
       <SheetOverlay />
@@ -61,7 +64,7 @@ function SheetContent({
           <SheetPrimitive.Close data-slot="sheet-close" asChild>
             <Button variant="ghost" className="absolute top-3 right-3" size="icon-sm">
               <X className="size-4" />
-              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel)}</span>
+              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel, locale)}</span>
             </Button>
           </SheetPrimitive.Close>
         ) : null}

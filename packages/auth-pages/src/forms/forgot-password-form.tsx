@@ -5,7 +5,8 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomInputField } from "@carefully-built/forms";
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { forgotPasswordFormTexts } from "../locale/auth-texts";
 
 import type { AuthFormState } from "../types";
 
@@ -39,11 +40,11 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
   error,
   email,
   loginHref = "/login/email",
-  emailLabel = "Email",
-  emailPlaceholder = "tuaemail@gmail.com",
-  submitLabel = "Send reset link",
-  loadingLabel = "Sending...",
-  backToLoginLabel = "Back to login",
+  emailLabel: emailLabelProp,
+  emailPlaceholder: emailPlaceholderProp,
+  submitLabel: submitLabelProp,
+  loadingLabel: loadingLabelProp,
+  backToLoginLabel: backToLoginLabelProp,
   renderSentMessage,
   className,
   sentClassName,
@@ -51,6 +52,19 @@ export function ForgotPasswordForm<TValues extends FieldValues>({
   errorClassName,
   buttonClassName,
 }: ForgotPasswordFormProps<TValues>): React.ReactElement {
+  const {
+    emailLabel,
+    emailPlaceholder,
+    submitLabel,
+    loadingLabel,
+    backToLoginLabel,
+  } = useKitTexts(forgotPasswordFormTexts, {
+    emailLabel: emailLabelProp,
+    emailPlaceholder: emailPlaceholderProp,
+    submitLabel: submitLabelProp,
+    loadingLabel: loadingLabelProp,
+    backToLoginLabel: backToLoginLabelProp,
+  });
   if (sent) {
     return (
       <div className={cn("space-y-4 text-center", sentClassName)}>

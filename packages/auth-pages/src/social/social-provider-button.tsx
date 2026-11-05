@@ -2,7 +2,9 @@
 
 import { useTransition } from "react";
 
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+
+import { socialLoginTexts } from "../locale/auth-texts";
 
 export interface SocialProvider {
   readonly name: string;
@@ -39,10 +41,11 @@ interface SocialProviderButtonProps {
 export function SocialProviderButton({
   invitationToken,
   provider,
-  label = `Continue with ${provider.name}`,
+  label,
   className,
   iconClassName,
 }: SocialProviderButtonProps): React.ReactElement {
+  const { providerLabel } = useKitTexts(socialLoginTexts);
   const [isPending, startTransition] = useTransition();
 
   const handleClick = (): void => {
@@ -76,7 +79,7 @@ export function SocialProviderButton({
         aria-hidden
         className={iconClassName}
       />
-      {label}
+      {label ?? providerLabel(provider.name)}
     </Button>
   );
 }

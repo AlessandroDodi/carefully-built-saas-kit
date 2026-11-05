@@ -3,7 +3,7 @@ import { describe, expect, test } from 'bun:test';
 import {
   buildAllFilterOptionLabel,
   resolveTableToolbarLabels,
-} from '../src/table-toolbar/table-toolbar';
+} from '../src/table-toolbar/table-toolbar.labels';
 
 describe('buildAllFilterOptionLabel', () => {
   test('defaults all-filter labels to English', () => {

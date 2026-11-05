@@ -3,6 +3,7 @@
 import { Check, FileText, Upload, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { Button } from './button';
 import { cn } from '../utils/cn';
 
@@ -41,24 +42,49 @@ function getFileTypeLabel(file: File): string {
   return file.type || file.name.split('.').pop()?.toUpperCase() || 'File';
 }
 
+interface FileDropzoneTexts {
+  readonly browseLabel: string;
+  /** `null` hides the footer line. */
+  readonly footerText: string | null;
+  readonly title: string;
+}
+
+const fileDropzoneTexts = defineKitTexts<FileDropzoneTexts>({
+  en: {
+    browseLabel: 'Browse',
+    footerText: 'Drag a file here or click the box to select one.',
+    title: 'Drop a file here or browse',
+  },
+  it: {
+    browseLabel: 'Sfoglia',
+    footerText: 'Trascina un file qui o fai clic sul riquadro per sceglierlo.',
+    title: 'Trascina un file qui o sfoglia',
+  },
+});
+
 export function FileDropzone({
   accept,
-  browseLabel = 'Browse',
+  browseLabel: browseLabelProp,
   browseButtonClassName,
   className,
   currentPreviewUrl = null,
   disabled = false,
   emptyIcon,
   helperText,
-  footerText = 'Drag a file here or click the box to select one.',
+  footerText: footerTextProp,
   inputClassName,
   multiple = false,
   onFileSelect,
   onFilesSelect,
   onRemove,
   previewAlt,
-  title = 'Drop a file here or browse',
+  title: titleProp,
 }: FileDropzoneProps): React.ReactElement {
+  const { browseLabel, footerText, title } = useKitTexts(fileDropzoneTexts, {
+    browseLabel: browseLabelProp,
+    footerText: footerTextProp,
+    title: titleProp,
+  });
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);

@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { useKitLocale } from '../locale/kit-locale';
+
 import {
   resolveUnsavedChangesDialogCopy,
   shouldConfirmUnsavedChangesClose,
@@ -31,7 +33,7 @@ export function useUnsavedCloseGuard({
 }: UseUnsavedCloseGuardOptions): UnsavedCloseGuardController {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [pendingCloseAction, setPendingCloseAction] = useState<'cancel' | 'openChange' | null>(null);
-  const copy = resolveUnsavedChangesDialogCopy(confirmCloseWhenDirty);
+  const copy = resolveUnsavedChangesDialogCopy(confirmCloseWhenDirty, useKitLocale());
 
   const queueCloseAction = (action: 'cancel' | 'openChange'): boolean => {
     if (!shouldConfirmUnsavedChangesClose({ confirmCloseWhenDirty, nextOpen: false })) {

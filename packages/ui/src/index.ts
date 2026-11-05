@@ -48,3 +48,4 @@ export * from './utils/cn';
 export * from './utils/date-display';
 export * from './utils/search';
 export * from './utils/use-media-query';
+export * from './locale';

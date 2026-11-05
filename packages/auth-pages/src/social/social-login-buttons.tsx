@@ -1,6 +1,7 @@
 "use client";
 
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { socialLoginTexts } from "../locale/auth-texts";
 
 import {
   SocialProviderButton,
@@ -23,13 +24,17 @@ export function SocialLoginButtons({
   providers,
   invitationToken,
   emailHref,
-  emailLabel = "Continue with email",
+  emailLabel: emailLabelProp,
   getProviderLabel,
   className,
   providerButtonClassName,
   emailLinkClassName,
   emailButtonClassName,
 }: SocialLoginButtonsProps): React.ReactElement {
+  const { emailLabel } = useKitTexts(socialLoginTexts, {
+    emailLabel: emailLabelProp,
+  });
+
   return (
     <div className={cn("mt-4 space-y-2", className)}>
       {providers.map((provider) => (

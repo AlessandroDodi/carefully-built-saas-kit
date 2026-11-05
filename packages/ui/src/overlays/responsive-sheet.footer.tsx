@@ -4,7 +4,9 @@ import { CornerDownLeft } from 'lucide-react';
 
 import type { ReactNode } from 'react';
 
+import { useKitLocale } from '../locale/kit-locale';
 import { Button } from '../primitives/button';
+import { responsiveSheetTexts } from './responsive-sheet.labels';
 import { KeyboardKeycap, ShortcutModifierKeycap } from '../primitives/keyboard-shortcut-hint';
 
 export function DesktopConfirmShortcutHint({
@@ -45,10 +47,11 @@ export function SheetActionFooter({
   confirmLabel,
   confirmDisabled,
   confirmLoading,
-  confirmLoadingLabel = 'Saving...',
+  confirmLoadingLabel,
   desktopConfirmShortcutEnabled = false,
   desktopModifierLabel = null,
 }: SheetActionFooterProps): React.ReactNode {
+  const locale = useKitLocale();
   if (footer) return footer;
 
   if (!onCancel && !onConfirm) return null;
@@ -76,7 +79,9 @@ export function SheetActionFooter({
           className={`${footerButtonClassName} relative`}
         >
           <span className="inline-flex w-full items-center justify-center">
-            <span>{confirmLoading ? confirmLoadingLabel : confirmLabel}</span>
+            <span>{confirmLoading
+                ? (confirmLoadingLabel ?? responsiveSheetTexts[locale].confirmLoadingLabel)
+                : confirmLabel}</span>
             {desktopConfirmShortcutEnabled && desktopModifierLabel ? (
               <span className="absolute top-1/2 right-2 -translate-y-1/2">
                 <DesktopConfirmShortcutHint desktopModifierLabel={desktopModifierLabel} />

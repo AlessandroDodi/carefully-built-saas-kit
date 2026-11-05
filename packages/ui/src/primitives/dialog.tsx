@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
+import { useKitLocale } from "../locale/kit-locale"
 import { resolveOverlayCloseLabel } from "../overlays/responsive-sheet.labels"
 import { cn } from "../utils/cn"
 import { Button } from "./button"
@@ -49,6 +50,8 @@ function DialogContent({
   showCloseButton?: boolean
   closeLabel?: React.ReactNode
 }) {
+  const locale = useKitLocale()
+
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -65,7 +68,7 @@ function DialogContent({
           <DialogPrimitive.Close data-slot="dialog-close" asChild>
             <Button variant="ghost" className="absolute top-2 right-2" size="icon-sm">
               <X />
-              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel)}</span>
+              <span className="sr-only">{resolveOverlayCloseLabel(closeLabel, locale)}</span>
             </Button>
           </DialogPrimitive.Close>
         )}
@@ -94,6 +97,8 @@ function DialogFooter({
   showCloseButton?: boolean
   closeLabel?: React.ReactNode
 }) {
+  const locale = useKitLocale()
+
   return (
     <div
       data-slot="dialog-footer"
@@ -106,7 +111,7 @@ function DialogFooter({
       {children}
       {showCloseButton && (
         <DialogPrimitive.Close asChild>
-          <Button variant="outline">{resolveOverlayCloseLabel(closeLabel)}</Button>
+          <Button variant="outline">{resolveOverlayCloseLabel(closeLabel, locale)}</Button>
         </DialogPrimitive.Close>
       )}
     </div>

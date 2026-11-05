@@ -12,8 +12,16 @@ import { DesktopConfirmShortcutHint } from '../overlays/responsive-sheet.footer'
 import { ResponsiveSheet } from '../overlays/responsive-sheet';
 import { useDesktopShortcutModifierLabel } from '../overlays/responsive-sheet.shortcuts';
 import { SearchableSelect } from '../search/searchable-select';
+import { useKitLocale } from '../locale/kit-locale';
 import { cn } from '../utils/cn';
 import { useIsMobile } from '../utils/use-media-query';
+import {
+  buildAllFilterOptionLabel,
+  resolveTableToolbarLabels,
+  tableToolbarControlTexts,
+} from './table-toolbar.labels';
+
+import type { TableToolbarLabelsInput } from './table-toolbar.labels';
 
 export interface FilterOption<T extends string = string> {
   readonly value: T;
@@ -31,10 +39,6 @@ interface FilterDropdownProps<T extends string> {
   readonly allOptionLabel?: string;
 }
 
-export function buildAllFilterOptionLabel(label: string, allOptionLabel?: string): string {
-  return allOptionLabel ?? `All: ${label}`;
-}
-
 export function FilterDropdown<T extends string>({
   label,
   value,
@@ -44,6 +48,8 @@ export function FilterDropdown<T extends string>({
   allowAll = true,
   allOptionLabel,
 }: FilterDropdownProps<T>): React.ReactElement {
+  const locale = useKitLocale();
+
   return (
     <SearchableSelect
       value={value}
@@ -52,10 +58,10 @@ export function FilterDropdown<T extends string>({
       }}
       placeholder={label}
       className={className ?? 'w-full sm:w-[140px]'}
-      searchPlaceholder={`Search ${label.toLocaleLowerCase()}...`}
+      searchPlaceholder={tableToolbarControlTexts[locale].searchOptionsPlaceholder(label)}
       options={[
         ...(allowAll
-          ? [{ value: 'all', label: buildAllFilterOptionLabel(label, allOptionLabel) }]
+          ? [{ value: 'all', label: buildAllFilterOptionLabel(label, allOptionLabel, locale) }]
           : []),
         ...options,
       ]}
@@ -75,16 +81,18 @@ interface SearchInputProps {
 export function SearchInput({
   value,
   onChange,
-  placeholder = 'Search...',
+  placeholder,
   className,
-  clearLabel = 'Clear search',
+  clearLabel,
 }: SearchInputProps): React.ReactElement {
+  const locale = useKitLocale();
+
   return (
     <div className={cn('relative', className)}>
       <Search className="text-muted-foreground absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
       <Input
         type="text"
-        placeholder={placeholder}
+        placeholder={placeholder ?? tableToolbarControlTexts[locale].searchPlaceholder}
         value={value}
         onChange={(event) => {
           onChange(event.target.value);
@@ -94,7 +102,7 @@ export function SearchInput({
       {value ? (
         <button
           type="button"
-          aria-label={clearLabel}
+          aria-label={clearLabel ?? resolveTableToolbarLabels({}, locale).clearSearchLabel}
           onClick={() => {
             onChange('');
           }}
@@ -112,46 +120,6 @@ export interface FilterConfig<T extends string = string> {
   readonly label: string;
   readonly icon?: LucideIcon;
   readonly options: readonly FilterOption<T>[];
-}
-
-export interface TableToolbarLabels {
-  readonly filtersButtonLabel: string;
-  readonly filtersTitle: ReactNode;
-  readonly filtersDescription?: ReactNode;
-  readonly clearFiltersLabel: ReactNode;
-  /** Accessible name for the search field's icon-only clear control. */
-  readonly clearSearchLabel: string;
-  /** Accessible name of the filter sheet's close button. */
-  readonly closeFiltersLabel: string;
-  readonly showResultsLabel: (resultCount?: number) => ReactNode;
-  readonly rangeMinPlaceholder: string;
-  readonly rangeMaxPlaceholder: string;
-}
-
-export type TableToolbarLabelsInput = Partial<TableToolbarLabels>;
-
-export function resolveTableToolbarLabels(
-  labels: TableToolbarLabelsInput = {},
-): TableToolbarLabels {
-  return {
-    filtersButtonLabel: labels.filtersButtonLabel ?? 'Filters',
-    filtersTitle: labels.filtersTitle ?? 'Filters',
-    filtersDescription:
-      labels.filtersDescription ?? 'Narrow the list using the available criteria.',
-    clearFiltersLabel: labels.clearFiltersLabel ?? 'Clear',
-    clearSearchLabel: labels.clearSearchLabel ?? 'Clear search',
-    closeFiltersLabel: labels.closeFiltersLabel ?? 'Close',
-    showResultsLabel:
-      labels.showResultsLabel ??
-      ((resultCount?: number) =>
-        typeof resultCount === 'number'
-          ? `Show ${resultCount.toLocaleString('en-US')} ${
-              resultCount === 1 ? 'result' : 'results'
-            }`
-          : 'Show results'),
-    rangeMinPlaceholder: labels.rangeMinPlaceholder ?? 'Min',
-    rangeMaxPlaceholder: labels.rangeMaxPlaceholder ?? 'Max',
-  };
 }
 
 interface SelectFilter {
@@ -237,7 +205,7 @@ export function TableToolbar({
   labels,
   children,
 }: TableToolbarProps): React.ReactElement {
-  const resolvedLabels = resolveTableToolbarLabels(labels);
+  const resolvedLabels = resolveTableToolbarLabels(labels, useKitLocale());
   const isMobile = useIsMobile();
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [draftFilterValues, setDraftFilterValues] = useState<Record<string, string>>({});

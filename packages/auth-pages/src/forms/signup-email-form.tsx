@@ -5,7 +5,8 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomInputField, CustomPasswordField } from "@carefully-built/forms";
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { signupEmailFormTexts } from "../locale/auth-texts";
 
 import type { AuthFormState } from "../types";
 
@@ -31,18 +32,34 @@ export function SignupEmailForm<TValues extends FieldValues>({
   onSubmit,
   loading = false,
   error,
-  emailLabel = "Email",
-  emailPlaceholder = "you@example.com",
-  passwordLabel = "Password",
-  passwordPlaceholder = "At least 8 characters",
-  submitLabel = "Sign up",
-  loadingLabel = "Creating account...",
+  emailLabel: emailLabelProp,
+  emailPlaceholder: emailPlaceholderProp,
+  passwordLabel: passwordLabelProp,
+  passwordPlaceholder: passwordPlaceholderProp,
+  submitLabel: submitLabelProp,
+  loadingLabel: loadingLabelProp,
   showPasswordLabel,
   hidePasswordLabel,
   className,
   errorClassName,
   buttonClassName,
 }: SignupEmailFormProps<TValues>): React.ReactElement {
+  const {
+    emailLabel,
+    emailPlaceholder,
+    passwordLabel,
+    passwordPlaceholder,
+    submitLabel,
+    loadingLabel,
+  } = useKitTexts(signupEmailFormTexts, {
+    emailLabel: emailLabelProp,
+    emailPlaceholder: emailPlaceholderProp,
+    passwordLabel: passwordLabelProp,
+    passwordPlaceholder: passwordPlaceholderProp,
+    submitLabel: submitLabelProp,
+    loadingLabel: loadingLabelProp,
+  });
+
   return (
     <FormProvider {...form}>
       <form

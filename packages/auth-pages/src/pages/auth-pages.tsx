@@ -3,6 +3,8 @@
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 
+import { useKitTexts } from "@carefully-built/ui";
+
 import {
   useForgotPasswordForm,
   useLoginForm,
@@ -22,6 +24,7 @@ import {
   UpdatePasswordForm,
 } from "../forms";
 import { useAuthPagesConfig } from "../config/auth-pages-config";
+import { authPageTexts } from "../locale/auth-texts";
 import { SocialLoginButtons, type SocialProvider } from "../social";
 import type { AuthLayoutBranding, LegalLinkConfig } from "../types";
 
@@ -111,12 +114,14 @@ export interface AuthLoginPageProps extends AuthPageBranding {
 
 export function AuthLoginPage({
   providers,
-  title = "Sign in",
+  title: titleProp,
   emailHref = "/login/email",
   emailLabel,
   children,
   ...branding
 }: AuthLoginPageProps): React.ReactElement {
+  const texts = useKitTexts(authPageTexts);
+  const title = titleProp ?? texts.loginTitle;
   const invitationToken = getInvitationToken();
 
   return (
@@ -147,14 +152,18 @@ export interface AuthEmailLoginPageProps extends AuthPageBranding {
 
 export function AuthEmailLoginPage({
   signIn,
-  title = "Sign in with email",
-  signupPromptText = "Do not have an account?",
-  signupLinkText = "Sign up",
+  title: titleProp,
+  signupPromptText: signupPromptTextProp,
+  signupLinkText: signupLinkTextProp,
   signupHref = "/signup/email",
   successHref = "/dashboard",
   children,
   ...branding
 }: AuthEmailLoginPageProps): React.ReactElement {
+  const texts = useKitTexts(authPageTexts);
+  const title = titleProp ?? texts.emailLoginTitle;
+  const signupPromptText = signupPromptTextProp ?? texts.signupPromptText;
+  const signupLinkText = signupLinkTextProp ?? texts.signupLinkText;
   const invitationToken = getInvitationToken();
   const state = useLoginForm({
     signIn,
@@ -190,14 +199,18 @@ export interface AuthSignupPageProps extends AuthPageBranding {
 
 export function AuthSignupPage({
   signUp,
-  title = "Sign up with email",
-  loginPromptText = "Already have an account?",
-  loginLinkText = "Sign in",
+  title: titleProp,
+  loginPromptText: loginPromptTextProp,
+  loginLinkText: loginLinkTextProp,
   loginHref = "/login/email",
   successHref = "/dashboard",
   children,
   ...branding
 }: AuthSignupPageProps): React.ReactElement {
+  const texts = useKitTexts(authPageTexts);
+  const title = titleProp ?? texts.signupTitle;
+  const loginPromptText = loginPromptTextProp ?? texts.loginPromptText;
+  const loginLinkText = loginLinkTextProp ?? texts.loginLinkText;
   const invitationToken = getInvitationToken();
   const state = useSignupForm({
     signUp,
@@ -230,11 +243,14 @@ export interface AuthForgotPasswordPageProps extends AuthPageBranding {
 
 export function AuthForgotPasswordPage({
   sendPasswordResetEmail,
-  title = "Forgot password",
-  subtitle = "Enter your email to receive a password reset link",
+  title: titleProp,
+  subtitle: subtitleProp,
   children,
   ...branding
 }: AuthForgotPasswordPageProps): React.ReactElement {
+  const texts = useKitTexts(authPageTexts);
+  const title = titleProp ?? texts.forgotPasswordTitle;
+  const subtitle = subtitleProp ?? texts.forgotPasswordSubtitle;
   const state = useForgotPasswordForm({ sendPasswordResetEmail });
 
   return (
@@ -257,12 +273,15 @@ export interface AuthUpdatePasswordPageProps extends AuthPageBranding {
 
 export function AuthUpdatePasswordPage({
   resetPassword,
-  title = "Update password",
-  subtitle = "Enter your new password",
+  title: titleProp,
+  subtitle: subtitleProp,
   successHref = "/login/email?reset=success",
   children,
   ...branding
 }: AuthUpdatePasswordPageProps): React.ReactElement {
+  const texts = useKitTexts(authPageTexts);
+  const title = titleProp ?? texts.updatePasswordTitle;
+  const subtitle = subtitleProp ?? texts.updatePasswordSubtitle;
   const token = getPasswordResetToken();
   const state = useUpdatePasswordForm({
     token,

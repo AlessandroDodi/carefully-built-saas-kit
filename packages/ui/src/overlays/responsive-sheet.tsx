@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import type { ConfirmCloseWhenDirty } from './unsaved-changes';
 
 import { SheetActionFooter } from './responsive-sheet.footer';
+import { useKitLocale } from '../locale/kit-locale';
 import { resolveResponsiveSheetLabels } from './responsive-sheet.labels';
 import { UnsavedChangesDialog } from './unsaved-changes-dialog';
 import { useUnsavedCloseGuard } from './use-unsaved-close-guard';
@@ -83,12 +84,11 @@ export function ResponsiveSheet({
   footerClassName,
   classes,
 }: ResponsiveSheetProps): React.ReactElement {
-  const labels = resolveResponsiveSheetLabels({
-    cancelLabel,
-    confirmLabel,
-    confirmLoadingLabel,
-    closeLabel,
-  });
+  const locale = useKitLocale();
+  const labels = resolveResponsiveSheetLabels(
+    { cancelLabel, confirmLabel, confirmLoadingLabel, closeLabel },
+    locale,
+  );
   const closeGuard = useUnsavedCloseGuard({
     confirmCloseWhenDirty,
     onCancel,

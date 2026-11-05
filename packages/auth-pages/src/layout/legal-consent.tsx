@@ -1,18 +1,37 @@
+"use client";
+
+import { cn, useKitTexts } from "@carefully-built/ui";
+
+import { legalConsentTexts } from "../locale/auth-texts";
+
 import type { LegalLinkConfig } from "../types";
-import { cn } from "@carefully-built/ui";
 
 export function LegalConsent({
   termsHref = "/terms",
   privacyHref = "/privacy",
   cookieHref,
-  consentText = "By continuing, you agree to our",
-  termsLabel = "Terms of Service",
-  privacyLabel = "Privacy Policy",
-  cookieLabel = "Cookie policy",
-  conjunctionText = "and",
+  consentText: consentTextProp,
+  termsLabel: termsLabelProp,
+  privacyLabel: privacyLabelProp,
+  cookieLabel: cookieLabelProp,
+  conjunctionText: conjunctionTextProp,
   className,
   linkClassName,
 }: LegalLinkConfig): React.ReactElement {
+  const {
+    consentText,
+    termsLabel,
+    privacyLabel,
+    cookieLabel,
+    conjunctionText,
+  } = useKitTexts(legalConsentTexts, {
+    consentText: consentTextProp,
+    termsLabel: termsLabelProp,
+    privacyLabel: privacyLabelProp,
+    cookieLabel: cookieLabelProp,
+    conjunctionText: conjunctionTextProp,
+  });
+
   return (
     <p className={cn("text-muted-foreground mt-4 text-center text-xs", className)}>
       {consentText}{" "}

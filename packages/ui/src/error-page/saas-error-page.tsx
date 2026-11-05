@@ -2,15 +2,19 @@
 
 import { useEffect, useMemo, useState } from "react";
 
+import { useKitLocale } from "../locale/kit-locale";
 import { Button } from "../primitives/button";
 import { cn } from "../utils/cn";
 import { ErrorCode } from "./error-code";
 import {
+  errorPageTexts,
   getNotFoundPageContent,
   resolveErrorPageContent,
   type ErrorPageContent,
 } from "./error-page-content";
 import { captureErrorToPostHog, createErrorReference } from "./posthog-error-capture";
+
+import type { KitLocale } from "../locale/kit-locale";
 
 export interface SaasErrorPageProps {
   readonly error?: Error & { readonly digest?: string };
@@ -38,8 +42,11 @@ export interface SaasErrorPageClassNames {
 function resolveContent(
   error: SaasErrorPageProps["error"],
   content: SaasErrorPageProps["content"],
+  locale: KitLocale,
 ): ErrorPageContent {
-  const resolvedContent = error ? resolveErrorPageContent(error) : getNotFoundPageContent();
+  const resolvedContent = error
+    ? resolveErrorPageContent(error, {}, locale)
+    : getNotFoundPageContent(locale);
 
   return {
     ...resolvedContent,
@@ -52,15 +59,19 @@ export function SaasErrorPage({
   error,
   reset,
   homeHref = "/",
-  homeLabel = "Back to home",
-  retryLabel = "Try again",
+  homeLabel,
+  retryLabel,
   source,
   metadata,
   content,
   className,
   classes,
 }: SaasErrorPageProps): React.ReactElement {
-  const resolvedContent = useMemo(() => resolveContent(error, content), [content, error]);
+  const locale = useKitLocale();
+  const resolvedContent = useMemo(
+    () => resolveContent(error, content, locale),
+    [content, error, locale],
+  );
   const [reference] = useState(() => (error ? createErrorReference(error) : null));
 
   useEffect(() => {
@@ -109,11 +120,11 @@ export function SaasErrorPage({
       <div className={cn("mt-2 flex flex-wrap justify-center gap-3", classes?.actions)}>
         {reset ? (
           <Button type="button" variant="outline" onClick={reset}>
-            {retryLabel}
+            {retryLabel ?? errorPageTexts[locale].retryLabel}
           </Button>
         ) : null}
         <Button asChild>
-          <a href={homeHref}>{homeLabel}</a>
+          <a href={homeHref}>{homeLabel ?? errorPageTexts[locale].homeLabel}</a>
         </Button>
       </div>
     </main>
@@ -131,15 +142,15 @@ export function SaasNotFoundPage({
   description,
   ...props
 }: SaasNotFoundPageProps): React.ReactElement {
+  const notFound = getNotFoundPageContent(useKitLocale());
+
   return (
     <SaasErrorPage
       {...props}
       content={{
-        code: "404",
-        title: title ?? "Page not found",
-        description:
-          description ?? "The page you are looking for does not exist or has been moved.",
-        shouldCapture: false,
+        ...notFound,
+        title: title ?? notFound.title,
+        description: description ?? notFound.description,
       }}
     />
   );
