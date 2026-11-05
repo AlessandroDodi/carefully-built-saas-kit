@@ -37,7 +37,10 @@ export function EmptyStateCard({
   const hasAction = hasLinkAction || hasButtonAction || hasDisabledAction;
 
   return (
-    <Card className={cn("w-full border border-dashed border-border shadow-none ring-0", className)}>
+    <Card
+      data-empty-state=""
+      className={cn("w-full border border-dashed border-border shadow-none ring-0", className)}
+    >
       <CardContent className="flex flex-col items-center justify-start px-6 py-10 text-center">
         <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-muted text-muted-foreground">
           {icon}

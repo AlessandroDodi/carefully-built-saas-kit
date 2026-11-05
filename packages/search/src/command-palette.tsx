@@ -365,6 +365,7 @@ export function CommandPalette<TItem, TType extends string>({
     <Button
       type="button"
       variant="ghost"
+      data-search-trigger=""
       className={cn(
         'w-full',
         isBottomNavTrigger
@@ -632,7 +633,9 @@ function CommandPaletteContent<TItem, TType extends string>({
             onChange={(event) => setSearch(event.target.value)}
             placeholder={placeholder}
             className={cn(
-              'h-9 border-0 px-0 pr-14 text-base shadow-none focus-visible:ring-0 md:text-sm',
+              // The palette header is the field: the Input primitive's own
+              // fill (dark:bg-input/30) and radius would draw a box around the text.
+              'h-9 rounded-none border-0 bg-transparent px-0 pr-14 text-base shadow-none focus-visible:ring-0 md:text-sm dark:bg-transparent',
               hasSearchCompletion && completionText && 'text-transparent caret-foreground',
             )}
           />

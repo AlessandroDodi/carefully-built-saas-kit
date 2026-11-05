@@ -181,16 +181,21 @@ function DesktopNavLink({
     </NavigationAnchor>
   );
 
-  if (isCollapsed) {
-    return (
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>{content}</TooltipTrigger>
-        <TooltipContent side="right">{item.label}</TooltipContent>
-      </Tooltip>
-    );
-  }
-
-  return content;
+  // `display: contents` wrapper: a stable hook for theme styles
+  // (`[data-slot=nav-item][data-active] > a`) that leaves the layout untouched,
+  // since the anchor itself comes from the host's link component.
+  return (
+    <span data-slot="nav-item" data-active={isActive || undefined} className="contents">
+      {isCollapsed ? (
+        <Tooltip delayDuration={0}>
+          <TooltipTrigger asChild>{content}</TooltipTrigger>
+          <TooltipContent side="right">{item.label}</TooltipContent>
+        </Tooltip>
+      ) : (
+        content
+      )}
+    </span>
+  );
 }
 
 function MobileNavLink({
@@ -282,6 +287,7 @@ function DesktopNavigationGroup({
       {group.collapsible ? (
         <button
           type="button"
+          data-slot="nav-group-label"
           className="flex w-full items-center justify-between rounded-md px-2 py-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55 transition-colors hover:text-sidebar-foreground"
           aria-expanded={resolvedOpen}
           onClick={() => setIsOpen((current) => !current)}
@@ -295,7 +301,7 @@ function DesktopNavigationGroup({
           />
         </button>
       ) : (
-        <p className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
+        <p data-slot="nav-group-label" className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
           {group.label}
         </p>
       )}
@@ -337,6 +343,7 @@ function MobileNavigationGroup({
       {group.collapsible ? (
         <button
           type="button"
+          data-slot="nav-group-label"
           className="flex w-full items-center justify-between rounded-md px-2 py-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55 transition-colors hover:text-sidebar-foreground"
           aria-expanded={resolvedOpen}
           onClick={() => setIsOpen((current) => !current)}
@@ -350,7 +357,7 @@ function MobileNavigationGroup({
           />
         </button>
       ) : (
-        <p className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
+        <p data-slot="nav-group-label" className="px-2 pb-1 text-xs font-medium uppercase tracking-wide text-sidebar-foreground/55">
           {group.label}
         </p>
       )}
@@ -702,7 +709,7 @@ export function AppNavigationShell({
             onClick={() => setIsMobileOpen(false)}
             aria-label={closeLabel}
           />
-          <aside className="border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-y-0 left-0 z-50 w-full max-w-xs border-r md:hidden">
+          <aside data-slot="app-sidebar" className="border-sidebar-border bg-sidebar text-sidebar-foreground fixed inset-y-0 left-0 z-50 w-full max-w-xs border-r md:hidden">
             <SidebarContent
               bottomNavItems={bottomNavItems}
               closeLabel={closeLabel}
@@ -726,6 +733,7 @@ export function AppNavigationShell({
       ) : null}
 
       <aside
+        data-slot="app-sidebar"
         className="border-sidebar-border bg-sidebar text-sidebar-foreground fixed top-0 left-0 z-40 hidden h-screen flex-col border-r transition-all duration-200 ease-in-out md:flex"
         style={{ width: isCollapsed ? collapsedWidth : sidebarWidth }}
       >

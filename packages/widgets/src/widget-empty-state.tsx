@@ -38,6 +38,7 @@ export function WidgetEmptyState({
 }: WidgetEmptyStateProps): React.ReactElement {
   return (
     <div
+      data-empty-state=""
       className={cn(
         "flex h-full w-full items-center justify-center rounded-[16px] border border-dashed border-border/70 px-4 py-8 text-center",
         minHeightClassName ?? "min-h-[248px]",

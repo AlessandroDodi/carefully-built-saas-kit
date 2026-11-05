@@ -976,7 +976,10 @@ export function ActivityCalendarView({
   }
 
   return (
-    <div className="agenda-calendar-shell border-border bg-background rounded-lg border p-3 md:p-4">
+    <div
+      data-slot="calendar"
+      className="agenda-calendar-shell border-border bg-background rounded-lg border p-3 md:p-4"
+    >
       <div className="flex items-center justify-between gap-3 pb-4">
         {effectiveScope === 'day' ? (
           <Popover open={isPickerOpen} onOpenChange={setIsPickerOpen}>

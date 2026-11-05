@@ -222,7 +222,7 @@ export function DesktopView<T>({
   if (isLoading) {
     return (
       <div className={cn('flex flex-col', fullHeight && 'min-h-0 flex-1')}>
-        <div className={scrollContainerClass} style={scrollContainerStyle}>
+        <div data-slot="smart-table" className={scrollContainerClass} style={scrollContainerStyle}>
           <Table className="table-fixed">
             {columnGroup}
             {tableHeader}
@@ -288,7 +288,7 @@ export function DesktopView<T>({
 
   return (
     <div className={cn('flex flex-col', fullHeight && 'min-h-0 flex-1')}>
-      <div className={scrollContainerClass} style={scrollContainerStyle}>
+      <div data-slot="smart-table" className={scrollContainerClass} style={scrollContainerStyle}>
         <Table className="table-fixed">
           {columnGroup}
           {tableHeader}

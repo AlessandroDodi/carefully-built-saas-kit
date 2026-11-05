@@ -1,0 +1,144 @@
+/*
+ * Soft style: grey canvas, white surfaces with no borders and a soft shadow,
+ * very rounded corners, pill-shaped controls, large titles and numbers.
+ *
+ * Import after base.css and a color preset:
+ *
+ *   @import '@carefully-built/theme/base.css';
+ *   @import '@carefully-built/theme/presets/mono.css';
+ *   @import '@carefully-built/theme/styles/soft.css';
+ *
+ * Kit components keep their own classes; this file restyles them through
+ * stable hooks (data-slot / data-* attributes). The rules are deliberately
+ * unlayered: Tailwind utilities live in a cascade layer, so these win without
+ * !important and without touching the components.
+ */
+
+:root {
+  --radius: 0.875rem;
+  --surface-radius: 1.5rem;
+  --background: oklch(0.962 0 0);
+  --card: oklch(1 0 0);
+  --popover: oklch(1 0 0);
+  --sidebar: var(--background);
+  --sidebar-border: transparent;
+  --surface-shadow:
+    0 0 0 1px oklch(0 0 0 / 3%), 0 1px 2px oklch(0 0 0 / 4%), 0 8px 24px -12px oklch(0 0 0 / 10%);
+}
+
+.dark {
+  --background: oklch(0.12 0 0);
+  --card: oklch(0.175 0 0);
+  --popover: oklch(0.19 0 0);
+  --sidebar: var(--background);
+  --sidebar-border: transparent;
+  --surface-shadow: 0 0 0 1px oklch(1 0 0 / 6%), 0 8px 24px -12px oklch(0 0 0 / 60%);
+}
+
+/* Surfaces ---------------------------------------------------------------- */
+
+[data-slot='card']:not([data-empty-state]),
+[data-slot='widget'],
+[data-slot='smart-table'],
+[data-slot='calendar'] {
+  border-color: transparent;
+  border-radius: var(--surface-radius);
+  background: var(--card);
+  box-shadow: var(--surface-shadow);
+}
+
+[data-slot='widget'] {
+  padding: 1rem 1.125rem 1.125rem;
+}
+
+[data-empty-state] {
+  border-radius: var(--surface-radius);
+  border: 1.5px dashed color-mix(in oklab, var(--foreground) 12%, transparent);
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Inside a surface the empty state is just content: no second frame. */
+:is([data-slot='widget'], [data-slot='card']) [data-empty-state] {
+  border: 0;
+}
+
+/* Typography -------------------------------------------------------------- */
+
+[data-slot='page-title'] {
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+[data-slot='widget-value'] {
+  font-size: 2.25rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-slot='nav-group-label'] {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Controls ---------------------------------------------------------------- */
+
+[data-slot='button'],
+[data-slot='input'],
+[data-slot='select-trigger'],
+[data-slot='tabs-list'],
+[data-slot='tabs-trigger'],
+[data-search-trigger] {
+  border-radius: 9999px;
+}
+
+[data-slot='textarea'] {
+  border-radius: 1.125rem;
+}
+
+[data-search-trigger] {
+  border-color: transparent;
+  background: var(--card);
+  box-shadow: var(--surface-shadow);
+}
+
+/* Navigation -------------------------------------------------------------- */
+
+[data-slot='app-sidebar'] {
+  border-color: transparent;
+}
+
+[data-slot='nav-item'] > a {
+  border-radius: 9999px;
+}
+
+[data-slot='nav-item'][data-active] > a {
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: var(--surface-shadow);
+}
+
+/* Overlays ---------------------------------------------------------------- */
+
+[data-slot='dialog-content'],
+[data-slot='sheet-content'],
+[data-slot='drawer-content'] {
+  border-radius: var(--surface-radius);
+  background: var(--popover);
+}
+
+[data-slot='popover-content'],
+[data-slot='select-content'],
+[data-slot='dropdown-menu-content'],
+[data-slot='tooltip-content'] {
+  border-radius: 1rem;
+}
+
+/* Side sheets float off the edge instead of touching it. */
+[data-slot='sheet-content'][data-side='right'] {
+  inset: 0.5rem 0.5rem 0.5rem auto;
+  height: auto;
+}
