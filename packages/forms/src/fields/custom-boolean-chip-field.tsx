@@ -1,6 +1,9 @@
 'use client';
 
+import { useKitTexts } from '@carefully-built/ui';
+
 import { CustomChipSelectField } from './custom-chip-select-field';
+import { booleanChipFieldTexts } from './field-texts';
 
 import type { LucideIcon } from 'lucide-react';
 import type { FieldValues, Path } from 'react-hook-form';
@@ -19,11 +22,16 @@ export function CustomBooleanChipField<TValues extends FieldValues>({
   name,
   label,
   labelIcon,
-  yesLabel = 'Yes',
-  noLabel = 'No',
+  yesLabel: yesLabelProp,
+  noLabel: noLabelProp,
   disabled = false,
   className,
 }: CustomBooleanChipFieldProps<TValues>): React.ReactElement {
+  const { yesLabel, noLabel } = useKitTexts(booleanChipFieldTexts, {
+    yesLabel: yesLabelProp,
+    noLabel: noLabelProp,
+  });
+
   return (
     <CustomChipSelectField<TValues>
       name={name}

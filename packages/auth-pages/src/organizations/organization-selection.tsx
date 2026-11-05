@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { organizationSelectorTexts, organizationSelectionPageTexts } from "../locale/auth-texts";
 
 export interface OrganizationSelectorItem {
   readonly id: string;
@@ -128,14 +129,25 @@ function getSelectionHref(
 export function OrganizationSelector({
   organizations,
   selectionEndpoint = "/api/auth/organization-selection",
-  searchPlaceholder = "Search organization...",
-  emptyTitle = "No organization found",
-  emptyDescription = "Try searching with a different name.",
-  itemDescription = "Continue with this organization",
+  searchPlaceholder: searchPlaceholderProp,
+  emptyTitle: emptyTitleProp,
+  emptyDescription: emptyDescriptionProp,
+  itemDescription: itemDescriptionProp,
   searchThreshold = 6,
   className,
   classes,
 }: OrganizationSelectorProps): React.ReactElement {
+  const {
+    searchPlaceholder,
+    emptyTitle,
+    emptyDescription,
+    itemDescription,
+  } = useKitTexts(organizationSelectorTexts, {
+    searchPlaceholder: searchPlaceholderProp,
+    emptyTitle: emptyTitleProp,
+    emptyDescription: emptyDescriptionProp,
+    itemDescription: itemDescriptionProp,
+  });
   const [search, setSearch] = useState("");
   const normalizedSearch = search.trim().toLocaleLowerCase();
   const showSearch = organizations.length >= searchThreshold;
@@ -225,18 +237,33 @@ export function OrganizationSelector({
 
 export function OrganizationSelectionPage({
   organizations,
-  title = "Welcome",
-  description = "You have access to multiple organizations. Select the one you want to continue with.",
-  noOrganizationsTitle = "No organization available",
-  noOrganizationsDescription = "Your account is authenticated, but you still need to choose or create an organization.",
+  title: titleProp,
+  description: descriptionProp,
+  noOrganizationsTitle: noOrganizationsTitleProp,
+  noOrganizationsDescription: noOrganizationsDescriptionProp,
   dashboardHref = "/dashboard",
   loginHref = "/login",
-  dashboardLabel = "Go to dashboard",
-  loginLabel = "Back to login",
+  dashboardLabel: dashboardLabelProp,
+  loginLabel: loginLabelProp,
   pageClassName,
   pageClasses,
   ...selectorProps
 }: OrganizationSelectionPageProps): React.ReactElement {
+  const {
+    title,
+    description,
+    noOrganizationsTitle,
+    noOrganizationsDescription,
+    dashboardLabel,
+    loginLabel,
+  } = useKitTexts(organizationSelectionPageTexts, {
+    title: titleProp,
+    description: descriptionProp,
+    noOrganizationsTitle: noOrganizationsTitleProp,
+    noOrganizationsDescription: noOrganizationsDescriptionProp,
+    dashboardLabel: dashboardLabelProp,
+    loginLabel: loginLabelProp,
+  });
   if (organizations.length === 0) {
     return (
       <main className={cn("min-h-screen bg-background px-6 py-12 sm:px-8", pageClassName, pageClasses?.root)}>

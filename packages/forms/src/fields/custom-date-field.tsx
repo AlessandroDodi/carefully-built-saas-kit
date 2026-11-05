@@ -8,8 +8,9 @@ import {
   formatDatePickerValue,
   parseDatePickerValue,
 } from './date-picker-value';
+import { dateFieldTexts } from './field-texts';
 
-import { Button } from '@carefully-built/ui';
+import { Button, useKitTexts } from '@carefully-built/ui';
 import { Calendar } from '@carefully-built/ui';
 import { Popover, PopoverContent, PopoverTrigger } from '@carefully-built/ui';
 import { cn } from '@carefully-built/ui';
@@ -94,13 +95,18 @@ export function CustomDateField({
   id,
   value,
   onChange,
-  placeholder = 'Select date',
+  placeholder: placeholderProp,
   locale,
-  displayLocale = 'en-US',
-  clearLabel = 'Clear',
+  displayLocale: displayLocaleProp,
+  clearLabel: clearLabelProp,
   hasError = false,
   disabled = false,
 }: CustomDateFieldProps): React.ReactElement {
+  const { placeholder, clearLabel, displayLocale } = useKitTexts(dateFieldTexts, {
+    placeholder: placeholderProp,
+    clearLabel: clearLabelProp,
+    displayLocale: displayLocaleProp,
+  });
   const [open, setOpen] = useState(false);
   const selectedDate = parseDatePickerValue(value);
   const displayValue = formatDatePickerDisplayValue(value, placeholder, displayLocale);

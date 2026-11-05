@@ -1,0 +1,20 @@
+/*
+ * Monochrome preset: premium black on white in light mode, white on near-black
+ * in dark mode. Import after `@carefully-built/theme/base.css`.
+ */
+
+:root {
+  --primary: oklch(0.17 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --ring: oklch(0.17 0 0 / 35%);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+}
+
+.dark {
+  --primary: oklch(0.99 0 0);
+  --primary-foreground: oklch(0.17 0 0);
+  --ring: oklch(0.99 0 0 / 35%);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+}

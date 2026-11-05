@@ -26,6 +26,16 @@ The root export is server-safe for Next.js App Router. Use `/forms`, `/controlle
 
 The consuming app should eventually mount auth with one import and one config object, keeping app-side auth code under 200 LOC.
 
+## Lingua
+
+Default labels follow the kit locale set with `KitLocaleProvider` from
+`@carefully-built/ui` (English without a provider). Props and `messages`
+objects still win; server actions keep `config.messages`.
+
+```tsx
+<KitLocaleProvider locale="it">{children}</KitLocaleProvider>
+```
+
 ## Styling And Theming
 
 Auth components ship with default Tailwind/shadcn-compatible classes. Consuming apps can keep page files clean by defining product-specific classes in an app config file and passing them through optional `className` and `classes` props.

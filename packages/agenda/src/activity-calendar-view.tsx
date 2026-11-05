@@ -643,7 +643,9 @@ export function ActivityCalendarView({
   locale,
   localeCode = 'en-US',
   firstDay = 1,
-  slotDuration,
+  // FullCalendar treats an explicit `undefined` as a value, not as "use the
+  // default": the time grid then crashes computing its labels. Default it here.
+  slotDuration = '00:30:00',
 }: ActivityCalendarViewProps): React.ReactElement {
   const calendarRef = useRef<FullCalendar | null>(null);
   const anchorDateRef = useRef(anchorDate);

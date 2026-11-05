@@ -5,7 +5,8 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomPasswordField } from "@carefully-built/forms";
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { updatePasswordFormTexts } from "../locale/auth-texts";
 
 import type { AuthFormState } from "../types";
 
@@ -36,13 +37,13 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   loading = false,
   error,
   token,
-  missingTokenMessage = "Invalid or missing reset token. Request a new password reset link.",
-  passwordLabel = "New password",
-  passwordPlaceholder = "At least 8 characters",
-  confirmPasswordLabel = "Confirm password",
-  confirmPasswordPlaceholder = "Enter the password again",
-  submitLabel = "Update password",
-  loadingLabel = "Updating...",
+  missingTokenMessage: missingTokenMessageProp,
+  passwordLabel: passwordLabelProp,
+  passwordPlaceholder: passwordPlaceholderProp,
+  confirmPasswordLabel: confirmPasswordLabelProp,
+  confirmPasswordPlaceholder: confirmPasswordPlaceholderProp,
+  submitLabel: submitLabelProp,
+  loadingLabel: loadingLabelProp,
   showPasswordLabel,
   hidePasswordLabel,
   className,
@@ -50,6 +51,23 @@ export function UpdatePasswordForm<TValues extends FieldValues>({
   missingTokenClassName,
   buttonClassName,
 }: UpdatePasswordFormProps<TValues>): React.ReactElement {
+  const {
+    missingTokenMessage,
+    passwordLabel,
+    passwordPlaceholder,
+    confirmPasswordLabel,
+    confirmPasswordPlaceholder,
+    submitLabel,
+    loadingLabel,
+  } = useKitTexts(updatePasswordFormTexts, {
+    missingTokenMessage: missingTokenMessageProp,
+    passwordLabel: passwordLabelProp,
+    passwordPlaceholder: passwordPlaceholderProp,
+    confirmPasswordLabel: confirmPasswordLabelProp,
+    confirmPasswordPlaceholder: confirmPasswordPlaceholderProp,
+    submitLabel: submitLabelProp,
+    loadingLabel: loadingLabelProp,
+  });
   if (!token) {
     return (
       <div

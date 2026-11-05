@@ -31,9 +31,11 @@ import {
   TooltipTrigger,
   cn,
   useIsMobile,
+  useKitTexts,
 } from '@carefully-built/ui';
 
 import { getCommandPaletteFallbackIconStyle } from './command-palette-fallback';
+import { commandPaletteTexts } from './command-palette.texts';
 import { buildSearchText, rankBySearch } from './index';
 
 export interface CommandPaletteTypeOption<TType extends string> {
@@ -168,7 +170,7 @@ function filterCommandPaletteItems<TItem, TType extends string>({
 
 export function CommandPalette<TItem, TType extends string>({
   activeAllType,
-  description = 'Search and open records.',
+  description: descriptionProp,
   enableShortcut = true,
   getItemImageUrl,
   getItemKey,
@@ -176,24 +178,49 @@ export function CommandPalette<TItem, TType extends string>({
   getItemMeta,
   getItemSearchText,
   getItemType,
-  closeLabel = 'Close search',
+  closeLabel: closeLabelProp,
   isCollapsed = false,
   isLoading = false,
   isMobile = false,
   items,
-  loadingLabel = 'Loading...',
-  noResultsLabel = 'No results found',
-  navigateHintLabel = 'to navigate',
-  openHintLabel = 'to open',
-  closeHintLabel = 'to close',
+  loadingLabel: loadingLabelProp,
+  noResultsLabel: noResultsLabelProp,
+  navigateHintLabel: navigateHintLabelProp,
+  openHintLabel: openHintLabelProp,
+  closeHintLabel: closeHintLabelProp,
   onSelect,
-  placeholder = 'Search...',
-  title = 'Search',
-  triggerLabel = 'Search',
-  triggerTooltip = 'Search',
+  placeholder: placeholderProp,
+  title: titleProp,
+  triggerLabel: triggerLabelProp,
+  triggerTooltip: triggerTooltipProp,
   triggerVariant = 'sidebar',
   typeOptions,
 }: CommandPaletteProps<TItem, TType>): React.ReactElement {
+  const {
+    description,
+    closeLabel,
+    loadingLabel,
+    noResultsLabel,
+    navigateHintLabel,
+    openHintLabel,
+    closeHintLabel,
+    placeholder,
+    title,
+    triggerLabel,
+    triggerTooltip,
+  } = useKitTexts(commandPaletteTexts, {
+    description: descriptionProp,
+    closeLabel: closeLabelProp,
+    loadingLabel: loadingLabelProp,
+    noResultsLabel: noResultsLabelProp,
+    navigateHintLabel: navigateHintLabelProp,
+    openHintLabel: openHintLabelProp,
+    closeHintLabel: closeHintLabelProp,
+    placeholder: placeholderProp,
+    title: titleProp,
+    triggerLabel: triggerLabelProp,
+    triggerTooltip: triggerTooltipProp,
+  });
   const isMobileViewport = useIsMobile();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);

@@ -5,10 +5,11 @@ import { Controller, useFormContext } from 'react-hook-form';
 import type { LucideIcon } from 'lucide-react';
 import type { FieldValues, Path } from 'react-hook-form';
 
-import { SearchableSelect, cn } from '@carefully-built/ui';
+import { SearchableSelect, cn, useKitTexts } from '@carefully-built/ui';
 
 import { FieldMessage } from './field-message';
 import { FormFieldLabel } from './form-field-label';
+import { selectFieldTexts } from './field-texts';
 
 interface SelectOption {
   readonly value: string;
@@ -29,11 +30,12 @@ export function CustomSelectField<TValues extends FieldValues>({
   name,
   label,
   labelIcon,
-  placeholder = 'Select...',
+  placeholder: placeholderProp,
   options,
   disabled = false,
   className,
 }: CustomSelectFieldProps<TValues>): React.ReactElement {
+  const { placeholder } = useKitTexts(selectFieldTexts, { placeholder: placeholderProp });
   const { control } = useFormContext<TValues>();
   const validOptions = options.filter((option) => option.value !== '');
 

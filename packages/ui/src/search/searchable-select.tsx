@@ -8,6 +8,7 @@ import { buildSearchText, rankBySearch } from '../utils/search';
 
 import type { LucideIcon } from 'lucide-react';
 
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { Input } from '../primitives/input';
 import { cn } from '../utils/cn';
 import { resolveSearchableSelectDropdownPosition } from './searchable-select-position';
@@ -68,24 +69,34 @@ export function getSearchableSelectPortalContainer(
   return trigger?.closest(SEARCHABLE_SELECT_MODAL_CONTENT_SELECTOR) ?? null;
 }
 
+const searchableSelectTexts = defineKitTexts({
+  en: { placeholder: 'Select...', searchPlaceholder: 'Search...', emptyMessage: 'No results found' },
+  it: { placeholder: 'Seleziona…', searchPlaceholder: 'Cerca…', emptyMessage: 'Nessun risultato' },
+});
+
 export function SearchableSelect<TOption extends SearchableSelectOption>({
   value,
   onValueChange,
   options,
-  placeholder = 'Select...',
+  placeholder: placeholderProp,
   disabled = false,
   className,
   triggerClassName,
   contentClassName,
   ariaLabel,
-  searchPlaceholder = 'Search...',
-  emptyMessage = 'No results found',
+  searchPlaceholder: searchPlaceholderProp,
+  emptyMessage: emptyMessageProp,
   leadingIcon: LeadingIcon,
   searchThreshold = AUTO_SEARCHABLE_SELECT_THRESHOLD,
   size = 'default',
   renderOption,
   renderValue,
 }: SearchableSelectProps<TOption>): React.ReactElement {
+  const { placeholder, searchPlaceholder, emptyMessage } = useKitTexts(searchableSelectTexts, {
+    placeholder: placeholderProp,
+    searchPlaceholder: searchPlaceholderProp,
+    emptyMessage: emptyMessageProp,
+  });
   const selectId = useId();
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);

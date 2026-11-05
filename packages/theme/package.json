@@ -1,0 +1,58 @@
+{
+  "name": "@carefully-built/theme",
+  "version": "0.1.0",
+  "description": "Tailwind v4 design tokens, color presets, and third-party widget styles for Carefully Built apps.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alessandro Dodi",
+  "homepage": "https://github.com/AlessandroDodi/carefully-built-saas-kit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlessandroDodi/carefully-built-saas-kit.git",
+    "directory": "packages/theme"
+  },
+  "bugs": {
+    "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
+  },
+  "keywords": [
+    "tailwindcss",
+    "theme",
+    "design-tokens",
+    "shadcn",
+    "saas"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "exports": {
+    "./base.css": "./dist/base.css",
+    "./presets/mono.css": "./dist/presets/mono.css",
+    "./presets/teal.css": "./dist/presets/teal.css",
+    "./workos-widgets.css": "./dist/workos-widgets.css",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "rm -rf dist && cp -R src dist",
+    "prepublishOnly": "bun run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@radix-ui/themes": ">=3.0.0",
+    "@workos-inc/widgets": ">=1.0.0",
+    "tailwindcss": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@radix-ui/themes": {
+      "optional": true
+    },
+    "@workos-inc/widgets": {
+      "optional": true
+    }
+  }
+}

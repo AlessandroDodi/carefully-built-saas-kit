@@ -1,3 +1,7 @@
+import { defineKitTexts } from "../locale/kit-texts";
+
+import type { KitLocale } from "../locale/kit-locale";
+
 export type ErrorPageKind = "error" | "not-found";
 
 export interface ErrorPageContent {
@@ -14,6 +18,25 @@ export interface ResolveErrorPageContentOptions {
 }
 
 const NOT_FOUND_STATUS = 404;
+
+export const errorPageTexts = defineKitTexts({
+  en: {
+    notFoundTitle: "Page not found",
+    notFoundDescription: "The page you are looking for does not exist or has been moved.",
+    errorTitle: "An error occurred",
+    errorDescription: "An unexpected error occurred. Please try again later.",
+    homeLabel: "Back to home",
+    retryLabel: "Try again",
+  },
+  it: {
+    notFoundTitle: "Pagina non trovata",
+    notFoundDescription: "La pagina cercata non esiste o è stata spostata.",
+    errorTitle: "Si è verificato un errore",
+    errorDescription: "Si è verificato un errore imprevisto. Riprova più tardi.",
+    homeLabel: "Torna alla home",
+    retryLabel: "Riprova",
+  },
+});
 
 function getErrorText(error: unknown): string {
   if (error instanceof Error) {
@@ -46,30 +69,27 @@ function getErrorStatusCode(error: unknown): number | null {
 export function resolveErrorPageContent(
   error: unknown,
   options: ResolveErrorPageContentOptions = {},
+  locale: KitLocale = "en",
 ): ErrorPageContent {
   if (getErrorStatusCode(error) === NOT_FOUND_STATUS) {
-    return {
-      code: "404",
-      title: "Page not found",
-      description: "The page you are looking for does not exist or has been moved.",
-      shouldCapture: false,
-    };
+    return getNotFoundPageContent(locale);
   }
 
+  const texts = errorPageTexts[locale];
   return {
     code: options.fallbackCode ?? "500",
-    title: options.fallbackTitle ?? "An error occurred",
-    description:
-      options.fallbackDescription ?? "An unexpected error occurred. Please try again later.",
+    title: options.fallbackTitle ?? texts.errorTitle,
+    description: options.fallbackDescription ?? texts.errorDescription,
     shouldCapture: true,
   };
 }
 
-export function getNotFoundPageContent(): ErrorPageContent {
+export function getNotFoundPageContent(locale: KitLocale = "en"): ErrorPageContent {
+  const texts = errorPageTexts[locale];
   return {
     code: "404",
-    title: "Page not found",
-    description: "The page you are looking for does not exist or has been moved.",
+    title: texts.notFoundTitle,
+    description: texts.notFoundDescription,
     shouldCapture: false,
   };
 }

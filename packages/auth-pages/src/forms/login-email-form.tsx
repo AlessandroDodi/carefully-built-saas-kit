@@ -5,7 +5,8 @@ import { FormProvider } from "react-hook-form";
 import type { FieldValues, Path } from "react-hook-form";
 
 import { CustomInputField, CustomPasswordField } from "@carefully-built/forms";
-import { Button, cn } from "@carefully-built/ui";
+import { Button, cn, useKitTexts } from "@carefully-built/ui";
+import { loginEmailFormTexts } from "../locale/auth-texts";
 
 import type { AuthFormState } from "../types";
 
@@ -34,12 +35,12 @@ export function LoginEmailForm<TValues extends FieldValues>({
   onSubmit,
   loading = false,
   error,
-  emailLabel = "Email",
-  emailPlaceholder = "you@example.com",
-  passwordLabel = "Password",
-  forgotPasswordLabel = "Forgot password?",
-  submitLabel = "Sign in",
-  loadingLabel = "Signing in...",
+  emailLabel: emailLabelProp,
+  emailPlaceholder: emailPlaceholderProp,
+  passwordLabel: passwordLabelProp,
+  forgotPasswordLabel: forgotPasswordLabelProp,
+  submitLabel: submitLabelProp,
+  loadingLabel: loadingLabelProp,
   forgotPasswordHref = "/forgot-password",
   showPasswordLabel,
   hidePasswordLabel,
@@ -48,6 +49,22 @@ export function LoginEmailForm<TValues extends FieldValues>({
   errorClassName,
   buttonClassName,
 }: LoginEmailFormProps<TValues>): React.ReactElement {
+  const {
+    emailLabel,
+    emailPlaceholder,
+    passwordLabel,
+    forgotPasswordLabel,
+    submitLabel,
+    loadingLabel,
+  } = useKitTexts(loginEmailFormTexts, {
+    emailLabel: emailLabelProp,
+    emailPlaceholder: emailPlaceholderProp,
+    passwordLabel: passwordLabelProp,
+    forgotPasswordLabel: forgotPasswordLabelProp,
+    submitLabel: submitLabelProp,
+    loadingLabel: loadingLabelProp,
+  });
+
   return (
     <FormProvider {...form}>
       <form

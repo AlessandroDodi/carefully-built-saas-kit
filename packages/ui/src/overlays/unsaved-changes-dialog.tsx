@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../primitives/dialog';
+import { useKitLocale } from '../locale/kit-locale';
 import { Button } from '../primitives/button';
 import { resolveUnsavedChangesDialogCopy } from './unsaved-changes';
 
@@ -26,7 +27,7 @@ export function UnsavedChangesDialog({
   onDiscard,
   copy,
 }: UnsavedChangesDialogProps): React.ReactElement {
-  const resolvedCopy = resolveUnsavedChangesDialogCopy(copy);
+  const resolvedCopy = resolveUnsavedChangesDialogCopy(copy, useKitLocale());
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

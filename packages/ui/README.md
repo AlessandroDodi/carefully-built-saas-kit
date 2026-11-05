@@ -20,6 +20,24 @@ import { SmartTable, useTableSorting, type Column } from '@carefully-built/ui';
 
 This package assumes your app provides Tailwind-compatible design tokens such as `bg-card`, `text-muted-foreground`, `border`, and `ring`.
 
+## Lingua
+
+Every user-visible string is a prop. When a prop is omitted, the default comes
+from the active kit locale: English without a provider, Italian with
+`locale="it"`. Wrap the app once:
+
+```tsx
+import { KitLocaleProvider } from '@carefully-built/ui';
+
+<KitLocaleProvider locale="it">{children}</KitLocaleProvider>;
+```
+
+Packages define their copy with `defineKitTexts({ en: {...}, it: {...} })` and
+read it with `useKitTexts(texts, overrides)`, where defined overrides (the
+component props) win over the locale default. `useKitLocale()` returns the
+active locale; `resolveKitTexts(texts, locale, overrides)` is the pure variant
+for resolvers and tests.
+
 ## Styling And Theming
 
 Components keep their default style when styling props are omitted. For app-specific theme differences, pass `className`, focused slot props such as `contentClassName`, or `classes` objects instead of copying primitives into the app.

@@ -6,9 +6,10 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import type { FieldValues, Path } from 'react-hook-form';
 
-import { Button, Input, Label, cn } from '@carefully-built/ui';
+import { Button, Input, Label, cn, useKitTexts } from '@carefully-built/ui';
 
 import { FieldMessage } from './field-message';
+import { passwordFieldTexts } from './field-texts';
 
 interface CustomPasswordFieldProps<TValues extends FieldValues> {
   readonly name: Path<TValues>;
@@ -30,9 +31,13 @@ export function CustomPasswordField<TValues extends FieldValues>({
   autoFocus = false,
   autoComplete = 'current-password',
   className,
-  showPasswordLabel = 'Show password',
-  hidePasswordLabel = 'Hide password',
+  showPasswordLabel: showPasswordLabelProp,
+  hidePasswordLabel: hidePasswordLabelProp,
 }: CustomPasswordFieldProps<TValues>): React.ReactElement {
+  const { showPasswordLabel, hidePasswordLabel } = useKitTexts(passwordFieldTexts, {
+    showPasswordLabel: showPasswordLabelProp,
+    hidePasswordLabel: hidePasswordLabelProp,
+  });
   const { control } = useFormContext<TValues>();
   const [showPassword, setShowPassword] = useState(false);
 

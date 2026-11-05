@@ -8,8 +8,6 @@ import {
   type NavigationLinkProps,
 } from '@carefully-built/app-shell';
 
-export * from '@carefully-built/app-shell';
-
 /** `next/link` adapter for the shell's navigation links. */
 export function NextNavigationLink({
   children,

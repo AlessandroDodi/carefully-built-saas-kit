@@ -49,6 +49,15 @@ function AccountForm() {
 
 Use `CustomForm` when you want full layout control, and `SchemaForm` when a CRUD screen should be generated from a small field list.
 
+## Lingua
+
+Default labels follow the kit locale set with `KitLocaleProvider` from
+`@carefully-built/ui` (English without a provider). Props still win.
+
+```tsx
+<KitLocaleProvider locale="it">{children}</KitLocaleProvider>
+```
+
 ## Component Docs
 
 - [Forms](./docs/forms.md)
