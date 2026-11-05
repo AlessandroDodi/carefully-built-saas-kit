@@ -22,3 +22,11 @@ import { CoverageGrid } from '@carefully-built/charts';
   onSlotClick={(index) => openSlot(index)}
 />;
 ```
+
+## Andamenti e KPI
+
+- `TrendAreaChart`: area morbida con riempimento sfumato a tratteggio, linea
+  tratteggiata del periodo precedente, animata al montaggio.
+- `SparkBars`: barre minime per le card KPI, con il picco evidenziato.
+- `DeltaBadge`: pillola "▲ 15%" rispetto al periodo precedente (`lowerIsBetter`
+  per i costi).
