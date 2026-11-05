@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { toast } from 'sonner';
+import { useKitLocale, useKitTexts } from '@carefully-built/ui';
 
 import { createFilePreview, validateOrganizationLogo } from './organization-logo';
+import { organizationLogoTexts } from './workos-texts';
 
 interface UseOrganizationLogoInputResult {
   readonly clearLogo: () => void;
@@ -16,6 +18,8 @@ interface UseOrganizationLogoInputResult {
 export function useOrganizationLogoInput(): UseOrganizationLogoInputResult {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const locale = useKitLocale();
+  const { readError } = useKitTexts(organizationLogoTexts);
 
   const clearLogo = (): void => {
     setLogoFile(null);
@@ -23,7 +27,7 @@ export function useOrganizationLogoInput(): UseOrganizationLogoInputResult {
   };
 
   const handleLogoSelect = async (file: File): Promise<void> => {
-    const validationError = validateOrganizationLogo(file);
+    const validationError = validateOrganizationLogo(file, locale);
 
     if (validationError) {
       toast.error(validationError);
@@ -31,11 +35,11 @@ export function useOrganizationLogoInput(): UseOrganizationLogoInputResult {
     }
 
     try {
-      const preview = await createFilePreview(file);
+      const preview = await createFilePreview(file, locale);
       setLogoFile(file);
       setLogoPreview(preview);
     } catch (previewError) {
-      toast.error(previewError instanceof Error ? previewError.message : 'Unable to read the selected file');
+      toast.error(previewError instanceof Error ? previewError.message : readError);
     }
   };
 

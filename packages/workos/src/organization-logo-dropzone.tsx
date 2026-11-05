@@ -1,11 +1,9 @@
 'use client';
 
-import { FileDropzone } from '@carefully-built/ui';
-import {
-  ORGANIZATION_LOGO_ACCEPT,
-  ORGANIZATION_LOGO_CAPTION,
-  ORGANIZATION_LOGO_HELPER_TEXT,
-} from './organization-logo';
+import { FileDropzone, useKitTexts } from '@carefully-built/ui';
+
+import { ORGANIZATION_LOGO_ACCEPT } from './organization-logo';
+import { organizationLogoTexts } from './workos-texts';
 
 interface OrganizationLogoDropzoneProps {
   readonly onFileSelect: (file: File) => void;
@@ -18,17 +16,19 @@ export function OrganizationLogoDropzone({
   onRemove,
   previewUrl,
 }: OrganizationLogoDropzoneProps): React.ReactElement {
+  const texts = useKitTexts(organizationLogoTexts);
+
   return (
     <div className="space-y-2">
       <FileDropzone
         accept={ORGANIZATION_LOGO_ACCEPT}
         currentPreviewUrl={previewUrl}
-        helperText={ORGANIZATION_LOGO_HELPER_TEXT}
-        previewAlt="Organization logo preview"
+        helperText={texts.helperText}
+        previewAlt={texts.previewAlt}
         onFileSelect={onFileSelect}
         onRemove={onRemove}
       />
-      <p className="text-xs text-muted-foreground">{ORGANIZATION_LOGO_CAPTION}</p>
+      <p className="text-xs text-muted-foreground">{texts.caption}</p>
     </div>
   );
 }

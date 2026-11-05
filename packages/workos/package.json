@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/workos",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Reusable WorkOS organization creation and organization logo primitives for SaaS apps.",
   "type": "module",
   "license": "MIT",
@@ -41,7 +41,7 @@
   },
   "peerDependencies": {
     "@carefully-built/settings-ui": ">=0.1.6",
-    "@carefully-built/ui": ">=0.1.15",
+    "@carefully-built/ui": ">=0.1.24",
     "@radix-ui/react-slot": "^1.0.0",
     "lucide-react": ">=0.400.0 || >=1.0.0",
     "next": ">=15.0.0 || >=16.0.0",
@@ -51,9 +51,6 @@
   },
   "peerDependenciesMeta": {
     "@carefully-built/settings-ui": {
-      "optional": true
-    },
-    "@carefully-built/ui": {
       "optional": true
     },
     "next": {

@@ -6,8 +6,9 @@ import { useRef } from 'react';
 import { CreateOrganizationFormContent } from './create-organization-form-content';
 import { useCreateOrganizationDialog } from './use-create-organization-dialog';
 
-import { ResponsiveSheet } from '@carefully-built/ui';
-import { Button } from '@carefully-built/ui';
+import { Button, ResponsiveSheet, useKitTexts } from '@carefully-built/ui';
+
+import { createOrganizationTexts } from './workos-texts';
 
 interface CreateOrganizationProps {
   readonly children?: React.ReactNode;
@@ -37,15 +38,15 @@ export interface CreateOrganizationLabels {
 
 export type CreateOrganizationLabelsInput = Partial<CreateOrganizationLabels>;
 
-function resolveCreateOrganizationLabels(
+/** Labels from props, then the kit locale's defaults. */
+function useCreateOrganizationLabels(
   labels: CreateOrganizationLabelsInput = {},
 ): CreateOrganizationLabels {
-  return {
-    triggerLabel: labels.triggerLabel ?? 'Create organization',
-    title: labels.title ?? 'Create organization',
-    description: labels.description ?? 'Create a new organization to invite your team and collaborate.',
-    confirmLabel: labels.confirmLabel ?? 'Create',
-  };
+  const { triggerLabel, title, description, confirmLabel } = useKitTexts(
+    createOrganizationTexts,
+    labels,
+  );
+  return { triggerLabel, title, description, confirmLabel };
 }
 
 function CreateOrganizationTrigger({
@@ -125,7 +126,7 @@ export function CreateOrganization({
   labels,
 }: CreateOrganizationProps): React.ReactElement {
   const dialog = useCreateOrganizationDialog({ createOrganization, onCreated, uploadLogo });
-  const resolvedLabels = resolveCreateOrganizationLabels(labels);
+  const resolvedLabels = useCreateOrganizationLabels(labels);
 
   return (
     <>
