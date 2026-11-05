@@ -370,9 +370,12 @@ export function CommandPalette<TItem, TType extends string>({
         isBottomNavTrigger
           ? 'text-muted-foreground hover:text-foreground mx-1 my-1 h-auto min-w-0 flex-1 flex-col gap-1 rounded-xl px-2 py-2 text-[11px] font-medium'
           : 'border-sidebar-border bg-background/70 text-sidebar-foreground/75 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:bg-sidebar-accent hover:text-sidebar-primary dark:text-sidebar-foreground/90 dark:hover:text-white border',
+        // Same box as the sidebar nav items (full width, rounded-md) in both
+        // states, so the collapsed trigger lines up with the icons below it
+        // instead of rendering as a circle.
         !isBottomNavTrigger &&
           (isCollapsed && !isMobile
-            ? 'size-8 px-0'
+            ? 'h-8 w-full justify-center rounded-md px-2'
             : 'h-8 w-full justify-start gap-2 rounded-md px-2.5'),
       )}
       onClick={() => setIsOpen(true)}

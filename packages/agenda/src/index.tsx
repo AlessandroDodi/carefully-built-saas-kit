@@ -10,6 +10,7 @@ export * from './activity-item';
 export * from './activity-list-view';
 export * from './activity-page-state';
 export * from './activity-types';
+export * from './agenda-texts';
 export * from './activity-view-mode-toggle';
 export * from './shift-timeline';
 export * from './shared-activity-calendar-day-picker';

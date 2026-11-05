@@ -1,13 +1,16 @@
 'use client';
 
+import { useKitTexts } from '@carefully-built/ui';
+
 import { isSameLocalDay } from './activity-calendar-widget';
+import { agendaTexts } from './agenda-texts';
 
 function cn(...classes: readonly (string | false | null | undefined)[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-function formatChipWeekday(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
+function formatChipWeekday(date: Date, localeCode: string): string {
+  return new Intl.DateTimeFormat(localeCode, {
     weekday: 'short',
   })
     .format(date)
@@ -24,6 +27,8 @@ export function SharedActivityCalendarDayPicker({
   readonly selectedDate: Date;
   readonly onSelectDay: (day: Date) => void;
 }): React.ReactElement {
+  const { localeCode } = useKitTexts(agendaTexts);
+
   return (
     <div className="grid grid-cols-7 gap-1">
       {visibleDays.map((day) => {
@@ -47,7 +52,7 @@ export function SharedActivityCalendarDayPicker({
                 isSelected ? 'text-primary-foreground/80' : 'text-muted-foreground'
               )}
             >
-              {formatChipWeekday(day)}
+              {formatChipWeekday(day, localeCode)}
             </span>
             <span className="text-[13px] leading-none font-semibold">{day.getDate()}</span>
           </button>

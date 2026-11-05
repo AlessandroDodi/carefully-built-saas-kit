@@ -1,3 +1,5 @@
+import { agendaTexts } from './agenda-texts';
+
 interface ActivityTypeSource {
   readonly _id: string;
   readonly label: string;
@@ -25,18 +27,14 @@ export interface FallbackActivityType {
 }
 
 /**
- * Starter types offered to an organization that has none of its own. They are
- * matched against the real types **by label**, so a host whose data is in
- * another language must pass its own through `fallbackTypes` — otherwise none
- * match and every default shows up as an extra, undeletable row next to the
- * real ones.
+ * English starter types offered to an organization that has none of its own.
+ * They are matched against the real types **by label**: `useAgendaPageState`
+ * picks the set of the kit locale, and a host whose data is in yet another
+ * language passes its own through `fallbackTypes` — otherwise none match and
+ * every default shows up as an extra, undeletable row next to the real ones.
  */
-export const DEFAULT_ACTIVITY_TYPES = [
-  { label: 'Meeting', color: '#0EA5E9' },
-  { label: 'Call', color: '#06B6D4' },
-  { label: 'Visit', color: '#EA580C' },
-  { label: 'Review', color: '#713DFF' },
-] as const;
+export const DEFAULT_ACTIVITY_TYPES: readonly FallbackActivityType[] =
+  agendaTexts.en.defaultActivityTypes;
 
 /**
  * Etichetta che l'host usa per un'attivita' il cui tipo non esiste piu'. Serve a
