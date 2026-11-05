@@ -2,9 +2,10 @@
 
 import { Bell } from "lucide-react";
 
-import { EmptyStateCard, Skeleton } from "@carefully-built/ui";
+import { EmptyStateCard, Skeleton, useKitTexts } from "@carefully-built/ui";
 
 import { NotificationListItem } from "./notification-list-item";
+import { notificationTexts } from "./notification-texts";
 import type {
   NotificationRecord,
   NotificationSourceMeta,
@@ -27,7 +28,7 @@ export interface NotificationListProps<TNotification extends NotificationRecord>
 export function NotificationList<TNotification extends NotificationRecord>({
   notifications,
   emptyLabel,
-  emptySubtitle = "You're all caught up.",
+  emptySubtitle: emptySubtitleProp,
   openItemLabel,
   markSeenItemLabel,
   typeMeta,
@@ -36,6 +37,7 @@ export function NotificationList<TNotification extends NotificationRecord>({
   onOpen,
   onMarkSeen,
 }: NotificationListProps<TNotification>): React.ReactElement {
+  const { emptySubtitle } = useKitTexts(notificationTexts, { emptySubtitle: emptySubtitleProp });
   if (notifications === undefined) {
     return (
       <div className="space-y-2">

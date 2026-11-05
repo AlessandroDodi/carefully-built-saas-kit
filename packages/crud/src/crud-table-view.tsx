@@ -2,13 +2,18 @@
 
 import type { CrudTableViewProps } from "./types";
 
-import { SmartTable, TableToolbar } from "@carefully-built/ui";
+import { SmartTable, TableToolbar, defineKitTexts, useKitTexts } from "@carefully-built/ui";
+
+const crudTableViewTexts = defineKitTexts({
+  en: { searchPlaceholder: "Search..." },
+  it: { searchPlaceholder: "Cerca…" },
+});
 
 export function CrudTableView<TItem extends object>({
   state,
   columns,
   isLoading,
-  searchPlaceholder = "Search...",
+  searchPlaceholder: searchPlaceholderProp,
   toolbarLabels,
   filters = [],
   actions,
@@ -26,6 +31,9 @@ export function CrudTableView<TItem extends object>({
   fullHeight = true,
   maxHeight,
 }: CrudTableViewProps<TItem>): React.ReactElement {
+  const { searchPlaceholder } = useKitTexts(crudTableViewTexts, {
+    searchPlaceholder: searchPlaceholderProp,
+  });
   const emptyContent =
     state.emptyState === "no-results" ? noResultsContent : initialEmptyContent;
 

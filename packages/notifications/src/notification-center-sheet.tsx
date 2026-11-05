@@ -11,9 +11,11 @@ import {
   TabsList,
   TabsScrollArea,
   TabsTrigger,
+  useKitTexts,
 } from "@carefully-built/ui";
 
 import { NotificationList } from "./notification-list";
+import { notificationTexts } from "./notification-texts";
 import type {
   NotificationLocaleConfig,
   NotificationRecord,
@@ -22,21 +24,6 @@ import type {
   NotificationVisualMeta,
 } from "./types";
 
-const defaultLocaleConfig: Required<Omit<NotificationLocaleConfig, "locale">> = {
-  allTabValue: "all",
-  allTabLabel: "All",
-  title: "Notifications",
-  description: "Recent updates from your workspace.",
-  emptyAllLabel: "No notifications",
-  emptyFilteredLabel: "No notifications in this category",
-  emptySubtitle: "You're all caught up.",
-  openNotificationItemLabel: "Open {title}",
-  markSeenItemLabel: "Segna come vista: {title}",
-  closeLabel: "Close",
-  markAllSeenLabel: "Mark all read",
-  openNotificationsLabel: "Open notifications",
-  tooltipLabel: "Notifications",
-};
 
 export interface NotificationCenterSheetProps<TNotification extends NotificationRecord> {
   readonly open: boolean;
@@ -67,7 +54,7 @@ export function NotificationCenterSheet<TNotification extends NotificationRecord
   onMarkAllSeen,
   width = 620,
 }: NotificationCenterSheetProps<TNotification>): React.ReactElement {
-  const labels = { ...defaultLocaleConfig, ...localeConfig };
+  const labels = useKitTexts(notificationTexts, localeConfig);
   const [selectedTab, setSelectedTab] = useState(labels.allTabValue);
   const resolvedTabs = useMemo(
     () => [{ value: labels.allTabValue, label: labels.allTabLabel, icon: Bell }, ...tabs],
