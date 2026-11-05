@@ -9,3 +9,4 @@ export * from './export-csv';
 export * from './import-types';
 export * from './parse-tabular-import-file';
 export * from './use-contact-import-state';
+export * from './tabular';
