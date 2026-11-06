@@ -15,6 +15,7 @@ export { CustomCompactCurrencyField } from './fields/custom-compact-currency-fie
 export { CustomMultiSelectDropdownField } from './fields/custom-multi-select-dropdown-field';
 export { CustomMultiSelectField } from './fields/custom-multi-select-field';
 export { CustomPasswordField } from './fields/custom-password-field';
+export { CustomPhoneField } from './fields/custom-phone-field';
 export { CustomSelectField } from './fields/custom-select-field';
 export { CustomSegmentedToggleField } from './fields/custom-segmented-toggle-field';
 export { CustomSingleAssociationPickerField } from './fields/custom-single-association-picker-field';

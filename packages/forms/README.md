@@ -73,3 +73,9 @@ operatore, finestre di chiamata, orari di apertura). Il valore è un
 `WeeklyHoursRange[]` piatto (`{ weekday: 1…7, start: 'HH:mm', end: 'HH:mm' }`),
 validabile con `weeklyHoursSchema`; `defaultWeeklyHours()` dà lunedì–venerdì
 9–18. I testi seguono `KitLocaleProvider`.
+
+## Telefono con prefisso
+
+`CustomPhoneField` (o `type: 'phone'` in `SchemaForm`) mostra il prefisso
+internazionale come select, Italia predefinita, e il numero locale a fianco; il
+valore del form resta una sola stringa E.164 (`+39333…`).

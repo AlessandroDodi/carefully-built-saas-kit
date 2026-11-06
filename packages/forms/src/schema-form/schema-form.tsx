@@ -6,6 +6,7 @@ import type { FieldValues, Path } from 'react-hook-form';
 
 import { CustomInputField } from '../fields/custom-input-field';
 import { CustomPasswordField } from '../fields/custom-password-field';
+import { CustomPhoneField } from '../fields/custom-phone-field';
 import { CustomSelectField } from '../fields/custom-select-field';
 import { CustomTextareaField } from '../fields/custom-textarea-field';
 
@@ -41,6 +42,11 @@ export type SchemaFormField<TValues extends FieldValues> =
   | (BaseSchemaField<TValues> & {
       readonly type: 'password';
       readonly autoComplete?: string;
+    })
+  | (BaseSchemaField<TValues> & {
+      /** Country prefix + local number, stored as one E.164 string. */
+      readonly type: 'phone';
+      readonly required?: boolean;
     })
   | (BaseSchemaField<TValues> & {
       readonly type: 'custom';
@@ -89,6 +95,18 @@ function renderSchemaField<TValues extends FieldValues>(
     );
   }
 
+  if (field.type === 'phone') {
+    return (
+      <CustomPhoneField<TValues>
+        key={field.name}
+        name={field.name}
+        label={field.label}
+        placeholder={field.placeholder}
+        required={field.required}
+        className={field.className}
+      />
+    );
+  }
   if (field.type === 'password') {
     return (
       <CustomPasswordField<TValues>
