@@ -1,14 +1,14 @@
 'use client';
 
 import { useId } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, ReferenceDot, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 import type { ReactNode } from 'react';
 
 export interface TrendPoint {
   readonly label: string;
   readonly value: number;
-  /** Same metric in the comparison period, drawn as a dashed line. */
+  /** Same metric in the comparison period, drawn as a dotted line. */
   readonly previous?: number;
 }
 
@@ -32,9 +32,21 @@ interface TooltipProps {
   readonly payload?: readonly TooltipPayload[];
 }
 
+interface DotProps {
+  readonly cx?: number;
+  readonly cy?: number;
+  readonly index?: number;
+}
+
+/** Ring markers on a few evenly spaced points, so a long series stays clean. */
+function dotStep(length: number): number {
+  return length <= 14 ? 1 : Math.ceil(length / 7);
+}
+
 /**
- * A smooth area with a hatched gradient fill and a comparison line, animated on
- * mount. Colours come from the theme tokens, the accent from `color`.
+ * A smooth line over a soft gradient, ring markers, the last value in a pill
+ * and the comparison period as a dotted line. The scale hugs the data, so no
+ * empty band sits under the curve.
  */
 export function TrendAreaChart({
   data,
@@ -46,7 +58,8 @@ export function TrendAreaChart({
 }: TrendAreaChartProps): React.ReactElement {
   const id = useId();
   const gradientId = `trend-gradient-${id}`;
-  const hatchId = `trend-hatch-${id}`;
+  const last = data.at(-1);
+  const step = dotStep(data.length);
 
   const renderTooltip = ({ active, label, payload }: TooltipProps): ReactNode => {
     if (!active || !payload?.length) return null;
@@ -69,51 +82,78 @@ export function TrendAreaChart({
     );
   };
 
+  const renderDot = ({ cx, cy, index }: DotProps): React.ReactElement<SVGElement> => {
+    const isLast = index === data.length - 1;
+    const show = cx !== undefined && cy !== undefined && (isLast || (index !== undefined && index % step === 0));
+    const key = `dot-${String(index)}`;
+    if (!show) return <g key={key} />;
+    return isLast ? (
+      <circle key={key} cx={cx} cy={cy} r={5} fill={color} stroke="var(--card)" strokeWidth={2} />
+    ) : (
+      <circle key={key} cx={cx} cy={cy} r={4} fill="var(--card)" stroke={color} strokeWidth={2} />
+    );
+  };
+
+  const renderEndLabel = ({ viewBox }: { viewBox?: { x?: number; y?: number } }): React.ReactElement<SVGElement> => {
+    if (!last || viewBox?.x === undefined || viewBox.y === undefined) return <g />;
+    const text = valueFormatter(last.value);
+    const width = text.length * 7 + 16;
+    return (
+      <g transform={`translate(${String(viewBox.x + 12)}, ${String(viewBox.y - 11)})`}>
+        <rect width={width} height={22} rx={11} fill="var(--card)" stroke={color} strokeWidth={1.5} />
+        <text x={width / 2} y={15} textAnchor="middle" fontSize={11} fontWeight={600} fill={color}>
+          {text}
+        </text>
+      </g>
+    );
+  };
+
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={[...data]} margin={{ top: 12, right: 8, bottom: 0, left: 8 }}>
+      <AreaChart data={[...data]} margin={{ top: 16, right: 56, bottom: 0, left: 8 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={color} stopOpacity={0.35} />
-            <stop offset="100%" stopColor={color} stopOpacity={0.02} />
+            <stop offset="0%" stopColor={color} stopOpacity={0.28} />
+            <stop offset="100%" stopColor={color} stopOpacity={0} />
           </linearGradient>
-          <pattern id={hatchId} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <rect width="6" height="6" fill={`url(#${gradientId})`} />
-            <line x1="0" y1="0" x2="0" y2="6" stroke={color} strokeOpacity={0.18} strokeWidth="1.5" />
-          </pattern>
         </defs>
-        <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />
         <XAxis
           dataKey="label"
           axisLine={false}
           tickLine={false}
           tick={{ fontSize: 11, fill: 'var(--muted-foreground)' }}
+          tickMargin={10}
           interval="preserveStartEnd"
-          minTickGap={24}
+          minTickGap={28}
         />
-        <YAxis hide />
+        <YAxis hide domain={[(min: number) => Math.max(0, Math.floor(min * 0.85)), (max: number) => Math.ceil(max * 1.08)]} />
         <Tooltip content={renderTooltip} cursor={{ stroke: 'var(--border)' }} />
         <Area
           type="monotone"
           dataKey="previous"
           stroke="var(--muted-foreground)"
-          strokeWidth={1.5}
-          strokeDasharray="4 4"
-          strokeOpacity={0.5}
+          strokeWidth={2}
+          strokeDasharray="1 5"
+          strokeLinecap="round"
+          strokeOpacity={0.55}
           fill="none"
           animationDuration={900}
           dot={false}
+          activeDot={false}
         />
         <Area
           type="monotone"
           dataKey="value"
+          baseValue="dataMin"
           stroke={color}
           strokeWidth={2.5}
-          fill={`url(#${hatchId})`}
+          strokeLinecap="round"
+          fill={`url(#${gradientId})`}
           animationDuration={1200}
-          dot={false}
-          activeDot={{ r: 5, strokeWidth: 2, stroke: 'var(--card)' }}
+          dot={renderDot}
+          activeDot={{ r: 6, strokeWidth: 2, stroke: 'var(--card)' }}
         />
+        {last ? <ReferenceDot x={last.label} y={last.value} r={0} label={renderEndLabel} /> : null}
       </AreaChart>
     </ResponsiveContainer>
   );
