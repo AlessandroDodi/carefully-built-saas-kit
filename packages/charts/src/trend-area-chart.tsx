@@ -81,8 +81,10 @@ export function TrendAreaChart({
 }: TrendAreaChartProps): React.ReactElement {
   const id = useId();
   const gradientId = `trend-gradient-${id}`;
-  const last = data.at(-1);
-  const step = dotStep(data.length);
+  // One point is a flat line, not a dot: the same value at both ends.
+  const series = data.length === 1 && data[0] ? [data[0], { ...data[0] }] : data;
+  const last = series.at(-1);
+  const step = dotStep(series.length);
 
   const renderTooltip = ({ active, label, payload }: TooltipProps): ReactNode => {
     if (!active || !payload?.length) return null;
@@ -106,7 +108,7 @@ export function TrendAreaChart({
   };
 
   const renderDot = ({ cx, cy, index }: DotProps): React.ReactElement<SVGElement> => {
-    const isLast = index === data.length - 1;
+    const isLast = index === series.length - 1;
     const show = cx !== undefined && cy !== undefined && (isLast || (index !== undefined && index % step === 0));
     const key = `dot-${String(index)}`;
     if (!show) return <g key={key} />;
@@ -137,7 +139,7 @@ export function TrendAreaChart({
   return (
     <div ref={box.ref} style={{ width: '100%', height }}>
       {box.width > 0 && box.height > 0 ? (
-      <AreaChart width={box.width} height={box.height} data={[...data]} margin={{ top: 36, right: 12, bottom: 0, left: 12 }}>
+      <AreaChart width={box.width} height={box.height} data={[...series]} margin={{ top: 36, right: 12, bottom: 0, left: 12 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity={0.28} />

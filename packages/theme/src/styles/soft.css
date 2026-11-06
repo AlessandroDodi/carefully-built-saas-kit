@@ -151,3 +151,11 @@
   inset: 0.5rem 0.5rem 0.5rem auto;
   height: auto;
 }
+
+/* Recharts makes pies focusable: no focus rectangle around a chart you clicked. */
+.recharts-wrapper :focus,
+.recharts-wrapper :focus-visible,
+.recharts-surface:focus,
+.recharts-surface:focus-visible {
+  outline: none;
+}

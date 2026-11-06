@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/theme",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Tailwind v4 design tokens, color presets, and third-party widget styles for Carefully Built apps.",
   "type": "module",
   "license": "MIT",
