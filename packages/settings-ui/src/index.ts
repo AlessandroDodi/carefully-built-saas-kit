@@ -25,3 +25,5 @@ export * from './integration-panels';
 export * from './settings-list-section';
 export * from './settings-reorderable-list';
 export * from './settings-details';
+export { EditableSettingsSection, type EditableSettingsSectionProps } from './editable-settings-section';
+export { SettingsText, type SettingsTextProps } from './settings-text';

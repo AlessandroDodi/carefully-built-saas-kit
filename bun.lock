@@ -343,7 +343,7 @@
     },
     "packages/forms": {
       "name": "@carefully-built/forms",
-      "version": "0.1.14",
+      "version": "0.1.15",
       "devDependencies": {
         "@carefully-built/association-picker": "workspace:*",
         "@carefully-built/ui": "workspace:*",
@@ -637,7 +637,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.27",
+      "version": "0.1.28",
       "dependencies": {
         "@carefully-built/agenda": "0.1.13",
         "@carefully-built/app-shell": "0.1.8",
@@ -733,7 +733,7 @@
     },
     "packages/settings-ui": {
       "name": "@carefully-built/settings-ui",
-      "version": "0.1.10",
+      "version": "0.1.11",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",

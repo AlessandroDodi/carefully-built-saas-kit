@@ -21,6 +21,7 @@ export { CustomSegmentedToggleField } from './fields/custom-segmented-toggle-fie
 export { CustomSingleAssociationPickerField } from './fields/custom-single-association-picker-field';
 export { CustomTextareaField } from './fields/custom-textarea-field';
 export { CustomWeeklyHoursField } from './fields/custom-weekly-hours-field';
+export { WeeklyHoursSummary, groupWeeklyHours, type WeeklyHoursGroup, type WeeklyHoursSummaryProps } from './fields/weekly-hours-summary';
 export {
   WEEKDAYS,
   defaultWeeklyHours,
