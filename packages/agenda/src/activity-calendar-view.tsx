@@ -14,7 +14,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import type { DateClickArg } from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import FullCalendar from '@fullcalendar/react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import type {
@@ -103,7 +104,21 @@ interface ActivityCalendarViewProps {
   readonly localeCode?: string;
   readonly firstDay?: number;
   readonly slotDuration?: string;
+  /**
+   * How events created in the app are marked: a small icon on the event chip
+   * (drawn on the event colour) and in the tooltip's "connected to" list
+   * (drawn on the tooltip's dark surface), so pass something light, e.g. a
+   * white mark. Defaults to a generic square.
+   */
+  readonly appBadge?: AppBadge;
 }
+
+export interface AppBadge {
+  readonly icon: ReactNode;
+  readonly label: string;
+}
+
+const AppBadgeContext = createContext<AppBadge | undefined>(undefined);
 
 function getScheduledDate(activity: ActivityListItem): Date | null {
   const timestamp = activity.startAt ?? activity.dueAt ?? activity.endAt;
@@ -250,6 +265,8 @@ const calendarViewTexts = defineKitTexts<{
   readonly week: string;
   readonly month: string;
   readonly today: string;
+  readonly connectedTo: string;
+  readonly workspace: string;
 }>({
   en: {
     fullCalendarLocale: undefined,
@@ -262,6 +279,8 @@ const calendarViewTexts = defineKitTexts<{
     week: 'week',
     month: 'month',
     today: 'today',
+    connectedTo: 'Connected to',
+    workspace: 'Workspace',
   },
   it: {
     fullCalendarLocale: itLocale,
@@ -274,6 +293,8 @@ const calendarViewTexts = defineKitTexts<{
     week: 'settimana',
     month: 'mese',
     today: 'oggi',
+    connectedTo: 'Collegato a',
+    workspace: 'Spazio di lavoro',
   },
 });
 
@@ -458,6 +479,7 @@ function CalendarEventSourceIcons({
 }: {
   readonly badges: CalendarEventBadges | undefined;
 }): React.ReactNode {
+  const appBadge = useContext(AppBadgeContext);
   if (!badges?.hasApp && !badges?.hasGoogleCalendar) {
     return null;
   }
@@ -465,11 +487,13 @@ function CalendarEventSourceIcons({
   return (
     <div className="agenda-calendar-event__meta">
       {badges?.hasApp ? (
-        <img
-          src="/logos/square_logo.png"
-          alt="Evento dell'app"
-          className="agenda-calendar-event__icon"
-        />
+        appBadge ? (
+          <span className="agenda-calendar-event__icon [&>*]:h-full [&>*]:w-auto" aria-label={appBadge.label}>
+            {appBadge.icon}
+          </span>
+        ) : (
+          <span className="agenda-calendar-event__icon rounded-[3px] bg-white/85" aria-hidden />
+        )
       ) : null}
       {badges?.hasGoogleCalendar ? (
         <img
@@ -487,18 +511,24 @@ function CalendarEventConnections({
 }: {
   readonly badges: CalendarEventBadges;
 }): React.ReactNode {
+  const appBadge = useContext(AppBadgeContext);
+  const { connectedTo, workspace } = useKitTexts(calendarViewTexts);
   if (!badges.hasApp && !badges.hasGoogleCalendar) {
     return null;
   }
 
   return (
     <div className="space-y-1.5">
-      <p className="text-[10px] font-medium tracking-normal uppercase opacity-65">Connected to</p>
+      <p className="text-[10px] font-medium tracking-normal uppercase opacity-65">{connectedTo}</p>
       <div className="space-y-1">
         {badges.hasApp ? (
           <div className="flex items-center gap-1.5 text-[11px] opacity-90">
-            <span className="bg-primary size-3.5 shrink-0 rounded-sm" />
-            <span>Workspace</span>
+            {appBadge ? (
+              <span className="flex size-3.5 shrink-0 items-center justify-center [&>*]:h-full [&>*]:w-auto">{appBadge.icon}</span>
+            ) : (
+              <span className="size-3.5 shrink-0 rounded-sm bg-white/85" />
+            )}
+            <span>{appBadge?.label ?? workspace}</span>
           </div>
         ) : null}
         {badges.hasGoogleCalendar ? (
@@ -673,6 +703,7 @@ function renderEventContent(arg: EventContentArg): React.ReactNode {
 }
 
 export function ActivityCalendarView({
+  appBadge,
   activities,
   showGoogleCalendarEvents,
   calendarSourceFilter,
@@ -976,6 +1007,7 @@ export function ActivityCalendarView({
   }
 
   return (
+    <AppBadgeContext.Provider value={appBadge}>
     <div
       data-slot="calendar"
       className="agenda-calendar-shell border-border bg-background rounded-lg border p-3 md:p-4"
@@ -1097,5 +1129,6 @@ export function ActivityCalendarView({
         eventContent={renderEventContent}
       />
     </div>
+    </AppBadgeContext.Provider>
   );
 }

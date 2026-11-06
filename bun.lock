@@ -14,7 +14,7 @@
     },
     "packages/agenda": {
       "name": "@carefully-built/agenda",
-      "version": "0.1.13",
+      "version": "0.1.14",
       "devDependencies": {
         "@carefully-built/association-picker": "workspace:*",
         "@carefully-built/crud": "workspace:*",
@@ -637,7 +637,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.32",
+      "version": "0.1.33",
       "dependencies": {
         "@carefully-built/agenda": "0.1.13",
         "@carefully-built/app-shell": "0.1.8",
