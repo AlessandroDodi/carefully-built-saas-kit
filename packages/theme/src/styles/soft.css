@@ -71,7 +71,8 @@
 
 [data-slot='page-title'] {
   font-size: 2rem;
-  line-height: 1.1;
+  /* Titles are truncated (overflow hidden): room for descenders like "g". */
+  line-height: 1.25;
   font-weight: 600;
   letter-spacing: -0.035em;
 }
