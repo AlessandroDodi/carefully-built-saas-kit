@@ -34,10 +34,17 @@ const GENDER_GRADIENT: Record<NonNullable<VoiceCardData['gender']>, string> = {
   neutral: 'from-emerald-500 via-teal-500 to-cyan-500',
 };
 
-/** Twelve bars that dance while a sample plays, still otherwise. */
+/** Readable gender chip: pink for female, blue for male. */
+const GENDER_CHIP: Record<NonNullable<VoiceCardData['gender']>, string> = {
+  female: 'bg-pink-100 text-pink-700 dark:bg-pink-500/15 dark:text-pink-300',
+  male: 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300',
+  neutral: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300',
+};
+
+/** Twelve bars that dance while a sample plays; hidden otherwise. */
 function Equalizer({ active }: { readonly active: boolean }): React.ReactElement {
   return (
-    <span className="flex h-5 items-end gap-[3px]" aria-hidden>
+    <span className={cn('flex h-5 items-end gap-[3px] transition-opacity duration-300', active ? 'opacity-100' : 'opacity-0')} aria-hidden>
       {Array.from({ length: 12 }, (_, index) => (
         <span
           key={index}
@@ -63,10 +70,13 @@ export function VoiceCarousel({ voices, value, onChange, getSampleUrl, disabled 
 
   useEffect(() => () => { audioRef.current?.pause(); }, []);
 
-  // Bring the chosen card into view when the carousel opens.
+  // Center the chosen card by scrolling the rail only: scrollIntoView would also scroll the sheet around it.
   useEffect(() => {
-    const card = railRef.current?.querySelector<HTMLElement>(`[data-voice-id="${CSS.escape(value)}"]`);
-    card?.scrollIntoView({ block: 'nearest', inline: 'center' });
+    const rail = railRef.current;
+    const card = rail?.querySelector<HTMLElement>(`[data-voice-id="${CSS.escape(value)}"]`);
+    if (!rail || !card) return;
+    const offset = card.getBoundingClientRect().left - rail.getBoundingClientRect().left;
+    rail.scrollTo({ left: rail.scrollLeft + offset - (rail.clientWidth - card.offsetWidth) / 2 });
   }, [value]);
 
   function stop(): void {
@@ -101,8 +111,11 @@ export function VoiceCarousel({ voices, value, onChange, getSampleUrl, disabled 
   }
 
   return (
-    <div className={cn('relative', className)}>
-      <div ref={railRef} className="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className={cn('relative w-full max-w-full min-w-0', className)}>
+      <div
+        ref={railRef}
+        className="flex w-full snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain scroll-smooth px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
         {voices.map((voice, index) => {
           const isSelected = voice.id === value;
           const isPlaying = playing === voice.id;
@@ -147,9 +160,10 @@ export function VoiceCarousel({ voices, value, onChange, getSampleUrl, disabled 
                 <p className="text-foreground truncate text-sm font-semibold">{voice.name}</p>
                 <p className="text-muted-foreground line-clamp-2 text-xs leading-snug">{voice.description}</p>
               </div>
-              <div className="text-muted-foreground flex flex-wrap gap-1 text-[10px]">
-                {[voice.gender ? t[voice.gender] : null, ...(voice.tags ?? [])].filter(Boolean).map((tag) => (
-                  <span key={String(tag)} className="bg-muted rounded-full px-1.5 py-0.5">{tag}</span>
+              <div className="flex flex-wrap gap-1 text-[11px] font-medium">
+                {voice.gender ? <span className={cn('rounded-full px-2 py-0.5', GENDER_CHIP[voice.gender])}>{t[voice.gender]}</span> : null}
+                {(voice.tags ?? []).map((tag) => (
+                  <span key={tag} className="bg-muted text-muted-foreground rounded-full px-2 py-0.5">{tag}</span>
                 ))}
               </div>
               <div className={cn('mt-auto flex items-center justify-between gap-2 pt-1', isPlaying ? 'text-foreground' : 'text-muted-foreground')}>
@@ -174,10 +188,10 @@ export function VoiceCarousel({ voices, value, onChange, getSampleUrl, disabled 
       </div>
       {voices.length > 2 ? (
         <>
-          <Button type="button" size="icon-sm" variant="outline" aria-label={t.previous} className="bg-background absolute top-1/2 -left-3 -translate-y-1/2 rounded-full shadow" onClick={() => { scrollBy(-1); }}>
+          <Button type="button" size="icon-sm" variant="outline" aria-label={t.previous} className="bg-background absolute top-1/2 left-1 -translate-y-1/2 rounded-full shadow" onClick={() => { scrollBy(-1); }}>
             <ChevronLeft className="size-4" />
           </Button>
-          <Button type="button" size="icon-sm" variant="outline" aria-label={t.next} className="bg-background absolute top-1/2 -right-3 -translate-y-1/2 rounded-full shadow" onClick={() => { scrollBy(1); }}>
+          <Button type="button" size="icon-sm" variant="outline" aria-label={t.next} className="bg-background absolute top-1/2 right-1 -translate-y-1/2 rounded-full shadow" onClick={() => { scrollBy(1); }}>
             <ChevronRight className="size-4" />
           </Button>
         </>
