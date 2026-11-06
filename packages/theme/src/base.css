@@ -178,3 +178,15 @@
     transform: scaleY(1);
   }
 }
+
+/* Rings leaving the orb while the agent speaks (CallScreen in @carefully-built/elevenlabs-react). */
+@keyframes kit-call-wave {
+  from {
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}

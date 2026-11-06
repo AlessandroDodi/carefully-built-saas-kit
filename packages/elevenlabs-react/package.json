@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/elevenlabs-react",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "React hook for talking to an ElevenLabs agent from the browser (microphone, WebRTC), with the token fetched from your own backend.",
   "type": "module",
   "license": "MIT",
