@@ -22,12 +22,18 @@ interface CustomPhoneFieldProps<TValues extends FieldValues> {
   readonly className?: string;
 }
 
+/**
+ * While the number is still too short to parse (`+393`), only the selected
+ * country's prefix is stripped, so the digits being typed are never eaten.
+ */
 function splitValue(value: string, fallback: CountryCode): { country: CountryCode; local: string } {
   const parsed = value ? parsePhoneNumber(value) : undefined;
   if (parsed?.country) {
     return { country: parsed.country, local: parsed.nationalNumber };
   }
-  return { country: fallback, local: value.replace(/^\+\d{1,3}/, '').replace(/\D/g, '') };
+  const prefix = `+${getCountryCallingCode(fallback)}`;
+  const local = value.startsWith(prefix) ? value.slice(prefix.length) : value;
+  return { country: fallback, local: local.replace(/\D/g, '') };
 }
 
 function joinValue(country: CountryCode, local: string): string {
