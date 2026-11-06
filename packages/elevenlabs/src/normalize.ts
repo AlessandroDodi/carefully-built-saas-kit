@@ -89,6 +89,7 @@ export function normalizeVoice(raw: unknown): Voice {
     age: asString(labels.age),
     accent: asString(labels.accent),
     previewUrl: asString(item.preview_url),
+    liveModerated: asRecord(item.sharing).live_moderation_enabled === true,
   };
 }
 
