@@ -51,8 +51,10 @@ export function useAgentConversation({ getToken, dynamicVariables }: UseAgentCon
   }, [conversation, dynamicVariables, getToken]);
 
   const failed = conversation.status === 'error';
+  const status: AgentConversationStatus =
+    isStarting ? 'connecting' : conversation.status === 'connected' || conversation.status === 'connecting' ? conversation.status : 'disconnected';
   return {
-    status: isStarting ? 'connecting' : failed ? 'disconnected' : conversation.status,
+    status,
     isSpeaking: conversation.status === 'connected' && conversation.isSpeaking,
     error: error ?? (failed ? conversation.message ?? 'Connessione fallita' : null),
     start,

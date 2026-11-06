@@ -296,7 +296,7 @@
     },
     "packages/elevenlabs-react": {
       "name": "@carefully-built/elevenlabs-react",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "dependencies": {
         "@elevenlabs/react": "^1.21.1",
       },
@@ -637,7 +637,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.26",
+      "version": "0.1.27",
       "dependencies": {
         "@carefully-built/agenda": "0.1.13",
         "@carefully-built/app-shell": "0.1.8",
