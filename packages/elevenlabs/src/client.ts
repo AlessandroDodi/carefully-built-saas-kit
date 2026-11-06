@@ -153,6 +153,11 @@ export function createElevenLabsClient({
       },
     },
     conversations: {
+      /** Short-lived WebRTC token so a browser can talk to a private agent without the API key. */
+      async token(agentId: string): Promise<string> {
+        const result = await request<{ token: string }>(`/v1/convai/conversation/token?agent_id=${encodeURIComponent(agentId)}`);
+        return result.token;
+      },
       async get(conversationId: string): Promise<ConversationDetail> {
         return normalizeConversation(await request<unknown>(`/v1/convai/conversations/${conversationId}`));
       },
