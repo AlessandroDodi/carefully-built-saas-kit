@@ -166,7 +166,7 @@
     },
     "packages/charts": {
       "name": "@carefully-built/charts",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@carefully-built/widgets": "workspace:*",
@@ -343,7 +343,7 @@
     },
     "packages/forms": {
       "name": "@carefully-built/forms",
-      "version": "0.1.15",
+      "version": "0.1.16",
       "devDependencies": {
         "@carefully-built/association-picker": "workspace:*",
         "@carefully-built/ui": "workspace:*",
@@ -637,7 +637,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.29",
+      "version": "0.1.31",
       "dependencies": {
         "@carefully-built/agenda": "0.1.13",
         "@carefully-built/app-shell": "0.1.8",

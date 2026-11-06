@@ -98,8 +98,9 @@ export function TrendAreaChart({
     if (!last || viewBox?.x === undefined || viewBox.y === undefined) return <g />;
     const text = valueFormatter(last.value);
     const width = text.length * 7 + 16;
+    // Above the last point and ending at it, so it never runs past the right edge.
     return (
-      <g transform={`translate(${String(viewBox.x + 12)}, ${String(viewBox.y - 11)})`}>
+      <g transform={`translate(${String(viewBox.x - width + 8)}, ${String(viewBox.y - 34)})`}>
         <rect width={width} height={22} rx={11} fill="var(--card)" stroke={color} strokeWidth={1.5} />
         <text x={width / 2} y={15} textAnchor="middle" fontSize={11} fontWeight={600} fill={color}>
           {text}
@@ -110,7 +111,7 @@ export function TrendAreaChart({
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={[...data]} margin={{ top: 16, right: 56, bottom: 0, left: 8 }}>
+      <AreaChart data={[...data]} margin={{ top: 36, right: 12, bottom: 0, left: 12 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity={0.28} />
