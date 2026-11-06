@@ -15,7 +15,8 @@ export interface TrendPoint {
 export interface TrendAreaChartProps {
   readonly data: readonly TrendPoint[];
   readonly color?: string;
-  readonly height?: number;
+  /** A number of pixels, or a percentage to fill a sized parent. */
+  readonly height?: number | string;
   readonly valueFormatter?: (value: number) => string;
   readonly seriesLabel?: string;
   readonly previousLabel?: string;

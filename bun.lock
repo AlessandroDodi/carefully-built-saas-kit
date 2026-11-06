@@ -166,7 +166,7 @@
     },
     "packages/charts": {
       "name": "@carefully-built/charts",
-      "version": "0.1.6",
+      "version": "0.1.7",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "@carefully-built/widgets": "workspace:*",
@@ -637,7 +637,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.31",
+      "version": "0.1.32",
       "dependencies": {
         "@carefully-built/agenda": "0.1.13",
         "@carefully-built/app-shell": "0.1.8",
