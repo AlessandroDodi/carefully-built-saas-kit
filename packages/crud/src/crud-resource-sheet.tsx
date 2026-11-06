@@ -35,9 +35,12 @@ export function CrudResourceSheet({
   children,
   formId,
   onConfirm,
+  onCancel,
   outsideInteractionGuard,
   ...sheetProps
 }: CrudResourceSheetProps): React.ReactElement {
+  // A resource sheet always offers a way out next to the confirm button.
+  const cancel = onCancel ?? ((): void => sheetProps.onOpenChange(false));
   const submitForm = (): void => {
     const form = formId ? document.getElementById(formId) : null;
 
@@ -53,6 +56,7 @@ export function CrudResourceSheet({
     <ResponsiveSheet
       {...sheetProps}
       outsideInteractionGuard={outsideInteractionGuard}
+      onCancel={cancel}
       onConfirm={formId || onConfirm ? submitForm : undefined}
     >
       {children}
