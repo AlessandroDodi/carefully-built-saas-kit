@@ -12,7 +12,8 @@ export class ElevenLabsWebhookError extends Error {
 export type ElevenLabsWebhookEvent =
   | { readonly type: 'post_call_transcription'; readonly eventTimestamp: number; readonly conversation: ConversationDetail }
   | { readonly type: 'post_call_audio'; readonly eventTimestamp: number; readonly conversationId: string; readonly audioBase64: string }
-  | { readonly type: string; readonly eventTimestamp: number; readonly raw: unknown };
+  /** Any other event type ElevenLabs may add; `rawType` carries its name. */
+  | { readonly type: 'other'; readonly rawType: string; readonly eventTimestamp: number; readonly raw: unknown };
 
 export interface VerifyWebhookInput {
   readonly secret: string;
@@ -55,17 +56,17 @@ function toEvent(payload: Record<string, unknown>): ElevenLabsWebhookEvent {
   const data = typeof payload.data === 'object' && payload.data !== null ? (payload.data as Record<string, unknown>) : {};
 
   if (type === 'post_call_transcription') {
-    return { type, eventTimestamp, conversation: normalizeConversation(data) };
+    return { type: 'post_call_transcription', eventTimestamp, conversation: normalizeConversation(data) };
   }
   if (type === 'post_call_audio') {
     return {
-      type,
+      type: 'post_call_audio',
       eventTimestamp,
       conversationId: typeof data.conversation_id === 'string' ? data.conversation_id : '',
       audioBase64: typeof data.full_audio === 'string' ? data.full_audio : '',
     };
   }
-  return { type, eventTimestamp, raw: payload };
+  return { type: 'other', rawType: type, eventTimestamp, raw: payload };
 }
 
 /**
