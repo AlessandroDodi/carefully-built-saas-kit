@@ -25,7 +25,11 @@ export interface OutboundAgentInput {
 }
 
 function endCallTool(): SystemToolConfig {
-  return { name: 'end_call', description: 'Chiude la chiamata quando la conversazione è conclusa.', params: { system_tool_type: 'end_call' } };
+  return {
+    name: 'end_call',
+    description: 'Chiude la chiamata. Usalo solo dopo aver salutato per intero e dopo che il contatto ha risposto al saluto, mai a metà frase.',
+    params: { system_tool_type: 'end_call' },
+  };
 }
 
 function voicemailTool(message: string | null | undefined): SystemToolConfig {
