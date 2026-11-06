@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/elevenlabs",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Typed, fetch-only client for ElevenLabs Agents (outbound calls, phone numbers, conversations) and post-call webhook verification.",
   "type": "module",
   "license": "MIT",
