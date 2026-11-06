@@ -1,6 +1,6 @@
 export { buildOutboundAgentConfig, type OutboundAgentInput } from './agent-config';
 export { createElevenLabsClient, ElevenLabsError, type ElevenLabsClient, type ElevenLabsClientOptions } from './client';
-export { normalizeConversation } from './normalize';
+export { normalizeConversation, normalizeVoice } from './normalize';
 export * from './types';
 export {
   verifyElevenLabsWebhook,

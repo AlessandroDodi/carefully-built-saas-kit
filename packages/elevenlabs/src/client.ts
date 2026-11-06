@@ -1,4 +1,4 @@
-import { normalizeConversation, normalizePhoneNumber } from './normalize';
+import { normalizeConversation, normalizePhoneNumber, normalizeVoice } from './normalize';
 
 import type {
   AgentConfigBody,
@@ -8,6 +8,7 @@ import type {
   OutboundCallInput,
   OutboundCallResult,
   PhoneNumber,
+  Voice,
 } from './types';
 
 export interface ElevenLabsClientOptions {
@@ -88,6 +89,27 @@ export function createElevenLabsClient({
       },
       async remove(agentId: string): Promise<void> {
         await request(`/v1/convai/agents/${agentId}`, { method: 'DELETE' });
+      },
+    },
+    voices: {
+      /** Every voice on the workspace: premade, professional and cloned. */
+      async list(): Promise<Voice[]> {
+        const result = await request<{ voices?: unknown[] }>('/v1/voices');
+        return (result.voices ?? []).map(normalizeVoice);
+      },
+    },
+    tts: {
+      /** Speaks `text` with a voice and returns MP3 bytes, for samples and previews. */
+      async speak(voiceId: string, text: string, options: { modelId?: string; languageCode?: string } = {}): Promise<ArrayBuffer> {
+        const response = await fetchImpl(`${baseUrl}/v1/text-to-speech/${voiceId}?output_format=mp3_44100_64`, {
+          method: 'POST',
+          headers: { 'xi-api-key': apiKey, 'content-type': 'application/json' },
+          body: JSON.stringify({ text, model_id: options.modelId ?? 'eleven_multilingual_v2', language_code: options.languageCode }),
+        });
+        if (!response.ok) {
+          throw new ElevenLabsError(`ElevenLabs tts → ${String(response.status)}`, response.status, await response.text());
+        }
+        return response.arrayBuffer();
       },
     },
     phoneNumbers: {

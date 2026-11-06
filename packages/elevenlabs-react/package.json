@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/elevenlabs-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React hook for talking to an ElevenLabs agent from the browser (microphone, WebRTC), with the token fetched from your own backend.",
   "type": "module",
   "license": "MIT",
@@ -14,12 +14,20 @@
   "bugs": {
     "url": "https://github.com/AlessandroDodi/carefully-built-saas-kit/issues"
   },
-  "keywords": ["elevenlabs", "voice-agent", "react", "webrtc"],
+  "keywords": [
+    "elevenlabs",
+    "voice-agent",
+    "react",
+    "webrtc"
+  ],
   "sideEffects": false,
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -33,7 +41,15 @@
     "prepublishOnly": "bun run typecheck && bun run build",
     "typecheck": "tsc --noEmit"
   },
-  "publishConfig": { "access": "public" },
-  "dependencies": { "@elevenlabs/react": "^1.21.1" },
-  "peerDependencies": { "react": ">=18.2.0 || >=19.0.0" }
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@elevenlabs/react": "^1.21.1"
+  },
+  "peerDependencies": {
+    "@carefully-built/ui": ">=0.1.26",
+    "lucide-react": ">=0.400.0 || >=1.0.0",
+    "react": ">=18.2.0 || >=19.0.0"
+  }
 }

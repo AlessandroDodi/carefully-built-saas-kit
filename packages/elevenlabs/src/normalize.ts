@@ -1,4 +1,5 @@
 import type {
+  Voice,
   ConversationAnalysis,
   ConversationDetail,
   ConversationMetadata,
@@ -71,6 +72,23 @@ export function normalizeConversation(raw: unknown): ConversationDetail {
     analysis: normalizeAnalysis(data.analysis),
     dynamicVariables: asRecord(initiation.dynamic_variables),
     hasAudio: data.has_audio === true,
+  };
+}
+
+export function normalizeVoice(raw: unknown): Voice {
+  const item = asRecord(raw);
+  const labels = asRecord(item.labels);
+  const gender = asString(labels.gender);
+  return {
+    voiceId: asString(item.voice_id) ?? '',
+    name: asString(item.name) ?? '',
+    description: asString(item.description) ?? '',
+    category: asString(item.category) ?? '',
+    language: asString(labels.language),
+    gender: gender === 'male' || gender === 'female' || gender === 'neutral' ? gender : null,
+    age: asString(labels.age),
+    accent: asString(labels.accent),
+    previewUrl: asString(item.preview_url),
   };
 }
 
