@@ -7,3 +7,4 @@ export * from './organization-logo-dropzone';
 export * from './sidebar-org-switcher';
 export * from './use-create-organization-dialog';
 export * from './use-organization-logo-input';
+export * from './widgets-intl';
