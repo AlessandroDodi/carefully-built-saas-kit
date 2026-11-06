@@ -74,7 +74,7 @@
     },
     "packages/app-shell": {
       "name": "@carefully-built/app-shell",
-      "version": "0.1.8",
+      "version": "0.1.9",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",
@@ -648,7 +648,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.45",
+      "version": "0.1.46",
       "dependencies": {
         "@carefully-built/agenda": "0.1.14",
         "@carefully-built/app-shell": "0.1.8",
@@ -745,7 +745,7 @@
     },
     "packages/settings-ui": {
       "name": "@carefully-built/settings-ui",
-      "version": "0.1.11",
+      "version": "0.1.12",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",

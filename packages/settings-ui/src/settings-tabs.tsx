@@ -63,7 +63,7 @@ export function SettingsTabs({
       </TabsScrollArea>
 
       {tabs.map((tab) => (
-        <TabsContent key={tab.value} value={tab.value} className="mt-6 w-full">
+        <TabsContent key={tab.value} value={tab.value} className="mt-4 w-full">
           {tab.content}
         </TabsContent>
       ))}

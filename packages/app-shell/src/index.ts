@@ -43,3 +43,4 @@ export {
 } from './responsive-page-actions';
 export { DefaultNavigationLink } from './navigation-shell';
 export type { NavigationLinkComponent, NavigationLinkProps } from './navigation-shell';
+export { DetailLayout, type DetailLayoutProps } from './detail-layout';
