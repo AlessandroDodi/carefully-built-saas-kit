@@ -19,6 +19,8 @@ export interface OutboundAgentInput {
   /** Spoken to voicemail; omit to hang up on voicemail. */
   readonly voicemailMessage?: string | null;
   readonly dataCollection?: Record<string, AnalysisProperty>;
+  /** Language of the post-call summary and analysis, e.g. `it`; defaults to the agent language. */
+  readonly summaryLanguage?: string;
   readonly webhook?: { readonly postCallWebhookId: string; readonly events?: readonly ('transcript' | 'audio')[] };
 }
 
@@ -73,6 +75,7 @@ export function buildOutboundAgentConfig(input: OutboundAgentInput): AgentConfig
       conversation: { max_duration_seconds: input.maxDurationSeconds ?? 600 },
     },
     platform_settings: {
+      summary_language: input.summaryLanguage ?? input.language ?? 'it',
       ...(input.dataCollection ? { data_collection: input.dataCollection } : {}),
       ...(input.webhook
         ? { workspace_overrides: { webhooks: { post_call_webhook_id: input.webhook.postCallWebhookId, events: input.webhook.events ?? ['transcript', 'audio'] } } }

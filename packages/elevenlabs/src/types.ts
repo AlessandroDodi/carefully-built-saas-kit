@@ -21,6 +21,8 @@ export interface Voice {
   readonly accent: string | null;
   /** ElevenLabs' own sample, usually in English. */
   readonly previewUrl: string | null;
+  /** Live-moderated library voices cannot be used by agents. */
+  readonly liveModerated: boolean;
 }
 
 export interface SystemToolConfig {
@@ -72,6 +74,8 @@ export interface AgentConfigBody {
     readonly conversation?: { readonly max_duration_seconds?: number };
   };
   readonly platform_settings?: {
+    /** Language of the post-call summary and analysis. */
+    readonly summary_language?: string;
     readonly data_collection?: Record<string, AnalysisProperty>;
     readonly evaluation?: { readonly criteria: readonly EvaluationCriterion[] };
     readonly workspace_overrides?: {
