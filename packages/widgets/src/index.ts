@@ -14,3 +14,4 @@ export {
   type PeriodPreset,
   type PeriodRange,
 } from "./period-select";
+export { Reveal, GrowBar, type RevealProps, type GrowBarProps } from "./reveal";

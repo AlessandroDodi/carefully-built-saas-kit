@@ -160,3 +160,10 @@
     transition: none !important;
   }
 }
+
+/* Entrance of progress bars (see GrowBar in @carefully-built/widgets). */
+@keyframes kit-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}

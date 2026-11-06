@@ -1,7 +1,7 @@
 'use client';
 
-import { useId } from 'react';
-import { Area, AreaChart, ReferenceDot, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useEffect, useId, useRef, useState } from 'react';
+import { Area, AreaChart, ReferenceDot, Tooltip, XAxis, YAxis } from 'recharts';
 
 import type { ReactNode } from 'react';
 
@@ -42,6 +42,28 @@ interface DotProps {
 /** Ring markers on a few evenly spaced points, so a long series stays clean. */
 function dotStep(length: number): number {
   return length <= 14 ? 1 : Math.ceil(length / 7);
+}
+
+/**
+ * The chart mounts only once its box is measured: with a responsive container
+ * the first render happens at zero size and the entrance animation is lost.
+ */
+function useBoxSize(): { ref: React.RefObject<HTMLDivElement | null>; width: number; height: number } {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [size, setSize] = useState({ width: 0, height: 0 });
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return undefined;
+    const update = (): void => {
+      const next = { width: Math.round(element.clientWidth), height: Math.round(element.clientHeight) };
+      setSize((current) => (current.width === next.width && current.height === next.height ? current : next));
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    return () => { observer.disconnect(); };
+  }, []);
+  return { ref, ...size };
 }
 
 /**
@@ -110,9 +132,12 @@ export function TrendAreaChart({
     );
   };
 
+  const box = useBoxSize();
+
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={[...data]} margin={{ top: 36, right: 12, bottom: 0, left: 12 }}>
+    <div ref={box.ref} style={{ width: '100%', height }}>
+      {box.width > 0 && box.height > 0 ? (
+      <AreaChart width={box.width} height={box.height} data={[...data]} margin={{ top: 36, right: 12, bottom: 0, left: 12 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={color} stopOpacity={0.28} />
@@ -157,6 +182,7 @@ export function TrendAreaChart({
         />
         {last ? <ReferenceDot x={last.label} y={last.value} r={0} label={renderEndLabel} /> : null}
       </AreaChart>
-    </ResponsiveContainer>
+      ) : null}
+    </div>
   );
 }

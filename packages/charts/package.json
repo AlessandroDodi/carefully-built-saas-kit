@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/charts",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Reusable chart widgets, cards, and legends for Carefully Built SaaS apps.",
   "type": "module",
   "license": "MIT",
