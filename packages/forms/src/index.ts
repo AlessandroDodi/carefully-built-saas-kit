@@ -3,6 +3,7 @@
 export { CustomForm } from './custom-form';
 export { buildCustomFormOptions } from './custom-form-options';
 export { CustomInputField } from './fields/custom-input-field';
+export { CustomListField } from './fields/custom-list-field';
 export { CustomDateField } from './fields/custom-date-field';
 export { CustomDateFormField } from './fields/custom-date-form-field';
 export { CountryPhoneInput, getPhoneCountryOptions } from './fields/country-phone-input';

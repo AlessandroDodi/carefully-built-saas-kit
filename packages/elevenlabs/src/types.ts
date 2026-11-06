@@ -10,6 +10,19 @@ export interface PhoneNumber {
   readonly assignedAgentId: string | null;
 }
 
+export interface Voice {
+  readonly voiceId: string;
+  readonly name: string;
+  readonly description: string;
+  readonly category: string;
+  readonly language: string | null;
+  readonly gender: 'male' | 'female' | 'neutral' | null;
+  readonly age: string | null;
+  readonly accent: string | null;
+  /** ElevenLabs' own sample, usually in English. */
+  readonly previewUrl: string | null;
+}
+
 export interface SystemToolConfig {
   readonly name: string;
   readonly description?: string;

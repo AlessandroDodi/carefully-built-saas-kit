@@ -7,3 +7,4 @@ export {
   type AgentConversationStatus,
   type UseAgentConversationOptions,
 } from './use-agent-conversation';
+export { VoiceCarousel, type VoiceCarouselProps, type VoiceCardData } from './voice-carousel';
