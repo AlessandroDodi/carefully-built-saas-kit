@@ -1,5 +1,8 @@
 import type { AgentConfigBody, AnalysisProperty, SystemToolConfig } from './types';
 
+/** ElevenLabs' built-in ambient sounds. */
+export type BackgroundSoundPreset = 'office1' | 'office2' | 'restaurant' | 'city' | 'typing' | 'elevator1' | 'elevator2' | 'elevator3' | 'elevator4';
+
 export interface OutboundAgentInput {
   readonly name: string;
   /** The host's prompt; `fixedRules` are appended after it and cannot be edited by end users. */
@@ -22,6 +25,18 @@ export interface OutboundAgentInput {
   /** Language of the post-call summary and analysis, e.g. `it`; defaults to the agent language. */
   readonly summaryLanguage?: string;
   readonly webhook?: { readonly postCallWebhookId: string; readonly events?: readonly ('transcript' | 'audio')[] };
+  /**
+   * Ambient sound under the voice so the call sounds less synthetic. `volume` is
+   * relative to the speech, 0.01–1 (default 0.15). `null` turns it off; omit to leave it as is.
+   */
+  readonly backgroundSound?: { readonly preset: BackgroundSoundPreset; readonly volume?: number } | null;
+}
+
+function backgroundSound(input: OutboundAgentInput['backgroundSound']): { background_sound?: NonNullable<NonNullable<AgentConfigBody['conversation_config']>['conversation']>['background_sound'] } {
+  if (input === undefined) return {};
+  if (input === null) return { background_sound: { source_type: null, source_id: null } };
+  const volume = Math.min(1, Math.max(0.01, input.volume ?? 0.15));
+  return { background_sound: { source_type: 'preset', source_id: input.preset, volume, crossfade_loop: true } };
 }
 
 function endCallTool(): SystemToolConfig {
@@ -76,7 +91,7 @@ export function buildOutboundAgentConfig(input: OutboundAgentInput): AgentConfig
         expressive_mode: true,
       },
       turn: { turn_timeout: 7, turn_eagerness: input.turnEagerness ?? 'normal', silence_end_call_timeout: 20 },
-      conversation: { max_duration_seconds: input.maxDurationSeconds ?? 600 },
+      conversation: { max_duration_seconds: input.maxDurationSeconds ?? 600, ...backgroundSound(input.backgroundSound) },
     },
     platform_settings: {
       summary_language: input.summaryLanguage ?? input.language ?? 'it',

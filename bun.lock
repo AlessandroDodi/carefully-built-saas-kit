@@ -301,7 +301,7 @@
     },
     "packages/elevenlabs": {
       "name": "@carefully-built/elevenlabs",
-      "version": "0.1.6",
+      "version": "0.1.7",
     },
     "packages/elevenlabs-react": {
       "name": "@carefully-built/elevenlabs-react",

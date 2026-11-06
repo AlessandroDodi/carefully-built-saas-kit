@@ -71,7 +71,16 @@ export interface AgentConfigBody {
       readonly turn_eagerness?: 'patient' | 'normal' | 'eager';
       readonly silence_end_call_timeout?: number;
     };
-    readonly conversation?: { readonly max_duration_seconds?: number };
+    readonly conversation?: {
+      readonly max_duration_seconds?: number;
+      /** Ambient sound mixed under the agent's voice; both ids `null` turns it off. */
+      readonly background_sound?: {
+        readonly source_type: 'preset' | null;
+        readonly source_id: string | null;
+        readonly volume?: number;
+        readonly crossfade_loop?: boolean;
+      };
+    };
   };
   readonly platform_settings?: {
     /** Language of the post-call summary and analysis. */
