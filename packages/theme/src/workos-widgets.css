@@ -11,6 +11,23 @@
   overflow-x: hidden;
 }
 
+/* Radix Themes paints its root with its own page background: the app's canvas shows through instead. */
+.radix-themes,
+.woswidgets-root {
+  background-color: transparent !important;
+  min-height: 0 !important;
+}
+
+/* A widget already sits inside an app card: no second box around its rows. */
+.workos-widget-container > .rt-Card,
+.workos-widget-container .woswidgets-widget.rt-Card {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+}
+
+
 .woswidgets-root,
 .woswidgets-widget {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif !important;
