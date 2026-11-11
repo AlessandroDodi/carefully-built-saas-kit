@@ -21,12 +21,13 @@ export function autoMapColumns<TRecord extends object>(
   const used = new Set<string>();
 
   return headers.map((header) => {
-    const normalized = normalizeHeader(header);
+    // "Telefono (obbligatorio)", as the template writes it, still matches "Telefono".
+    const variants = new Set([normalizeHeader(header), normalizeHeader(header.replace(/\s*\([^)]*\)\s*$/, ''))]);
     const match = fields.find(
       (field) =>
         !used.has(field.key) &&
-        [field.key, field.label, ...(field.aliases ?? [])].some(
-          (candidate) => normalizeHeader(candidate) === normalized,
+        [field.key, field.label, ...(field.aliases ?? [])].some((candidate) =>
+          variants.has(normalizeHeader(candidate)),
         ),
     );
     if (!match) return null;
