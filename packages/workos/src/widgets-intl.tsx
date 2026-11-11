@@ -1,7 +1,7 @@
 'use client';
 
 import { internal_IntlContext as IntlContext } from '@workos-inc/widgets';
-import { Fragment, useMemo } from 'react';
+import { Fragment, useEffect, useMemo } from 'react';
 
 import type { ReactNode } from 'react';
 
@@ -53,7 +53,50 @@ export function WorkOsWidgetsIntl({ locale, catalog, children }: WorkOsWidgetsIn
     }),
     [locale, catalog],
   );
+  useEffect(() => translateLiterals(catalog), [catalog]);
   return <IntlContext.Provider value={value}>{children}</IntlContext.Provider>;
+}
+
+// Widget DOM, including dropdowns and dialogs portaled outside the widget root.
+const WIDGET_SCOPE = '.woswidgets-widget, .woswidgets-dropdown, .woswidgets-select-dropdown, .woswidgets-dialog, .rt-TooltipContent';
+
+/**
+ * Some widget text skips the intl context: the role filter's "All" is hardcoded
+ * and role names come from the WorkOS API as configured ("Member", "Admin").
+ * Text nodes that are exactly a catalog key (or a comma list of keys, as in
+ * the multi-role tooltip) get swapped in place.
+ */
+function translateLiterals(catalog: WorkOsWidgetsCatalog): () => void {
+  const translate = (raw: string): string | undefined => {
+    const text = raw.trim();
+    if (!text) return undefined;
+    const exact = catalog[text];
+    if (exact !== undefined) return exact;
+    const parts = text.split(', ');
+    if (parts.length < 2 || !parts.every((part) => part in catalog)) return undefined;
+    return parts.map((part) => catalog[part]).join(', ');
+  };
+  const visit = (node: Node): void => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const translated = node.nodeValue ? translate(node.nodeValue) : undefined;
+      if (translated !== undefined && node.parentElement?.closest(WIDGET_SCOPE)) node.nodeValue = translated;
+      return;
+    }
+    if (node.nodeType !== Node.ELEMENT_NODE) return;
+    const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+    for (let text = walker.nextNode(); text; text = walker.nextNode()) visit(text);
+  };
+  visit(document.body);
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'characterData') visit(mutation.target);
+      else mutation.addedNodes.forEach(visit);
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  return () => {
+    observer.disconnect();
+  };
 }
 
 /** Italian for every string of the widgets as of @workos-inc/widgets 1.20. */
@@ -100,6 +143,9 @@ export const workosWidgetsItalian: WorkOsWidgetsCatalog = {
   'Accounts {organizationName} owns and shares with everyone.': 'Account di proprietà di {organizationName}, condivisi con tutti.',
   'Add connection': 'Aggiungi collegamento',
   'All': 'Tutti',
+  // Default WorkOS role names, shown as configured in the environment.
+  'Admin': 'Amministratore',
+  'Member': 'Membro',
   'An error occurred while disconnecting your account. Please refresh the page and try again.': 'Errore nello scollegare l’account. Ricarica la pagina e riprova.',
   'An error occurred while renaming this connection. Please try again.': 'Errore nel rinominare il collegamento. Riprova.',
   'An error occurred. Please check the value and try again.': 'Si è verificato un errore. Controlla il valore e riprova.',

@@ -649,7 +649,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.53",
+      "version": "0.1.54",
       "dependencies": {
         "@carefully-built/agenda": "0.1.14",
         "@carefully-built/app-shell": "0.1.8",
@@ -767,7 +767,7 @@
     },
     "packages/superadmin": {
       "name": "@carefully-built/superadmin",
-      "version": "0.1.18",
+      "version": "0.1.19",
       "devDependencies": {
         "@carefully-built/app-shell": "workspace:*",
         "@carefully-built/ui": "workspace:*",
@@ -796,7 +796,7 @@
     },
     "packages/theme": {
       "name": "@carefully-built/theme",
-      "version": "0.1.11",
+      "version": "0.1.12",
       "peerDependencies": {
         "@radix-ui/themes": ">=3.0.0",
         "@workos-inc/widgets": ">=1.0.0",
@@ -889,7 +889,7 @@
     },
     "packages/workos": {
       "name": "@carefully-built/workos",
-      "version": "0.1.9",
+      "version": "0.1.10",
       "devDependencies": {
         "@carefully-built/settings-ui": "workspace:*",
         "@carefully-built/ui": "workspace:*",

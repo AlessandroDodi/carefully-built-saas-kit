@@ -163,6 +163,11 @@
   color: var(--destructive) !important;
 }
 
+/* Select items keep Radix's left gutter for the check mark, which the menu-item padding above would remove. */
+.woswidgets-select-item {
+  padding-left: var(--select-item-indicator-width, 1.75rem) !important;
+}
+
 /* Select */
 .woswidgets-select {
   border-radius: var(--radius-lg) !important;
