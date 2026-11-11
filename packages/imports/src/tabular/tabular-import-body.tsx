@@ -16,6 +16,7 @@ interface TabularImportBodyProps<TRecord extends object> {
   readonly definition: TabularImportDefinition<TRecord>;
   readonly texts: TabularImportTexts;
   readonly isPreviewing: boolean;
+  readonly fileStepExtra?: React.ReactNode;
 }
 
 /** Content of the current step of `TabularImportSheet`. */
@@ -24,6 +25,7 @@ export function TabularImportBody<TRecord extends object>({
   definition,
   texts,
   isPreviewing,
+  fileStepExtra,
 }: TabularImportBodyProps<TRecord>): React.ReactElement {
   if (state.headers.length === 0) {
     return (
@@ -56,6 +58,7 @@ export function TabularImportBody<TRecord extends object>({
             {texts.templateLabel}
           </Button>
         </div>
+        {fileStepExtra}
       </div>
     );
   }

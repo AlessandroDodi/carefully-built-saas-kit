@@ -17,6 +17,8 @@ export interface TabularImportSheetProps<TRecord extends object> {
   readonly onImport: (payload: TabularImportPayload<TRecord>) => void;
   readonly importing?: boolean;
   readonly title?: string;
+  /** Extra content under the file picker (notices, related options). */
+  readonly fileStepExtra?: React.ReactNode;
 }
 
 interface FooterArgs<TRecord extends object> {
@@ -71,6 +73,7 @@ export function TabularImportSheet<TRecord extends object>({
   onImport,
   importing = false,
   title,
+  fileStepExtra,
 }: TabularImportSheetProps<TRecord>): React.ReactElement {
   const texts = useKitTexts(tabularImportTexts, { title });
   const state = useTabularImport(definition);
@@ -102,7 +105,13 @@ export function TabularImportSheet<TRecord extends object>({
       width={720}
       confirmLoading={importing}
     >
-      <TabularImportBody state={state} definition={definition} texts={texts} isPreviewing={isPreviewing} />
+      <TabularImportBody
+        state={state}
+        definition={definition}
+        texts={texts}
+        isPreviewing={isPreviewing}
+        fileStepExtra={fileStepExtra}
+      />
     </ResponsiveSheet>
   );
 }

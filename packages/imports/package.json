@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/import-export",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Reusable tabular import/export for SaaS apps: CSV and Excel import with column mapping, dedupe and preview, CSV export.",
   "type": "module",
   "license": "MIT",
