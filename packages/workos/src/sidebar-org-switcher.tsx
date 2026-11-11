@@ -417,7 +417,7 @@ export function SidebarOrgSwitcherBase<
                 className={cx(
                   "flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm transition-colors",
                   currentOrg?.id === org.id
-                    ? "bg-[rgba(151,112,255,0.17)] text-[#250089] dark:bg-[rgba(151,112,255,0.24)] dark:text-white"
+                    ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
                     : "text-sidebar-foreground/75 dark:text-sidebar-foreground/90 hover:bg-sidebar-accent hover:text-sidebar-primary dark:hover:text-white",
                 )}
                 onClick={() => {

@@ -160,7 +160,7 @@ function withBasePath(item: NavigationItem, basePath: string): NavigationItem {
 function SuperAdminLogo(): React.ReactElement {
   return (
     <>
-      <div className="grid size-7 shrink-0 place-items-center rounded-md bg-[#250089] text-white">
+      <div className="grid size-7 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
         <PanelsTopLeft className="size-4" />
       </div>
       <span className="truncate text-sm font-semibold tracking-tight">Superadmin</span>
