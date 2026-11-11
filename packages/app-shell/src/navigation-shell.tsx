@@ -30,6 +30,8 @@ export interface NavigationItem {
   readonly trailingIcon?: NavigationIcon;
   readonly activeMatch?: 'exact' | 'prefix';
   readonly activePaths?: readonly string[];
+  /** Shorter label for the mobile bottom bar, where every item gets a sixth of the screen. */
+  readonly mobileLabel?: ReactNode;
 }
 
 export interface NavigationGroup {
@@ -246,14 +248,14 @@ function MobileBottomNavLink({
       href={item.href}
       onClick={onNavClick}
       className={cn(
-        'mx-1 my-1 flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-2 py-2 text-[11px] font-medium transition-colors',
+        'mx-0.5 my-1 flex min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-xl px-1 py-2 text-[11px] font-medium transition-colors',
         isActive
           ? 'bg-primary/12 text-primary shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--primary)_20%,transparent)]'
           : 'text-muted-foreground hover:bg-accent/50 hover:text-foreground',
       )}
     >
       <Icon className="size-5 shrink-0" />
-      <span className="max-w-full truncate">{item.label}</span>
+      <span className="max-w-full truncate">{item.mobileLabel ?? item.label}</span>
     </NavigationAnchor>
   );
 }
@@ -628,7 +630,7 @@ function MobileBottomNav({
           })}
           <button
             type="button"
-            className="text-muted-foreground hover:text-foreground flex min-w-0 flex-1 flex-col items-center justify-center gap-1 px-2 py-2 text-[11px] font-medium transition-colors"
+            className="text-muted-foreground hover:text-foreground flex min-w-0 flex-1 flex-col items-center justify-center gap-1 px-1 py-2 text-[11px] font-medium transition-colors"
             onClick={() => setIsMoreOpen(true)}
           >
             <Ellipsis className="size-5 shrink-0" />
