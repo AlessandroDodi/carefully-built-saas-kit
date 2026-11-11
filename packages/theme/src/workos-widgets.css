@@ -18,13 +18,51 @@
   min-height: 0 !important;
 }
 
-/* A widget already sits inside an app card: no second box around its rows. */
+/*
+ * A widget already sits inside an app card: no second box around its rows.
+ * Radix draws the card outline with pseudo-elements and offsets every Inset by
+ * --card-padding, so both go too, or rows bleed past the edges.
+ */
 .workos-widget-container > .rt-Card,
 .workos-widget-container .woswidgets-widget.rt-Card {
+  --card-padding: 0px !important;
   background: transparent !important;
   box-shadow: none !important;
   border: 0 !important;
   padding: 0 !important;
+  overflow: visible !important;
+}
+
+.workos-widget-container > .rt-Card::before,
+.workos-widget-container > .rt-Card::after,
+.workos-widget-container .woswidgets-widget.rt-Card::before,
+.workos-widget-container .woswidgets-widget.rt-Card::after {
+  display: none !important;
+}
+
+/* Data lists (profile): one even row per field, separators edge to edge. */
+.workos-widget-container .rt-DataListRoot {
+  row-gap: 0 !important;
+}
+
+.workos-widget-container .rt-DataListItem {
+  min-height: 3rem;
+  align-items: center !important;
+}
+
+.workos-widget-container .rt-DataListRoot > .rt-Inset {
+  margin: 0 !important;
+}
+
+/* Card lists (security, integrations): rows aligned with the card title. */
+.workos-widget-container .woswidgets-card-list-item {
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.workos-widget-container .woswidgets-card-list-item > .rt-Box {
+  padding: 0.5rem 0 !important;
 }
 
 
