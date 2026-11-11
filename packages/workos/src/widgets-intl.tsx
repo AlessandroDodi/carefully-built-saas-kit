@@ -67,9 +67,13 @@ const WIDGET_SCOPE = '.woswidgets-widget, .woswidgets-dropdown, .woswidgets-sele
  * the multi-role tooltip) get swapped in place.
  */
 function translateLiterals(catalog: WorkOsWidgetsCatalog): () => void {
+  // Text already in the target language is left alone, so a translation that is
+  // itself a key (or equal to its key, like "Password") can never be rewritten
+  // again: every write fires the observer, and rewriting would loop forever.
+  const translatedValues = new Set(Object.values(catalog));
   const translate = (raw: string): string | undefined => {
     const text = raw.trim();
-    if (!text) return undefined;
+    if (!text || translatedValues.has(text)) return undefined;
     const exact = catalog[text];
     if (exact !== undefined) return exact;
     const parts = text.split(', ');
@@ -78,8 +82,10 @@ function translateLiterals(catalog: WorkOsWidgetsCatalog): () => void {
   };
   const visit = (node: Node): void => {
     if (node.nodeType === Node.TEXT_NODE) {
-      const translated = node.nodeValue ? translate(node.nodeValue) : undefined;
-      if (translated !== undefined && node.parentElement?.closest(WIDGET_SCOPE)) node.nodeValue = translated;
+      const current = node.nodeValue ?? '';
+      const translated = translate(current);
+      if (translated === undefined || translated === current.trim() || !node.parentElement?.closest(WIDGET_SCOPE)) return;
+      node.nodeValue = current.replace(current.trim(), translated);
       return;
     }
     if (node.nodeType !== Node.ELEMENT_NODE) return;

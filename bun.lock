@@ -649,7 +649,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.55",
+      "version": "0.1.56",
       "dependencies": {
         "@carefully-built/agenda": "0.1.15",
         "@carefully-built/app-shell": "0.1.10",
@@ -889,7 +889,7 @@
     },
     "packages/workos": {
       "name": "@carefully-built/workos",
-      "version": "0.1.10",
+      "version": "0.1.11",
       "devDependencies": {
         "@carefully-built/settings-ui": "workspace:*",
         "@carefully-built/ui": "workspace:*",
