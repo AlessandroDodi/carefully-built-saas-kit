@@ -1,6 +1,6 @@
 'use client';
 
-import { MoreHorizontal } from 'lucide-react';
+import { ChevronDown, MoreHorizontal } from 'lucide-react';
 import type { ReactNode } from 'react';
 
 import {
@@ -23,8 +23,17 @@ export interface ResponsivePageAction {
   readonly destructive?: boolean;
 }
 
+/** A named group of actions behind its own outlined button (e.g. "Import" → from file / from the web). */
+export interface ResponsivePageActionMenu {
+  readonly label: string;
+  readonly icon?: ReactNode;
+  readonly items: readonly ResponsivePageAction[];
+}
+
 export interface ResponsivePageActionsProps {
   readonly primaryAction: ResponsivePageAction;
+  /** Shown before the primary action: labelled on desktop, icon only on mobile when it has an icon. */
+  readonly secondaryMenu?: ResponsivePageActionMenu;
   readonly secondaryActions?: readonly ResponsivePageAction[];
   readonly moreLabel?: string;
 }
@@ -69,8 +78,38 @@ function SecondaryActionItem({ action }: { readonly action: ResponsivePageAction
   );
 }
 
+function SecondaryMenu({ menu, isMobile }: { readonly menu: ResponsivePageActionMenu; readonly isMobile: boolean }): React.ReactElement {
+  const iconOnly = isMobile && Boolean(menu.icon);
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          size={iconOnly ? 'icon-sm' : 'sm'}
+          aria-label={iconOnly ? menu.label : undefined}
+        >
+          {menu.icon ? <span className="shrink-0">{menu.icon}</span> : null}
+          {iconOnly ? null : (
+            <>
+              <span>{menu.label}</span>
+              <ChevronDown className="size-3.5 opacity-60" />
+            </>
+          )}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-52">
+        {menu.items.map((action, index) => (
+          <SecondaryActionItem key={index} action={action} />
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 export function ResponsivePageActions({
   primaryAction,
+  secondaryMenu,
   secondaryActions = [],
   moreLabel = 'More actions',
 }: ResponsivePageActionsProps): React.ReactElement {
@@ -89,6 +128,8 @@ export function ResponsivePageActions({
 
   return (
     <div className="flex items-center gap-2">
+      {secondaryMenu && secondaryMenu.items.length > 0 ? <SecondaryMenu menu={secondaryMenu} isMobile={isMobile} /> : null}
+
       {primaryAction.href ? (
         <Button
           asChild
