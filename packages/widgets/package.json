@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/widgets",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable SaaS dashboard and detail widgets for Carefully Built apps.",
   "type": "module",
   "license": "MIT",

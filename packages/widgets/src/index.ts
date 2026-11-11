@@ -15,3 +15,4 @@ export {
   type PeriodRange,
 } from "./period-select";
 export { Reveal, GrowBar, type RevealProps, type GrowBarProps } from "./reveal";
+export { LockedContent, type LockedContentProps } from "./locked-content";
