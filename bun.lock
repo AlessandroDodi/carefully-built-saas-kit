@@ -404,7 +404,7 @@
     },
     "packages/imports": {
       "name": "@carefully-built/import-export",
-      "version": "0.1.5",
+      "version": "0.1.6",
       "dependencies": {
         "read-excel-file": "^9.3.14",
         "write-excel-file": "^4.1.1",
@@ -649,7 +649,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.51",
+      "version": "0.1.52",
       "dependencies": {
         "@carefully-built/agenda": "0.1.14",
         "@carefully-built/app-shell": "0.1.8",
