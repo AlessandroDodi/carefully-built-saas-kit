@@ -610,6 +610,17 @@ function CalendarEventTooltip({
   );
 }
 
+/**
+ * Google events follow the theme: Google blue blended into the card for the
+ * block, the foreground for text. Month view draws timed events without a
+ * block, so a fixed dark text would vanish on a dark background.
+ */
+const GOOGLE_EVENT_COLORS = {
+  background: 'color-mix(in oklab, #4285F4 16%, var(--card))',
+  border: 'color-mix(in oklab, #4285F4 45%, var(--card))',
+  text: 'var(--foreground)',
+} as const;
+
 function renderEventContent(arg: EventContentArg): React.ReactNode {
   const activity = arg.event.extendedProps.activity as ActivityListItem | undefined;
   const googleCalendarEvent = arg.event.extendedProps.googleCalendarEvent as
@@ -627,7 +638,7 @@ function renderEventContent(arg: EventContentArg): React.ReactNode {
         <TooltipTrigger asChild>
           <div
             className="agenda-calendar-event__content cursor-pointer"
-            style={{ color: '#1f2937' }}
+            style={{ color: GOOGLE_EVENT_COLORS.text }}
           >
             <div className="agenda-calendar-event__text">
               {timeText ? <div className="agenda-calendar-event__time">{timeText}</div> : null}
@@ -804,9 +815,9 @@ export function ActivityCalendarView({
             end: event.allDay ? undefined : (event.endAt ?? undefined),
             allDay: event.allDay,
             editable: false,
-            backgroundColor: '#E8F0FE',
-            borderColor: '#A8C7FA',
-            textColor: '#1f2937',
+            backgroundColor: GOOGLE_EVENT_COLORS.background,
+            borderColor: GOOGLE_EVENT_COLORS.border,
+            textColor: GOOGLE_EVENT_COLORS.text,
             classNames: ['agenda-calendar-event', 'agenda-calendar-event--google'],
             extendedProps: {
               localeCode,
