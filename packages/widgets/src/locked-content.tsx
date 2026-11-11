@@ -21,7 +21,8 @@ export interface LockedContentProps {
 /**
  * A feature the plan does not include yet: its content stays visible but
  * blurred and faded behind a lock, with a call to unlock it. The content is
- * hidden from assistive tech and cannot be focused or clicked.
+ * hidden from assistive tech and cannot be focused or clicked. A minimum height
+ * keeps the lock, text and button visible over short content.
  */
 export function LockedContent({
   children,
@@ -32,7 +33,7 @@ export function LockedContent({
   className,
 }: LockedContentProps): React.ReactElement {
   return (
-    <div data-locked="" className={cn("relative isolate w-full overflow-hidden rounded-[16px]", className)}>
+    <div data-locked="" className={cn("relative isolate min-h-60 w-full overflow-hidden rounded-[16px]", className)}>
       <div aria-hidden inert className="pointer-events-none select-none blur-[5px] saturate-50">
         {children}
       </div>

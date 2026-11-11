@@ -97,7 +97,8 @@ export function SearchInput({
         onChange={(event) => {
           onChange(event.target.value);
         }}
-        className="pr-9 pl-9"
+        // Room for the clear button only when there is something to clear; a long placeholder ends in "…".
+        className={cn('pl-9 text-ellipsis', value ? 'pr-9' : 'pr-3')}
       />
       {value ? (
         <button
@@ -374,7 +375,7 @@ export function TableToolbar({
             onChange={search.onChange}
             placeholder={search.placeholder}
             clearLabel={resolvedLabels.clearSearchLabel}
-            className="min-w-0 flex-1 sm:w-64 sm:flex-initial"
+            className="min-w-0 flex-1 sm:w-72 sm:flex-initial"
           />
         ) : null}
 
