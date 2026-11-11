@@ -8,6 +8,10 @@ interface TabularImportTexts {
   readonly title: string;
   readonly dropTitle: string;
   readonly dropHelper: string;
+  readonly templateLabel: string;
+  readonly templateHelper: string;
+  readonly templateFileName: string;
+  readonly requiredMark: string;
   readonly mappingDescription: string;
   readonly columnHeader: string;
   readonly fieldHeader: string;
@@ -35,6 +39,10 @@ export const tabularImportTexts = defineKitTexts<TabularImportTexts>({
     title: 'Import from file',
     dropTitle: 'Drop a CSV or Excel file here',
     dropHelper: 'The first row must contain the column names. Formats: .csv, .xlsx.',
+    templateLabel: 'Download the Excel template',
+    templateHelper: 'Fill it in and drop it here: the columns are matched automatically.',
+    templateFileName: 'import-template.xlsx',
+    requiredMark: '(required)',
     mappingDescription: 'Match each column of the file to a field. Unmatched columns are ignored.',
     columnHeader: 'File column',
     fieldHeader: 'Field',
@@ -64,6 +72,10 @@ export const tabularImportTexts = defineKitTexts<TabularImportTexts>({
     title: 'Importa da file',
     dropTitle: 'Trascina qui un file CSV o Excel',
     dropHelper: 'La prima riga deve contenere i nomi delle colonne. Formati: .csv, .xlsx.',
+    templateLabel: 'Scarica il modello Excel',
+    templateHelper: 'Compilalo e trascinalo qui: le colonne vengono riconosciute da sole.',
+    templateFileName: 'modello-importazione.xlsx',
+    requiredMark: '(obbligatorio)',
     mappingDescription: 'Abbina ogni colonna del file a un campo. Le colonne non abbinate vengono ignorate.',
     columnHeader: 'Colonna del file',
     fieldHeader: 'Campo',
