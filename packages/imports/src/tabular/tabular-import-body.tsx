@@ -1,7 +1,9 @@
 'use client';
 
-import { FileDropzone } from '@carefully-built/ui';
-import { FileSpreadsheet } from 'lucide-react';
+import { Button, FileDropzone } from '@carefully-built/ui';
+import { Download, FileSpreadsheet } from 'lucide-react';
+
+import { downloadTabularTemplate } from './download-tabular-template';
 
 import { TabularMappingStep } from './tabular-mapping-step';
 import { TabularPreviewStep } from './tabular-preview-step';
@@ -25,7 +27,7 @@ export function TabularImportBody<TRecord extends object>({
 }: TabularImportBodyProps<TRecord>): React.ReactElement {
   if (state.headers.length === 0) {
     return (
-      <div className="space-y-2">
+      <div className="space-y-3">
         <FileDropzone
           accept=".csv,.xlsx"
           title={texts.dropTitle}
@@ -36,6 +38,24 @@ export function TabularImportBody<TRecord extends object>({
           onFileSelect={(file) => void state.selectFile(file)}
         />
         {state.fileError ? <p className="text-destructive text-sm">{state.fileError}</p> : null}
+        <div className="border-border flex flex-wrap items-center justify-between gap-3 rounded-xl border p-3">
+          <p className="text-muted-foreground min-w-0 flex-1 text-sm">{texts.templateHelper}</p>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              void downloadTabularTemplate(
+                definition.fields,
+                definition.templateFileName ?? texts.templateFileName,
+                texts.requiredMark,
+              )
+            }
+          >
+            <Download className="size-4" />
+            {texts.templateLabel}
+          </Button>
+        </div>
       </div>
     );
   }

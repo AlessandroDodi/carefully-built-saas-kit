@@ -1,6 +1,6 @@
 {
   "name": "@carefully-built/import-export",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Reusable tabular import/export for SaaS apps: CSV and Excel import with column mapping, dedupe and preview, CSV export.",
   "type": "module",
   "license": "MIT",
@@ -30,7 +30,8 @@
     "access": "public"
   },
   "dependencies": {
-    "read-excel-file": "^9.3.14"
+    "read-excel-file": "^9.3.14",
+    "write-excel-file": "^4.1.1"
   },
   "peerDependencies": {
     "@carefully-built/ui": ">=0.1.24",

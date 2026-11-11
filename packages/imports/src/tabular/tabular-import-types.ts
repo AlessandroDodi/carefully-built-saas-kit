@@ -15,6 +15,8 @@ export interface TabularImportField<TRecord extends object, TKey extends keyof T
    * accents, spaces and punctuation, so `'cellulare'` also matches "Cellulare".
    */
   readonly aliases?: readonly string[];
+  /** Sample value written in the downloadable template, e.g. `'333 123 4567'`. */
+  readonly example?: string;
   /** Cleans and validates a non-empty cell. Without it the trimmed text is used. */
   readonly normalize?: (raw: string) => TabularNormalizeResult<TRecord[TKey]>;
 }
@@ -36,6 +38,8 @@ export interface TabularImportDefinition<TRecord extends object> {
   readonly existing?: ReadonlyMap<string, string>;
   /** Initial value of the "update existing records" switch. Default true. */
   readonly updateExisting?: boolean;
+  /** Name of the downloadable template; the template button shows by default. */
+  readonly templateFileName?: string;
 }
 
 /** Column index of the file → field key, or null when the column is ignored. */
