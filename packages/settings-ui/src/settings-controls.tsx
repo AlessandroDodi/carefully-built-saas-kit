@@ -211,20 +211,21 @@ export function SettingsPipesWidgetPanel({
   readonly onClickCapture?: MouseEventHandler<HTMLDivElement>;
   readonly renderWidget: (authToken: string) => ReactNode;
 }): React.ReactElement {
-  const classes = ["min-h-48 rounded-lg border border-border p-3", className]
+  // Sized by its content: only the loading and error states hold a fixed height.
+  const classes = ["rounded-xl border border-border p-3", className]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div className={classes} onClickCapture={onClickCapture}>
       {hasError ? (
-        <div className="flex min-h-40 items-center justify-center text-sm text-destructive">
+        <div className="flex min-h-14 items-center justify-center text-sm text-destructive">
           {errorText}
         </div>
       ) : authToken ? (
         renderWidget(authToken)
       ) : (
-        <div className="flex min-h-40 items-center justify-center text-sm text-muted-foreground">
+        <div className="flex min-h-14 items-center justify-center text-sm text-muted-foreground">
           {loadingText}
         </div>
       )}

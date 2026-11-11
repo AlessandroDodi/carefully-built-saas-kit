@@ -648,7 +648,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.46",
+      "version": "0.1.48",
       "dependencies": {
         "@carefully-built/agenda": "0.1.14",
         "@carefully-built/app-shell": "0.1.8",
@@ -745,7 +745,7 @@
     },
     "packages/settings-ui": {
       "name": "@carefully-built/settings-ui",
-      "version": "0.1.12",
+      "version": "0.1.13",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",
@@ -795,7 +795,7 @@
     },
     "packages/theme": {
       "name": "@carefully-built/theme",
-      "version": "0.1.10",
+      "version": "0.1.11",
       "peerDependencies": {
         "@radix-ui/themes": ">=3.0.0",
         "@workos-inc/widgets": ">=1.0.0",
