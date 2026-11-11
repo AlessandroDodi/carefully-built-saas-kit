@@ -39,6 +39,7 @@ export {
 export {
   ResponsivePageActions,
   type ResponsivePageAction,
+  type ResponsivePageActionMenu,
   type ResponsivePageActionsProps,
 } from './responsive-page-actions';
 export { DefaultNavigationLink } from './navigation-shell';

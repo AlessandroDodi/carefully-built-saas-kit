@@ -74,7 +74,7 @@
     },
     "packages/app-shell": {
       "name": "@carefully-built/app-shell",
-      "version": "0.1.9",
+      "version": "0.1.10",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",
@@ -648,7 +648,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.48",
+      "version": "0.1.49",
       "dependencies": {
         "@carefully-built/agenda": "0.1.14",
         "@carefully-built/app-shell": "0.1.8",
