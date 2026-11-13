@@ -377,7 +377,7 @@ export function CommandPalette<TItem, TType extends string>({
         !isBottomNavTrigger &&
           (isCollapsed && !isMobile
             ? 'h-8 w-full justify-center rounded-md px-2'
-            : 'h-8 w-full justify-start gap-2 rounded-md px-2.5'),
+            : cn('w-full justify-start gap-2 rounded-md px-2.5', isMobile ? 'h-10' : 'h-8')),
       )}
       onClick={() => setIsOpen(true)}
     >
@@ -386,7 +386,8 @@ export function CommandPalette<TItem, TType extends string>({
       {(isCollapsed && !isMobile) || isBottomNavTrigger ? null : (
         <>
           <span className="min-w-0 flex-1 truncate text-left text-sm">{triggerLabel}</span>
-          <span className="inline-flex items-center gap-1">
+          {/* No keyboard shortcut on a phone. */}
+          <span className={cn('inline-flex items-center gap-1', isMobile && 'hidden')}>
             <ShortcutModifierKeycap
               modifierLabel={shortcutLabel}
               className={cn(keycapClassName, 'border-sidebar-border bg-background/70')}
