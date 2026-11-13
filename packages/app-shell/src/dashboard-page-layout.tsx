@@ -84,7 +84,9 @@ export function DashboardPageLayout({
     <div
       className={cn(
         fillViewport
-          ? "flex h-[calc(100vh-theme(spacing.16)-theme(spacing.8))] flex-col gap-3 overflow-hidden md:h-[calc(100vh-theme(spacing.12))]"
+          ? // overflow-hidden keeps the table scrolling inside the page; the 4px gutter
+            // (-mx-1 px-1) lets focus rings at the edges (the search field) show whole.
+            "-mx-1 flex h-[calc(100vh-theme(spacing.16)-theme(spacing.8))] flex-col gap-3 overflow-hidden px-1 md:h-[calc(100vh-theme(spacing.12))]"
           : "space-y-3",
         className,
       )}
