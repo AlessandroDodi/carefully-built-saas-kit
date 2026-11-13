@@ -2,8 +2,34 @@
 
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
+import { defineKitTexts, useKitTexts } from '../locale/kit-texts';
 import { Button } from '../primitives/button';
 import { cn } from '../utils/cn';
+
+const paginationTexts = defineKitTexts({
+  en: {
+    noItems: 'No items',
+    showing: 'Showing',
+    of: 'of',
+    rows: 'Rows:',
+    page: 'Page',
+    firstPage: 'First page',
+    previousPage: 'Previous page',
+    nextPage: 'Next page',
+    lastPage: 'Last page',
+  },
+  it: {
+    noItems: 'Nessun elemento',
+    showing: '',
+    of: 'di',
+    rows: 'Righe:',
+    page: 'Pagina',
+    firstPage: 'Prima pagina',
+    previousPage: 'Pagina precedente',
+    nextPage: 'Pagina successiva',
+    lastPage: 'Ultima pagina',
+  },
+});
 
 export interface PaginationProps {
   /** Current page (1-indexed) */
@@ -44,6 +70,7 @@ export function Pagination({
     return null;
   }
 
+  const texts = useKitTexts(paginationTexts);
   const hasPrevPage = currentPage > 1;
   const hasNextPage = currentPage < totalPages;
 
@@ -52,11 +79,11 @@ export function Pagination({
       {/* Items info */}
       <div className="text-xs text-muted-foreground">
         {totalItems === 0 ? (
-          'No items'
+          texts.noItems
         ) : (
           <>
-            Showing <span className="font-medium">{startIndex + 1}</span> -{' '}
-            <span className="font-medium">{endIndex}</span> of{' '}
+            {texts.showing ? `${texts.showing} ` : null}
+            <span className="font-medium">{startIndex + 1}</span>–<span className="font-medium">{endIndex}</span> {texts.of}{' '}
             <span className="font-medium">{totalItems}</span>
           </>
         )}
@@ -66,7 +93,7 @@ export function Pagination({
         {/* Page size selector */}
         {pageSizeOptions && onPageSizeChange && (
           <div className="hidden items-center gap-1.5 sm:flex">
-            <span className="text-xs text-muted-foreground">Rows:</span>
+            <span className="text-xs text-muted-foreground">{texts.rows}</span>
             <select
               value={String(pageSize)}
               onChange={(event) => {
@@ -85,7 +112,7 @@ export function Pagination({
 
         {/* Page info */}
         <div className="hidden text-xs text-muted-foreground sm:block">
-          Page {currentPage} of {totalPages}
+          {texts.page} {currentPage} {texts.of} {totalPages}
         </div>
 
         {/* Navigation buttons */}
@@ -98,7 +125,7 @@ export function Pagination({
             disabled={!hasPrevPage}
           >
             <ChevronsLeft className="size-3.5" />
-            <span className="sr-only">First page</span>
+            <span className="sr-only">{texts.firstPage}</span>
           </Button>
           <Button
             variant="outline"
@@ -108,7 +135,7 @@ export function Pagination({
             disabled={!hasPrevPage}
           >
             <ChevronLeft className="size-3.5" />
-            <span className="sr-only">Previous page</span>
+            <span className="sr-only">{texts.previousPage}</span>
           </Button>
 
           {/* Mobile page indicator */}
@@ -124,7 +151,7 @@ export function Pagination({
             disabled={!hasNextPage}
           >
             <ChevronRight className="size-3.5" />
-            <span className="sr-only">Next page</span>
+            <span className="sr-only">{texts.nextPage}</span>
           </Button>
           <Button
             variant="outline"
@@ -134,7 +161,7 @@ export function Pagination({
             disabled={!hasNextPage}
           >
             <ChevronsRight className="size-3.5" />
-            <span className="sr-only">Last page</span>
+            <span className="sr-only">{texts.lastPage}</span>
           </Button>
         </div>
       </div>

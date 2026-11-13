@@ -622,12 +622,6 @@ function MobileBottomNav({
               onNavClick={onNavClick}
             />
           ))}
-          {renderSearch?.({
-            isCollapsed: false,
-            isMobile: true,
-            onNavigate: onNavClick,
-            triggerVariant: 'bottom-nav',
-          })}
           <button
             type="button"
             className="text-muted-foreground hover:text-foreground flex min-w-0 flex-1 flex-col items-center justify-center gap-1 px-1 py-2 text-[10px] font-medium transition-colors"
@@ -645,6 +639,13 @@ function MobileBottomNav({
             <DrawerTitle>{moreLabel}</DrawerTitle>
           </DrawerHeader>
           <div className="-mx-1 flex max-h-[70vh] flex-col gap-4 overflow-y-auto px-1 pb-2">
+            {/* Search lives here, not in the bar: five items fit the bottom bar, six crowd it. */}
+            {renderSearch?.({
+              isCollapsed: false,
+              isMobile: true,
+              onNavigate: handleOverflowClick,
+              triggerVariant: 'sidebar',
+            })}
             {overflowItems.length > 0 ? (
               <div className="flex flex-col gap-1">
                 {overflowItems.map((item) => (
