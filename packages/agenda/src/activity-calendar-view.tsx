@@ -1030,9 +1030,9 @@ export function ActivityCalendarView({
               <Button
                 type="button"
                 variant="ghost"
-                className="agenda-calendar-title-trigger h-auto px-2 py-1 text-left"
+                className="agenda-calendar-title-trigger h-auto min-w-0 shrink px-2 py-1 text-left"
               >
-                <span>{titleLabel}</span>
+                <span className="truncate">{titleLabel}</span>
                 <ChevronDown className="text-muted-foreground size-4" />
               </Button>
             </PopoverTrigger>
@@ -1054,9 +1054,9 @@ export function ActivityCalendarView({
             ariaLabel={texts.selectWeek}
             placeholder={texts.selectWeek}
             searchPlaceholder="Search week..."
-            className="max-w-full min-w-[20rem]"
+            className="max-w-full min-w-0 flex-1 sm:min-w-[20rem] sm:flex-none"
             triggerClassName="agenda-calendar-searchable-trigger"
-            contentClassName="w-[24rem]"
+            contentClassName="w-[min(24rem,calc(100vw-2rem))]"
             renderValue={(option) => option.label}
             renderOption={(option) => option.label}
           />
@@ -1069,15 +1069,15 @@ export function ActivityCalendarView({
             ariaLabel={texts.selectMonth}
             placeholder={texts.selectMonth}
             searchPlaceholder="Search month..."
-            className="max-w-full min-w-[16rem]"
+            className="max-w-full min-w-0 flex-1 sm:min-w-[16rem] sm:flex-none"
             triggerClassName="agenda-calendar-searchable-trigger"
-            contentClassName="w-[20rem]"
+            contentClassName="w-[min(20rem,calc(100vw-2rem))]"
             renderValue={(option) => option.label}
             renderOption={(option) => option.label}
           />
         ) : null}
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           <Button
             type="button"
             variant="outline"

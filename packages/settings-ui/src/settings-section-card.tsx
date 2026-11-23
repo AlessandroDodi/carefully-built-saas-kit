@@ -26,8 +26,9 @@ export function SettingsSectionCard({
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-1">
+        {/* The title keeps at least 9rem: a wide action wraps under it on a phone instead of squeezing the subtitle to a word per line. */}
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-3">
+          <div className="min-w-0 flex-[1_1_9rem] space-y-1">
             <CardTitle>{title}</CardTitle>
             {subtitle ? <CardDescription>{subtitle}</CardDescription> : null}
           </div>

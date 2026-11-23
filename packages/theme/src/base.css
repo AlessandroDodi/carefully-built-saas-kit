@@ -133,6 +133,24 @@
     scrollbar-width: thin;
   }
 
+  /* A grid with no explicit columns gets one column that can shrink. Its
+     implicit `auto` track otherwise grows to the widest child's min-content
+     (a time input, a row of chips, a long word) and the whole form overflows
+     sideways on a phone. Any grid-cols-* utility still wins (utilities layer). */
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Phone layout: no scrollbar takes width anywhere, so the padding on the
+     right always equals the padding on the left (touch scrolling needs no bar,
+     and a classic scrollbar in a narrow window made every page lopsided). */
+  @media (width < 48rem) {
+    html,
+    html * {
+      scrollbar-width: none;
+    }
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
