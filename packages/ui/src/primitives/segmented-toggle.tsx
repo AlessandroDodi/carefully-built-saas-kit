@@ -75,7 +75,9 @@ export function SegmentedToggle<TValue extends string>({
       ) : (
         <TabsList
           className={cn(
-            'w-full',
+            // Long labels wrap inside their segment instead of pushing the
+            // control past the screen edge on a phone.
+            'w-full group-data-horizontal/tabs:h-auto group-data-[orientation=horizontal]/tabs:h-auto min-h-8',
             isPrimaryVariant &&
               'border-border bg-background h-8 gap-0.5 rounded-lg border p-0.5 shadow-none',
           )}
@@ -86,7 +88,7 @@ export function SegmentedToggle<TValue extends string>({
               value={option.value}
               disabled={disabled}
               className={cn(
-                'flex-1',
+                'h-auto min-h-7 min-w-0 flex-1 py-1 leading-tight whitespace-normal text-center',
                 isPrimaryVariant && [
                   'text-foreground h-full gap-1.5 rounded-md px-2 py-0 text-[13px] leading-5 font-medium tracking-[-0.28px] shadow-none',
                   'hover:text-foreground',

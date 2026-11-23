@@ -27,7 +27,8 @@ interface WeeklyHoursDayProps {
 /**
  * One row of the weekly hours field: a switch turns the day on or off, the
  * ranges sit next to it. Only a second range gets a remove button, so the
- * common case (one range per day) shows no extra controls.
+ * common case (one range per day) shows no extra controls. When the row is
+ * too narrow (a phone), the ranges drop under the day instead of overflowing.
  */
 export function WeeklyHoursDay({
   weekday,
@@ -44,7 +45,7 @@ export function WeeklyHoursDay({
   const switchId = `weekly-hours-${String(weekday)}`;
 
   return (
-    <div className="flex min-h-9 items-start gap-4 py-2">
+    <div className="flex min-h-9 flex-wrap items-start gap-x-4 gap-y-1 py-2">
       <label htmlFor={switchId} className="flex w-32 shrink-0 items-center gap-3 pt-1.5">
         <Switch
           id={switchId}
@@ -54,7 +55,7 @@ export function WeeklyHoursDay({
         />
         <span className={cn('text-sm', !isOn && 'text-muted-foreground')}>{label}</span>
       </label>
-      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-1 gap-y-2">
+      <div className="flex min-w-[14rem] flex-1 flex-wrap items-center gap-x-1 gap-y-2">
         {!isOn ? <p className="text-muted-foreground pt-1.5 text-sm">{closedLabel}</p> : null}
         {ranges.map((range, index) => (
           <div key={`${String(range.weekday)}-${String(index)}`} className="flex items-center gap-1.5">

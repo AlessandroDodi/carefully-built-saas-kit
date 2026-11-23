@@ -126,7 +126,7 @@ export function MobileSheetLayout({
         <div className="flex min-h-0 flex-1 flex-col gap-4">
           <div
             className={cn(
-              '-mx-1 flex-1 overflow-y-auto px-1 pb-3 [scrollbar-gutter:stable]',
+              '-mx-1 flex-1 overflow-y-auto px-1 pb-3',
               contentClassName,
               classes?.body,
             )}
@@ -192,7 +192,7 @@ export function DesktopSheetLayout({
         <div className="flex min-h-0 flex-1 flex-col">
           <div
             className={cn(
-              'flex-1 overflow-x-visible overflow-y-auto px-4 pt-4 pb-6 [scrollbar-gutter:stable]',
+              'flex-1 overflow-x-visible overflow-y-auto px-4 pt-4 pb-6',
               contentClassName,
               classes?.body,
             )}

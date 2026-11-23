@@ -46,14 +46,16 @@ export function DashboardPageHeader({
   ) : null;
 
   return (
-    <div data-slot="page-header" className="flex shrink-0 items-center justify-between gap-4">
-      <div className="flex min-w-0 items-center gap-2">
+    // The title never gets cut to make room: actions that do not fit next to
+    // it wrap to the line below (a period select on a phone).
+    <div data-slot="page-header" className="flex shrink-0 flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <div className="flex max-w-full min-w-0 shrink-0 items-center gap-2">
         {backButton}
         <h1 data-slot="page-title" className="truncate text-xl font-semibold tracking-tight">
           {title}
         </h1>
       </div>
-      {actions ? <div className="flex min-w-0 items-center gap-2">{actions}</div> : null}
+      {actions ? <div className="ml-auto flex max-w-full min-w-0 items-center gap-2">{actions}</div> : null}
     </div>
   );
 }
