@@ -28,6 +28,9 @@ interface CustomListFieldProps<TValues extends FieldValues, TName extends ArrayP
 }
 
 /**
+ * The remove button sits in the row's top-right corner, on the line of the
+ * first label, so the fields below keep the full width (it matters on phones).
+ *
  * A repeatable group of fields (rows added and removed by the user) for
  * array values in a CustomForm, e.g. a list of objections with their answers.
  */
@@ -51,7 +54,7 @@ export function CustomListField<TValues extends FieldValues, TName extends Array
       {fields.length === 0 && emptyLabel ? <p className="text-muted-foreground text-sm">{emptyLabel}</p> : null}
       <ol className="space-y-3">
         {fields.map((field, index) => (
-          <li key={field.id} className="border-border bg-card animate-in fade-in-0 slide-in-from-top-1 relative rounded-xl border p-3 pr-11">
+          <li key={field.id} className="border-border bg-card animate-in fade-in-0 slide-in-from-top-1 relative rounded-xl border p-3">
             {renderItem(`${name}.${String(index)}` as `${TName}.${number}`, index)}
             <Button
               type="button"
