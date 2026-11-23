@@ -97,7 +97,8 @@ export function MobileSheetLayout({
       <DrawerContent
         aria-describedby={description ? undefined : 'responsive-sheet-description-empty'}
         className={cn(
-          'px-4 pb-[calc(env(safe-area-inset-bottom)+20px)]',
+          // Forms need the room: 80vh left half the screen to header and footer on a phone.
+          'px-4 pb-[calc(env(safe-area-inset-bottom)+20px)] data-[vaul-drawer-direction=bottom]:max-h-[92dvh]',
           mobileDrawerContentClassName,
           classes?.mobileContent,
         )}
