@@ -40,6 +40,8 @@ Helpers in this package:
 - `AIActionButton`
 - `createRichTextDocumentFromText`
 - `createRichTextDocumentFromText`
+- `DEFAULT_RICH_TEXT_TOOLBAR_LABELS`
+- `DEFAULT_RICH_TEXT_TOOLBAR_LABELS`
 - `getPlainTextFromRichText`
 - `getPlainTextFromRichText`
 - `hasRichTextContent`
@@ -60,6 +62,7 @@ Helpers in this package:
 - `AIActionButtonProps`
 - `RichTextEditorProps`
 - `RichTextRendererProps`
+- `RichTextToolbarLabels`
 
 
 ## API Catalog
@@ -72,6 +75,8 @@ Helpers in this package:
 | `AIActionButton` | Helper | `packages/rich-text/src/index.ts` |
 | `createRichTextDocumentFromText` | Helper | `packages/rich-text/src/index.ts` |
 | `createRichTextDocumentFromText` | Helper | `packages/rich-text/src/rich-text-utils.ts` |
+| `DEFAULT_RICH_TEXT_TOOLBAR_LABELS` | Helper | `packages/rich-text/src/index.ts` |
+| `DEFAULT_RICH_TEXT_TOOLBAR_LABELS` | Helper | `packages/rich-text/src/rich-text-editor.tsx` |
 | `getPlainTextFromRichText` | Helper | `packages/rich-text/src/index.ts` |
 | `getPlainTextFromRichText` | Helper | `packages/rich-text/src/rich-text-utils.ts` |
 | `hasRichTextContent` | Helper | `packages/rich-text/src/index.ts` |
@@ -89,6 +94,7 @@ Helpers in this package:
 | `AIActionButtonProps` | Type | `packages/rich-text/src/ai-action-button.tsx` |
 | `RichTextEditorProps` | Type | `packages/rich-text/src/rich-text-editor.tsx` |
 | `RichTextRendererProps` | Type | `packages/rich-text/src/rich-text-renderer.tsx` |
+| `RichTextToolbarLabels` | Type | `packages/rich-text/src/rich-text-editor.tsx` |
 
 
 ## Consumer Responsibilities

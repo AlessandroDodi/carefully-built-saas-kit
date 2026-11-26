@@ -14,6 +14,20 @@ For local development in an app inside the same parent workspace, use the packed
 
 - `@carefully-built/custom-fields`
 
+## Component Usage
+
+```tsx
+import { CustomFieldsDetailRows } from '@carefully-built/custom-fields';
+
+// Check the API catalog below for the component source and prop types.
+// Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
+```
+
+Components in this package:
+
+- `CustomFieldsDetailRows`: import from `@carefully-built/custom-fields`.
+- `CustomFieldsFormSection`: import from `@carefully-built/custom-fields`.
+
 ## Helper Usage
 
 ```ts
@@ -40,6 +54,10 @@ Helpers in this package:
 - `CustomFieldOptionConfig`
 - `CustomFieldOptionPricing`
 - `CustomFieldOptionPricingEntry`
+- `CustomFieldsDetailRowsProps`
+- `CustomFieldsFormSectionProps`
+- `CustomFieldsStateSection`
+- `CustomFieldsStateSectionProps`
 - `CustomFieldType`
 - `CustomFieldValue`
 - `formatCustomFieldDisplayValue`
@@ -51,6 +69,8 @@ Helpers in this package:
 
 | Export | Kind | Source |
 |---|---|---|
+| `CustomFieldsDetailRows` | Component | `packages/custom-fields/src/custom-field-sections.tsx` |
+| `CustomFieldsFormSection` | Component | `packages/custom-fields/src/custom-field-sections.tsx` |
 | `CUSTOM_FIELD_ENTITY_OPTIONS` | Helper | `packages/custom-fields/src/index.ts` |
 | `CUSTOM_FIELD_TYPE_OPTIONS` | Helper | `packages/custom-fields/src/index.ts` |
 | `customFieldTypeChipMeta` | Helper | `packages/custom-fields/src/index.ts` |
@@ -66,6 +86,10 @@ Helpers in this package:
 | `CustomFieldOptionConfig` | Type | `packages/custom-fields/src/index.ts` |
 | `CustomFieldOptionPricing` | Type | `packages/custom-fields/src/index.ts` |
 | `CustomFieldOptionPricingEntry` | Type | `packages/custom-fields/src/index.ts` |
+| `CustomFieldsDetailRowsProps` | Type | `packages/custom-fields/src/custom-field-sections.tsx` |
+| `CustomFieldsFormSectionProps` | Type | `packages/custom-fields/src/custom-field-sections.tsx` |
+| `CustomFieldsStateSection` | Type | `packages/custom-fields/src/custom-field-sections.tsx` |
+| `CustomFieldsStateSectionProps` | Type | `packages/custom-fields/src/custom-field-sections.tsx` |
 | `CustomFieldType` | Type | `packages/custom-fields/src/index.ts` |
 | `CustomFieldValue` | Type | `packages/custom-fields/src/index.ts` |
 | `formatCustomFieldDisplayValue` | Type | `packages/custom-fields/src/index.ts` |

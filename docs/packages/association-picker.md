@@ -66,12 +66,16 @@ Helpers in this package:
 - `associationTypeChipMeta`
 - `buildAssociationCreateOption`
 - `buildAssociationCreateOption`
+- `getAssociationEntityTypeLabel`
+- `getAssociationEntityTypeLabel`
 - `getAssociationTypeChipMeta`
 - `getAssociationTypeChipMeta`
 - `getCreateableAssociationTypes`
 - `getCreateableAssociationTypes`
 - `getCreateButtonLabel`
 - `getCreateButtonLabel`
+- `getResolvedAssociationPickerLabels`
+- `getResolvedAssociationPickerLabels`
 - `normalizeAssociationEntityType`
 - `normalizeAssociationEntityType`
 - `ORDERED_ASSOCIATION_ENTITY_TYPES`
@@ -84,6 +88,8 @@ Helpers in this package:
 - `AssociationPickerCreateHandler`
 - `AssociationPickerCreateRendererProps`
 - `AssociationPickerCreateResult`
+- `AssociationPickerLabels`
+- `AssociationPickerLabelsInput`
 - `AssociationPickerOption`
 - `AssociationPickerOptionsList`
 - `AssociationPickerProps`
@@ -114,12 +120,16 @@ Helpers in this package:
 | `associationTypeChipMeta` | Helper | `packages/association-picker/src/index.ts` |
 | `buildAssociationCreateOption` | Helper | `packages/association-picker/src/defaultCreateHandlers.shared.ts` |
 | `buildAssociationCreateOption` | Helper | `packages/association-picker/src/index.ts` |
+| `getAssociationEntityTypeLabel` | Helper | `packages/association-picker/src/associationPicker.options.tsx` |
+| `getAssociationEntityTypeLabel` | Helper | `packages/association-picker/src/index.ts` |
 | `getAssociationTypeChipMeta` | Helper | `packages/association-picker/src/associationTypeMeta.tsx` |
 | `getAssociationTypeChipMeta` | Helper | `packages/association-picker/src/index.ts` |
 | `getCreateableAssociationTypes` | Helper | `packages/association-picker/src/associationPicker.create.ts` |
 | `getCreateableAssociationTypes` | Helper | `packages/association-picker/src/index.ts` |
 | `getCreateButtonLabel` | Helper | `packages/association-picker/src/associationPicker.create.ts` |
 | `getCreateButtonLabel` | Helper | `packages/association-picker/src/index.ts` |
+| `getResolvedAssociationPickerLabels` | Helper | `packages/association-picker/src/associationPicker.options.tsx` |
+| `getResolvedAssociationPickerLabels` | Helper | `packages/association-picker/src/index.ts` |
 | `normalizeAssociationEntityType` | Helper | `packages/association-picker/src/associationTypeMeta.tsx` |
 | `normalizeAssociationEntityType` | Helper | `packages/association-picker/src/index.ts` |
 | `ORDERED_ASSOCIATION_ENTITY_TYPES` | Helper | `packages/association-picker/src/constants.ts` |
@@ -135,6 +145,8 @@ Helpers in this package:
 | `AssociationPickerCreateHandler` | Type | `packages/association-picker/src/types.ts` |
 | `AssociationPickerCreateRendererProps` | Type | `packages/association-picker/src/types.ts` |
 | `AssociationPickerCreateResult` | Type | `packages/association-picker/src/types.ts` |
+| `AssociationPickerLabels` | Type | `packages/association-picker/src/types.ts` |
+| `AssociationPickerLabelsInput` | Type | `packages/association-picker/src/types.ts` |
 | `AssociationPickerOption` | Type | `packages/association-picker/src/types.ts` |
 | `AssociationPickerOptionsList` | Type | `packages/association-picker/src/AssociationPickerOptionsList.tsx` |
 | `AssociationPickerProps` | Type | `packages/association-picker/src/types.ts` |

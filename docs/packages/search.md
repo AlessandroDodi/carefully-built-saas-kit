@@ -37,6 +37,7 @@ import { buildSearchText } from '@carefully-built/search';
 Helpers in this package:
 
 - `buildSearchText`
+- `commandPaletteTexts`
 - `filterAndRankBySearch`
 - `getCommandPaletteFallbackIconStyle`
 - `getCommandPaletteTypeCompletion`
@@ -59,6 +60,7 @@ Helpers in this package:
 |---|---|---|
 | `CommandPalette` | Component | `packages/search/src/command-palette.tsx` |
 | `buildSearchText` | Helper | `packages/search/src/index.ts` |
+| `commandPaletteTexts` | Helper | `packages/search/src/command-palette.texts.ts` |
 | `filterAndRankBySearch` | Helper | `packages/search/src/index.ts` |
 | `getCommandPaletteFallbackIconStyle` | Helper | `packages/search/src/command-palette-fallback.ts` |
 | `getCommandPaletteTypeCompletion` | Helper | `packages/search/src/command-palette.tsx` |

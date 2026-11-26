@@ -51,17 +51,19 @@ The CLI is published on npm as [`@carefully-built/cli`](https://www.npmjs.com/pa
 | [`@carefully-built/forms`](./docs/packages/forms.md) | 0.1.8 | Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps. |
 | [`@carefully-built/import-export`](./docs/packages/imports.md) | 0.1.2 | Reusable tabular import/export sheets, CSV parsing, preview rows, and contact import examples for SaaS apps. |
 | [`@carefully-built/kanban`](./docs/packages/kanban.md) | 0.1.0 | Reusable Kanban board and card primitives for SaaS pipelines. |
-| [`@carefully-built/legal-ui`](./docs/packages/legal-ui.md) | 0.1.1 | Reusable legal document renderer for Carefully Built SaaS apps. |
+| [`@carefully-built/legal-ui`](./docs/packages/legal-ui.md) | 0.1.3 | Reusable legal document renderer, read-to-the-end document reader and version list for Carefully Built SaaS apps. |
 | [`@carefully-built/maps-ui`](./docs/packages/maps-ui.md) | 0.1.3 | Reusable Google Maps UI, map themes, and attribution helpers for Carefully Built apps. |
 | [`@carefully-built/notes`](./docs/packages/notes.md) | 0.1.2 | Reusable notes cards, grids, helpers, and editor shell pieces for SaaS apps. |
 | [`@carefully-built/notifications`](./docs/packages/notifications.md) | 0.1.0 | Reusable notification center UI for Carefully Built SaaS apps. |
+| [`@carefully-built/offline`](./docs/packages/offline.md) | 0.1.0 | Offline-first building blocks for Carefully Built SaaS apps: an encrypted IndexedDB store, a persistent retrying send queue, and React bindings with a sync status badge. |
 | [`@carefully-built/resource-kit`](./docs/packages/resource-kit.md) | 0.1.2 | Reusable resource-page state helpers for CRUD SaaS surfaces. |
 | [`@carefully-built/rich-text`](./docs/packages/rich-text.md) | 0.1.0 | Reusable rich text editor, renderer, AI action affordances, and serialization helpers for SaaS apps. |
 | [`@carefully-built/search`](./docs/packages/search.md) | 0.1.1 | Reusable fuzzy search and ranking helpers for Carefully Built SaaS apps. |
 | [`@carefully-built/settings-ui`](./docs/packages/settings-ui.md) | 0.1.4 | Reusable SaaS settings tabs, section cards, and settings metrics for Carefully Built apps. |
+| [`@carefully-built/signature`](./docs/packages/signature.md) | 0.1.0 | Signature pad for Carefully Built SaaS apps: smooth handwritten signatures on a canvas, stored as plain geometry and exported as PNG or SVG. |
 | [`@carefully-built/superadmin`](./docs/packages/superadmin.md) | 0.1.8 | Reusable superadmin UI for Carefully Built SaaS apps. |
 | [`@carefully-built/theme-ui`](./docs/packages/theme-ui.md) | 0.1.0 | Reusable SaaS theme, map theme, color, and shape selectors for Carefully Built apps. |
-| [`@carefully-built/ui`](./docs/packages/ui.md) | 0.1.15 | Reusable React UI primitives and data-display components for Carefully Built SaaS apps. |
+| [`@carefully-built/ui`](./docs/packages/ui.md) | 0.1.31 | Reusable React UI primitives and data-display components for Carefully Built SaaS apps. |
 | [`@carefully-built/user-picker`](./docs/packages/user-picker.md) | 0.1.1 | Reusable user picker for SaaS forms. |
 | [`@carefully-built/widgets`](./docs/packages/widgets.md) | 0.1.0 | Reusable SaaS dashboard and detail widgets for Carefully Built apps. |
 | [`@carefully-built/workos`](./docs/packages/workos.md) | 0.1.2 | Reusable WorkOS organization creation and organization logo primitives for SaaS apps. |

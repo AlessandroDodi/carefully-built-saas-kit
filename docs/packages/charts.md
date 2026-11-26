@@ -27,7 +27,11 @@ Components in this package:
 
 - `BarDistributionWidget`: import from `@carefully-built/charts`.
 - `ChartLegend`: import from `@carefully-built/charts`.
+- `CoverageGrid`: import from `@carefully-built/charts`.
+- `DeltaBadge`: import from `@carefully-built/charts`.
 - `DonutChartWidget`: import from `@carefully-built/charts`.
+- `SparkBars`: import from `@carefully-built/charts`.
+- `TrendAreaChart`: import from `@carefully-built/charts`.
 
 ## Helper Usage
 
@@ -39,14 +43,25 @@ Helpers in this package:
 
 - `BarDistributionWidget`
 - `ChartLegend`
+- `CoverageGrid`
+- `DeltaBadge`
 - `DonutChartWidget`
+- `SparkBars`
+- `TrendAreaChart`
 
 ## Types And Schemas
 
 - `BarDistributionWidgetProps`
 - `ChartLegendEntry`
 - `ChartLegendProps`
+- `CoverageGridProps`
+- `CoverageGridSlot`
+- `CoverageLevel`
+- `DeltaBadgeProps`
 - `DonutChartWidgetProps`
+- `SparkBarsProps`
+- `TrendAreaChartProps`
+- `TrendPoint`
 
 
 ## API Catalog
@@ -55,14 +70,29 @@ Helpers in this package:
 |---|---|---|
 | `BarDistributionWidget` | Component | `packages/charts/src/bar-distribution-widget.tsx` |
 | `ChartLegend` | Component | `packages/charts/src/chart-legend.tsx` |
+| `CoverageGrid` | Component | `packages/charts/src/coverage-grid.tsx` |
+| `DeltaBadge` | Component | `packages/charts/src/delta-badge.tsx` |
 | `DonutChartWidget` | Component | `packages/charts/src/donut-chart-widget.tsx` |
+| `SparkBars` | Component | `packages/charts/src/spark-bars.tsx` |
+| `TrendAreaChart` | Component | `packages/charts/src/trend-area-chart.tsx` |
 | `BarDistributionWidget` | Helper | `packages/charts/src/index.ts` |
 | `ChartLegend` | Helper | `packages/charts/src/index.ts` |
+| `CoverageGrid` | Helper | `packages/charts/src/index.ts` |
+| `DeltaBadge` | Helper | `packages/charts/src/index.ts` |
 | `DonutChartWidget` | Helper | `packages/charts/src/index.ts` |
+| `SparkBars` | Helper | `packages/charts/src/index.ts` |
+| `TrendAreaChart` | Helper | `packages/charts/src/index.ts` |
 | `BarDistributionWidgetProps` | Type | `packages/charts/src/bar-distribution-widget.tsx` |
 | `ChartLegendEntry` | Type | `packages/charts/src/chart-legend.tsx` |
 | `ChartLegendProps` | Type | `packages/charts/src/chart-legend.tsx` |
+| `CoverageGridProps` | Type | `packages/charts/src/coverage-grid.tsx` |
+| `CoverageGridSlot` | Type | `packages/charts/src/coverage-grid.tsx` |
+| `CoverageLevel` | Type | `packages/charts/src/coverage-grid.tsx` |
+| `DeltaBadgeProps` | Type | `packages/charts/src/delta-badge.tsx` |
 | `DonutChartWidgetProps` | Type | `packages/charts/src/donut-chart-widget.tsx` |
+| `SparkBarsProps` | Type | `packages/charts/src/spark-bars.tsx` |
+| `TrendAreaChartProps` | Type | `packages/charts/src/trend-area-chart.tsx` |
+| `TrendPoint` | Type | `packages/charts/src/trend-area-chart.tsx` |
 
 
 ## Consumer Responsibilities

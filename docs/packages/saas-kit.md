@@ -16,6 +16,7 @@ For local development in an app inside the same parent workspace, use the packed
 - `@carefully-built/saas-kit/agenda`
 - `@carefully-built/saas-kit/app-shell`
 - `@carefully-built/saas-kit/association-picker`
+- `@carefully-built/saas-kit/audio`
 - `@carefully-built/saas-kit/auth-pages`
 - `@carefully-built/saas-kit/automations`
 - `@carefully-built/saas-kit/charts`
@@ -24,6 +25,8 @@ For local development in an app inside the same parent workspace, use the packed
 - `@carefully-built/saas-kit/convex-platform`
 - `@carefully-built/saas-kit/convex-workos`
 - `@carefully-built/saas-kit/crud`
+- `@carefully-built/saas-kit/elevenlabs`
+- `@carefully-built/saas-kit/elevenlabs-react`
 - `@carefully-built/saas-kit/custom-fields`
 - `@carefully-built/saas-kit/files`
 - `@carefully-built/saas-kit/forms`
@@ -33,16 +36,21 @@ For local development in an app inside the same parent workspace, use the packed
 - `@carefully-built/saas-kit/maps-ui`
 - `@carefully-built/saas-kit/notes`
 - `@carefully-built/saas-kit/notifications`
+- `@carefully-built/saas-kit/offline`
+- `@carefully-built/saas-kit/offline/react`
+- `@carefully-built/saas-kit/organizations`
 - `@carefully-built/saas-kit/resource-kit`
 - `@carefully-built/saas-kit/rich-text`
 - `@carefully-built/saas-kit/search`
 - `@carefully-built/saas-kit/settings-ui`
+- `@carefully-built/saas-kit/signature`
 - `@carefully-built/saas-kit/superadmin`
 - `@carefully-built/saas-kit/theme-ui`
 - `@carefully-built/saas-kit/ui`
 - `@carefully-built/saas-kit/user-picker`
 - `@carefully-built/saas-kit/widgets`
 - `@carefully-built/saas-kit/workos`
+- `@carefully-built/saas-kit/workos/organization-profile-settings`
 - `@carefully-built/saas-kit/auth-pages/forms`
 - `@carefully-built/saas-kit/auth-pages/controllers`
 - `@carefully-built/saas-kit/auth-pages/config`
@@ -51,16 +59,51 @@ For local development in an app inside the same parent workspace, use the packed
 - `@carefully-built/saas-kit/auth-pages/social`
 - `@carefully-built/saas-kit/auth-pages/workos`
 - `@carefully-built/saas-kit/agenda/styles.css`
+- `@carefully-built/saas-kit/theme/base.css`
+- `@carefully-built/saas-kit/theme/workos-widgets.css`
+- `@carefully-built/saas-kit/theme/presets/mono.css`
+- `@carefully-built/saas-kit/theme/presets/teal.css`
+- `@carefully-built/saas-kit/theme/styles/soft.css`
 - `@carefully-built/saas-kit/files/convex`
 - `@carefully-built/saas-kit/next`
 - `@carefully-built/saas-kit/search/command-palette`
 - `@carefully-built/saas-kit/server`
 - `@carefully-built/saas-kit/settings/client`
 
+## Component Usage
+
+```tsx
+import { AppNavigationShell } from '@carefully-built/saas-kit';
+
+// Check the API catalog below for the component source and prop types.
+// Most components are controlled shells: pass app data, handlers, and slot content from the consuming app.
+```
+
+Components in this package:
+
+- `AppNavigationShell`: import from `@carefully-built/saas-kit`.
+- `NextNavigationLink`: import from `@carefully-built/saas-kit`.
+
+## Helper Usage
+
+```ts
+import { AppNavigationShell } from '@carefully-built/saas-kit';
+```
+
+Helpers in this package:
+
+- `AppNavigationShell`
+- `NextNavigationLink`
+
 
 ## API Catalog
 
-No public exports were detected in `src`.
+| Export | Kind | Source |
+|---|---|---|
+| `AppNavigationShell` | Component | `packages/saas-kit/src/app-shell/next-navigation-shell.tsx` |
+| `NextNavigationLink` | Component | `packages/saas-kit/src/app-shell/next-navigation-shell.tsx` |
+| `AppNavigationShell` | Helper | `packages/saas-kit/src/app-shell.ts` |
+| `NextNavigationLink` | Helper | `packages/saas-kit/src/app-shell.ts` |
 
 
 ## Consumer Responsibilities

@@ -90,25 +90,39 @@ Helpers in this package:
 - `AuthForgotPasswordPage`
 - `AuthLayout`
 - `AuthLoginPage`
+- `authMessageTexts`
+- `authPageTexts`
 - `AuthSignupPage`
 - `AuthUpdatePasswordPage`
 - `createWorkOSAuthActions`
 - `createWorkOSAuthActions`
 - `ForgotPasswordForm`
+- `forgotPasswordFormTexts`
 - `getFormInvitationToken`
 - `getFormInvitationToken`
 - `LegalConsent`
+- `legalConsentTexts`
 - `LoginEmailForm`
+- `loginEmailFormTexts`
 - `OrganizationLogo`
 - `OrganizationSelectionPage`
+- `organizationSelectionPageTexts`
 - `OrganizationSelector`
+- `organizationSelectorTexts`
 - `SignupEmailForm`
+- `signupEmailFormTexts`
 - `SocialLoginButtons`
+- `socialLoginTexts`
 - `SocialProviderButton`
 - `UpdatePasswordForm`
+- `updatePasswordFormTexts`
 
 ## Types And Schemas
 
+- `buildForgotPasswordSchema`
+- `buildLoginSchema`
+- `buildResetPasswordSchema`
+- `buildSignupSchema`
 - `forgotPasswordSchema`
 - `forgotPasswordSchema`
 - `loginSchema`
@@ -130,6 +144,7 @@ Helpers in this package:
 - `AuthPagesConfigProvider`
 - `AuthSignupPageProps`
 - `AuthUpdatePasswordPageProps`
+- `AuthValidationMessages`
 - `AuthVisualConfig`
 - `ForgotPasswordFormData`
 - `LegalLinkConfig`
@@ -188,22 +203,32 @@ Helpers in this package:
 | `AuthForgotPasswordPage` | Helper | `packages/auth-pages/src/pages.ts` |
 | `AuthLayout` | Helper | `packages/auth-pages/src/index.ts` |
 | `AuthLoginPage` | Helper | `packages/auth-pages/src/pages.ts` |
+| `authMessageTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
+| `authPageTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `AuthSignupPage` | Helper | `packages/auth-pages/src/pages.ts` |
 | `AuthUpdatePasswordPage` | Helper | `packages/auth-pages/src/pages.ts` |
 | `createWorkOSAuthActions` | Helper | `packages/auth-pages/src/workos/auth-actions.ts` |
 | `createWorkOSAuthActions` | Helper | `packages/auth-pages/src/workos.ts` |
 | `ForgotPasswordForm` | Helper | `packages/auth-pages/src/forms.ts` |
+| `forgotPasswordFormTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `getFormInvitationToken` | Helper | `packages/auth-pages/src/workos/auth-actions.ts` |
 | `getFormInvitationToken` | Helper | `packages/auth-pages/src/workos.ts` |
 | `LegalConsent` | Helper | `packages/auth-pages/src/index.ts` |
+| `legalConsentTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `LoginEmailForm` | Helper | `packages/auth-pages/src/forms.ts` |
+| `loginEmailFormTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `OrganizationLogo` | Helper | `packages/auth-pages/src/organizations.ts` |
 | `OrganizationSelectionPage` | Helper | `packages/auth-pages/src/organizations.ts` |
+| `organizationSelectionPageTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `OrganizationSelector` | Helper | `packages/auth-pages/src/organizations.ts` |
+| `organizationSelectorTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `SignupEmailForm` | Helper | `packages/auth-pages/src/forms.ts` |
+| `signupEmailFormTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `SocialLoginButtons` | Helper | `packages/auth-pages/src/social.ts` |
+| `socialLoginTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `SocialProviderButton` | Helper | `packages/auth-pages/src/social.ts` |
 | `UpdatePasswordForm` | Helper | `packages/auth-pages/src/forms.ts` |
+| `updatePasswordFormTexts` | Helper | `packages/auth-pages/src/locale/auth-texts.ts` |
 | `useAuthPagesConfig` | Hook | `packages/auth-pages/src/config/auth-pages-config.tsx` |
 | `useAuthPagesConfig` | Hook | `packages/auth-pages/src/config.ts` |
 | `useForgotPasswordForm` | Hook | `packages/auth-pages/src/controllers/password-forms.ts` |
@@ -214,6 +239,10 @@ Helpers in this package:
 | `useSignupForm` | Hook | `packages/auth-pages/src/controllers.ts` |
 | `useUpdatePasswordForm` | Hook | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `useUpdatePasswordForm` | Hook | `packages/auth-pages/src/controllers.ts` |
+| `buildForgotPasswordSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
+| `buildLoginSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
+| `buildResetPasswordSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
+| `buildSignupSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `forgotPasswordSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `forgotPasswordSchema` | Schema | `packages/auth-pages/src/controllers.ts` |
 | `loginSchema` | Schema | `packages/auth-pages/src/controllers/password-forms.ts` |
@@ -235,6 +264,7 @@ Helpers in this package:
 | `AuthPagesConfigProvider` | Type | `packages/auth-pages/src/config.ts` |
 | `AuthSignupPageProps` | Type | `packages/auth-pages/src/pages/auth-pages.tsx` |
 | `AuthUpdatePasswordPageProps` | Type | `packages/auth-pages/src/pages/auth-pages.tsx` |
+| `AuthValidationMessages` | Type | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `AuthVisualConfig` | Type | `packages/auth-pages/src/types.ts` |
 | `ForgotPasswordFormData` | Type | `packages/auth-pages/src/controllers/password-forms.ts` |
 | `LegalLinkConfig` | Type | `packages/auth-pages/src/types.ts` |

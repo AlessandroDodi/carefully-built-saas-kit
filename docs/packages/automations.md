@@ -63,10 +63,14 @@ Helpers in this package:
 - `AutomationActionConfig`
 - `AutomationActionTargetEntity`
 - `AutomationActionType`
+- `AutomationBuilderCanvasLabels`
+- `AutomationBuilderCanvasLabelsInput`
 - `AutomationConditionDraft`
 - `AutomationConditionGroupDraft`
 - `AutomationDraft`
 - `AutomationDraftInput`
+- `AutomationDraftLabels`
+- `AutomationDraftLabelsInput`
 - `AutomationDraftValidation`
 - `AutomationOption`
 - `AutomationPathBranchDraft`
@@ -79,6 +83,8 @@ Helpers in this package:
 - `AutomationTriggerType`
 - `EntityCreatedTriggerDraft`
 - `FieldChangedTriggerDraft`
+- `UseAutomationBuilderLabels`
+- `UseAutomationBuilderOptions`
 - `validateAutomationDraftInput`
 
 
@@ -98,10 +104,14 @@ Helpers in this package:
 | `AutomationActionConfig` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationActionTargetEntity` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationActionType` | Type | `packages/automations/src/automation-draft.ts` |
+| `AutomationBuilderCanvasLabels` | Type | `packages/automations/src/automation-builder-canvas.tsx` |
+| `AutomationBuilderCanvasLabelsInput` | Type | `packages/automations/src/automation-builder-canvas.tsx` |
 | `AutomationConditionDraft` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationConditionGroupDraft` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationDraft` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationDraftInput` | Type | `packages/automations/src/automation-draft.ts` |
+| `AutomationDraftLabels` | Type | `packages/automations/src/automation-draft.ts` |
+| `AutomationDraftLabelsInput` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationDraftValidation` | Type | `packages/automations/src/automation-draft.ts` |
 | `AutomationOption` | Type | `packages/automations/src/automation-options.ts` |
 | `AutomationPathBranchDraft` | Type | `packages/automations/src/automation-draft.ts` |
@@ -114,6 +124,8 @@ Helpers in this package:
 | `AutomationTriggerType` | Type | `packages/automations/src/automation-draft.ts` |
 | `EntityCreatedTriggerDraft` | Type | `packages/automations/src/automation-draft.ts` |
 | `FieldChangedTriggerDraft` | Type | `packages/automations/src/automation-draft.ts` |
+| `UseAutomationBuilderLabels` | Type | `packages/automations/src/use-automation-builder.ts` |
+| `UseAutomationBuilderOptions` | Type | `packages/automations/src/use-automation-builder.ts` |
 | `validateAutomationDraftInput` | Type | `packages/automations/src/automation-draft.ts` |
 
 

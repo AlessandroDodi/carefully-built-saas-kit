@@ -28,6 +28,8 @@ Components in this package:
 - `AppNavigationShell`: import from `@carefully-built/app-shell`.
 - `DashboardPageHeader`: import from `@carefully-built/app-shell`.
 - `DashboardPageLayout`: import from `@carefully-built/app-shell`.
+- `DefaultNavigationLink`: import from `@carefully-built/app-shell`.
+- `DetailLayout`: import from `@carefully-built/app-shell`.
 - `ResponsiveButton`: import from `@carefully-built/app-shell`.
 - `ResponsivePageActions`: import from `@carefully-built/app-shell`.
 - `SidebarContext`: import from `@carefully-built/app-shell`.
@@ -61,6 +63,8 @@ Helpers in this package:
 - `AppNavigationShell`
 - `DashboardPageHeader`
 - `DashboardPageLayout`
+- `DefaultNavigationLink`
+- `DetailLayout`
 - `resolveMobileBottomNavigation`
 - `resolveMobileBottomNavigation`
 - `ResponsiveButton`
@@ -75,12 +79,16 @@ Helpers in this package:
 - `DashboardMobileNavigationConfig`
 - `DashboardPageHeaderProps`
 - `DashboardPageLayoutProps`
+- `DetailLayoutProps`
 - `isNavigationItemActive`
 - `isNavigationItemActive`
 - `KeyedNavigationItem`
 - `NavigationFooterRenderOptions`
+- `NavigationGroup`
 - `NavigationIcon`
 - `NavigationItem`
+- `NavigationLinkComponent`
+- `NavigationLinkProps`
 - `NavigationSearchRenderOptions`
 - `ResolvedMobileBottomNavigation`
 - `resolveResponsiveButtonState`
@@ -88,6 +96,7 @@ Helpers in this package:
 - `ResponsiveButtonProps`
 - `ResponsiveButtonState`
 - `ResponsivePageAction`
+- `ResponsivePageActionMenu`
 - `ResponsivePageActionsProps`
 - `SidebarContextValue`
 - `SidebarInsetProps`
@@ -100,6 +109,8 @@ Helpers in this package:
 | `AppNavigationShell` | Component | `packages/app-shell/src/navigation-shell.tsx` |
 | `DashboardPageHeader` | Component | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardPageLayout` | Component | `packages/app-shell/src/dashboard-page-layout.tsx` |
+| `DefaultNavigationLink` | Component | `packages/app-shell/src/navigation-shell.tsx` |
+| `DetailLayout` | Component | `packages/app-shell/src/detail-layout.tsx` |
 | `ResponsiveButton` | Component | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsivePageActions` | Component | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `SidebarContext` | Component | `packages/app-shell/src/sidebar.tsx` |
@@ -108,6 +119,8 @@ Helpers in this package:
 | `AppNavigationShell` | Helper | `packages/app-shell/src/index.ts` |
 | `DashboardPageHeader` | Helper | `packages/app-shell/src/index.ts` |
 | `DashboardPageLayout` | Helper | `packages/app-shell/src/index.ts` |
+| `DefaultNavigationLink` | Helper | `packages/app-shell/src/index.ts` |
+| `DetailLayout` | Helper | `packages/app-shell/src/index.ts` |
 | `resolveMobileBottomNavigation` | Helper | `packages/app-shell/src/index.ts` |
 | `resolveMobileBottomNavigation` | Helper | `packages/app-shell/src/mobile-navigation.ts` |
 | `ResponsiveButton` | Helper | `packages/app-shell/src/index.ts` |
@@ -121,12 +134,16 @@ Helpers in this package:
 | `DashboardMobileNavigationConfig` | Type | `packages/app-shell/src/mobile-navigation.ts` |
 | `DashboardPageHeaderProps` | Type | `packages/app-shell/src/dashboard-page-layout.tsx` |
 | `DashboardPageLayoutProps` | Type | `packages/app-shell/src/dashboard-page-layout.tsx` |
+| `DetailLayoutProps` | Type | `packages/app-shell/src/detail-layout.tsx` |
 | `isNavigationItemActive` | Type | `packages/app-shell/src/index.ts` |
 | `isNavigationItemActive` | Type | `packages/app-shell/src/navigation-shell.tsx` |
 | `KeyedNavigationItem` | Type | `packages/app-shell/src/mobile-navigation.ts` |
 | `NavigationFooterRenderOptions` | Type | `packages/app-shell/src/navigation-shell.tsx` |
+| `NavigationGroup` | Type | `packages/app-shell/src/navigation-shell.tsx` |
 | `NavigationIcon` | Type | `packages/app-shell/src/navigation-shell.tsx` |
 | `NavigationItem` | Type | `packages/app-shell/src/navigation-shell.tsx` |
+| `NavigationLinkComponent` | Type | `packages/app-shell/src/navigation-shell.tsx` |
+| `NavigationLinkProps` | Type | `packages/app-shell/src/navigation-shell.tsx` |
 | `NavigationSearchRenderOptions` | Type | `packages/app-shell/src/navigation-shell.tsx` |
 | `ResolvedMobileBottomNavigation` | Type | `packages/app-shell/src/mobile-navigation.ts` |
 | `resolveResponsiveButtonState` | Type | `packages/app-shell/src/index.ts` |
@@ -134,6 +151,7 @@ Helpers in this package:
 | `ResponsiveButtonProps` | Type | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsiveButtonState` | Type | `packages/app-shell/src/responsive-button.tsx` |
 | `ResponsivePageAction` | Type | `packages/app-shell/src/responsive-page-actions.tsx` |
+| `ResponsivePageActionMenu` | Type | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `ResponsivePageActionsProps` | Type | `packages/app-shell/src/responsive-page-actions.tsx` |
 | `SidebarContextValue` | Type | `packages/app-shell/src/sidebar.tsx` |
 | `SidebarInsetProps` | Type | `packages/app-shell/src/sidebar.tsx` |

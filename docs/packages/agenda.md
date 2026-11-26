@@ -29,10 +29,12 @@ Components in this package:
 - `ActivityCalendarView`: import from `@carefully-built/agenda`.
 - `ActivityForm`: import from `@carefully-built/agenda`.
 - `ActivityListView`: import from `@carefully-built/agenda`.
+- `ActivityViewModeToggle`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarDayPicker`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarEvents`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarHeader`: import from `@carefully-built/agenda`.
 - `SharedActivityCalendarWidget`: import from `@carefully-built/agenda`.
+- `ShiftTimeline`: import from `@carefully-built/agenda`.
 
 ## Hook Usage
 
@@ -59,6 +61,7 @@ Helpers in this package:
 
 - `addLocalDays`
 - `addOneHourToTime`
+- `agendaTexts`
 - `ALL_DAY_ACTIVITY_END_TIME`
 - `ALL_DAY_ACTIVITY_START_TIME`
 - `buildActivityDisplayModel`
@@ -67,6 +70,7 @@ Helpers in this package:
 - `DEFAULT_ACTIVITY_END_TIME`
 - `DEFAULT_ACTIVITY_START_TIME`
 - `DEFAULT_ACTIVITY_TYPES`
+- `DEFAULT_AGENDA_PAGE_MESSAGES`
 - `filterActivities`
 - `formatCalendarWidgetTime`
 - `getActivitiesForDay`
@@ -76,6 +80,7 @@ Helpers in this package:
 - `isActivityPast`
 - `isAllDayActivityRange`
 - `isSameLocalDay`
+- `MISSING_ACTIVITY_TYPE_LABEL`
 - `shouldShowActivityCalendarScopeControls`
 - `startOfLocalDay`
 - `toAlphaColor`
@@ -93,20 +98,29 @@ Helpers in this package:
 - `ActivityItem`
 - `ActivityListItem`
 - `ActivityStatus`
+- `ActivityViewMode`
+- `ActivityViewModeToggleOption`
+- `ActivityViewModeToggleProps`
 - `ActivityVisibility`
 - `AgendaActivityFormValues`
 - `AgendaActivityMutationPayload`
 - `AgendaAssociationOption`
 - `AgendaFilterConfig`
 - `AgendaIntegrationPreferences`
+- `AgendaPageMessages`
 - `AgendaUserLike`
+- `AppBadge`
 - `AssociationEntityType`
 - `AvailableActivityType`
+- `defaultActivityViewModeOptions`
 - `EditableActivity`
+- `FallbackActivityType`
 - `formatActivityTypeOptionValue`
 - `formatDateInputValue`
 - `formatTimeInputValue`
 - `parseActivityTypeOptionValue`
+- `ShiftTimelineAssignment`
+- `ShiftTimelineProps`
 - `UseAgendaPageStateOptions`
 
 
@@ -117,12 +131,15 @@ Helpers in this package:
 | `ActivityCalendarView` | Component | `packages/agenda/src/activity-calendar-view.tsx` |
 | `ActivityForm` | Component | `packages/agenda/src/activity-form.tsx` |
 | `ActivityListView` | Component | `packages/agenda/src/activity-list-view.tsx` |
+| `ActivityViewModeToggle` | Component | `packages/agenda/src/activity-view-mode-toggle.tsx` |
 | `SharedActivityCalendarDayPicker` | Component | `packages/agenda/src/shared-activity-calendar-day-picker.tsx` |
 | `SharedActivityCalendarEvents` | Component | `packages/agenda/src/shared-activity-calendar-events.tsx` |
 | `SharedActivityCalendarHeader` | Component | `packages/agenda/src/shared-activity-calendar-header.tsx` |
 | `SharedActivityCalendarWidget` | Component | `packages/agenda/src/shared-activity-calendar-widget.tsx` |
+| `ShiftTimeline` | Component | `packages/agenda/src/shift-timeline.tsx` |
 | `addLocalDays` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
 | `addOneHourToTime` | Helper | `packages/agenda/src/activity-form-time.ts` |
+| `agendaTexts` | Helper | `packages/agenda/src/agenda-texts.ts` |
 | `ALL_DAY_ACTIVITY_END_TIME` | Helper | `packages/agenda/src/activity-form-time.ts` |
 | `ALL_DAY_ACTIVITY_START_TIME` | Helper | `packages/agenda/src/activity-form-time.ts` |
 | `buildActivityDisplayModel` | Helper | `packages/agenda/src/activity-helpers.ts` |
@@ -131,6 +148,7 @@ Helpers in this package:
 | `DEFAULT_ACTIVITY_END_TIME` | Helper | `packages/agenda/src/activity-form-time.ts` |
 | `DEFAULT_ACTIVITY_START_TIME` | Helper | `packages/agenda/src/activity-form-time.ts` |
 | `DEFAULT_ACTIVITY_TYPES` | Helper | `packages/agenda/src/activity-types.ts` |
+| `DEFAULT_AGENDA_PAGE_MESSAGES` | Helper | `packages/agenda/src/activity-page-state.ts` |
 | `filterActivities` | Helper | `packages/agenda/src/activity-helpers.ts` |
 | `formatCalendarWidgetTime` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
 | `getActivitiesForDay` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
@@ -140,6 +158,7 @@ Helpers in this package:
 | `isActivityPast` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
 | `isAllDayActivityRange` | Helper | `packages/agenda/src/activity-form-time.ts` |
 | `isSameLocalDay` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
+| `MISSING_ACTIVITY_TYPE_LABEL` | Helper | `packages/agenda/src/activity-types.ts` |
 | `shouldShowActivityCalendarScopeControls` | Helper | `packages/agenda/src/activity-calendar-scope.ts` |
 | `startOfLocalDay` | Helper | `packages/agenda/src/activity-calendar-widget.ts` |
 | `toAlphaColor` | Helper | `packages/agenda/src/activity-helpers.ts` |
@@ -155,20 +174,29 @@ Helpers in this package:
 | `ActivityItem` | Type | `packages/agenda/src/activity-item.tsx` |
 | `ActivityListItem` | Type | `packages/agenda/src/activity-helpers.ts` |
 | `ActivityStatus` | Type | `packages/agenda/src/activity-helpers.ts` |
+| `ActivityViewMode` | Type | `packages/agenda/src/activity-view-mode-toggle.tsx` |
+| `ActivityViewModeToggleOption` | Type | `packages/agenda/src/activity-view-mode-toggle.tsx` |
+| `ActivityViewModeToggleProps` | Type | `packages/agenda/src/activity-view-mode-toggle.tsx` |
 | `ActivityVisibility` | Type | `packages/agenda/src/activity-helpers.ts` |
 | `AgendaActivityFormValues` | Type | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaActivityMutationPayload` | Type | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaAssociationOption` | Type | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaFilterConfig` | Type | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaIntegrationPreferences` | Type | `packages/agenda/src/activity-page-state.ts` |
+| `AgendaPageMessages` | Type | `packages/agenda/src/activity-page-state.ts` |
 | `AgendaUserLike` | Type | `packages/agenda/src/activity-page-state.ts` |
+| `AppBadge` | Type | `packages/agenda/src/activity-calendar-view.tsx` |
 | `AssociationEntityType` | Type | `packages/agenda/src/activity-helpers.ts` |
 | `AvailableActivityType` | Type | `packages/agenda/src/activity-types.ts` |
+| `defaultActivityViewModeOptions` | Type | `packages/agenda/src/activity-view-mode-toggle.tsx` |
 | `EditableActivity` | Type | `packages/agenda/src/activity-page-state.ts` |
+| `FallbackActivityType` | Type | `packages/agenda/src/activity-types.ts` |
 | `formatActivityTypeOptionValue` | Type | `packages/agenda/src/activity-helpers.ts` |
 | `formatDateInputValue` | Type | `packages/agenda/src/activity-form-time.ts` |
 | `formatTimeInputValue` | Type | `packages/agenda/src/activity-form-time.ts` |
 | `parseActivityTypeOptionValue` | Type | `packages/agenda/src/activity-helpers.ts` |
+| `ShiftTimelineAssignment` | Type | `packages/agenda/src/shift-timeline.tsx` |
+| `ShiftTimelineProps` | Type | `packages/agenda/src/shift-timeline.tsx` |
 | `UseAgendaPageStateOptions` | Type | `packages/agenda/src/activity-page-state.ts` |
 
 

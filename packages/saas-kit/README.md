@@ -56,14 +56,17 @@ Import from the root for shared UI primitives, or from a subpath for a product a
 | `@carefully-built/saas-kit/forms` | Schema/custom forms and user picker fields |
 | `@carefully-built/saas-kit/import-export` | CSV import/export helpers and sheets |
 | `@carefully-built/saas-kit/kanban` | Kanban board and pipeline helpers |
-| `@carefully-built/saas-kit/legal-ui` | Legal document renderer and default legal text |
+| `@carefully-built/saas-kit/legal-ui` | Legal document renderer and default legal text, read-to-the-end document reader with read progress, and document version list |
 | `@carefully-built/saas-kit/maps-ui` | Google Maps Places loader helpers |
 | `@carefully-built/saas-kit/notes` | Notes CRUD page and note list types |
 | `@carefully-built/saas-kit/notifications` | Notification lists, buttons, and visual metadata |
+| `@carefully-built/saas-kit/offline` | Encrypted IndexedDB store and persistent offline send queue (no framework dependency) |
+| `@carefully-built/saas-kit/offline/react` | Online status and queue hooks, sync status badge |
 | `@carefully-built/saas-kit/resource-kit` | Resource pages, entity detail shells, associated tabs, and toast helpers |
 | `@carefully-built/saas-kit/rich-text` | Rich text editor and renderer |
 | `@carefully-built/saas-kit/search` | Search and command palette modules |
 | `@carefully-built/saas-kit/settings-ui` | Settings cards and settings tab surfaces |
+| `@carefully-built/saas-kit/signature` | Signature pad with geometry-only capture and PNG/SVG export |
 | `@carefully-built/saas-kit/superadmin` | Superadmin UI, server helpers, and Next.js page factory |
 | `@carefully-built/saas-kit/theme-ui` | Theme selector components |
 | `@carefully-built/saas-kit/ui` | Direct access to the UI package barrel |
