@@ -82,6 +82,7 @@ import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
 - `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`: Radix tooltip wrappers.
 - `DisplayDate`: consistent date display for table/list values.
 - `KeyboardKeycap`, `ShortcutModifierKeycap`: small keyboard shortcut keycap UI.
+- `Checkbox`, `CheckboxCard`: accessible Radix checkbox, and a whole tappable card that is one checkbox (title, optional badge and description). See [Checkbox and CheckboxCard](#checkbox-and-checkboxcard).
 - `DeviceCodeInput`: segmented input for device codes, one-time codes and PINs, with paste, grouping (`XXX-XXX`) and masking. See [DeviceCodeInput](#devicecodeinput).
 - `EventTimeline`: read-only, append-only log of events (audit trails, histories) with a coloured square marker per row and a mono line for timestamp and detail. See [EventTimeline](#eventtimeline).
 
@@ -117,6 +118,33 @@ import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
 - `CustomTableToolbarFilter`: extension point for app-specific filters such as association pickers.
 - `FilterConfig`, `FilterOption`, `TableToolbarProps`: toolbar typing helpers.
 - Component doc: [TableToolbar](./docs/table-toolbar.md).
+
+### Checkbox and CheckboxCard
+
+```tsx
+import { Checkbox, CheckboxCard, Label } from '@carefully-built/ui';
+
+<div className="flex items-center gap-2">
+  <Checkbox id="terms" checked={accepted} onCheckedChange={(value) => setAccepted(value === true)} />
+  <Label htmlFor="terms">I accept the terms</Label>
+</div>;
+
+<CheckboxCard
+  title="Product updates"
+  description="One email a month, no more."
+  badge="Optional"
+  checked={updates}
+  onCheckedChange={setUpdates}
+/>;
+```
+
+- `Checkbox`: a Radix checkbox (`role="checkbox"`, Space toggles) with `checked`, `defaultChecked`, `onCheckedChange`, `disabled`, and `name` / `value` / `required` for forms. `checked` can also be `'indeterminate'`, drawn as a dash. It has no label of its own: pair it with a `Label` or pass `aria-label`.
+- `size`: `default` is a 16px square; `lg` is a 24px square with a 44px hit area, for touch screens.
+- Themed with the kit tokens: `--input` border, `--primary` fill and `--primary-foreground` tick when checked, the usual focus ring. `data-slot="checkbox"`, plus Radix's `data-state` (`checked`, `unchecked`, `indeterminate`) and `data-disabled` for styling through `className`.
+- `CheckboxCard`: the whole card is the checkbox, so it is one tab stop, Space toggles it and its accessible name is the title, badge and description (or `aria-label`). The square on the left is decorative. `checked` / `onCheckedChange(checked: boolean)` control it; without `checked` it keeps its own state and starts unchecked unless `defaultChecked` is set.
+- The card sets `data-checked` when checked (style it with `data-checked:` classes) and its square carries the same `data-state` / `data-disabled` as `Checkbox`.
+- `classes`: `root`, `checkbox`, `content`, `header`, `title`, `badge`, `description`. `size` picks the square as in `Checkbox`.
+- `getCheckboxBoxClassName(size)` returns the classes of the square, to draw the same box elsewhere; `getCheckboxDataState(checked)` returns its `data-state`.
 
 ### EventTimeline
 
