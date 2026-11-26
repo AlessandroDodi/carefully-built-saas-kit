@@ -113,9 +113,15 @@ export function EventTimeline<TItem extends EventTimelineItem = EventTimelineIte
   }
 
   const ordered = order === 'desc' ? [...items].reverse() : items;
+  // Spelled out rather than `dateStyle: 'short'`, which drops the century in Italian.
   const formatter = new Intl.DateTimeFormat(timestampLocales[locale], {
-    dateStyle: 'short',
-    timeStyle: 'medium',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
   });
 
   return (

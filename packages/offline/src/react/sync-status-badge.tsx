@@ -85,7 +85,7 @@ export function SyncStatusBadge({
         data-slot="sync-status-badge"
         data-status={status}
         className={cn(
-          'text-foreground inline-flex max-w-full items-center gap-2 text-xs',
+          'text-foreground inline-flex w-fit max-w-full items-center gap-2 text-xs',
           className,
           classes?.root,
         )}
@@ -106,7 +106,8 @@ export function SyncStatusBadge({
       data-slot="sync-status-badge"
       data-status={status}
       className={cn(
-        'inline-flex max-w-full items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium',
+        // w-fit: inside a flex column or a grid the pill would stretch to the full width.
+        'inline-flex w-fit max-w-full items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium',
         status === 'syncing'
           ? 'border-blue-500/30 bg-blue-500/10 text-blue-700 dark:text-blue-300'
           : 'border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300',
