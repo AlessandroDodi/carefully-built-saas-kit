@@ -560,6 +560,29 @@
         "@carefully-built/ui",
       ],
     },
+    "packages/offline": {
+      "name": "@carefully-built/offline",
+      "version": "0.1.0",
+      "devDependencies": {
+        "@carefully-built/ui": "workspace:*",
+        "fake-indexeddb": "^6.0.0",
+        "lucide-react": "^1.8.0",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+      },
+      "peerDependencies": {
+        "@carefully-built/ui": ">=0.1.24",
+        "lucide-react": ">=0.400.0 || >=1.0.0",
+        "react": ">=18.2.0 || >=19.0.0",
+        "react-dom": ">=18.2.0 || >=19.0.0",
+      },
+      "optionalPeers": [
+        "@carefully-built/ui",
+        "lucide-react",
+        "react",
+        "react-dom",
+      ],
+    },
     "packages/organizations": {
       "name": "@carefully-built/organizations",
       "version": "0.1.0",
@@ -1001,6 +1024,8 @@
     "@carefully-built/notes": ["@carefully-built/notes@workspace:packages/notes"],
 
     "@carefully-built/notifications": ["@carefully-built/notifications@workspace:packages/notifications"],
+
+    "@carefully-built/offline": ["@carefully-built/offline@workspace:packages/offline"],
 
     "@carefully-built/organizations": ["@carefully-built/organizations@workspace:packages/organizations"],
 
@@ -1655,6 +1680,8 @@
     "eventemitter3": ["eventemitter3@4.0.7", "", {}, "sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw=="],
 
     "events": ["events@3.3.0", "", {}, "sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q=="],
+
+    "fake-indexeddb": ["fake-indexeddb@6.2.8", "", {}, "sha512-mpVW/HLUqwKXJ6F/s0hMgdK1eQfM4ncTHDioNGHWL0WKV3VcZCoZq1NKgboBbAge07aRCO7L48yziKssL59XEQ=="],
 
     "fast-equals": ["fast-equals@5.4.0", "", {}, "sha512-jt2DW/aNFNwke7AUd+Z+e6pz39KO5rzdbbFCg2sGafS4mk13MI7Z8O5z9cADNn5lhGODIgLwug6TZO2ctf7kcw=="],
 
