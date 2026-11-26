@@ -10,6 +10,7 @@ export * from './primitives/dialog';
 export * from './primitives/dropdown-menu';
 export * from './primitives/drawer';
 export * from './primitives/display-date';
+export * from './primitives/event-timeline';
 export * from './primitives/field-detail-row';
 export * from './primitives/file-dropzone';
 export * from './primitives/help-info-button';

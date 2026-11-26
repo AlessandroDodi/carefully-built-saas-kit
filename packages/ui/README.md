@@ -82,6 +82,7 @@ import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
 - `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`: Radix tooltip wrappers.
 - `DisplayDate`: consistent date display for table/list values.
 - `KeyboardKeycap`, `ShortcutModifierKeycap`: small keyboard shortcut keycap UI.
+- `EventTimeline`: read-only, append-only log of events (audit trails, histories) with a coloured square marker per row and a mono line for timestamp and detail. See [EventTimeline](#eventtimeline).
 
 ### Overlays
 
@@ -115,6 +116,28 @@ import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
 - `CustomTableToolbarFilter`: extension point for app-specific filters such as association pickers.
 - `FilterConfig`, `FilterOption`, `TableToolbarProps`: toolbar typing helpers.
 - Component doc: [TableToolbar](./docs/table-toolbar.md).
+
+### EventTimeline
+
+```tsx
+import { EventTimeline } from '@carefully-built/ui';
+
+<EventTimeline
+  order="desc"
+  items={[
+    { id: '1', title: 'Document opened', timestamp: openedAt },
+    { id: '2', title: 'Signed', timestamp: signedAt, tone: 'success', meta: 'Tablet 2' },
+    { id: '3', title: 'Revoked', timestamp: '12/03/2026 09:41', tone: 'danger' },
+  ]}
+/>;
+```
+
+- `items`: `{ id, title, meta?, timestamp?, tone?, icon? }[]`, in the order they were appended. `order="desc"` shows the newest first; the component never sorts by timestamp.
+- `timestamp`: a `Date` or epoch milliseconds is formatted in the kit locale (override with `formatTimestamp`); a string is shown as given.
+- `tone`: `neutral` (default), `success`, `danger`, `warning`, `info`. It colours the square marker, or the `icon` when one is passed.
+- `renderMeta(item)` replaces the default rendering of `item.meta`; `emptyState` replaces the default "No events yet" text.
+- `classes`: `root`, `item`, `marker`, `content`, `title`, `details`, `timestamp`, `meta`, `empty`.
+- There are no edit or delete affordances by design: use it for logs that must not look editable.
 
 ### Component Docs
 
