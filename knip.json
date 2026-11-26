@@ -32,6 +32,14 @@
       "entry": ["package.json"],
       "project": ["src/**/*.{ts,tsx}"]
     },
+    "packages/signature": {
+      "entry": ["package.json", "tests/**/*.test.ts"],
+      "project": ["src/**/*.{ts,tsx}", "tests/**/*.ts"]
+    },
+    "packages/offline": {
+      "entry": ["package.json", "tests/**/*.test.ts"],
+      "project": ["src/**/*.{ts,tsx}", "tests/**/*.ts"]
+    },
     "packages/cli": {
       "entry": ["package.json"],
       "project": ["src/**/*.ts"]
