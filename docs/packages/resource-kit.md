@@ -26,23 +26,27 @@ import { EntityAssociatedEmptyTab } from '@carefully-built/resource-kit';
 Components in this package:
 
 - `EntityAssociatedEmptyTab`: import from `@carefully-built/resource-kit`.
+- `EntityAssociatedResourcePanel`: import from `@carefully-built/resource-kit`.
 - `EntityAssociatedTabPanel`: import from `@carefully-built/resource-kit`.
 - `EntityDetailLoadingSidebar`: import from `@carefully-built/resource-kit`.
+- `EntityDetailResourceShell`: import from `@carefully-built/resource-kit`.
 - `EntityDetailShell`: import from `@carefully-built/resource-kit`.
 
 ## Hook Usage
 
 ```tsx
-import { useResourceSheetState } from '@carefully-built/resource-kit';
+import { useEntityAssociationDefaults } from '@carefully-built/resource-kit';
 
 export function Example() {
-  const state = useResourceSheetState({} as never);
+  const state = useEntityAssociationDefaults({} as never);
   return null;
 }
 ```
 
 Hooks in this package:
 
+- `useEntityAssociationDefaults`: keep app-specific data fetching and mutations in the consuming app.
+- `useEntityAssociationOptions`: keep app-specific data fetching and mutations in the consuming app.
 - `useResourceSheetState`: keep app-specific data fetching and mutations in the consuming app.
 - `useResourceSheetState`: keep app-specific data fetching and mutations in the consuming app.
 
@@ -67,6 +71,7 @@ Helpers in this package:
 - `EntityAssociatedEmptyTab`
 - `EntityAssociatedTabPanel`
 - `EntityDetailLoadingSidebar`
+- `EntityDetailResourceShell`
 - `EntityDetailShell`
 - `filterAssociatedActivities`
 - `filterAssociatedActivities`
@@ -104,11 +109,16 @@ Helpers in this package:
 - `createCurrentEntityAssociationRecord`
 - `createCurrentEntityAssociationRecord`
 - `EntityAssociatedEmptyTabProps`
+- `EntityAssociatedResourcePanelProps`
+- `EntityAssociatedResourceRenderContext`
 - `EntityAssociatedTabPanelBaseProps`
 - `EntityAssociatedTabPanelProps`
+- `EntityAssociationDefaults`
 - `EntityAssociationPayload`
 - `EntityAssociationRecord`
+- `EntityAssociationTarget`
 - `EntityDetailLoadingField`
+- `EntityDetailResourceShellProps`
 - `EntityDetailTab`
 - `EntityDetailTabOption`
 - `EntityOpportunityListItem`
@@ -119,6 +129,7 @@ Helpers in this package:
 - `ResourceId`
 - `ResourceSheetState`
 - `SupportedAssociationEntityType`
+- `UseEntityAssociationOptionsParams`
 - `UseResourceSheetStateOptions`
 
 
@@ -127,8 +138,10 @@ Helpers in this package:
 | Export | Kind | Source |
 |---|---|---|
 | `EntityAssociatedEmptyTab` | Component | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
+| `EntityAssociatedResourcePanel` | Component | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `EntityAssociatedTabPanel` | Component | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityDetailLoadingSidebar` | Component | `packages/resource-kit/src/entity-detail-loading-sidebar.tsx` |
+| `EntityDetailResourceShell` | Component | `packages/resource-kit/src/entity-detail-shell.tsx` |
 | `EntityDetailShell` | Component | `packages/resource-kit/src/entity-detail-shell.tsx` |
 | `captureApiError` | Helper | `packages/resource-kit/src/error-handling.ts` |
 | `captureApiError` | Helper | `packages/resource-kit/src/index.ts` |
@@ -143,6 +156,7 @@ Helpers in this package:
 | `EntityAssociatedEmptyTab` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityAssociatedTabPanel` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityDetailLoadingSidebar` | Helper | `packages/resource-kit/src/index.ts` |
+| `EntityDetailResourceShell` | Helper | `packages/resource-kit/src/index.ts` |
 | `EntityDetailShell` | Helper | `packages/resource-kit/src/index.ts` |
 | `filterAssociatedActivities` | Helper | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `filterAssociatedActivities` | Helper | `packages/resource-kit/src/index.ts` |
@@ -170,6 +184,8 @@ Helpers in this package:
 | `withCurrentEntityAssociationOption` | Helper | `packages/resource-kit/src/index.ts` |
 | `withErrorHandler` | Helper | `packages/resource-kit/src/error-handling.ts` |
 | `withErrorHandler` | Helper | `packages/resource-kit/src/index.ts` |
+| `useEntityAssociationDefaults` | Hook | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
+| `useEntityAssociationOptions` | Hook | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `useResourceSheetState` | Hook | `packages/resource-kit/src/index.ts` |
 | `useResourceSheetState` | Hook | `packages/resource-kit/src/use-resource-sheet-state.ts` |
 | `buildEntityAssociationOptions` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
@@ -179,11 +195,16 @@ Helpers in this package:
 | `createCurrentEntityAssociationRecord` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `createCurrentEntityAssociationRecord` | Type | `packages/resource-kit/src/index.ts` |
 | `EntityAssociatedEmptyTabProps` | Type | `packages/resource-kit/src/entity-associated-empty-tab.tsx` |
+| `EntityAssociatedResourcePanelProps` | Type | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
+| `EntityAssociatedResourceRenderContext` | Type | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `EntityAssociatedTabPanelBaseProps` | Type | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
 | `EntityAssociatedTabPanelProps` | Type | `packages/resource-kit/src/entity-associated-tab-panel.tsx` |
+| `EntityAssociationDefaults` | Type | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `EntityAssociationPayload` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `EntityAssociationRecord` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
+| `EntityAssociationTarget` | Type | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `EntityDetailLoadingField` | Type | `packages/resource-kit/src/entity-detail-loading-sidebar.tsx` |
+| `EntityDetailResourceShellProps` | Type | `packages/resource-kit/src/entity-detail-shell.tsx` |
 | `EntityDetailTab` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
 | `EntityDetailTabOption` | Type | `packages/resource-kit/src/entity-detail-shell.tsx` |
 | `EntityOpportunityListItem` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
@@ -194,6 +215,7 @@ Helpers in this package:
 | `ResourceId` | Type | `packages/resource-kit/src/use-resource-sheet-state.ts` |
 | `ResourceSheetState` | Type | `packages/resource-kit/src/use-resource-sheet-state.ts` |
 | `SupportedAssociationEntityType` | Type | `packages/resource-kit/src/entity-detail-helpers.ts` |
+| `UseEntityAssociationOptionsParams` | Type | `packages/resource-kit/src/entity-associated-resource-panel.tsx` |
 | `UseResourceSheetStateOptions` | Type | `packages/resource-kit/src/use-resource-sheet-state.ts` |
 
 

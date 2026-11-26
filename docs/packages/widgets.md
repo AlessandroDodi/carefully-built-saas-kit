@@ -27,6 +27,10 @@ Components in this package:
 
 - `DashboardWidget`: import from `@carefully-built/widgets`.
 - `EntityInfoWidget`: import from `@carefully-built/widgets`.
+- `GrowBar`: import from `@carefully-built/widgets`.
+- `LockedContent`: import from `@carefully-built/widgets`.
+- `PeriodSelect`: import from `@carefully-built/widgets`.
+- `Reveal`: import from `@carefully-built/widgets`.
 
 ## Helper Usage
 
@@ -38,11 +42,26 @@ Helpers in this package:
 
 - `DashboardWidget`
 - `EntityInfoWidget`
+- `GrowBar`
+- `isPeriodPreset`
+- `isPeriodPreset`
+- `LockedContent`
+- `PERIOD_PRESETS`
+- `PERIOD_PRESETS`
+- `PeriodSelect`
+- `resolvePeriodRange`
+- `resolvePeriodRange`
+- `Reveal`
 
 ## Types And Schemas
 
 - `DashboardWidgetProps`
 - `EntityInfoWidgetProps`
+- `GrowBarProps`
+- `LockedContentProps`
+- `PeriodPreset`
+- `PeriodRange`
+- `RevealProps`
 - `WidgetEmptyState`
 - `WidgetEmptyState`
 - `WidgetEmptyStateAction`
@@ -56,10 +75,29 @@ Helpers in this package:
 |---|---|---|
 | `DashboardWidget` | Component | `packages/widgets/src/dashboard-widget.tsx` |
 | `EntityInfoWidget` | Component | `packages/widgets/src/entity-info-widget.tsx` |
+| `GrowBar` | Component | `packages/widgets/src/reveal.tsx` |
+| `LockedContent` | Component | `packages/widgets/src/locked-content.tsx` |
+| `PeriodSelect` | Component | `packages/widgets/src/period-select.tsx` |
+| `Reveal` | Component | `packages/widgets/src/reveal.tsx` |
 | `DashboardWidget` | Helper | `packages/widgets/src/index.ts` |
 | `EntityInfoWidget` | Helper | `packages/widgets/src/index.ts` |
+| `GrowBar` | Helper | `packages/widgets/src/index.ts` |
+| `isPeriodPreset` | Helper | `packages/widgets/src/index.ts` |
+| `isPeriodPreset` | Helper | `packages/widgets/src/period-select.tsx` |
+| `LockedContent` | Helper | `packages/widgets/src/index.ts` |
+| `PERIOD_PRESETS` | Helper | `packages/widgets/src/index.ts` |
+| `PERIOD_PRESETS` | Helper | `packages/widgets/src/period-select.tsx` |
+| `PeriodSelect` | Helper | `packages/widgets/src/index.ts` |
+| `resolvePeriodRange` | Helper | `packages/widgets/src/index.ts` |
+| `resolvePeriodRange` | Helper | `packages/widgets/src/period-select.tsx` |
+| `Reveal` | Helper | `packages/widgets/src/index.ts` |
 | `DashboardWidgetProps` | Type | `packages/widgets/src/dashboard-widget.tsx` |
 | `EntityInfoWidgetProps` | Type | `packages/widgets/src/entity-info-widget.tsx` |
+| `GrowBarProps` | Type | `packages/widgets/src/reveal.tsx` |
+| `LockedContentProps` | Type | `packages/widgets/src/locked-content.tsx` |
+| `PeriodPreset` | Type | `packages/widgets/src/period-select.tsx` |
+| `PeriodRange` | Type | `packages/widgets/src/period-select.tsx` |
+| `RevealProps` | Type | `packages/widgets/src/reveal.tsx` |
 | `WidgetEmptyState` | Type | `packages/widgets/src/index.ts` |
 | `WidgetEmptyState` | Type | `packages/widgets/src/widget-empty-state.tsx` |
 | `WidgetEmptyStateAction` | Type | `packages/widgets/src/widget-empty-state.tsx` |

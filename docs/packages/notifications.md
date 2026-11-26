@@ -40,6 +40,7 @@ Helpers in this package:
 - `NotificationCenterButton`
 - `NotificationCenterSheet`
 - `NotificationList`
+- `notificationTexts`
 
 ## Types And Schemas
 
@@ -66,6 +67,7 @@ Helpers in this package:
 | `NotificationCenterButton` | Helper | `packages/notifications/src/index.ts` |
 | `NotificationCenterSheet` | Helper | `packages/notifications/src/index.ts` |
 | `NotificationList` | Helper | `packages/notifications/src/index.ts` |
+| `notificationTexts` | Helper | `packages/notifications/src/notification-texts.ts` |
 | `NotificationCenterButtonProps` | Type | `packages/notifications/src/notification-center-button.tsx` |
 | `NotificationCenterSheetProps` | Type | `packages/notifications/src/notification-center-sheet.tsx` |
 | `NotificationListItem` | Type | `packages/notifications/src/index.ts` |

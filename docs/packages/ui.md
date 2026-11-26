@@ -64,11 +64,13 @@ Components in this package:
 - `DropdownMenuSeparator`: import from `@carefully-built/ui`.
 - `DropdownMenuTrigger`: import from `@carefully-built/ui`.
 - `ErrorCode`: import from `@carefully-built/ui`.
+- `EventTimeline`: import from `@carefully-built/ui`.
 - `FieldDetailRow`: import from `@carefully-built/ui`.
 - `FileDropzone`: import from `@carefully-built/ui`.
 - `FilterDropdown`: import from `@carefully-built/ui`.
 - `HelpInfoButton`: import from `@carefully-built/ui`.
 - `KeyboardKeycap`: import from `@carefully-built/ui`.
+- `KitLocaleProvider`: import from `@carefully-built/ui`.
 - `Label`: import from `@carefully-built/ui`.
 - `MobileSheetLayout`: import from `@carefully-built/ui`.
 - `MobileView`: import from `@carefully-built/ui`.
@@ -118,6 +120,7 @@ Components in this package:
 - `TooltipProvider`: import from `@carefully-built/ui`.
 - `TooltipTrigger`: import from `@carefully-built/ui`.
 - `TruncatedContent`: import from `@carefully-built/ui`.
+- `UnsavedChangesDialog`: import from `@carefully-built/ui`.
 - `UserPicker`: import from `@carefully-built/ui`.
 
 ## Hook Usage
@@ -136,9 +139,13 @@ Hooks in this package:
 - `useDesktopConfirmShortcut`: keep app-specific data fetching and mutations in the consuming app.
 - `useDesktopShortcutModifierLabel`: keep app-specific data fetching and mutations in the consuming app.
 - `useIsMobile`: keep app-specific data fetching and mutations in the consuming app.
+- `useKitLocale`: keep app-specific data fetching and mutations in the consuming app.
+- `useKitTexts`: keep app-specific data fetching and mutations in the consuming app.
 - `useMediaQuery`: keep app-specific data fetching and mutations in the consuming app.
 - `useTableSorting`: keep app-specific data fetching and mutations in the consuming app.
 - `useTableSorting`: keep app-specific data fetching and mutations in the consuming app.
+- `useUnsavedCloseGuard`: keep app-specific data fetching and mutations in the consuming app.
+- `useUnsavedRouteExitGuard`: keep app-specific data fetching and mutations in the consuming app.
 
 ## Helper Usage
 
@@ -149,6 +156,8 @@ import { AUTO_SEARCHABLE_SELECT_THRESHOLD } from '@carefully-built/ui';
 Helpers in this package:
 
 - `AUTO_SEARCHABLE_SELECT_THRESHOLD`
+- `buildAllFilterOptionLabel`
+- `buildAllFilterOptionLabel`
 - `buildSearchText`
 - `buildUserInitials`
 - `buttonVariants`
@@ -158,12 +167,17 @@ Helpers in this package:
 - `cn`
 - `createErrorReference`
 - `createErrorReference`
+- `DEFAULT_UNSAVED_CHANGES_DIALOG_COPY`
+- `defineKitTexts`
 - `ErrorCode`
+- `errorPageTexts`
 - `filterAndRankBySearch`
+- `filterDeviceCodeCharacters`
 - `FilterDropdown`
 - `filterSelectableUsers`
 - `filterUsersBySearch`
 - `formatAbsoluteDate`
+- `formatDeviceCode`
 - `formatDisplayDate`
 - `formatSelectedUserSummary`
 - `formatUserDisplayName`
@@ -177,31 +191,55 @@ Helpers in this package:
 - `getTruncatedContentAlignmentClass`
 - `isAllowedConfirmShortcutEvent`
 - `isSearchableSelectPointerInside`
+- `isUnsavedChangesGuardDirty`
+- `normalizeDeviceCode`
+- `pasteDeviceCode`
 - `rankBySearch`
+- `resolveDeviceCodeGroups`
 - `resolveErrorPageContent`
 - `resolveErrorPageContent`
+- `resolveKitTexts`
+- `resolveOverlayCloseLabel`
+- `resolveResponsiveSheetLabels`
 - `resolveSearchableSelectDropdownPosition`
+- `resolveTableToolbarLabels`
+- `resolveUnsavedChangesDialogCopy`
+- `responsiveSheetTexts`
 - `SaasErrorPage`
 - `SaasNotFoundPage`
 - `scoreFuzzyMatch`
+- `shouldConfirmUnsavedChangesClose`
 - `shouldRenderTooltipTrigger`
 - `SmartTable`
 - `SmartTableActions`
+- `splitDeviceCode`
 - `TableToolbar`
+- `tableToolbarControlTexts`
 - `tabsListVariants`
 - `toggleUserSelection`
 - `TruncatedContent`
+- `unsavedChangesDialogTexts`
 
 ## Types And Schemas
 
 - `ActionHandlers`
+- `ActionLabels`
 - `ActionType`
 - `ChipSize`
 - `CollectionEmptyState`
 - `Column`
 - `ColumnAlign`
+- `ConfirmCloseWhenDirty`
 - `CustomTableToolbarFilter`
+- `DateDisplayFormatOptions`
+- `DateDisplayLabels`
 - `DateDisplayValue`
+- `DeviceCodeCharset`
+- `DeviceCodeFormat`
+- `DeviceCodeInput`
+- `DeviceCodeInputClassNames`
+- `DeviceCodeInputProps`
+- `DeviceCodeSelection`
 - `DisplayDateProps`
 - `DropdownMenuCheckboxItem`
 - `DropdownMenuItem`
@@ -211,16 +249,26 @@ Helpers in this package:
 - `ErrorCodeProps`
 - `ErrorPageContent`
 - `ErrorPageKind`
+- `EventTimelineClassNames`
+- `EventTimelineItem`
+- `EventTimelineProps`
+- `EventTimelineTimestamp`
+- `EventTimelineTone`
 - `FieldDetailRowProps`
 - `FilterConfig`
 - `FilterOption`
 - `getColumnValue`
+- `getDeviceCodeInputMode`
 - `getNextSortState`
 - `HelpInfoButtonProps`
 - `InitialEmptyState`
 - `InitialEmptyState`
 - `InitialEmptyStateProps`
 - `Input`
+- `KitLocale`
+- `KitLocaleProviderProps`
+- `KitTextOverrides`
+- `KitTexts`
 - `NoResultsState`
 - `NoResultsState`
 - `NoResultsStateProps`
@@ -233,6 +281,8 @@ Helpers in this package:
 - `ResolveCollectionEmptyStateOptions`
 - `ResolveErrorPageContentOptions`
 - `ResponsiveSheetClassNames`
+- `ResponsiveSheetLabels`
+- `ResponsiveSheetLabelsInput`
 - `ResponsiveSheetProps`
 - `SaasErrorPageClassNames`
 - `SaasErrorPageProps`
@@ -252,10 +302,20 @@ Helpers in this package:
 - `SortDirection`
 - `SortState`
 - `SortValue`
+- `TableToolbarControlTexts`
+- `TableToolbarLabels`
+- `TableToolbarLabelsInput`
 - `TableToolbarProps`
+- `UnsavedChangesDialogCopy`
+- `UnsavedChangesDialogProps`
+- `UnsavedChangesGuard`
+- `UnsavedCloseGuardController`
+- `UnsavedRouteExitGuard`
 - `UserPickerCopy`
 - `UserPickerOption`
 - `UserPickerProps`
+- `UseUnsavedCloseGuardOptions`
+- `UseUnsavedRouteExitGuardOptions`
 
 
 ## API Catalog
@@ -301,11 +361,13 @@ Helpers in this package:
 | `DropdownMenuSeparator` | Component | `packages/ui/src/primitives/dropdown-menu.tsx` |
 | `DropdownMenuTrigger` | Component | `packages/ui/src/primitives/dropdown-menu.tsx` |
 | `ErrorCode` | Component | `packages/ui/src/error-page/error-code.tsx` |
+| `EventTimeline` | Component | `packages/ui/src/primitives/event-timeline.tsx` |
 | `FieldDetailRow` | Component | `packages/ui/src/primitives/field-detail-row.tsx` |
 | `FileDropzone` | Component | `packages/ui/src/primitives/file-dropzone.tsx` |
 | `FilterDropdown` | Component | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `HelpInfoButton` | Component | `packages/ui/src/primitives/help-info-button.tsx` |
 | `KeyboardKeycap` | Component | `packages/ui/src/primitives/keyboard-shortcut-hint.tsx` |
+| `KitLocaleProvider` | Component | `packages/ui/src/locale/kit-locale.tsx` |
 | `Label` | Component | `packages/ui/src/primitives/label.tsx` |
 | `MobileSheetLayout` | Component | `packages/ui/src/overlays/responsive-sheet.layouts.tsx` |
 | `MobileView` | Component | `packages/ui/src/smart-table/MobileView.tsx` |
@@ -355,8 +417,11 @@ Helpers in this package:
 | `TooltipProvider` | Component | `packages/ui/src/primitives/tooltip.tsx` |
 | `TooltipTrigger` | Component | `packages/ui/src/primitives/tooltip.tsx` |
 | `TruncatedContent` | Component | `packages/ui/src/smart-table/TruncatedContent.tsx` |
+| `UnsavedChangesDialog` | Component | `packages/ui/src/overlays/unsaved-changes-dialog.tsx` |
 | `UserPicker` | Component | `packages/ui/src/primitives/user-picker.tsx` |
 | `AUTO_SEARCHABLE_SELECT_THRESHOLD` | Helper | `packages/ui/src/search/searchable-select.tsx` |
+| `buildAllFilterOptionLabel` | Helper | `packages/ui/src/table-toolbar/index.ts` |
+| `buildAllFilterOptionLabel` | Helper | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
 | `buildSearchText` | Helper | `packages/ui/src/utils/search.ts` |
 | `buildUserInitials` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `buttonVariants` | Helper | `packages/ui/src/primitives/button.tsx` |
@@ -366,12 +431,17 @@ Helpers in this package:
 | `cn` | Helper | `packages/ui/src/utils/cn.ts` |
 | `createErrorReference` | Helper | `packages/ui/src/error-page/index.ts` |
 | `createErrorReference` | Helper | `packages/ui/src/error-page/posthog-error-capture.ts` |
+| `DEFAULT_UNSAVED_CHANGES_DIALOG_COPY` | Helper | `packages/ui/src/overlays/unsaved-changes.ts` |
+| `defineKitTexts` | Helper | `packages/ui/src/locale/kit-texts.ts` |
 | `ErrorCode` | Helper | `packages/ui/src/error-page/index.ts` |
+| `errorPageTexts` | Helper | `packages/ui/src/error-page/error-page-content.ts` |
 | `filterAndRankBySearch` | Helper | `packages/ui/src/utils/search.ts` |
+| `filterDeviceCodeCharacters` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `FilterDropdown` | Helper | `packages/ui/src/table-toolbar/index.ts` |
 | `filterSelectableUsers` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `filterUsersBySearch` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `formatAbsoluteDate` | Helper | `packages/ui/src/utils/date-display.ts` |
+| `formatDeviceCode` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `formatDisplayDate` | Helper | `packages/ui/src/utils/date-display.ts` |
 | `formatSelectedUserSummary` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `formatUserDisplayName` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
@@ -385,34 +455,62 @@ Helpers in this package:
 | `getTruncatedContentAlignmentClass` | Helper | `packages/ui/src/smart-table/truncated-content.utils.ts` |
 | `isAllowedConfirmShortcutEvent` | Helper | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `isSearchableSelectPointerInside` | Helper | `packages/ui/src/search/searchable-select.tsx` |
+| `isUnsavedChangesGuardDirty` | Helper | `packages/ui/src/overlays/unsaved-changes.ts` |
+| `normalizeDeviceCode` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
+| `pasteDeviceCode` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `rankBySearch` | Helper | `packages/ui/src/utils/search.ts` |
+| `resolveDeviceCodeGroups` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `resolveErrorPageContent` | Helper | `packages/ui/src/error-page/error-page-content.ts` |
 | `resolveErrorPageContent` | Helper | `packages/ui/src/error-page/index.ts` |
+| `resolveKitTexts` | Helper | `packages/ui/src/locale/kit-texts.ts` |
+| `resolveOverlayCloseLabel` | Helper | `packages/ui/src/overlays/responsive-sheet.labels.ts` |
+| `resolveResponsiveSheetLabels` | Helper | `packages/ui/src/overlays/responsive-sheet.labels.ts` |
 | `resolveSearchableSelectDropdownPosition` | Helper | `packages/ui/src/search/searchable-select-position.ts` |
+| `resolveTableToolbarLabels` | Helper | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
+| `resolveUnsavedChangesDialogCopy` | Helper | `packages/ui/src/overlays/unsaved-changes.ts` |
+| `responsiveSheetTexts` | Helper | `packages/ui/src/overlays/responsive-sheet.labels.ts` |
 | `SaasErrorPage` | Helper | `packages/ui/src/error-page/index.ts` |
 | `SaasNotFoundPage` | Helper | `packages/ui/src/error-page/index.ts` |
 | `scoreFuzzyMatch` | Helper | `packages/ui/src/utils/search.ts` |
+| `shouldConfirmUnsavedChangesClose` | Helper | `packages/ui/src/overlays/unsaved-changes.ts` |
 | `shouldRenderTooltipTrigger` | Helper | `packages/ui/src/smart-table/truncated-content.utils.ts` |
 | `SmartTable` | Helper | `packages/ui/src/smart-table/index.ts` |
 | `SmartTableActions` | Helper | `packages/ui/src/smart-table/index.ts` |
+| `splitDeviceCode` | Helper | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `TableToolbar` | Helper | `packages/ui/src/table-toolbar/index.ts` |
+| `tableToolbarControlTexts` | Helper | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
 | `tabsListVariants` | Helper | `packages/ui/src/primitives/tabs.tsx` |
 | `toggleUserSelection` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `TruncatedContent` | Helper | `packages/ui/src/smart-table/index.ts` |
+| `unsavedChangesDialogTexts` | Helper | `packages/ui/src/overlays/unsaved-changes.ts` |
 | `useDesktopConfirmShortcut` | Hook | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `useDesktopShortcutModifierLabel` | Hook | `packages/ui/src/overlays/responsive-sheet.shortcuts.ts` |
 | `useIsMobile` | Hook | `packages/ui/src/utils/use-media-query.ts` |
+| `useKitLocale` | Hook | `packages/ui/src/locale/kit-locale.tsx` |
+| `useKitTexts` | Hook | `packages/ui/src/locale/kit-texts.ts` |
 | `useMediaQuery` | Hook | `packages/ui/src/utils/use-media-query.ts` |
 | `useTableSorting` | Hook | `packages/ui/src/smart-table/index.ts` |
 | `useTableSorting` | Hook | `packages/ui/src/smart-table/sorting.ts` |
+| `useUnsavedCloseGuard` | Hook | `packages/ui/src/overlays/use-unsaved-close-guard.ts` |
+| `useUnsavedRouteExitGuard` | Hook | `packages/ui/src/overlays/use-unsaved-route-exit-guard.ts` |
 | `ActionHandlers` | Type | `packages/ui/src/smart-table/types.ts` |
+| `ActionLabels` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ActionType` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ChipSize` | Type | `packages/ui/src/primitives/chip-utils.ts` |
 | `CollectionEmptyState` | Type | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `Column` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ColumnAlign` | Type | `packages/ui/src/smart-table/types.ts` |
+| `ConfirmCloseWhenDirty` | Type | `packages/ui/src/overlays/unsaved-changes.ts` |
 | `CustomTableToolbarFilter` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
+| `DateDisplayFormatOptions` | Type | `packages/ui/src/utils/date-display.ts` |
+| `DateDisplayLabels` | Type | `packages/ui/src/utils/date-display.ts` |
 | `DateDisplayValue` | Type | `packages/ui/src/utils/date-display.ts` |
+| `DeviceCodeCharset` | Type | `packages/ui/src/primitives/device-code-input.utils.ts` |
+| `DeviceCodeFormat` | Type | `packages/ui/src/primitives/device-code-input.utils.ts` |
+| `DeviceCodeInput` | Type | `packages/ui/src/primitives/device-code-input.tsx` |
+| `DeviceCodeInputClassNames` | Type | `packages/ui/src/primitives/device-code-input.tsx` |
+| `DeviceCodeInputProps` | Type | `packages/ui/src/primitives/device-code-input.tsx` |
+| `DeviceCodeSelection` | Type | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `DisplayDateProps` | Type | `packages/ui/src/primitives/display-date.tsx` |
 | `DropdownMenuCheckboxItem` | Type | `packages/ui/src/primitives/dropdown-menu.tsx` |
 | `DropdownMenuItem` | Type | `packages/ui/src/primitives/dropdown-menu.tsx` |
@@ -422,16 +520,26 @@ Helpers in this package:
 | `ErrorCodeProps` | Type | `packages/ui/src/error-page/error-code.tsx` |
 | `ErrorPageContent` | Type | `packages/ui/src/error-page/error-page-content.ts` |
 | `ErrorPageKind` | Type | `packages/ui/src/error-page/error-page-content.ts` |
+| `EventTimelineClassNames` | Type | `packages/ui/src/primitives/event-timeline.tsx` |
+| `EventTimelineItem` | Type | `packages/ui/src/primitives/event-timeline.tsx` |
+| `EventTimelineProps` | Type | `packages/ui/src/primitives/event-timeline.tsx` |
+| `EventTimelineTimestamp` | Type | `packages/ui/src/primitives/event-timeline.tsx` |
+| `EventTimelineTone` | Type | `packages/ui/src/primitives/event-timeline.tsx` |
 | `FieldDetailRowProps` | Type | `packages/ui/src/primitives/field-detail-row.tsx` |
 | `FilterConfig` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `FilterOption` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `getColumnValue` | Type | `packages/ui/src/smart-table/utils.ts` |
+| `getDeviceCodeInputMode` | Type | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `getNextSortState` | Type | `packages/ui/src/smart-table/sorting.ts` |
 | `HelpInfoButtonProps` | Type | `packages/ui/src/primitives/help-info-button.tsx` |
 | `InitialEmptyState` | Type | `packages/ui/src/empty-state/index.ts` |
 | `InitialEmptyState` | Type | `packages/ui/src/empty-state/initial-empty-state.tsx` |
 | `InitialEmptyStateProps` | Type | `packages/ui/src/empty-state/initial-empty-state.tsx` |
 | `Input` | Type | `packages/ui/src/primitives/input.tsx` |
+| `KitLocale` | Type | `packages/ui/src/locale/kit-locale.tsx` |
+| `KitLocaleProviderProps` | Type | `packages/ui/src/locale/kit-locale.tsx` |
+| `KitTextOverrides` | Type | `packages/ui/src/locale/kit-texts.ts` |
+| `KitTexts` | Type | `packages/ui/src/locale/kit-texts.ts` |
 | `NoResultsState` | Type | `packages/ui/src/empty-state/index.ts` |
 | `NoResultsState` | Type | `packages/ui/src/empty-state/no-results-state.tsx` |
 | `NoResultsStateProps` | Type | `packages/ui/src/empty-state/no-results-state.tsx` |
@@ -444,6 +552,8 @@ Helpers in this package:
 | `ResolveCollectionEmptyStateOptions` | Type | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `ResolveErrorPageContentOptions` | Type | `packages/ui/src/error-page/error-page-content.ts` |
 | `ResponsiveSheetClassNames` | Type | `packages/ui/src/overlays/responsive-sheet.tsx` |
+| `ResponsiveSheetLabels` | Type | `packages/ui/src/overlays/responsive-sheet.labels.ts` |
+| `ResponsiveSheetLabelsInput` | Type | `packages/ui/src/overlays/responsive-sheet.labels.ts` |
 | `ResponsiveSheetProps` | Type | `packages/ui/src/overlays/responsive-sheet.tsx` |
 | `SaasErrorPageClassNames` | Type | `packages/ui/src/error-page/saas-error-page.tsx` |
 | `SaasErrorPageProps` | Type | `packages/ui/src/error-page/saas-error-page.tsx` |
@@ -463,10 +573,20 @@ Helpers in this package:
 | `SortDirection` | Type | `packages/ui/src/smart-table/types.ts` |
 | `SortState` | Type | `packages/ui/src/smart-table/types.ts` |
 | `SortValue` | Type | `packages/ui/src/smart-table/types.ts` |
+| `TableToolbarControlTexts` | Type | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
+| `TableToolbarLabels` | Type | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
+| `TableToolbarLabelsInput` | Type | `packages/ui/src/table-toolbar/table-toolbar.labels.ts` |
 | `TableToolbarProps` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
+| `UnsavedChangesDialogCopy` | Type | `packages/ui/src/overlays/unsaved-changes.ts` |
+| `UnsavedChangesDialogProps` | Type | `packages/ui/src/overlays/unsaved-changes-dialog.tsx` |
+| `UnsavedChangesGuard` | Type | `packages/ui/src/overlays/unsaved-changes.ts` |
+| `UnsavedCloseGuardController` | Type | `packages/ui/src/overlays/use-unsaved-close-guard.ts` |
+| `UnsavedRouteExitGuard` | Type | `packages/ui/src/overlays/use-unsaved-route-exit-guard.ts` |
 | `UserPickerCopy` | Type | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `UserPickerOption` | Type | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `UserPickerProps` | Type | `packages/ui/src/primitives/user-picker.tsx` |
+| `UseUnsavedCloseGuardOptions` | Type | `packages/ui/src/overlays/use-unsaved-close-guard.ts` |
+| `UseUnsavedRouteExitGuardOptions` | Type | `packages/ui/src/overlays/use-unsaved-route-exit-guard.ts` |
 
 
 ## Consumer Responsibilities

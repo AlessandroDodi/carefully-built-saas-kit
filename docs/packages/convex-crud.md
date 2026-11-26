@@ -30,9 +30,14 @@ Helpers in this package:
 - `createTagMutationSet`
 - `createTimestampFields`
 - `getActiveOrgRecord`
+- `hasAssignedUsersOverride`
 - `insertWithAudit`
+- `listActiveOrgRecords`
+- `listOrgRecords`
 - `normalizeTagName`
 - `patchWithAudit`
+- `requireAssignedUsersInOrganization`
+- `resolveAssignedUserIds`
 - `trimTagName`
 - `updateAuditFields`
 - `updateTimestampFields`
@@ -41,12 +46,14 @@ Helpers in this package:
 ## Types And Schemas
 
 - `ArchiveAuditFields`
+- `AssignedUsersInput`
 - `AssociatedEntityMutationFactoryArgs`
 - `AuditFields`
 - `ConvexCrudCtx`
 - `CreateTimestampFields`
 - `OrganizationRecord`
 - `TagMutationFactoryArgs`
+- `TimestampedOrganizationRecord`
 - `UpdateAuditFields`
 - `UpdateTimestampFields`
 
@@ -63,20 +70,27 @@ Helpers in this package:
 | `createTagMutationSet` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `createTimestampFields` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `getActiveOrgRecord` | Convex helper | `packages/convex-crud/src/index.ts` |
+| `hasAssignedUsersOverride` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `insertWithAudit` | Convex helper | `packages/convex-crud/src/index.ts` |
+| `listActiveOrgRecords` | Convex helper | `packages/convex-crud/src/index.ts` |
+| `listOrgRecords` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `normalizeTagName` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `patchWithAudit` | Convex helper | `packages/convex-crud/src/index.ts` |
+| `requireAssignedUsersInOrganization` | Convex helper | `packages/convex-crud/src/index.ts` |
+| `resolveAssignedUserIds` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `trimTagName` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `updateAuditFields` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `updateTimestampFields` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `upsertOrganizationRecord` | Convex helper | `packages/convex-crud/src/index.ts` |
 | `ArchiveAuditFields` | Type | `packages/convex-crud/src/index.ts` |
+| `AssignedUsersInput` | Type | `packages/convex-crud/src/index.ts` |
 | `AssociatedEntityMutationFactoryArgs` | Type | `packages/convex-crud/src/index.ts` |
 | `AuditFields` | Type | `packages/convex-crud/src/index.ts` |
 | `ConvexCrudCtx` | Type | `packages/convex-crud/src/index.ts` |
 | `CreateTimestampFields` | Type | `packages/convex-crud/src/index.ts` |
 | `OrganizationRecord` | Type | `packages/convex-crud/src/index.ts` |
 | `TagMutationFactoryArgs` | Type | `packages/convex-crud/src/index.ts` |
+| `TimestampedOrganizationRecord` | Type | `packages/convex-crud/src/index.ts` |
 | `UpdateAuditFields` | Type | `packages/convex-crud/src/index.ts` |
 | `UpdateTimestampFields` | Type | `packages/convex-crud/src/index.ts` |
 

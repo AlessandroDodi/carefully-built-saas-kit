@@ -32,25 +32,33 @@ Components in this package:
 - `CustomDateField`: import from `@carefully-built/forms`.
 - `CustomDateFormField`: import from `@carefully-built/forms`.
 - `CustomForm`: import from `@carefully-built/forms`.
+- `CustomListField`: import from `@carefully-built/forms`.
 - `CustomMultiSelectDropdownField`: import from `@carefully-built/forms`.
 - `CustomMultiSelectField`: import from `@carefully-built/forms`.
 - `CustomPasswordField`: import from `@carefully-built/forms`.
+- `CustomPhoneField`: import from `@carefully-built/forms`.
 - `CustomSegmentedToggleField`: import from `@carefully-built/forms`.
 - `CustomSelectField`: import from `@carefully-built/forms`.
 - `CustomSingleAssociationPickerField`: import from `@carefully-built/forms`.
 - `CustomTextareaField`: import from `@carefully-built/forms`.
 - `CustomUserPickerField`: import from `@carefully-built/forms`.
+- `CustomWeeklyHoursField`: import from `@carefully-built/forms`.
 - `FieldMessage`: import from `@carefully-built/forms`.
 - `FormFieldLabel`: import from `@carefully-built/forms`.
+- `WeeklyHoursDay`: import from `@carefully-built/forms`.
+- `WeeklyHoursSummary`: import from `@carefully-built/forms`.
 
 ## Helper Usage
 
 ```ts
-import { CustomAssociationPickerField } from '@carefully-built/forms';
+import { addRange } from '@carefully-built/forms';
 ```
 
 Helpers in this package:
 
+- `addRange`
+- `booleanChipFieldTexts`
+- `chipSelectFieldTexts`
 - `CustomAssociationPickerField`
 - `CustomBooleanChipField`
 - `CustomChipSelectField`
@@ -58,25 +66,46 @@ Helpers in this package:
 - `CustomDateField`
 - `CustomDateFormField`
 - `CustomForm`
+- `CustomListField`
 - `CustomMultiSelectDropdownField`
 - `CustomMultiSelectField`
 - `CustomPasswordField`
+- `CustomPhoneField`
 - `CustomSegmentedToggleField`
 - `CustomSelectField`
 - `CustomSingleAssociationPickerField`
 - `CustomTextareaField`
 - `CustomUserPickerField`
+- `CustomWeeklyHoursField`
+- `dateFieldTexts`
+- `defaultWeeklyHours`
+- `defaultWeeklyHours`
 - `FieldMessage`
 - `formatCompactCurrencyDisplay`
 - `formatCompactCurrencyDisplay`
 - `FormFieldLabel`
 - `getCompactCurrencySuggestion`
 - `getCompactCurrencySuggestion`
+- `groupWeeklyHours`
+- `groupWeeklyHours`
+- `multiSelectDropdownFieldTexts`
+- `passwordFieldTexts`
+- `rangesForDay`
+- `removeRange`
+- `selectFieldTexts`
+- `toggleDay`
+- `updateRange`
+- `WEEKDAYS`
+- `WEEKDAYS`
+- `weeklyHoursFieldTexts`
+- `WeeklyHoursSummary`
 
 ## Types And Schemas
 
 - `SchemaForm`
 - `SchemaForm`
+- `weeklyHoursSchema`
+- `weeklyHoursSchema`
 - `buildCustomFormOptions`
 - `buildCustomFormOptions`
 - `CompactCurrencySuggestion`
@@ -98,7 +127,13 @@ Helpers in this package:
 - `parseCompactCurrencyInput`
 - `parseDatePickerValue`
 - `parseDatePickerValue`
+- `phoneInputTexts`
 - `SchemaFormField`
+- `vatInputTexts`
+- `Weekday`
+- `WeeklyHoursGroup`
+- `WeeklyHoursRange`
+- `WeeklyHoursSummaryProps`
 
 
 ## API Catalog
@@ -112,16 +147,24 @@ Helpers in this package:
 | `CustomDateField` | Component | `packages/forms/src/fields/custom-date-field.tsx` |
 | `CustomDateFormField` | Component | `packages/forms/src/fields/custom-date-form-field.tsx` |
 | `CustomForm` | Component | `packages/forms/src/custom-form.tsx` |
+| `CustomListField` | Component | `packages/forms/src/fields/custom-list-field.tsx` |
 | `CustomMultiSelectDropdownField` | Component | `packages/forms/src/fields/custom-multi-select-dropdown-field.tsx` |
 | `CustomMultiSelectField` | Component | `packages/forms/src/fields/custom-multi-select-field.tsx` |
 | `CustomPasswordField` | Component | `packages/forms/src/fields/custom-password-field.tsx` |
+| `CustomPhoneField` | Component | `packages/forms/src/fields/custom-phone-field.tsx` |
 | `CustomSegmentedToggleField` | Component | `packages/forms/src/fields/custom-segmented-toggle-field.tsx` |
 | `CustomSelectField` | Component | `packages/forms/src/fields/custom-select-field.tsx` |
 | `CustomSingleAssociationPickerField` | Component | `packages/forms/src/fields/custom-single-association-picker-field.tsx` |
 | `CustomTextareaField` | Component | `packages/forms/src/fields/custom-textarea-field.tsx` |
 | `CustomUserPickerField` | Component | `packages/forms/src/fields/custom-user-picker-field.tsx` |
+| `CustomWeeklyHoursField` | Component | `packages/forms/src/fields/custom-weekly-hours-field.tsx` |
 | `FieldMessage` | Component | `packages/forms/src/fields/field-message.tsx` |
 | `FormFieldLabel` | Component | `packages/forms/src/fields/form-field-label.tsx` |
+| `WeeklyHoursDay` | Component | `packages/forms/src/fields/weekly-hours-day.tsx` |
+| `WeeklyHoursSummary` | Component | `packages/forms/src/fields/weekly-hours-summary.tsx` |
+| `addRange` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `booleanChipFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `chipSelectFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
 | `CustomAssociationPickerField` | Helper | `packages/forms/src/index.ts` |
 | `CustomBooleanChipField` | Helper | `packages/forms/src/index.ts` |
 | `CustomChipSelectField` | Helper | `packages/forms/src/index.ts` |
@@ -129,22 +172,43 @@ Helpers in this package:
 | `CustomDateField` | Helper | `packages/forms/src/index.ts` |
 | `CustomDateFormField` | Helper | `packages/forms/src/index.ts` |
 | `CustomForm` | Helper | `packages/forms/src/index.ts` |
+| `CustomListField` | Helper | `packages/forms/src/index.ts` |
 | `CustomMultiSelectDropdownField` | Helper | `packages/forms/src/index.ts` |
 | `CustomMultiSelectField` | Helper | `packages/forms/src/index.ts` |
 | `CustomPasswordField` | Helper | `packages/forms/src/index.ts` |
+| `CustomPhoneField` | Helper | `packages/forms/src/index.ts` |
 | `CustomSegmentedToggleField` | Helper | `packages/forms/src/index.ts` |
 | `CustomSelectField` | Helper | `packages/forms/src/index.ts` |
 | `CustomSingleAssociationPickerField` | Helper | `packages/forms/src/index.ts` |
 | `CustomTextareaField` | Helper | `packages/forms/src/index.ts` |
 | `CustomUserPickerField` | Helper | `packages/forms/src/index.ts` |
+| `CustomWeeklyHoursField` | Helper | `packages/forms/src/index.ts` |
+| `dateFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `defaultWeeklyHours` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `defaultWeeklyHours` | Helper | `packages/forms/src/index.ts` |
 | `FieldMessage` | Helper | `packages/forms/src/index.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `packages/forms/src/fields/compact-currency.ts` |
 | `formatCompactCurrencyDisplay` | Helper | `packages/forms/src/index.ts` |
 | `FormFieldLabel` | Helper | `packages/forms/src/index.ts` |
 | `getCompactCurrencySuggestion` | Helper | `packages/forms/src/fields/compact-currency.ts` |
 | `getCompactCurrencySuggestion` | Helper | `packages/forms/src/index.ts` |
+| `groupWeeklyHours` | Helper | `packages/forms/src/fields/weekly-hours-summary.tsx` |
+| `groupWeeklyHours` | Helper | `packages/forms/src/index.ts` |
+| `multiSelectDropdownFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `passwordFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `rangesForDay` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `removeRange` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `selectFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `toggleDay` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `updateRange` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `WEEKDAYS` | Helper | `packages/forms/src/fields/weekly-hours.ts` |
+| `WEEKDAYS` | Helper | `packages/forms/src/index.ts` |
+| `weeklyHoursFieldTexts` | Helper | `packages/forms/src/fields/field-texts.ts` |
+| `WeeklyHoursSummary` | Helper | `packages/forms/src/index.ts` |
 | `SchemaForm` | Schema | `packages/forms/src/index.ts` |
 | `SchemaForm` | Schema | `packages/forms/src/schema-form/schema-form.tsx` |
+| `weeklyHoursSchema` | Schema | `packages/forms/src/fields/weekly-hours.ts` |
+| `weeklyHoursSchema` | Schema | `packages/forms/src/index.ts` |
 | `buildCustomFormOptions` | Type | `packages/forms/src/custom-form-options.ts` |
 | `buildCustomFormOptions` | Type | `packages/forms/src/index.ts` |
 | `CompactCurrencySuggestion` | Type | `packages/forms/src/fields/compact-currency.ts` |
@@ -166,7 +230,13 @@ Helpers in this package:
 | `parseCompactCurrencyInput` | Type | `packages/forms/src/index.ts` |
 | `parseDatePickerValue` | Type | `packages/forms/src/fields/date-picker-value.ts` |
 | `parseDatePickerValue` | Type | `packages/forms/src/index.ts` |
+| `phoneInputTexts` | Type | `packages/forms/src/fields/field-texts.ts` |
 | `SchemaFormField` | Type | `packages/forms/src/schema-form/schema-form.tsx` |
+| `vatInputTexts` | Type | `packages/forms/src/fields/field-texts.ts` |
+| `Weekday` | Type | `packages/forms/src/fields/weekly-hours.ts` |
+| `WeeklyHoursGroup` | Type | `packages/forms/src/fields/weekly-hours-summary.tsx` |
+| `WeeklyHoursRange` | Type | `packages/forms/src/fields/weekly-hours.ts` |
+| `WeeklyHoursSummaryProps` | Type | `packages/forms/src/fields/weekly-hours-summary.tsx` |
 
 
 ## Consumer Responsibilities

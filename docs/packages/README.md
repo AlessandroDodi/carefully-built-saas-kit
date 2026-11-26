@@ -3,6 +3,7 @@
 - [`@carefully-built/agenda`](./agenda.md): Reusable agenda helpers, activity lists, time utilities, and activity type primitives for SaaS apps.
 - [`@carefully-built/app-shell`](./app-shell.md): Reusable dashboard shell primitives for Carefully Built SaaS apps.
 - [`@carefully-built/association-picker`](./association-picker.md): Reusable entity association picker for multitenant SaaS apps.
+- [`@carefully-built/audio`](./audio.md): Audio players for Carefully Built SaaS apps: a waveform player coloured by who is speaking.
 - [`@carefully-built/auth-pages`](./auth-pages.md): Reusable SaaS auth pages, layouts, legal consent, and form presentation for Carefully Built apps.
 - [`@carefully-built/automations`](./automations.md): Reusable automation builder primitives, canvas, options, and draft validation for SaaS apps.
 - [`@carefully-built/charts`](./charts.md): Reusable chart widgets, cards, and legends for Carefully Built SaaS apps.
@@ -13,20 +14,27 @@
 - [`@carefully-built/convex-workos`](./convex-workos.md): Reusable Convex helpers for syncing WorkOS users across base and organization-scoped records.
 - [`@carefully-built/crud`](./crud.md): Config-driven CRUD table and form helpers for Carefully Built SaaS apps.
 - [`@carefully-built/custom-fields`](./custom-fields.md): Reusable custom-field options, form mapping, payload building, and display helpers for SaaS apps.
+- [`@carefully-built/elevenlabs`](./elevenlabs.md): Typed, fetch-only client for ElevenLabs Agents (outbound calls, phone numbers, conversations) and post-call webhook verification.
+- [`@carefully-built/elevenlabs-react`](./elevenlabs-react.md): React hook for talking to an ElevenLabs agent from the browser (microphone, WebRTC), with the token fetched from your own backend.
 - [`@carefully-built/files`](./files.md): Reusable file and document UI primitives, previews, filters, and association helpers for SaaS apps.
 - [`@carefully-built/forms`](./forms.md): Reusable React Hook Form fields and schema-driven form helpers for Carefully Built SaaS apps.
-- [`@carefully-built/import-export`](./imports.md): Reusable tabular import/export sheets, CSV parsing, preview rows, and contact import examples for SaaS apps.
+- [`@carefully-built/gmail`](./gmail.md): Reusable Gmail API client and message preview helpers for SaaS apps.
+- [`@carefully-built/import-export`](./imports.md): Reusable tabular import/export for SaaS apps: CSV and Excel import with column mapping, dedupe and preview, CSV export.
 - [`@carefully-built/kanban`](./kanban.md): Reusable Kanban board and card primitives for SaaS pipelines.
-- [`@carefully-built/legal-ui`](./legal-ui.md): Reusable legal document renderer for Carefully Built SaaS apps.
+- [`@carefully-built/legal-ui`](./legal-ui.md): Reusable legal document renderer, read-to-the-end document reader and version list for Carefully Built SaaS apps.
 - [`@carefully-built/maps-ui`](./maps-ui.md): Reusable Google Maps UI, map themes, and attribution helpers for Carefully Built apps.
 - [`@carefully-built/notes`](./notes.md): Reusable notes cards, grids, helpers, and editor shell pieces for SaaS apps.
 - [`@carefully-built/notifications`](./notifications.md): Reusable notification center UI for Carefully Built SaaS apps.
+- [`@carefully-built/offline`](./offline.md): Offline-first building blocks for Carefully Built SaaS apps: an encrypted IndexedDB store, a persistent retrying send queue, and React bindings with a sync status badge.
+- [`@carefully-built/organizations`](./organizations.md): B2B organization management UI: members roster, role assignment, invite flow, and seat/license billing — presentational, data-via-props.
 - [`@carefully-built/resource-kit`](./resource-kit.md): Reusable resource-page state helpers for CRUD SaaS surfaces.
 - [`@carefully-built/rich-text`](./rich-text.md): Reusable rich text editor, renderer, AI action affordances, and serialization helpers for SaaS apps.
 - [`@carefully-built/saas-kit`](./saas-kit.md): One-install Carefully Built SaaS Kit package for React, Next.js, Convex, WorkOS, and editable SaaS components.
 - [`@carefully-built/search`](./search.md): Reusable fuzzy search and ranking helpers for Carefully Built SaaS apps.
 - [`@carefully-built/settings-ui`](./settings-ui.md): Reusable SaaS settings tabs, section cards, and settings metrics for Carefully Built apps.
+- [`@carefully-built/signature`](./signature.md): Signature pad for Carefully Built SaaS apps: smooth handwritten signatures on a canvas, stored as plain geometry and exported as PNG or SVG.
 - [`@carefully-built/superadmin`](./superadmin.md): Reusable superadmin UI for Carefully Built SaaS apps.
+- [`@carefully-built/theme`](./theme.md): Tailwind v4 design tokens, color presets, and third-party widget styles for Carefully Built apps.
 - [`@carefully-built/theme-ui`](./theme-ui.md): Reusable SaaS theme, map theme, color, and shape selectors for Carefully Built apps.
 - [`@carefully-built/ui`](./ui.md): Reusable React UI primitives and data-display components for Carefully Built SaaS apps.
 - [`@carefully-built/user-picker`](./user-picker.md): Reusable user picker for SaaS forms.

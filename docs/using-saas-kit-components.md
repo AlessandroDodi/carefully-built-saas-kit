@@ -125,6 +125,58 @@ import { LegalDocument } from '@carefully-built/legal-ui';
 />;
 ```
 
+## Documents That Must Be Read
+
+Use `DocumentReader`, `useReadProgress` and `ReadProgressBar` from `@carefully-built/legal-ui` when the user has to read a text to the end before continuing, and `VersionList` to show the versions of that text. The app provides the text and decides what reaching the end unlocks.
+
+```tsx
+import { DocumentReader, ReadProgressBar, useReadProgress } from '@carefully-built/legal-ui';
+
+const scrollRef = useRef<HTMLElement>(null);
+const reading = useReadProgress(scrollRef, { enabled: text !== undefined, resetKey: versionId });
+
+<DocumentReader title="Privacy notice" meta="v3 · 12/03/2026" readProgress={reading}>
+  {text}
+</DocumentReader>
+<ReadProgressBar value={reading.progress} />
+<Button disabled={!reading.reachedEnd}>Continue</Button>
+```
+
+Without `readProgress` the reader tracks on its own and reports through `onProgress` and `onReachEnd`.
+
+## Signatures
+
+Use `SignaturePad` from `@carefully-built/signature` instead of a hand-written canvas. It keeps only the shape of the signature (no pressure, tilt or timing), redraws on resize and rotation, and exports PNG or SVG through its ref.
+
+```tsx
+import { SignaturePad, type SignaturePadHandle } from '@carefully-built/signature';
+
+const pad = useRef<SignaturePadHandle>(null);
+
+<SignaturePad ref={pad} caption="Signature of Maria Rossi" onChange={({ isEmpty }) => setSigned(!isEmpty)} />;
+
+const png = await pad.current?.toBlob({ trim: true, padding: 16 });
+```
+
+## Offline And Sync
+
+Use `@carefully-built/offline` when data is collected on a device that may lose its connection. `createOfflineQueue` stores each item encrypted on the device before `enqueue` resolves and sends it when it can; `createEncryptedStore` is the same storage on its own. The app provides `send` and decides which errors are permanent.
+
+```tsx
+import { createOfflineQueue } from '@carefully-built/offline';
+import { SyncStatusBadge, deriveSyncStatus, useOfflineQueue, useOnlineStatus } from '@carefully-built/offline/react';
+
+export const queue = createOfflineQueue<Payload>({ name: 'submissions', send: postSubmission });
+
+const online = useOnlineStatus();
+const snapshot = useOfflineQueue(queue);
+
+<SyncStatusBadge
+  status={deriveSyncStatus({ online, pending: snapshot.pending, sending: snapshot.sending })}
+  pendingCount={snapshot.pending + snapshot.sending}
+/>;
+```
+
 ## Error Pages
 
 Use `SaasErrorPage` and `SaasNotFoundPage` from `@carefully-built/ui` in Next.js `error.tsx`, `global-error.tsx`, and `not-found.tsx`.
@@ -203,6 +255,8 @@ Use `@carefully-built/ui` primitives before adding local primitives.
 - `TableToolbar` for search and filters.
 - `SaasErrorPage` and `SaasNotFoundPage` for application error states.
 - `Button`, `Card`, `Input`, `Textarea`, `Label`, `Pagination`, `Skeleton`, and tooltips for shared shadcn-style primitives.
+- `EventTimeline` for read-only logs and audit trails.
+- `DeviceCodeInput` for pairing codes, one-time codes and PINs.
 
 ## When To Add New Props
 

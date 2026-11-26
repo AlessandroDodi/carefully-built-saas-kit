@@ -13,6 +13,8 @@ For local development in an app inside the same parent workspace, use the packed
 ## Import Paths
 
 - `@carefully-built/convex-workos`
+- `@carefully-built/convex-workos/organization-profile-settings`
+- `@carefully-built/convex-workos/server`
 
 ## Helper Usage
 

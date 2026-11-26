@@ -30,8 +30,10 @@ Components in this package:
 - `DocumentCardGrid`: import from `@carefully-built/files`.
 - `DocumentFormShell`: import from `@carefully-built/files`.
 - `DocumentSheetBase`: import from `@carefully-built/files`.
+- `DocumentToolbar`: import from `@carefully-built/files`.
 - `FileCardSkeleton`: import from `@carefully-built/files`.
 - `FileUploadSheet`: import from `@carefully-built/files`.
+- `PublicDocumentUploadShell`: import from `@carefully-built/files`.
 
 ## Helper Usage
 
@@ -54,6 +56,7 @@ Helpers in this package:
 - `normalizeOptionalString`
 - `shouldBackfillLegacyFile`
 - `buildDocumentAssociationSummary`
+- `buildFileKey`
 - `DOCUMENT_CARD_GRID_CLASS`
 - `filterDocuments`
 - `formatFileSize`
@@ -69,14 +72,27 @@ Helpers in this package:
 - `DocumentAssociationValueItem`
 - `DocumentCardAssociationItem`
 - `DocumentCardItem`
+- `DocumentCardLabels`
+- `DocumentCardLabelsInput`
 - `DocumentFilterOptions`
+- `DocumentFormShellLabels`
+- `DocumentFormShellLabelsInput`
 - `DocumentFormValues`
 - `DocumentListItemBase`
 - `DocumentSheetAssociationOption`
 - `DocumentSheetBaseProps`
 - `DocumentSheetDocument`
+- `DocumentSheetLabels`
+- `DocumentSheetLabelsInput`
+- `DocumentToolbarProps`
+- `DocumentToolbarTagOption`
 - `mapAssociationValuesToDocumentAssociations`
 - `mapAssociationValuesToDocumentPayload`
+- `PublicDocumentFile`
+- `PublicDocumentUploadCopy`
+- `PublicDocumentUploadedFile`
+- `PublicDocumentUploadRequest`
+- `PublicDocumentUploadShellProps`
 
 
 ## API Catalog
@@ -87,8 +103,10 @@ Helpers in this package:
 | `DocumentCardGrid` | Component | `packages/files/src/document-card-grid.tsx` |
 | `DocumentFormShell` | Component | `packages/files/src/document-form-shell.tsx` |
 | `DocumentSheetBase` | Component | `packages/files/src/document-sheet.tsx` |
+| `DocumentToolbar` | Component | `packages/files/src/document-toolbar.tsx` |
 | `FileCardSkeleton` | Component | `packages/files/src/file-card-skeleton.tsx` |
 | `FileUploadSheet` | Component | `packages/files/src/file-upload-sheet.tsx` |
+| `PublicDocumentUploadShell` | Component | `packages/files/src/public-document-upload-shell.tsx` |
 | `buildDocumentListItems` | Convex helper | `packages/files/src/convex.ts` |
 | `buildPendingPublicUploadUrl` | Convex helper | `packages/files/src/convex.ts` |
 | `buildPublicUploadRequestResult` | Convex helper | `packages/files/src/convex.ts` |
@@ -102,6 +120,7 @@ Helpers in this package:
 | `normalizeOptionalString` | Convex helper | `packages/files/src/convex.ts` |
 | `shouldBackfillLegacyFile` | Convex helper | `packages/files/src/convex.ts` |
 | `buildDocumentAssociationSummary` | Helper | `packages/files/src/document-helpers.ts` |
+| `buildFileKey` | Helper | `packages/files/src/file-utils.ts` |
 | `DOCUMENT_CARD_GRID_CLASS` | Helper | `packages/files/src/document-card-grid.tsx` |
 | `filterDocuments` | Helper | `packages/files/src/document-helpers.ts` |
 | `formatFileSize` | Helper | `packages/files/src/file-utils.ts` |
@@ -114,14 +133,27 @@ Helpers in this package:
 | `DocumentAssociationValueItem` | Type | `packages/files/src/document-helpers.ts` |
 | `DocumentCardAssociationItem` | Type | `packages/files/src/document-card.tsx` |
 | `DocumentCardItem` | Type | `packages/files/src/document-card.tsx` |
+| `DocumentCardLabels` | Type | `packages/files/src/document-card.tsx` |
+| `DocumentCardLabelsInput` | Type | `packages/files/src/document-card.tsx` |
 | `DocumentFilterOptions` | Type | `packages/files/src/document-helpers.ts` |
+| `DocumentFormShellLabels` | Type | `packages/files/src/document-form-shell.tsx` |
+| `DocumentFormShellLabelsInput` | Type | `packages/files/src/document-form-shell.tsx` |
 | `DocumentFormValues` | Type | `packages/files/src/document-form-shell.tsx` |
 | `DocumentListItemBase` | Type | `packages/files/src/document-helpers.ts` |
 | `DocumentSheetAssociationOption` | Type | `packages/files/src/document-sheet.tsx` |
 | `DocumentSheetBaseProps` | Type | `packages/files/src/document-sheet.tsx` |
 | `DocumentSheetDocument` | Type | `packages/files/src/document-sheet.tsx` |
+| `DocumentSheetLabels` | Type | `packages/files/src/document-sheet.tsx` |
+| `DocumentSheetLabelsInput` | Type | `packages/files/src/document-sheet.tsx` |
+| `DocumentToolbarProps` | Type | `packages/files/src/document-toolbar.tsx` |
+| `DocumentToolbarTagOption` | Type | `packages/files/src/document-toolbar.tsx` |
 | `mapAssociationValuesToDocumentAssociations` | Type | `packages/files/src/document-helpers.ts` |
 | `mapAssociationValuesToDocumentPayload` | Type | `packages/files/src/document-helpers.ts` |
+| `PublicDocumentFile` | Type | `packages/files/src/convex.ts` |
+| `PublicDocumentUploadCopy` | Type | `packages/files/src/public-document-upload-shell.tsx` |
+| `PublicDocumentUploadedFile` | Type | `packages/files/src/public-document-upload-shell.tsx` |
+| `PublicDocumentUploadRequest` | Type | `packages/files/src/public-document-upload-shell.tsx` |
+| `PublicDocumentUploadShellProps` | Type | `packages/files/src/public-document-upload-shell.tsx` |
 
 
 ## Consumer Responsibilities
