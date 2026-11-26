@@ -106,6 +106,8 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const searchInputRef = useRef<HTMLInputElement | null>(null);
+  /** How the last option was pressed: a finger chooses on the tap, a mouse at once. */
+  const lastPointerType = useRef('mouse');
   const optionRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [portalContainer, setPortalContainer] = useState<Element | null>(null);
   const [dropdownPosition, setDropdownPosition] = useState<{
@@ -413,12 +415,17 @@ export function SearchableSelect<TOption extends SearchableSelectOption>({
                       onPointerDown={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        selectOption(option.value);
+                        // A finger on the list may be starting to scroll it: on touch the choice waits for the tap
+                        // (picking at touch start chose whoever was under the finger, e.g. the contact to call).
+                        if (event.pointerType === 'mouse') selectOption(option.value);
                       }}
                       onClick={(event) => {
-                        if (event.detail === 0) {
+                        if (event.detail === 0 || lastPointerType.current !== 'mouse') {
                           selectOption(option.value);
                         }
+                      }}
+                      onPointerUp={(event) => {
+                        lastPointerType.current = event.pointerType;
                       }}
                     >
                       <span className="min-w-0 flex-1 truncate">

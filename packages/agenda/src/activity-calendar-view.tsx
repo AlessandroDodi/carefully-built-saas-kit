@@ -964,7 +964,7 @@ export function ActivityCalendarView({
     arg.view.calendar.unselect();
   }
 
-  async function handleEventDrop(arg: EventDropArg): Promise<void> {
+  async function handleEventDrop(arg: Pick<EventDropArg, 'event' | 'revert'>): Promise<void> {
     const activity = arg.event.extendedProps.activity as ActivityListItem | undefined;
 
     if (!activity || !arg.event.start) {
@@ -1135,6 +1135,10 @@ export function ActivityCalendarView({
         select={handleDateSelect}
         eventClick={handleEventClick}
         eventDrop={(arg) => {
+          void handleEventDrop(arg);
+        }}
+        // Stretching a meeting changes its end: saved like a move (it used to snap back on the next refresh).
+        eventResize={(arg) => {
           void handleEventDrop(arg);
         }}
         eventContent={renderEventContent}

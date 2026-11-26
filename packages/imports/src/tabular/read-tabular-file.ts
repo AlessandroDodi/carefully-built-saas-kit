@@ -1,6 +1,8 @@
 import Papa from 'papaparse';
 import { readSheet } from 'read-excel-file/browser';
 
+import { readCsvText } from '../read-csv-text';
+
 import type { TabularFileContent } from './tabular-import-types';
 
 export type TabularFileErrorCode = 'unsupported-format' | 'empty' | 'unreadable';
@@ -26,7 +28,7 @@ async function readCells(file: File): Promise<string[][]> {
 
   if (extension === 'csv') {
     // Delimiter auto-detected: Italian Excel exports use ";".
-    const result = Papa.parse<string[]>(await file.text(), { skipEmptyLines: 'greedy' });
+    const result = Papa.parse<string[]>(await readCsvText(file), { skipEmptyLines: 'greedy' });
     return result.data.map((row) => row.map(toText));
   }
 

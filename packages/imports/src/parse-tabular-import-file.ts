@@ -1,5 +1,7 @@
 import Papa from 'papaparse';
 
+import { readCsvText } from './read-csv-text';
+
 export interface ParsedTabularFile {
   readonly headers: string[];
   readonly rows: Record<string, string>[];
@@ -45,5 +47,5 @@ export async function parseTabularImportRows(file: File): Promise<ParsedTabularF
     throw new Error('Formato file non supportato. Usa un file .csv.');
   }
 
-  return parseCsvText(await file.text());
+  return parseCsvText(await readCsvText(file));
 }

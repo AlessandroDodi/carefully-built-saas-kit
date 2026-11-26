@@ -75,7 +75,8 @@ export function SheetActionFooter({
         <Button
           type="button"
           onClick={onConfirm}
-          disabled={confirmDisabled}
+          // While saving it cannot be pressed again: a second press saved twice (two campaigns, two appointments).
+          disabled={confirmDisabled || confirmLoading}
           className={`${footerButtonClassName} relative`}
         >
           <span className="inline-flex w-full items-center justify-center">
