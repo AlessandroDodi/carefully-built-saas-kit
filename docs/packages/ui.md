@@ -36,6 +36,8 @@ Components in this package:
 - `CardFooter`: import from `@carefully-built/ui`.
 - `CardHeader`: import from `@carefully-built/ui`.
 - `CardTitle`: import from `@carefully-built/ui`.
+- `Checkbox`: import from `@carefully-built/ui`.
+- `CheckboxCard`: import from `@carefully-built/ui`.
 - `Chip`: import from `@carefully-built/ui`.
 - `ChipButton`: import from `@carefully-built/ui`.
 - `DesktopConfirmShortcutHint`: import from `@carefully-built/ui`.
@@ -181,6 +183,7 @@ Helpers in this package:
 - `formatDisplayDate`
 - `formatSelectedUserSummary`
 - `formatUserDisplayName`
+- `getCheckboxBoxClassName`
 - `getChipClassName`
 - `getColumnSortKey`
 - `getColumnTooltipText`
@@ -225,6 +228,12 @@ Helpers in this package:
 - `ActionHandlers`
 - `ActionLabels`
 - `ActionType`
+- `CheckboxCardClassNames`
+- `CheckboxCardProps`
+- `CheckboxCheckedState`
+- `CheckboxDataState`
+- `CheckboxProps`
+- `CheckboxSize`
 - `ChipSize`
 - `CollectionEmptyState`
 - `Column`
@@ -257,6 +266,7 @@ Helpers in this package:
 - `FieldDetailRowProps`
 - `FilterConfig`
 - `FilterOption`
+- `getCheckboxDataState`
 - `getColumnValue`
 - `getDeviceCodeInputMode`
 - `getNextSortState`
@@ -333,6 +343,8 @@ Helpers in this package:
 | `CardFooter` | Component | `packages/ui/src/primitives/card.tsx` |
 | `CardHeader` | Component | `packages/ui/src/primitives/card.tsx` |
 | `CardTitle` | Component | `packages/ui/src/primitives/card.tsx` |
+| `Checkbox` | Component | `packages/ui/src/primitives/checkbox.tsx` |
+| `CheckboxCard` | Component | `packages/ui/src/primitives/checkbox-card.tsx` |
 | `Chip` | Component | `packages/ui/src/primitives/chip.tsx` |
 | `ChipButton` | Component | `packages/ui/src/primitives/chip.tsx` |
 | `DesktopConfirmShortcutHint` | Component | `packages/ui/src/overlays/responsive-sheet.footer.tsx` |
@@ -445,6 +457,7 @@ Helpers in this package:
 | `formatDisplayDate` | Helper | `packages/ui/src/utils/date-display.ts` |
 | `formatSelectedUserSummary` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
 | `formatUserDisplayName` | Helper | `packages/ui/src/primitives/user-picker-utils.ts` |
+| `getCheckboxBoxClassName` | Helper | `packages/ui/src/primitives/checkbox.utils.ts` |
 | `getChipClassName` | Helper | `packages/ui/src/primitives/chip-utils.ts` |
 | `getColumnSortKey` | Helper | `packages/ui/src/smart-table/sorting.ts` |
 | `getColumnTooltipText` | Helper | `packages/ui/src/smart-table/utils.ts` |
@@ -496,6 +509,12 @@ Helpers in this package:
 | `ActionHandlers` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ActionLabels` | Type | `packages/ui/src/smart-table/types.ts` |
 | `ActionType` | Type | `packages/ui/src/smart-table/types.ts` |
+| `CheckboxCardClassNames` | Type | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `CheckboxCardProps` | Type | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `CheckboxCheckedState` | Type | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `CheckboxDataState` | Type | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `CheckboxProps` | Type | `packages/ui/src/primitives/checkbox.tsx` |
+| `CheckboxSize` | Type | `packages/ui/src/primitives/checkbox.utils.ts` |
 | `ChipSize` | Type | `packages/ui/src/primitives/chip-utils.ts` |
 | `CollectionEmptyState` | Type | `packages/ui/src/empty-state/collection-empty-state.ts` |
 | `Column` | Type | `packages/ui/src/smart-table/types.ts` |
@@ -528,6 +547,7 @@ Helpers in this package:
 | `FieldDetailRowProps` | Type | `packages/ui/src/primitives/field-detail-row.tsx` |
 | `FilterConfig` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
 | `FilterOption` | Type | `packages/ui/src/table-toolbar/table-toolbar.tsx` |
+| `getCheckboxDataState` | Type | `packages/ui/src/primitives/checkbox.utils.ts` |
 | `getColumnValue` | Type | `packages/ui/src/smart-table/utils.ts` |
 | `getDeviceCodeInputMode` | Type | `packages/ui/src/primitives/device-code-input.utils.ts` |
 | `getNextSortState` | Type | `packages/ui/src/smart-table/sorting.ts` |

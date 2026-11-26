@@ -44,6 +44,8 @@ This catalog is generated from exported `.tsx` components across all package sou
 | `CardTitle` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/card.tsx` |
 | `Card` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/card.tsx` |
 | `ChartLegend` | `@carefully-built/charts` | [docs](../packages/charts.md) | `packages/charts/src/chart-legend.tsx` |
+| `CheckboxCard` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `Checkbox` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/checkbox.tsx` |
 | `ChipButton` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/chip.tsx` |
 | `Chip` | `@carefully-built/ui` | [docs](../packages/ui.md) | `packages/ui/src/primitives/chip.tsx` |
 | `CommandPalette` | `@carefully-built/search` | [docs](../packages/search.md) | `packages/search/src/command-palette.tsx` |

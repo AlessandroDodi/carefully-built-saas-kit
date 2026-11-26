@@ -168,6 +168,14 @@ Generated list of public exports detected in `packages/*/src`.
 | `ChartLegendProps` | Type | `@carefully-built/charts` | `packages/charts/src/chart-legend.tsx` |
 | `ChartLegend` | Component | `@carefully-built/charts` | `packages/charts/src/chart-legend.tsx` |
 | `ChartLegend` | Helper | `@carefully-built/charts` | `packages/charts/src/index.ts` |
+| `CheckboxCardClassNames` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `CheckboxCardProps` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `CheckboxCard` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox-card.tsx` |
+| `CheckboxCheckedState` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `CheckboxDataState` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `CheckboxProps` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.tsx` |
+| `CheckboxSize` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `Checkbox` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.tsx` |
 | `ChipButton` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/chip.tsx` |
 | `ChipSize` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/chip-utils.ts` |
 | `Chip` | Component | `@carefully-built/ui` | `packages/ui/src/primitives/chip.tsx` |
@@ -1344,6 +1352,8 @@ Generated list of public exports detected in `packages/*/src`.
 | `getAvailableTypeOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/associationPicker.options.tsx` |
 | `getAvailableTypeOptions` | Type | `@carefully-built/association-picker` | `packages/association-picker/src/index.ts` |
 | `getBestOrganizationAdminRoleSlug` | Helper | `@carefully-built/workos` | `packages/workos/src/server.ts` |
+| `getCheckboxBoxClassName` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.utils.ts` |
+| `getCheckboxDataState` | Type | `@carefully-built/ui` | `packages/ui/src/primitives/checkbox.utils.ts` |
 | `getChipClassName` | Helper | `@carefully-built/ui` | `packages/ui/src/primitives/chip-utils.ts` |
 | `getColumnSortKey` | Helper | `@carefully-built/ui` | `packages/ui/src/smart-table/sorting.ts` |
 | `getColumnTooltipText` | Helper | `@carefully-built/ui` | `packages/ui/src/smart-table/utils.ts` |
