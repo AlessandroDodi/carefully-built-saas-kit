@@ -19,6 +19,14 @@ export { ReadProgressBar } from './read-progress-bar';
 export type { ReadProgressBarClassNames, ReadProgressBarProps } from './read-progress-bar';
 export { useReadProgress } from './use-read-progress';
 export type { UseReadProgressOptions, UseReadProgressResult } from './use-read-progress';
+export { VersionList } from './version-list';
+export type {
+  DocumentVersion,
+  DocumentVersionStatus,
+  VersionListClassNames,
+  VersionListLabels,
+  VersionListProps,
+} from './version-list';
 export { advanceReadProgress, computeReadProgress, initialReadProgressState } from './read-progress';
 export type { ReadProgressMeasurement, ReadProgressState } from './read-progress';
 
