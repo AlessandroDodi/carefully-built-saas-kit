@@ -672,7 +672,7 @@
     },
     "packages/saas-kit": {
       "name": "@carefully-built/saas-kit",
-      "version": "0.1.64",
+      "version": "0.1.65",
       "dependencies": {
         "@carefully-built/agenda": "0.1.16",
         "@carefully-built/app-shell": "0.1.15",
@@ -707,7 +707,7 @@
         "@carefully-built/superadmin": "0.1.19",
         "@carefully-built/theme": "0.1.13",
         "@carefully-built/theme-ui": "0.1.4",
-        "@carefully-built/ui": "0.1.31",
+        "@carefully-built/ui": "0.1.32",
         "@carefully-built/user-picker": "0.1.2",
         "@carefully-built/widgets": "0.1.6",
         "@carefully-built/workos": "0.1.11",
@@ -866,7 +866,7 @@
     },
     "packages/ui": {
       "name": "@carefully-built/ui",
-      "version": "0.1.31",
+      "version": "0.1.32",
       "devDependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
