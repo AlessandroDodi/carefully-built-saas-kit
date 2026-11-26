@@ -142,9 +142,7 @@ export function useLoginForm({
       form.setValue("password", "");
     } catch (caughtError) {
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : copy.unexpectedError,
+        unexpected(caughtError, copy.unexpectedError),
       );
       form.setValue("password", "");
     } finally {
@@ -205,9 +203,7 @@ export function useSignupForm({
       form.setValue("password", "");
     } catch (caughtError) {
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : copy.unexpectedError,
+        unexpected(caughtError, copy.unexpectedError),
       );
       form.setValue("password", "");
     } finally {
@@ -269,9 +265,7 @@ export function useForgotPasswordForm({
       }
     } catch (caughtError) {
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : copy.unexpectedError,
+        unexpected(caughtError, copy.unexpectedError),
       );
     } finally {
       setLoading(false);
@@ -346,9 +340,7 @@ export function useUpdatePasswordForm({
       }
     } catch (caughtError) {
       setError(
-        caughtError instanceof Error
-          ? caughtError.message
-          : copy.unexpectedError,
+        unexpected(caughtError, copy.unexpectedError),
       );
     } finally {
       setLoading(false);
@@ -362,4 +354,14 @@ export function useUpdatePasswordForm({
     error,
     token,
   };
+}
+
+/**
+ * What the form shows when its action throws: never the error's own text («Failed to fetch», «NEXT_REDIRECT», a
+ * server's English message), which goes to the console. A redirect is the action working: it is passed on.
+ */
+function unexpected(caughtError: unknown, message: string): string {
+  if (typeof caughtError === 'object' && caughtError !== null && String((caughtError as { digest?: unknown }).digest ?? '').startsWith('NEXT_REDIRECT')) throw caughtError;
+  console.error(caughtError);
+  return message;
 }

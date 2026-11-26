@@ -59,7 +59,8 @@ export function CustomWeeklyHoursField<TValues extends FieldValues>({
                 />
               ))}
             </div>
-            <FieldMessage message={error ? texts.invalidRangeMessage : undefined} />
+            {/* The form's own message when it has one (e.g. hours outside what the account allows); else the generic one. */}
+            <FieldMessage message={error ? (error.message || texts.invalidRangeMessage) : undefined} />
           </div>
         );
       }}
