@@ -82,6 +82,7 @@ import { ResponsiveSheet, SaasErrorPage } from '@carefully-built/ui';
 - `Tooltip`, `TooltipProvider`, `TooltipTrigger`, `TooltipContent`: Radix tooltip wrappers.
 - `DisplayDate`: consistent date display for table/list values.
 - `KeyboardKeycap`, `ShortcutModifierKeycap`: small keyboard shortcut keycap UI.
+- `DeviceCodeInput`: segmented input for device codes, one-time codes and PINs, with paste, grouping (`XXX-XXX`) and masking. See [DeviceCodeInput](#devicecodeinput).
 - `EventTimeline`: read-only, append-only log of events (audit trails, histories) with a coloured square marker per row and a mono line for timestamp and detail. See [EventTimeline](#eventtimeline).
 
 ### Overlays
@@ -138,6 +139,27 @@ import { EventTimeline } from '@carefully-built/ui';
 - `renderMeta(item)` replaces the default rendering of `item.meta`; `emptyState` replaces the default "No events yet" text.
 - `classes`: `root`, `item`, `marker`, `content`, `title`, `details`, `timestamp`, `meta`, `empty`.
 - There are no edit or delete affordances by design: use it for logs that must not look editable.
+
+### DeviceCodeInput
+
+```tsx
+import { DeviceCodeInput } from '@carefully-built/ui';
+
+// Pairing code shown as XXX-XXX
+<DeviceCodeInput groups={[3, 3]} value={code} onChange={setCode} onComplete={pairDevice} />;
+
+// Four-digit PIN shown as dots
+<DeviceCodeInput length={4} charset="numeric" mask onComplete={unlock} error={wrongPin} />;
+```
+
+- `length` (default 6) or `groups` (e.g. `[3, 3]`, which also sets the length) decide the cells; `separator` is drawn between groups.
+- `value` / `onChange` are the normalized code: allowed characters only, no separators, upper-cased unless `uppercase={false}`. Without `value` the component keeps its own state (`defaultValue`).
+- `onComplete(value)` fires when the last character is filled in.
+- `charset`: `alphanumeric` (default) or `numeric`, which also opens the digits keyboard. `mask` shows dots and uses a password field.
+- A pasted or autofilled code is cleaned of separators and spaces; a whole code replaces what was typed. Arrow keys, Home/End and Backspace move between cells.
+- One real, transparent `<input autocomplete="one-time-code">` covers the cells, so on-screen keyboards, paste menus and code autofill behave as in a normal field. The `ref` points to that input.
+- Cells are 48×56px by default for touch use. `classes`: `root`, `group`, `cell`, `activeCell`, `separator`, `caret`, `input`.
+- Pure helpers for validation and display: `normalizeDeviceCode`, `formatDeviceCode`, `splitDeviceCode`, `resolveDeviceCodeGroups`, `pasteDeviceCode`, `filterDeviceCodeCharacters`, `getDeviceCodeInputMode`.
 
 ### Component Docs
 

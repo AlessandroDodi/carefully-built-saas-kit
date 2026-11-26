@@ -6,6 +6,8 @@ export * from './primitives/calendar';
 export * from './primitives/card';
 export * from './primitives/chip';
 export * from './primitives/chip-utils';
+export * from './primitives/device-code-input';
+export * from './primitives/device-code-input.utils';
 export * from './primitives/dialog';
 export * from './primitives/dropdown-menu';
 export * from './primitives/drawer';
