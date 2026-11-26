@@ -456,14 +456,14 @@
     },
     "packages/legal-ui": {
       "name": "@carefully-built/legal-ui",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "devDependencies": {
         "@carefully-built/ui": "workspace:*",
         "lucide-react": "^1.8.0",
         "react": "^19.2.3",
       },
       "peerDependencies": {
-        "@carefully-built/ui": ">=0.1.4",
+        "@carefully-built/ui": ">=0.1.24",
         "lucide-react": ">=0.400.0 || >=1.0.0",
         "react": ">=18.2.0 || >=19.0.0",
         "react-dom": ">=18.2.0 || >=19.0.0",
@@ -651,8 +651,8 @@
       "name": "@carefully-built/saas-kit",
       "version": "0.1.63",
       "dependencies": {
-        "@carefully-built/agenda": "0.1.15",
-        "@carefully-built/app-shell": "0.1.10",
+        "@carefully-built/agenda": "0.1.16",
+        "@carefully-built/app-shell": "0.1.15",
         "@carefully-built/association-picker": "0.1.2",
         "@carefully-built/audio": "0.1.0",
         "@carefully-built/auth-pages": "0.1.13",
@@ -667,7 +667,7 @@
         "@carefully-built/elevenlabs": "0.1.7",
         "@carefully-built/elevenlabs-react": "0.1.4",
         "@carefully-built/files": "0.1.14",
-        "@carefully-built/forms": "0.1.17",
+        "@carefully-built/forms": "0.1.19",
         "@carefully-built/import-export": "0.1.7",
         "@carefully-built/kanban": "0.1.4",
         "@carefully-built/legal-ui": "0.1.2",
@@ -677,15 +677,15 @@
         "@carefully-built/organizations": "0.1.0",
         "@carefully-built/resource-kit": "0.1.8",
         "@carefully-built/rich-text": "0.1.2",
-        "@carefully-built/search": "0.1.7",
-        "@carefully-built/settings-ui": "0.1.13",
+        "@carefully-built/search": "0.1.8",
+        "@carefully-built/settings-ui": "0.1.14",
         "@carefully-built/superadmin": "0.1.19",
-        "@carefully-built/theme": "0.1.12",
+        "@carefully-built/theme": "0.1.13",
         "@carefully-built/theme-ui": "0.1.4",
-        "@carefully-built/ui": "0.1.26",
+        "@carefully-built/ui": "0.1.30",
         "@carefully-built/user-picker": "0.1.2",
-        "@carefully-built/widgets": "0.1.5",
-        "@carefully-built/workos": "0.1.10",
+        "@carefully-built/widgets": "0.1.6",
+        "@carefully-built/workos": "0.1.11",
       },
       "peerDependencies": {
         "@fullcalendar/core": "^6.1.0",
@@ -765,6 +765,22 @@
         "@carefully-built/ui",
       ],
     },
+    "packages/signature": {
+      "name": "@carefully-built/signature",
+      "version": "0.1.0",
+      "devDependencies": {
+        "@carefully-built/ui": "workspace:*",
+        "lucide-react": "^1.8.0",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+      },
+      "peerDependencies": {
+        "@carefully-built/ui": ">=0.1.24",
+        "lucide-react": ">=0.400.0 || >=1.0.0",
+        "react": ">=18.2.0 || >=19.0.0",
+        "react-dom": ">=18.2.0 || >=19.0.0",
+      },
+    },
     "packages/superadmin": {
       "name": "@carefully-built/superadmin",
       "version": "0.1.19",
@@ -825,7 +841,7 @@
     },
     "packages/ui": {
       "name": "@carefully-built/ui",
-      "version": "0.1.30",
+      "version": "0.1.31",
       "devDependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
@@ -997,6 +1013,8 @@
     "@carefully-built/search": ["@carefully-built/search@workspace:packages/search"],
 
     "@carefully-built/settings-ui": ["@carefully-built/settings-ui@workspace:packages/settings-ui"],
+
+    "@carefully-built/signature": ["@carefully-built/signature@workspace:packages/signature"],
 
     "@carefully-built/superadmin": ["@carefully-built/superadmin@workspace:packages/superadmin"],
 
@@ -1889,6 +1907,10 @@
     "@carefully-built/organizations/lucide-react": ["lucide-react@0.475.0", "", { "peerDependencies": { "react": "^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-NJzvVu1HwFVeZ+Gwq2q00KygM1aBhy/ZrhY9FsAgJtpB+E4R7uxRk9M2iKvHa6/vNxZydIB59htha4c2vvwvVg=="],
 
     "@carefully-built/resource-kit/next": ["next@16.1.6", "", { "dependencies": { "@next/env": "16.1.6", "@swc/helpers": "0.5.15", "baseline-browser-mapping": "^2.8.3", "caniuse-lite": "^1.0.30001579", "postcss": "8.4.31", "styled-jsx": "5.1.6" }, "optionalDependencies": { "@next/swc-darwin-arm64": "16.1.6", "@next/swc-darwin-x64": "16.1.6", "@next/swc-linux-arm64-gnu": "16.1.6", "@next/swc-linux-arm64-musl": "16.1.6", "@next/swc-linux-x64-gnu": "16.1.6", "@next/swc-linux-x64-musl": "16.1.6", "@next/swc-win32-arm64-msvc": "16.1.6", "@next/swc-win32-x64-msvc": "16.1.6", "sharp": "^0.34.4" }, "peerDependencies": { "@opentelemetry/api": "^1.1.0", "@playwright/test": "^1.51.1", "babel-plugin-react-compiler": "*", "react": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "react-dom": "^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0", "sass": "^1.3.0" }, "optionalPeers": ["@opentelemetry/api", "@playwright/test", "babel-plugin-react-compiler", "sass"], "bin": { "next": "dist/bin/next" } }, "sha512-hkyRkcu5x/41KoqnROkfTm2pZVbKxvbZRuNvKXLRXxs3VfyO0WhY50TQS40EuKO9SW3rBj/sF3WbVwDACeMZyw=="],
+
+    "@carefully-built/saas-kit/@carefully-built/legal-ui": ["@carefully-built/legal-ui@0.1.2", "", { "peerDependencies": { "@carefully-built/ui": ">=0.1.4", "lucide-react": ">=0.400.0 || >=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-dom": ">=18.2.0 || >=19.0.0" } }, "sha512-THofVHgAmWqTtZyxC2oZtriUcd+DPziEM7/3Ekn9VzfcCNJf13uzl1VTUzLihpvNRTYrcGsA/cpZ6KtQLqcrjA=="],
+
+    "@carefully-built/saas-kit/@carefully-built/ui": ["@carefully-built/ui@0.1.30", "", { "peerDependencies": { "class-variance-authority": ">=0.7.0", "clsx": ">=2.0.0", "lucide-react": ">=0.400.0 || >=1.0.0", "radix-ui": ">=1.0.0", "react": ">=18.2.0 || >=19.0.0", "react-day-picker": ">=9.0.0", "react-dom": ">=18.2.0 || >=19.0.0", "tailwind-merge": ">=2.0.0 || >=3.0.0", "vaul": ">=1.0.0" } }, "sha512-foSSNNvHIYezogpJkNZml6Mokv9xzpGPoxYwiqAtPfQEr2ptOfLHZKPyZX6gFNHu7A1KrA3DRNt7i8cH0S504Q=="],
 
     "@radix-ui/react-alert-dialog/@radix-ui/react-slot": ["@radix-ui/react-slot@1.2.3", "", { "dependencies": { "@radix-ui/react-compose-refs": "1.1.2" }, "peerDependencies": { "@types/react": "*", "react": "^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc" }, "optionalPeers": ["@types/react"] }, "sha512-aeNmHnBxbi2St0au6VBVC7JXFlhLlOnvIIlePNniyUNAClzmtAUEY8/pBiK3iHjufOlwA+c20/8jngo7xcrg8A=="],
 
