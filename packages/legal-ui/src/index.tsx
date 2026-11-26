@@ -6,6 +6,22 @@ import { cn } from '@carefully-built/ui';
 
 export { privacyPolicyText, termsAndConditionsText } from './legal-texts';
 
+// The interactive pieces below are client modules. The package is built
+// unbundled so each keeps its own 'use client' line, and this file, the legal
+// document renderer and the default texts stay importable from server code.
+export { DocumentReader } from './document-reader';
+export type {
+  DocumentReaderClassNames,
+  DocumentReaderLabels,
+  DocumentReaderProps,
+} from './document-reader';
+export { ReadProgressBar } from './read-progress-bar';
+export type { ReadProgressBarClassNames, ReadProgressBarProps } from './read-progress-bar';
+export { useReadProgress } from './use-read-progress';
+export type { UseReadProgressOptions, UseReadProgressResult } from './use-read-progress';
+export { advanceReadProgress, computeReadProgress, initialReadProgressState } from './read-progress';
+export type { ReadProgressMeasurement, ReadProgressState } from './read-progress';
+
 export interface LegalDocumentClassNames {
   readonly root?: string;
   readonly logoBar?: string;
